@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('requests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student_id')
-            ->constrained(table: 'users', indexName: 'requests_student_id')
+            ->constrained()
             ->cascadeOnUpdate()
             ->cascadeOnDelete();
             $table->unsignedTinyInteger('is_reviewed');

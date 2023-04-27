@@ -27,7 +27,7 @@ return new class extends Migration
             ->onUpdate('cascade')
             ->onDelete('cascade');
             $table->foreignId('student_id')
-            ->constrained(table: 'users', indexName: 'documents_student_id')
+            ->constrained()
             ->cascadeOnUpdate()
             ->cascadeOnDelete();
             $table->unsignedTinyInteger('document_status_id');
