@@ -36,8 +36,8 @@ return new class extends Migration
             ->on('document_statuses')
             ->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->unsignedBigInteger('updated_by');
-            $table->foreign('updated_by')
+            $table->unsignedBigInteger('updated_by_id');
+            $table->foreign('updated_by_id')
             ->references('id')
             ->on('users')
             ->onUpdate('cascade')
