@@ -1,0 +1,7 @@
+.greeting_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--primary-maroon);
+  font-style: italic;
+}
