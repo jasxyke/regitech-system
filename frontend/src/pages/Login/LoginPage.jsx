@@ -3,6 +3,7 @@ import LoginForm from "./LoginForm.jsx";
 import Logo from "../../components/Logo.jsx";
 import LoginCss from "./LoginPage.module.css";
 import Footer from "../../components/Footer.jsx";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   return (
@@ -15,10 +16,10 @@ const LoginPage = () => {
           className={`col-lg-4 col-md-6 overflow-hidden ${LoginCss["right-side"]}`}
         >
           <Logo />
-          <h2 class="px-5">Login</h2>
+          <h2 className="px-5">Login</h2>
           <LoginForm />
           <div className="mt-3 text-center">
-            <a href="#"> don't have an account yet ? </a>
+            <a href="/sign-up"> don't have an account yet ? </a>
           </div>
           <Footer />
         </div>
