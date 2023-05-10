@@ -1,4 +1,5 @@
-import "./AdminPage.css";
+import css from "./AdminPage.module.css";
+
 import {IconContext} from "react-icons";
 import {BiEdit} from "react-icons/bi"
 import {BiTrash} from "react-icons/bi"
@@ -25,13 +26,13 @@ const TableItems = Staffs.map((items) =>
     <td>{items.name}</td>
     <td>{items.role}</td>
 
-    <IconContext.Provider value ={{className:"action-btn"}}>
+    <IconContext.Provider value ={{className: css.action_btn}}>
       <td> 
         <div className="row actions">
-          <a href="" className="col action-btn" >
+          <a href="" className={"col "+ css.action_btn_cont} >
             <BiEdit />
           </a>
-          <a href="" className="col action-btn-cont" >
+          <a href="" className={"col "+ css.action_btn_cont}>
             <BiTrash />
           </a>
         </div>
