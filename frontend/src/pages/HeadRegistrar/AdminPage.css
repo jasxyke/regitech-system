@@ -1,0 +1,11 @@
+.action-btn-cont{
+    width: 50px;
+    block-size: fit-content;
+}
+
+
+.action-btn{
+    width: 20px;
+    height: 20px;
+    color: #790000;
+}

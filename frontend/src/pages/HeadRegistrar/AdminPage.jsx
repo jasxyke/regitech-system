@@ -1,5 +1,11 @@
+import StaffTable from "./StaffTable";
+
+
 const AdminPage = () => {
-  return <div>AdminPage</div>;
+  return <div>AdminPage
+
+    <StaffTable />
+  </div>;
 };
 
 export default AdminPage;
