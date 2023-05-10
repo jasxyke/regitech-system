@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const MainNavbar = () => {
   return (
-    <nav className="navbar nav">
+    <nav className="navbar nav bg-dark navbar-dark">
       <div className="container">
         <div>
           <ul style={{ listStyle: "none", display: "flex", columnGap: "20px" }}>
