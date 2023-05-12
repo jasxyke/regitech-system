@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Students extends Model
+class Student extends Model
 {
     use HasFactory;
 
@@ -37,6 +37,4 @@ class Students extends Model
     public function documents(){
         return $this->hasMany(Document::class);
     }
-
-    
 }
