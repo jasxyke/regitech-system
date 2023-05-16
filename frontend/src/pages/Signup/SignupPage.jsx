@@ -19,7 +19,7 @@ const SignupPage = () => {
           <h2 className="px-5">Registration</h2>
           <SignupForm />
           <div className="mt-3 text-center">
-            <Link to="/">Don't have an account yet?</Link>
+            <Link to="/">Already have an account ?</Link>
           </div>
           <Footer />
         </div>
