@@ -21,12 +21,11 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
 Route::post('/signup', [AuthController::class, 'register']);
-
+Route::resource('courses', CourseController::class);
 
 Route::group(['middleware'=>['auth:sanctum']], function(){
     Route::post('/me', [AuthController::class, 'me']);
     Route::resources([
-        'courses'=> CourseController::class,
         'documents'=> DocumentsController::class,
         'document_statuses'=> DocumentStatusController::class,
         'document_types'=> DocumentTypesController::class,
