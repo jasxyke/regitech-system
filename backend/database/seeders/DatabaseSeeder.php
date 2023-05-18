@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -24,9 +26,8 @@ class DatabaseSeeder extends Seeder
             DocumentTypeSeeder::class,
             StudentStatusSeeder::class,
         ]);
-        //insert head registrar first
-       DB::table('users')->insert(
-        [
+
+        User::create([
             'email'=>'jasxyke23.jxc@gmail.com',
             'password'=>Hash::make('password'),
             'lastname'=>'Cortez',
@@ -35,11 +36,11 @@ class DatabaseSeeder extends Seeder
             'role_id'=>'1',
             'email_verified_at'=>now(),
             'remember_token' => Str::random(10),
-        ]
-        );
+        ]);
         $this->call([
             UserSeeder::class,
             StudentSeeder::class,
+            DocumentSeeder::class,
         ]);
 
     }

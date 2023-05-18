@@ -17,7 +17,11 @@ class DocumentFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'with_copies'=>rand(0,1),
+            //'file_path'=>$this->faker->image(storage_path('public/digitized_samples'), 200, 500, null, false),
+            'file_path'=>'sample path muna',
+            'document_status_id'=>rand(1,3),
+            'updated_by_id'=>'2'
         ];
     }
 }

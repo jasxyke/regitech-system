@@ -17,7 +17,7 @@ class RequestFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'is_reviewed'=>rand(0,1)
         ];
     }
 }

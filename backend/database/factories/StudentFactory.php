@@ -17,7 +17,9 @@ class StudentFactory extends Factory
     public function definition(): array
     {
         return [
-            
+            'course_id'=>rand(1,9),
+            'student_status_id'=>rand(1,4),
+            'year_admitted'=>rand(2015, 2023),
         ];
     }
 }
