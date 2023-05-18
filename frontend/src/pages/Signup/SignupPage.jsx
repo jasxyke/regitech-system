@@ -12,14 +12,12 @@ const SignupPage = () => {
         <div className="col-lg-8 col-md-6 d-none d-md-block">
           <img src={leftbg} alt="leftbg" className={LoginCss.left_img} />
         </div>
-        <div
-          className={`col-lg-4 col-md-6 overflow-hidden ${LoginCss["right-side"]}`}
-        >
+        <div className={`col-lg-4 col-md-6  ${LoginCss["right-side"]}`}>
           <Logo />
           <h2 className="px-5">Registration</h2>
           <SignupForm />
           <div className="mt-3 text-center">
-            <Link to="/">Don't have an account yet?</Link>
+            <Link to="/">Already have an account ?</Link>
           </div>
           <Footer />
         </div>
