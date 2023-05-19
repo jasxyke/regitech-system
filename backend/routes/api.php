@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +17,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+//login route
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout']);
+Route::post('/signup', [AuthController::class, 'register']);
+
+
+Route::group(['middleware'=>['auth:sanctum']], function(){
+    Route::post('/me', [AuthController::class, 'me']);
+    Route::resources([
+        'courses'=> CourseController::class,
+        'documents'=> DocumentsController::class,
+        'document_statuses'=> DocumentStatusController::class,
+        'document_types'=> DocumentTypesController::class,
+        'requests'=> RequestController::class,
+        'roles'=> RoleController::class,
+        'students'=> StudentController::class,
+        'student_statuses'=> StudentStatusController::class,
+        'users'=> UserController::class,
+    ]);
+    
 });
+
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
