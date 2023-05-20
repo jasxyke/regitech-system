@@ -74,3 +74,17 @@ const courses = [
     short_name: "DRET",
   },
 ];
+
+const years = [];
+for (let i = 2015; i < new Date().getFullYear(); i++) {
+  years.push(i);
+}
+
+export {
+  years,
+  documentStatuses,
+  documentTypes,
+  studentStatuses,
+  roles,
+  courses,
+};

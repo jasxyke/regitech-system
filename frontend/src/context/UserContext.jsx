@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import axiosClient, { cookies } from "../utils/axios";
-import { redirect, useNavigate } from "react-router-dom";
+import axiosClient from "../utils/axios";
+import { useNavigate } from "react-router-dom";
 
 const UserContext = React.createContext(null);
 
@@ -17,10 +17,9 @@ export function UserProvider({ children }) {
       .post("/me")
       .then((res) => {
         setUser(res.data);
-        console.log(res);
+        console.log(res.data);
       })
       .catch((error) => {
-        cookies.remove("token");
         console.log(error);
         navigate("/");
       });

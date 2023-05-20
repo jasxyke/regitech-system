@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Document;
 use Illuminate\Http\Request;
 
 class DocumentController extends Controller
@@ -13,7 +12,7 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        
+        //
     }
 
     /**

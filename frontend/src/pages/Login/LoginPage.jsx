@@ -2,7 +2,7 @@ import leftbg from "../../assets/backgroundleft.jpg";
 import LoginForm from "./LoginForm.jsx";
 import Logo from "../../components/Logo.jsx";
 import LoginCss from "./LoginPage.module.css";
-import Footer from "../../components/Footer.jsx";
+import Footer from "../../components/footers/Footer.jsx";
 
 const LoginPage = () => {
   return (

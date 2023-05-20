@@ -1,5 +1,5 @@
-import GreetingsHeader from "../../components/GreetingsHeader";
-import MainNavButtons from "../../components/NavButtons/MainNavButtons";
+import MainNavButtons from "../../../components/NavButtons/MainNavButtons";
+import GreetingsHeader from "../GreetingsHeader";
 import StaffTable from "./StaffTable";
 
 const AdminPage = () => {

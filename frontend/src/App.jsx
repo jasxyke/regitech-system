@@ -1,27 +1,30 @@
 import { Route, Routes } from "react-router-dom";
 import LoginPage from "./pages/Login/LoginPage";
-import VerificationPage from "./pages/VerificationRequests/VerificationPage";
-import StaffDashboard from "./pages/StaffDashboard/StaffDashboard";
-import AdminPage from "./pages/HeadRegistrar/AdminPage";
+import VerificationPage from "./pages/staff/VerificationRequests/VerificationPage";
 import SignupPage from "./pages/Signup/SignupPage";
-import StudentProfile from "./pages/StudentProfile/StudentProfile";
-import StudentDashboard from "./pages/StudentDashboard/StudentDashboard";
 import StudentLayout from "./components/layouts/StudentLayout";
 import StafflLayout from "./components/layouts/StafflLayout";
+import { AuthProvider } from "./context/AuthContext";
+import StaffDashboard from "./pages/staff/StaffDashboard/StaffDashboard";
+import AdminPage from "./pages/staff/HeadRegistrar/AdminPage";
+import StudentDashboard from "./pages/student/StudentDashboard/StudentDashboard";
+import StudentPrivateRoutes from "./components/PrivateRoutes/StudentPrivateRoutes";
+import StaffPrivateRoutes from "./components/PrivateRoutes/StaffPrivateRoutes";
+import GuestRoutes from "./components/PrivateRoutes/GuestRoutes";
 
 function App() {
   return (
-    <>
+    <AuthProvider>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/sign-up" element={<SignupPage />} />
-
-        <Route path="/student" element={<StudentLayout />}>
+        <Route element={<GuestRoutes />}>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/sign-up" element={<SignupPage />} />
+        </Route>
+        <Route path="/student" element={<StudentPrivateRoutes />}>
           <Route path="dashboard" element={<StudentDashboard />} />
-          <Route path=":id" element={<StudentProfile />} />
         </Route>
 
-        <Route path="/staff" element={<StafflLayout />}>
+        <Route path="/staff" element={<StaffPrivateRoutes />}>
           <Route path="document-verification" element={<VerificationPage />} />
           <Route path="dashboard" element={<StaffDashboard />} />
           <Route path="admin" element={<AdminPage />} />
@@ -29,7 +32,7 @@ function App() {
 
         <Route path="*" element={<h1>Not found 404</h1>} />
       </Routes>
-    </>
+    </AuthProvider>
   );
 }
 

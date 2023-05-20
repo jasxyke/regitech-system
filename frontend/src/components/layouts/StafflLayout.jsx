@@ -5,10 +5,8 @@ import { UserProvider } from "../../context/UserContext";
 const StafflLayout = () => {
   return (
     <UserProvider>
-      <>
-        <StaffNavbar />
-        <Outlet />
-      </>
+      <StaffNavbar />
+      <Outlet />
     </UserProvider>
   );
 };

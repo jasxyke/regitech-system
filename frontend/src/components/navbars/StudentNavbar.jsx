@@ -1,6 +1,9 @@
+import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "../../context/AuthContext";
 
 const StudentNavbar = () => {
+  const { logout } = useAuthContext();
   return (
     <nav className="navbar navbar-expand bg-dark navbar-dark">
       <div className="container">
@@ -13,6 +16,9 @@ const StudentNavbar = () => {
             </li>
           </ul>
         </div>
+        <Button variant="primary" onClick={logout}>
+          Logout
+        </Button>
       </div>
     </nav>
   );

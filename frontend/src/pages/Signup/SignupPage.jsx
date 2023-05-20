@@ -3,7 +3,7 @@ import leftbg from "../../assets/backgroundleft.jpg";
 import SignupForm from "./SignupForm.jsx";
 import Logo from "../../components/Logo.jsx";
 import LoginCss from "../Login/LoginPage.module.css";
-import Footer from "../../components/Footer.jsx";
+import Footer from "../../components/footers/Footer.jsx";
 
 const SignupPage = () => {
   return (

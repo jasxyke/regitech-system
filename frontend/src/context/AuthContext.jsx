@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { cookies, guestAxios } from "../utils/axios";
+import axiosClient, { guestAxios } from "../utils/axios";
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = React.createContext(null);
@@ -8,12 +8,43 @@ export function useAuthContext() {
   return useContext(AuthContext);
 }
 
+function storeAuthDetails(res) {
+  let token = JSON.stringify(res.data.token);
+  let role_id = JSON.stringify(res.data.role_id);
+  localStorage.setItem("token", token);
+  localStorage.setItem("role_id", role_id);
+}
+
 export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(false);
-
   const navigate = useNavigate();
 
-  const login = (email, password) => {
+  const signup = (userForm, onError) => {
+    setLoading(true);
+    guestAxios
+      .post("/sign-up", userForm)
+      .then((res) => {
+        storeAuthDetails(res);
+        alert("signup ey");
+        if (res.data.role_id === 4) {
+          navigate("/student/dashboard");
+        } else if (res.data.role_id >= 1 && res.data.role_id <= 3) {
+          navigate("/staff/dashboard");
+        } else {
+          console.log("error on role id");
+          navigate("/");
+        }
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log(error.response.data.errors);
+        onError(error.response.data.message);
+        setLoading(false);
+      });
+  };
+
+  const login = (email, password, onError) => {
     setLoading(true);
     guestAxios
       .post("/login", {
@@ -21,34 +52,70 @@ export function AuthProvider({ children }) {
         password: password,
       })
       .then((res) => {
-        cookies.set("token", res.data.token);
-        if (res.data.user_role_id === 4) {
+        storeAuthDetails(res);
+        // setAuthenticated(true);
+        // setUserRole(res.data.role_id);
+        console.log(res);
+        if (res.data.role_id === 4) {
           navigate("/student/dashboard");
-        } else if (res.data.user_role_id >= 2 && res.data.user_role_id <= 4) {
-          navigate("/staff/dasboard");
+        } else if (res.data.role_id >= 1 && res.data.role_id <= 3) {
+          navigate("/staff/dashboard");
         } else {
           console.log("error on role id");
-          navigate("/login");
+          navigate("/");
         }
         setLoading(false);
       })
       .catch((error) => {
-        cookies.remove("token");
+        localStorage.clear();
         setLoading(false);
+        console.log(error);
+        onError(error.response.data.error);
       });
   };
 
   const logout = () => {
-    cookies.remove("token");
+    try {
+      console.log("logout");
+      axiosClient
+        .post("/logout")
+        .then((res) => {
+          console.log(res);
+          localStorage.clear();
+          navigate("/");
+          //window.location.reload();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      //window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const checkAuthenticated = () => {
+    let token = JSON.parse(localStorage.getItem("token"));
+    if (!token) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  const getUserRole = () => {
+    //return userRole;
+    return parseInt(JSON.parse(localStorage.getItem("role_id")));
   };
 
   const value = {
     loading,
     login,
     logout,
+    signup,
+    checkAuthenticated,
+    getUserRole,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
-
-export default AuthContext;
