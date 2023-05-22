@@ -18,7 +18,7 @@ return new class extends Migration
             $table->char('password',60);
             $table->string('lastname', 50);
             $table->string('firstname', 100);
-            $table->string('midname',50);
+            $table->string('midname',50)->nullable();
             $table->unsignedTinyInteger('role_id');
             $table->foreign('role_id')
             ->references('id')

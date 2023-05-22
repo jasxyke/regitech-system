@@ -1,4 +1,4 @@
-import LoginCss from "../pages/Login/LoginPage.module.css";
+import LoginCss from "../../pages/Login/LoginPage.module.css";
 
 const Footer = () => {
   return (
