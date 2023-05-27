@@ -26,10 +26,10 @@ return new class extends Migration
             ->on('requests')
             ->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->foreignId('student_id')
-            ->constrained()
-            ->cascadeOnUpdate()
-            ->cascadeOnDelete();
+            // $table->foreignId('student_id')
+            // ->constrained()
+            // ->cascadeOnUpdate()
+            // ->cascadeOnDelete();
             $table->unsignedTinyInteger('document_status_id');
             $table->foreign('document_status_id')
             ->references('id')

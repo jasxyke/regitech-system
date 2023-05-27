@@ -2,12 +2,11 @@ import leftbg from "../../assets/backgroundleft.jpg";
 import LoginForm from "./LoginForm.jsx";
 import Logo from "../../components/Logo.jsx";
 import LoginCss from "./LoginPage.module.css";
-import Footer from "../../components/Footer.jsx";
-import { Link } from "react-router-dom";
+import Footer from "../../components/footers/Footer.jsx";
 
 const LoginPage = () => {
   return (
-    <div className="container-fluid m-0 p-0">
+    <div className={LoginCss.login_page + " container-fluid m-0 p-0"}>
       <div className="row g-0">
         <div className="col-lg-8 col-md-6 d-none d-md-block">
           <img src={leftbg} alt="leftbg" className={LoginCss.left_img} />

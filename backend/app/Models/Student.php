@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Students extends Model
+class Student extends Model
 {
     use HasFactory;
 
@@ -14,12 +15,12 @@ class Students extends Model
         'user_id',
         'course_id',
         'year_admitted',
-        'student_status_id ',
+        'student_status_id',
     ];
 
-    public function user(): HasOne
+    public function user(): BelongsTo
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function course(){
@@ -37,6 +38,4 @@ class Students extends Model
     public function documents(){
         return $this->hasMany(Document::class);
     }
-
-    
 }
