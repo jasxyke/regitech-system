@@ -15,7 +15,7 @@ class Student extends Model
         'user_id',
         'course_id',
         'year_admitted',
-        'student_status_id ',
+        'student_status_id',
     ];
 
     public function user(): BelongsTo

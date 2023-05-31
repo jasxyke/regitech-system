@@ -8,6 +8,7 @@ use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -24,7 +25,7 @@ class AuthController extends Controller
             'midname'=>$fields['midname'],
             'role_id'=>'4',
             'email_verified_at'=>now(),
-
+            'remember_token'=>Str::random(10)
         ]);
 
         Student::create([
@@ -36,7 +37,7 @@ class AuthController extends Controller
 
         $token = $user->createToken('regitechtoken')->plainTextToken;
 
-        return response()->json(['token' => $token], 201);
+        return response()->json(['token' => $token, 'role_id'=>$user->role_id], 201);
     }
 
     public function login(Request $request)
@@ -47,15 +48,15 @@ class AuthController extends Controller
             $user = Auth::user();
             $token = $user->createToken('regitechtoken')->plainTextToken;
 
-            return response()->json(['token' => $token], 200);
+            return response()->json(['token' => $token, 'role_id'=>$user->role_id], 200);
         }
 
-        return response()->json(['error' => 'Invalid credentials'], 401);
+        return response()->json(['error' => 'Invalid login'], 401);
     }
 
     public function logout(Request $request)
     {
-        $request->user()->token()->revoke();
+        $request->user()->currentAccessToken()->delete();
 
         return response()->json(['message' => 'Successfully logged out']);
     }

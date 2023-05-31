@@ -17,28 +17,23 @@ const MainNavbar = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/student" className="nav-link">
+              <Link to="/student/dashboard" className="nav-link">
                 Student
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/staff" className="nav-link">
+              <Link to="/staff/dashboard" className="nav-link">
                 Staff
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/admin" className="nav-link">
+              <Link to="/staff/admin" className="nav-link">
                 Admin
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/document-verification" className="nav-link">
+              <Link to="/staff/document-verification" className="nav-link">
                 Document Verification
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/student-profile" className="nav-link">
-                Student Profile
               </Link>
             </li>
           </ul>
