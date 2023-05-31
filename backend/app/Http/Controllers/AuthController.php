@@ -35,7 +35,21 @@ class AuthController extends Controller
             'student_status_id'=>'2',
         ]);
 
-        $token = $user->createToken('regitechtoken')->plainTextToken;
+        if($user->role_id == 1){
+            $token = $user->createToken('regitechtoken', ['manage:users','handle:requests']);
+            $token = $token->plainTextToken;
+        }
+        else if($user->role_id == 2 || $user->role_id == 3){
+            $token = $user->createToken('regitechtoken', ['handle:requests']);
+            $token = $token->plainTextToken;
+        }
+        else if($user->role_id == 4){
+            $token = $user->createToken('regitechtoken', ['student']);
+            $token = $token->plainTextToken;
+        }else{
+            response()->json(['error' => 'Invalid credentials'], 401);
+        }
+
 
         return response()->json(['token' => $token, 'role_id'=>$user->role_id], 201);
     }
@@ -46,7 +60,20 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            $token = $user->createToken('regitechtoken')->plainTextToken;
+            if($user->role_id == 1){
+            $token = $user->createToken('regitechtoken', ['manage:users','handle:requests']);
+            $token = $token->plainTextToken;
+        }
+        else if($user->role_id == 2 || $user->role_id == 3){
+            $token = $user->createToken('regitechtoken', ['handle:requests']);
+            $token = $token->plainTextToken;
+        }
+        else if($user->role_id == 4){
+            $token = $user->createToken('regitechtoken', ['student']);
+            $token = $token->plainTextToken;
+        }else{
+            response()->json(['error' => 'Invalid credentials'], 401);
+        }
 
             return response()->json(['token' => $token, 'role_id'=>$user->role_id], 200);
         }

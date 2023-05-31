@@ -1,6 +1,6 @@
 import MainNavbButtons from "../../../components/NavButtons/MainNavButtons";
 import { useUser } from "../../../context/UserContext";
-import GreetingsHeader from "../GreetingsHeader";
+import GreetingsHeader from "../../../components/GreetingsHeader";
 
 const StaffDashboard = () => {
   const user = useUser();

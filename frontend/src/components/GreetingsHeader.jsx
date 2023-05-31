@@ -1,11 +1,14 @@
+import moment from "moment/moment";
 import css from "./GreetingsHeader.module.css";
 
 const GreetingsHeader = ({ name }) => {
+  const date = moment().format("dddd, MMMM YY, YYYY");
+
   return (
     <div>
       <div className={css.greeting_header}>
         <h2>Hello, {name}!</h2>
-        <p>thursday, januar 12, 2023</p>
+        <p>{date}</p>
       </div>
     </div>
   );
