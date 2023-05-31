@@ -1,11 +1,28 @@
+/* STYLES FOR THE STAFF TABLE */
+
+
+
+/* STYLES FOR THE ACTION BUTTONS IN STAFF TABLE */
+
 .action_btn_cont{
     width: 50px;
     block-size: fit-content;
 }
 
-
 .action_btn{
     width: 20px;
     height: 20px;
     color: #790000;
+    cursor: pointer;
 }
+
+/* DISABLED OPTION IN FORM DROPDOWN */
+option:disabled{
+    color: #a7a7a7;
+}
+
+/* STYLE FOR THE ADD STAFF TRIGGER BUTTON*/
+.addstaffButton{
+    float: right;
+}
+
