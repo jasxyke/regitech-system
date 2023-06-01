@@ -1,0 +1,35 @@
+.btn_logout {
+  color: white !important;
+  cursor: pointer;
+}
+
+.navbar {
+  background-color: #790000;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.links {
+  color: #f5f3f3;
+  display: flex;
+  align-items: right;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  height: 100%;
+}
+
+.nav-links:hover {
+  border-bottom: 4px solid #fff200;
+  transition: all 0.2s ease-out;
+}
+
+.studBtn {
+  color: white;
+  cursor: pointer;
+}

@@ -1,38 +1,50 @@
+import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
+import { useState } from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import css from "./Navbar.module.css";
+import logo from "../../assets/puplogo.png";
 
-const StaffNavbar = () => {
+function StaffNavbar() {
+  const [click, setClick] = useState(false);
   const { logout } = useAuthContext();
 
   return (
-    <nav className="navbar navbar-expand bg-dark navbar-dark">
-      <div className="container">
-        <div>
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link to="/staff/dashboard" className="nav-link">
+    <>
+      <Navbar collapseOnSelect expand="lg" className={css.navbar}>
+        <Container>
+          <Navbar.Brand href="#">
+            <img
+              src={logo}
+              width="50"
+              height="50"
+              className="d-inline-block align-left"
+            />{" "}
+            <span style={{ color: "#f5f3f3" }}>Reg</span>
+            <span style={{ color: "#fff200" }}>iTech</span>
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link as={Link} to="/staff/dashboard">
                 Staff
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/staff/admin" className="nav-link">
+              </Nav.Link>
+              <Nav.Link as={Link} to="/staff/admin">
                 Admin
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/staff/document-verification" className="nav-link">
+              </Nav.Link>
+              <Nav.Link as={Link} to="/staff/document-verification">
                 Document Verification
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <Button variant="primary" onClick={logout}>
-          Logout
-        </Button>
-      </div>
-    </nav>
+              </Nav.Link>
+            </Nav>
+            <Button onClick={logout} className={css.btn_logout}>
+              Logout
+            </Button>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </>
   );
-};
+}
 
 export default StaffNavbar;
