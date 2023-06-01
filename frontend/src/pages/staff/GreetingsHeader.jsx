@@ -5,7 +5,7 @@ const GreetingsHeader = ({ name }) => {
     <div>
       <div className={css.greeting_header}>
         <h2>Hello, {name}!</h2>
-        <p>thursday, januar 12, 2023</p>
+        <p>thursday, january 12, 2023</p>
       </div>
     </div>
   );
