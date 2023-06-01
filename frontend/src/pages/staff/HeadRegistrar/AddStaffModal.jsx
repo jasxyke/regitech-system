@@ -1,16 +1,38 @@
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { BiShow } from "react-icons/bi";
+import { roles } from "../../../data/constants";
+import { useFormInput } from "../../../hooks/useFormInput";
+import { useState } from "react";
 
 // THE FUNCION FOR THE ADD STAFF MODAL (EXCLUDING THE TRIGGER)
 
-function AddModal(modalAdd) {
+function AddModal({ show, handleClose, onAddUser }) {
+  const localRoles = [roles[1], roles[2]];
+
+  const firstNameProps = useFormInput("");
+  const lastNameProps = useFormInput("");
+  const midNameProps = useFormInput("");
+  const emailProps = useFormInput("");
+  const passProps = useFormInput("");
+  const confirmPassProps = useFormInput("");
+  const [roleId, setRoleId] = useState("1");
+
+  const addedUser = {
+    firstname: firstNameProps.value,
+    lastname: lastNameProps.value,
+    midname: midNameProps.value,
+    email: emailProps.value,
+    password: passProps.value,
+    password_confirmation: confirmPassProps.value,
+    role_id: roleId,
+  };
   return (
     <>
       <Modal
         size="lg"
-        show={modalAdd.show}
-        onHide={modalAdd.handleClose}
+        show={show}
+        onHide={handleClose}
         backdrop="static"
         keyboard={false}
       >
@@ -27,13 +49,18 @@ function AddModal(modalAdd) {
                   {" "}
                   Roles <span style={{ color: "red" }}> * </span>{" "}
                 </label>
-                <select className="form-select" name="roles" id="roleSelection">
-                  <option selected disabled>
-                    Select Role{" "}
-                  </option>
-                  <option value="1"> Regular Staff </option>
-                  <option value="2"> Student Assistant </option>
-                  <option value="3"> Head Registrar </option>
+                <select
+                  className="form-select"
+                  name="role_id"
+                  id="roleSelection"
+                  value={roleId}
+                  onChange={(e) => setRoleId(e.target.value)}
+                >
+                  {localRoles.map((role) => (
+                    <option key={role.id} value={role.id}>
+                      {role.name}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div className="col mb-2">
@@ -44,10 +71,11 @@ function AddModal(modalAdd) {
                 <input
                   type="name"
                   className="form-control"
-                  name="FName"
+                  name="firstname"
                   id="firstname"
                   placeholder="e.g. Juan"
                   required
+                  {...firstNameProps}
                 />
               </div>
 
@@ -62,9 +90,10 @@ function AddModal(modalAdd) {
                 <input
                   type="name"
                   className="form-control"
-                  name="MName"
-                  id="middlename"
+                  name="midname"
+                  id="midname"
                   placeholder="e.g. Diosdado "
+                  {...midNameProps}
                 />
               </div>
 
@@ -76,10 +105,11 @@ function AddModal(modalAdd) {
                 <input
                   type="name"
                   className="form-control"
-                  name="LName"
+                  name="lastname"
                   id="lastname"
                   placeholder="e.g. Dela Cruz"
                   required
+                  {...lastNameProps}
                 />
               </div>
             </div>
@@ -97,6 +127,7 @@ function AddModal(modalAdd) {
                   id="email"
                   placeholder="e.g. juandelacruz@gmail.com"
                   required
+                  {...emailProps}
                 />
               </div>
 
@@ -108,10 +139,11 @@ function AddModal(modalAdd) {
                 <input
                   type="password"
                   className="form-control"
-                  name="PWord"
+                  name="password"
                   id="password"
                   placeholder="(8-16 characters)"
                   required
+                  {...passProps}
                 />
                 <div className="my-1 ms-3">
                   <input
@@ -137,10 +169,11 @@ function AddModal(modalAdd) {
                 <input
                   type="password"
                   className="form-control"
-                  name="CfrmPass"
+                  name="password_confirmation"
                   id="cfrmPass"
                   placeholder=""
                   required
+                  {...confirmPassProps}
                 />
                 <div className="my-1 ms-3">
                   <input
@@ -161,14 +194,14 @@ function AddModal(modalAdd) {
           </form>
         </Modal.Body>
         <Modal.Footer className="py-2">
-          <Button className="px-5" variant="primary">
-            Add
-          </Button>
           <Button
             className="px-5"
-            variant="secondary"
-            onClick={modalAdd.handleClose}
+            variant="primary"
+            onClick={() => onAddUser(addedUser)}
           >
+            Add
+          </Button>
+          <Button className="px-5" variant="secondary" onClick={handleClose}>
             Close
           </Button>
         </Modal.Footer>

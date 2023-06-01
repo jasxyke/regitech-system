@@ -1,17 +1,20 @@
 import MainNavButtons from "../../../components/NavButtons/MainNavButtons";
 import GreetingsHeader from "../../../components/GreetingsHeader";
 import StaffTable from "./StaffTable";
+import { useUser } from "../../../context/UserContext";
 
-// MAIN FUNCTION OF THE ADMIN PAGE, INCLUDING THE NAVIGATION, 
+// MAIN FUNCTION OF THE ADMIN PAGE, INCLUDING THE NAVIGATION,
 // STAFF TABLE AND MODALS
 
 function AdminPage() {
+  const user = useUser();
   return (
-    <div className="container">
-      <GreetingsHeader name={"Sean"} />
+    <>
+      <GreetingsHeader name={user?.firstname || ""} />
       <MainNavButtons />
       <StaffTable />
-    </div>);
-};
+    </>
+  );
+}
 
 export default AdminPage;

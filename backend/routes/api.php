@@ -30,19 +30,18 @@ Route::resource('courses', CourseController::class);
 
 Route::group(['middleware'=>['auth:sanctum']], function(){
     Route::post('/me', [AuthController::class, 'me']);
-    Route::group(['middleware'=>['auth:sanctum', 'abilities:manage:users,handle:requests']], function(){
+    Route::resource('requests', RequestController::class);
+    Route::group(['middleware'=>['auth:sanctum', 'ability:head-registrar']], function(){
         Route::resources([
             'documents'=> DocumentController::class,
-            'requests'=> RequestController::class,
             'students'=> StudentController::class,
             'users'=> UserController::class,
         ]);
     });
 
-    Route::group(['middleware'=>['auth:sanctum', 'ability:handle:requests']], function(){
+    Route::group(['middleware'=>['auth:sanctum', 'ability:regular-staff']], function(){
         Route::resources([
             'documents'=> DocumentController::class,
-            'requests'=> RequestController::class,
             'students'=> StudentController::class,
         ]);
     });

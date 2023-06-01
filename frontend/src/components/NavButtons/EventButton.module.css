@@ -6,6 +6,8 @@
   border: 1px solid black;
   text-align: center;
   padding: 12px 12px;
+  background-color: var(--primary-maroon);
+  color: white;
 }
 
 .container img {

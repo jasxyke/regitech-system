@@ -36,11 +36,11 @@ class AuthController extends Controller
         ]);
 
         if($user->role_id == 1){
-            $token = $user->createToken('regitechtoken', ['manage:users','handle:requests']);
+            $token = $user->createToken('regitechtoken', ['head-registrar']);
             $token = $token->plainTextToken;
         }
         else if($user->role_id == 2 || $user->role_id == 3){
-            $token = $user->createToken('regitechtoken', ['handle:requests']);
+            $token = $user->createToken('regitechtoken', ['regular-staff']);
             $token = $token->plainTextToken;
         }
         else if($user->role_id == 4){
@@ -61,11 +61,11 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             if($user->role_id == 1){
-            $token = $user->createToken('regitechtoken', ['manage:users','handle:requests']);
+            $token = $user->createToken('regitechtoken', ['head-registrar']);
             $token = $token->plainTextToken;
         }
         else if($user->role_id == 2 || $user->role_id == 3){
-            $token = $user->createToken('regitechtoken', ['handle:requests']);
+            $token = $user->createToken('regitechtoken', ['regular-staff']);
             $token = $token->plainTextToken;
         }
         else if($user->role_id == 4){

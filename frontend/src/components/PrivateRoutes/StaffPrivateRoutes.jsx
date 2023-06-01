@@ -13,7 +13,9 @@ const StaffPrivateRoutes = () => {
   return checkAuthenticated() && allowedRoleIds.includes(getUserRole()) ? (
     <UserProvider>
       <StaffNavbar />
-      <Outlet />
+      <div className="container">
+        <Outlet />
+      </div>
     </UserProvider>
   ) : (
     <Navigate to="/" />
