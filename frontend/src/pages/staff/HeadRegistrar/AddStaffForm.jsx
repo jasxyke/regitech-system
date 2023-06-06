@@ -4,7 +4,7 @@ import AddModal from "./AddStaffModal";
 
 // MAIN FUNCTION FOR THE ADD STAFF FORM (INCLUDING MODAL AND TRIGGER)
 
-function AddStaffForm({ onAddUser }) {
+function AddStaffForm({ onAddUser, loading }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -14,7 +14,12 @@ function AddStaffForm({ onAddUser }) {
   return (
     <>
       <AddStaffButton handleShow={handleShow} />
-      <AddModal show={show} handleClose={handleClose} onAddUser={onAddUser} />
+      <AddModal
+        show={show}
+        handleClose={handleClose}
+        onAddUser={onAddUser}
+        loading={loading}
+      />
     </>
   );
 }

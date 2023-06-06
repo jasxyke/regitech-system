@@ -22,8 +22,9 @@ axiosClient.interceptors.response.use(
   (err) => {
     if (err.response && err.response.status == 401) {
       localStorage.clear();
-      throw err;
+      return err;
     }
+    throw err;
   }
 );
 

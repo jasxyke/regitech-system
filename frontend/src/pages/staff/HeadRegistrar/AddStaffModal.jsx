@@ -4,10 +4,12 @@ import { BiShow } from "react-icons/bi";
 import { roles } from "../../../data/constants";
 import { useFormInput } from "../../../hooks/useFormInput";
 import { useState } from "react";
+import { clearTextInputs } from "../../../utils/InputFormClearer";
+import { Alert } from "react-bootstrap";
 
 // THE FUNCION FOR THE ADD STAFF MODAL (EXCLUDING THE TRIGGER)
 
-function AddModal({ show, handleClose, onAddUser }) {
+function AddModal({ show, handleClose, onAddUser, loading }) {
   const localRoles = [roles[1], roles[2]];
 
   const firstNameProps = useFormInput("");
@@ -16,16 +18,39 @@ function AddModal({ show, handleClose, onAddUser }) {
   const emailProps = useFormInput("");
   const passProps = useFormInput("");
   const confirmPassProps = useFormInput("");
-  const [roleId, setRoleId] = useState("1");
+  const [roleId, setRoleId] = useState("2");
 
-  const addedUser = {
-    firstname: firstNameProps.value,
-    lastname: lastNameProps.value,
-    midname: midNameProps.value,
-    email: emailProps.value,
-    password: passProps.value,
-    password_confirmation: confirmPassProps.value,
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
+
+  const addedStaff = {
+    firstname: firstNameProps.inputProps.value,
+    lastname: lastNameProps.inputProps.value,
+    midname: midNameProps.inputProps.value,
+    email: emailProps.inputProps.value,
+    password: passProps.inputProps.value,
+    password_confirmation: confirmPassProps.inputProps.value,
     role_id: roleId,
+  };
+
+  const clearForm = () => {
+    clearTextInputs(
+      firstNameProps,
+      lastNameProps,
+      midNameProps,
+      emailProps,
+      passProps,
+      confirmPassProps
+    );
+    setRoleId("1");
+  };
+
+  const onError = (error) => {
+    setError(error);
+  };
+
+  const onSuccess = (isSucess) => {
+    setSuccess(isSucess);
   };
   return (
     <>
@@ -42,6 +67,10 @@ function AddModal({ show, handleClose, onAddUser }) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          {success && (
+            <Alert variant="success">Successfully added new user</Alert>
+          )}
+          {!success && error !== "" && <Alert variant="danger">{error}</Alert>}
           <form className="row px-4" action="">
             <div className="col-md-6">
               <div className="col mb-2">
@@ -75,7 +104,7 @@ function AddModal({ show, handleClose, onAddUser }) {
                   id="firstname"
                   placeholder="e.g. Juan"
                   required
-                  {...firstNameProps}
+                  {...firstNameProps.inputProps}
                 />
               </div>
 
@@ -93,7 +122,7 @@ function AddModal({ show, handleClose, onAddUser }) {
                   name="midname"
                   id="midname"
                   placeholder="e.g. Diosdado "
-                  {...midNameProps}
+                  {...midNameProps.inputProps}
                 />
               </div>
 
@@ -109,7 +138,7 @@ function AddModal({ show, handleClose, onAddUser }) {
                   id="lastname"
                   placeholder="e.g. Dela Cruz"
                   required
-                  {...lastNameProps}
+                  {...lastNameProps.inputProps}
                 />
               </div>
             </div>
@@ -127,7 +156,7 @@ function AddModal({ show, handleClose, onAddUser }) {
                   id="email"
                   placeholder="e.g. juandelacruz@gmail.com"
                   required
-                  {...emailProps}
+                  {...emailProps.inputProps}
                 />
               </div>
 
@@ -143,7 +172,7 @@ function AddModal({ show, handleClose, onAddUser }) {
                   id="password"
                   placeholder="(8-16 characters)"
                   required
-                  {...passProps}
+                  {...passProps.inputProps}
                 />
                 <div className="my-1 ms-3">
                   <input
@@ -173,7 +202,7 @@ function AddModal({ show, handleClose, onAddUser }) {
                   id="cfrmPass"
                   placeholder=""
                   required
-                  {...confirmPassProps}
+                  {...confirmPassProps.inputProps}
                 />
                 <div className="my-1 ms-3">
                   <input
@@ -195,13 +224,28 @@ function AddModal({ show, handleClose, onAddUser }) {
         </Modal.Body>
         <Modal.Footer className="py-2">
           <Button
+            disabled={loading}
             className="px-5"
             variant="primary"
-            onClick={() => onAddUser(addedUser)}
+            onClick={() => {
+              setError("");
+              onAddUser(addedStaff, onError, onSuccess);
+              if (success) {
+                clearForm();
+              }
+            }}
           >
             Add
           </Button>
-          <Button className="px-5" variant="secondary" onClick={handleClose}>
+          <Button
+            className="px-5"
+            variant="secondary"
+            onClick={() => {
+              handleClose();
+              setSuccess(false);
+              setError("");
+            }}
+          >
             Close
           </Button>
         </Modal.Footer>

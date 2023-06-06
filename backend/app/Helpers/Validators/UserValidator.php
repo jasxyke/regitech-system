@@ -32,15 +32,10 @@ class UserValidator{
 
     public static function validateUpdate(Request $request){
         $fields = $request->validate([
-            'email'=>'required|string|email:rfc,dns|unique:users,email|max:255',
-            'password'=>['required', 'confirmed', 
-            Password::min(8)
-                    ->letters()
-                    ->numbers()
-            ],
+            'email'=>'required|string|email:rfc,dns|max:255',
             'lastname'=>'required|string|max:50',
             'firstname'=>'required|string|max:100',
-            'midname'=>'required|string|max:50|nullable',
+            'midname'=>'string|max:50|nullable',
         ]);
         return $fields;
     }

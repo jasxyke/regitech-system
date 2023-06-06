@@ -6,6 +6,7 @@ import AddStaffForm from "./AddStaffForm";
 import { useEffect, useState } from "react";
 import axiosClient from "../../../utils/axios";
 import StaffRecords from "./StaffRecords";
+import useStaffCrud from "../../../hooks/useStaffCrud";
 
 // DECLARATION FOR LISTINGS (TEMPORARY)
 
@@ -13,32 +14,17 @@ import StaffRecords from "./StaffRecords";
 // FUNCTIONS INCLUDED)
 
 function StaffTable() {
-  const [staffs, setStaffs] = useState(null);
-
-  useEffect(() => {
-    axiosClient
-      .get("/users")
-      .then((res) => {
-        console.log(res);
-        setStaffs(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-        //handleError()
-      });
-  }, []);
-
-  const onAddUser = (user) => {
-    console.log(user);
-    alert("adduser");
-  };
+  const [tempStaffs, setTempStaffs] = useState(null);
+  const staffCRUD = useStaffCrud();
+  const staffs = staffCRUD.staffs;
+  const loading = staffCRUD.loading;
 
   return (
     <div>
       <div className="d-flex justify-content-between mt-5">
         <p className="h2">Staff List</p>
         <div className={AdminStyles.addstaffButton}>
-          <AddStaffForm onAddUser={onAddUser} />
+          <AddStaffForm onAddUser={staffCRUD.onAddStaff} loading={loading} />
         </div>
       </div>
 
@@ -53,7 +39,15 @@ function StaffTable() {
             </tr>
           </thead>
           <tbody>
-            {staffs !== null ? <StaffRecords staffs={staffs} /> : null}
+            {staffs !== null ? (
+              <StaffRecords
+                staffs={staffs}
+                onDelete={staffCRUD.ondeleteStaff}
+                onEdit={staffCRUD.onEditStaff}
+                selectedStaff={staffCRUD.selectedStaff}
+                selectStaff={staffCRUD.onSelectStaff}
+              />
+            ) : null}
           </tbody>
         </table>
       </div>

@@ -69,10 +69,9 @@ class UserController extends Controller
     {
         $user = User::with('role')->find($id);
 
-        $fields = UserValidator::validateUpdate($request);
+        UserValidator::validateUpdate($request);
 
-        $user->update($fields);
-        return $user;
+        $user->update($request->all());
         return response()->json($user, 200);
     }
 

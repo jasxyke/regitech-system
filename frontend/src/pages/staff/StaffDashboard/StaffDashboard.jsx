@@ -8,14 +8,14 @@ const StaffDashboard = () => {
   const user = useUser();
 
   return (
-    <div className="container">
+    <>
       <GreetingsHeader name={user?.firstname || "unknown"} />
       <MainNavbButtons />
       <div className={css.table_header}>
         <h3>Verification Requests</h3>
       </div>
       <VerificationRequestTable />
-    </div>
+    </>
   );
 };
 

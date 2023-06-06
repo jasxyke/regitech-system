@@ -7,7 +7,9 @@ const GreetingsHeader = ({ name }) => {
   return (
     <div>
       <div className={css.greeting_header}>
-        <h2>Hello, {name}!</h2>
+        <h2>
+          <strong>Hello, {name}!</strong>
+        </h2>
         <p>{date}</p>
       </div>
     </div>

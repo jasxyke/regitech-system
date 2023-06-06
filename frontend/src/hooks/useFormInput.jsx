@@ -7,10 +7,18 @@ export function useFormInput(initialValue) {
     setValue(e.target.value);
   }
 
+  function clearTextForm() {
+    setValue("");
+  }
+
+  function changeValue(value) {
+    setValue(value);
+  }
+
   const inputProps = {
     value: value,
     onChange: handleChange,
   };
 
-  return inputProps;
+  return { inputProps, clearTextForm, changeValue };
 }
