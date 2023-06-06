@@ -1,86 +1,184 @@
-import Modal from "react-bootstrap/Modal"
-import Button from "react-bootstrap/Button"
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import { roles } from "../../../data/constants";
+import { useFormInput } from "../../../hooks/useFormInput";
+import { useEffect, useState } from "react";
+import { Alert } from "react-bootstrap";
 
+function EditModal({ show, handleClose, staff, handleEditStaff }) {
+  const localRoles = [roles[1], roles[2]];
 
-function EditModal(modalEdit){
+  const firstNameProps = useFormInput(staff.firstname);
+  const lastNameProps = useFormInput(staff.lastname);
+  const midNameProps = useFormInput(staff.midname || "");
+  const emailProps = useFormInput(staff.email);
+  const [roleId, setRoleId] = useState(staff.role_id);
 
-  return <>
-    <Modal size="lg" show={modalEdit.show} onHide={modalEdit.handleClose} backdrop="static" keyboard={false}>
-      <Modal.Header closeButton>
-        <Modal.Title><h5>Edit new user</h5></Modal.Title>
-      </Modal.Header>
-      <Modal.Body> 
-        <form className="row px-4" action="">
-          <div className="col-md-6">
-            <div className="col mb-2">
-              <label htmlFor="roleSelection" className="form-label"> Roles <span style={{color: "red"}}> * </span> </label>
-              <select className="form-select" name="roles" id="roleSelection">
-                <option selected disabled >Select Role </option>
-                <option value="1"> Regular Staff </option>
-                <option value="2"> Student Assistant </option>
-                <option value="3"> Head Registrar </option>
-              </select>
-            </div>
-            <div className="col mb-2">
-              <label htmlFor="firstname" className="form-label"> First Name <span style={{color: "red"}}> * </span></label>
-              <input type="name" className="form-control" name="FName" id="firstname" placeholder="" required/>
-            </div>
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
 
-            <div className="col mb-2">
-              <label htmlFor="middlename" className="form-label"> Middle Name <span className="text-muted"> (Optional) </span> </label>
-              <input type="name" className="form-control" name="MName" id="middlename" placeholder=""/>
-            </div>
+  useEffect(() => {
+    firstNameProps.changeValue(staff.firstname);
+    lastNameProps.changeValue(staff.lastname);
+    midNameProps.changeValue(staff.midname || "");
+    emailProps.changeValue(staff.email);
+    setRoleId(staff.role_id);
+  }, [staff]);
 
-            <div className="col mb-2">
-              <label htmlFor="lastname" className="form-label"> Last Name <span style={{color: "red"}}> * </span></label>
-              <input type="name" className="form-control" name="LName" id="lastname" placeholder="" required/>
-            </div>
-          </div>
-         
-          <div className="col-md-6">
-            <div className="col mb-2">
-              <label htmlFor="email" className="form-label"> E-mail <span style={{color: "red"}}> * </span></label>
-              <input type="email" className="form-control" name="FName" id="email" placeholder="" required/>
-            </div>
-            <div className="col mb-2">
-              <label htmlFor="password" className="form-label"> Password <span style={{color: "red"}}> * </span></label>
-              <input type="password" className="form-control" name="PWord" id="password" placeholder="" required/>
-              <div className="my-1 ms-3">
-                <input className="form-check-input" type="checkbox" value="" id="showPass" />
-                <label className="form-check-label mx-2 text-muted" htmlFor="showPass">
-                 Show password
-                </label>
+  const editedStaff = {
+    id: staff.id,
+    firstname: firstNameProps.inputProps.value,
+    lastname: lastNameProps.inputProps.value,
+    midname: midNameProps.inputProps.value,
+    email: emailProps.inputProps.value,
+    role_id: roleId,
+  };
+
+  const onError = (error) => {
+    setError(error);
+  };
+
+  const onSuccess = (isSuccess) => {
+    setSuccess(isSuccess);
+  };
+
+  return (
+    <>
+      <Modal
+        size="lg"
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>
+            <h5>Edit new user</h5>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {success && <Alert variant="success">Successfully edited user</Alert>}
+          {!success && error !== "" && <Alert variant="danger">{error}</Alert>}
+          <form>
+            <div className="row px-4">
+              <div className="col-md-6">
+                <div className="col mb-2">
+                  <label htmlFor="roleSelection" className="form-label">
+                    {" "}
+                    Roles <span style={{ color: "red" }}> * </span>{" "}
+                  </label>
+                  <select
+                    className="form-select"
+                    name="role_id"
+                    id="roleSelection"
+                    value={roleId}
+                    onChange={(e) => setRoleId(e.target.value)}
+                  >
+                    {localRoles.map((role) => (
+                      <option key={role.id} value={role.id}>
+                        {role.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="col mb-2">
+                  <label htmlFor="firstname" className="form-label">
+                    {" "}
+                    First Name <span style={{ color: "red" }}> * </span>
+                  </label>
+                  <input
+                    type="name"
+                    className="form-control"
+                    name="firstname"
+                    id="firstname"
+                    placeholder=""
+                    required
+                    {...firstNameProps.inputProps}
+                  />
+                </div>
+
+                <div className="col mb-2">
+                  <label htmlFor="middlename" className="form-label">
+                    {" "}
+                    Middle Name <span className="text-muted">
+                      {" "}
+                      (Optional){" "}
+                    </span>{" "}
+                  </label>
+                  <input
+                    type="name"
+                    className="form-control"
+                    name="midname"
+                    id="middlename"
+                    placeholder=""
+                    {...midNameProps.inputProps}
+                  />
+                </div>
+
+                <div className="col mb-2">
+                  <label htmlFor="lastname" className="form-label">
+                    {" "}
+                    Last Name <span style={{ color: "red" }}> * </span>
+                  </label>
+                  <input
+                    type="name"
+                    className="form-control"
+                    name="lastname"
+                    id="lastname"
+                    placeholder=""
+                    required
+                    {...lastNameProps.inputProps}
+                  />
+                </div>
+              </div>
+
+              <div className="col-md-6">
+                <div className="col mb-2">
+                  <label htmlFor="email" className="form-label">
+                    {" "}
+                    E-mail <span style={{ color: "red" }}> * </span>
+                  </label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    name="email"
+                    id="email"
+                    placeholder=""
+                    required
+                    {...emailProps.inputProps}
+                  />
+                </div>
               </div>
             </div>
-
-            <div className="col mb-2">
-              <label htmlFor="cfrmPass" className="form-label"> Confirm Password <span style={{color: "red"}}> * </span></label>
-              <input type="password" className="form-control" name="CfrmPass" id="cfrmPass" placeholder="" required/>
-              <div className="my-1 ms-3">
-                <input className="form-check-input" type="checkbox" value="" id="showPassConfirm" />
-                <label className="form-check-label mx-2 text-muted" htmlFor="showPassConfirm">
-                 Show password
-                </label>  
-              </div>
-            </div>
-
-          </div>
-
-        </form>
-      </Modal.Body>
-      <Modal.Footer>
-      <Button className="px-5"  variant="primary">
-          Edit
-        </Button>
-      <Button className="px-5"  variant="secondary" onClick={modalEdit.handleClose}> 
-          Close
-        </Button>
-      </Modal.Footer>
-    </Modal>
-  </>
-
+          </form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            className="px-5"
+            variant="primary"
+            type="submit"
+            onClick={() => {
+              setError("");
+              handleEditStaff(editedStaff, onError, onSuccess);
+            }}
+          >
+            Edit
+          </Button>
+          <Button
+            className="px-5"
+            variant="secondary"
+            onClick={() => {
+              handleClose();
+              setSuccess(false);
+              setError("");
+            }}
+          >
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
 }
 
 export default EditModal;
-
-

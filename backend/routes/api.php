@@ -30,16 +30,29 @@ Route::resource('courses', CourseController::class);
 
 Route::group(['middleware'=>['auth:sanctum']], function(){
     Route::post('/me', [AuthController::class, 'me']);
-    Route::resources([
-        'documents'=> DocumentController::class,
-        'document_statuses'=> DocumentStatusController::class,
-        'document_types'=> DocumentTypeController::class,
-        'requests'=> RequestController::class,
-        'roles'=> RoleController::class,
-        'students'=> StudentController::class,
-        'student_statuses'=> StudentStatusController::class,
-        'users'=> UserController::class,
-    ]);
+    Route::resource('requests', RequestController::class);
+    Route::group(['middleware'=>['auth:sanctum', 'ability:head-registrar']], function(){
+        Route::resources([
+            'documents'=> DocumentController::class,
+            'students'=> StudentController::class,
+            'users'=> UserController::class,
+        ]);
+    });
+
+    Route::group(['middleware'=>['auth:sanctum', 'ability:regular-staff']], function(){
+        Route::resources([
+            'documents'=> DocumentController::class,
+            'students'=> StudentController::class,
+        ]);
+    });
+
+    Route::group(['middleware'=>['auth:sanctum', 'ability:student']], function(){
+        Route::resources([
+            'documents'=> DocumentController::class,
+            'requests'=> RequestController::class,
+        ]);
+    });
+   
     Route::post('/logout', [AuthController::class, 'logout']);
 
 });

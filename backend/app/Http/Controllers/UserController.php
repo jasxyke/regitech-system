@@ -8,6 +8,7 @@ use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 
 class UserController extends Controller
@@ -21,6 +22,7 @@ class UserController extends Controller
         return User::with('role')
                     ->where('role_id', '=', '2')
                     ->orWhere('role_id', '=', '3')
+                    ->orderBy('created_at')
                     ->get();
     }
 
@@ -29,7 +31,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //for head registrar store, wait lang di ko pa prio to
+        $fields = UserValidator::validateCreateStaff($request);
+
+        $user = User::create([
+            'email'=>$fields['email'],
+            'password'=>bcrypt($fields['password']),
+            'email'=>$fields['email'],
+            'lastname'=>$fields['lastname'],
+            'firstname'=>$fields['firstname'],
+            'midname'=>$fields['midname'],
+            'role_id'=>$request->input('role_id'),
+            'email_verified_at'=>now(),
+            'remember_token'=>Str::random(10)
+        ]);
+
+        return response()->json($user->load('role'), 201);
+        
     }
 
     /**
@@ -37,7 +54,12 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        User::with('role')->find($id);
+        $user = User::with('role')->find($id);
+        if($user != null){
+            return $user;
+        }else{
+            return response()->json(['message'=>'User not found']);
+        }
     }
 
     /**
@@ -47,10 +69,10 @@ class UserController extends Controller
     {
         $user = User::with('role')->find($id);
 
-        $fields = UserValidator::validateUpdate($request);
+        UserValidator::validateUpdate($request);
 
-        $user->update($fields);
-        return $user;
+        $user->update($request->all());
+        return response()->json($user, 200);
     }
 
     /**
@@ -58,7 +80,14 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        User::destroy($id);
+        $user = User::find($id);
+        if($user != null){
+            $user->delete();
+            return response()->json(['message'=>'Successfully Deleted']);
+        }else{
+            return response()->json(['message'=>'User not found']);
+        }
+        
     }
 
     
