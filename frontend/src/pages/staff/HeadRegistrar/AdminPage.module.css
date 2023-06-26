@@ -1,19 +1,78 @@
 /* STYLES FOR THE STAFF TABLE */
+.table::-webkit-scrollbar{
+    display: none;
+}
 
+.table{
+    max-height: 500px;
+    overflow-x: hidden;
+    border-radius: 10px;
+}
+
+.table tr:last-child td:first-child{
+    border-radius: 0 0 0 10px;
+}
+
+.table tr:last-child td:last-child{
+    border-radius: 0 0 10px 0;
+}
+
+.table tr:last-child td{
+    border: none;
+}
+
+.table_header{
+    color: var(--primary-maroon);
+    font-style: italic;
+}
+
+.table_head{
+    top: 0;
+    position: sticky;
+    background-color: var(--primary-maroon); 
+    color: #ffffff;
+   
+}
+
+.table_contents{
+    background-color: var(--bg-grey);
+    overflow-y: scroll;
+}
+
+.admin_table_container{
+    max-width: 1100px;
+
+}
 
 
 /* STYLES FOR THE ACTION BUTTONS IN STAFF TABLE */
+.actions{
+    justify-content: center;
+}
 
 .action_btn_cont{
     width: 50px;
     block-size: fit-content;
+
 }
 
 .action_btn{
     width: 20px;
     height: 20px;
-    color: #790000;
+    color: var(--primary-maroon);
     cursor: pointer;
+}
+
+.add_btn{
+    border-radius: 10px !important;
+    background-color: var(--status-green) !important;
+    border: var(--status-green) !important;
+
+}
+
+.add_btn:hover{
+    background-color: #198754 !important;
+    border: #198754 !important;
 }
 
 /* DISABLED OPTION IN FORM DROPDOWN */
@@ -22,7 +81,9 @@ option:disabled{
 }
 
 /* STYLE FOR THE ADD STAFF TRIGGER BUTTON*/
-.addstaffButton{
+.addstaff_btn{
+
     float: right;
+
 }
 
