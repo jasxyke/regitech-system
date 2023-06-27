@@ -15,14 +15,17 @@
   overflow-y: scroll;
 }
 
+.right-side::-webkit-scrollbar {
+  display: none;
+}
+
 .copyright {
   position: absolute;
   margin-top: auto;
-  bottom: 0;
   left: 0;
   right: 0;
   padding: 5px;
-  background-color: #f8f9fa;
+  background-color: white;
   color: black;
   font-size: 0.8rem;
 }
