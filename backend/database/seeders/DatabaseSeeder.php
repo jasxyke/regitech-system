@@ -37,6 +37,18 @@ class DatabaseSeeder extends Seeder
             'email_verified_at'=>now(),
             'remember_token' => Str::random(10),
         ]);
+
+        User::create([
+            'email'=>'mamamoinamo@gmail.com',
+            'password'=>Hash::make('password'),
+            'lastname'=>'Clemente',
+            'firstname'=>'Mark Jay',
+            'midname'=>'Galang',
+            'role_id'=>'1',
+            'email_verified_at'=>now(),
+            'remember_token' => Str::random(10),
+        ]);
+        
         $this->call([
             UserSeeder::class,
             StudentSeeder::class,

@@ -7,7 +7,8 @@ const Logo = () => {
         <img src={logo} />
       </div>
       <h1 className="text-center mb-4">
-        Reg<span style={{ color: "yellow" }}>iTech</span>
+        <span style={{ color: "white" }}>Reg</span>
+        <span style={{ color: "yellow" }}>iTech</span>
       </h1>
     </div>
   );
