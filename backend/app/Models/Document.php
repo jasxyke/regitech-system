@@ -34,8 +34,8 @@ class Document extends Model
         return $this->belongsTo(Student::class);
     }
 
-    public function user(): BelongsTo{
-        return $this->belongsTo(User::class);
+    public function document_status(): BelongsTo{
+        return $this->belongsTo(DocumentStatus::class);
     }
 }
  

@@ -9,7 +9,11 @@ use App\Http\Controllers\RequestController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentStatusController;
+use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VerifiedDocumentsController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,37 +30,24 @@ use Illuminate\Support\Facades\Route;
 //login route
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/sign-up', [AuthController::class, 'register']);
-Route::resource('courses', CourseController::class);
 
-Route::group(['middleware'=>['auth:sanctum']], function(){
+Route::group(['middleware'=>['auth:sanctum','verified']], function(){
     Route::post('/me', [AuthController::class, 'me']);
     Route::resource('requests', RequestController::class);
-    Route::group(['middleware'=>['auth:sanctum', 'ability:head-registrar']], function(){
+        Route::post('/upload', [SubmissionController::class, 
+        'upload']);
         Route::resources([
-            'documents'=> DocumentController::class,
-            'students'=> StudentController::class,
-            'users'=> UserController::class,
+            'students' => StudentController::class,
+            'documents' => DocumentController::class,
+            'requests' => RequestController::class,
+            'users' => UserController::class,
         ]);
-    });
-
-    Route::group(['middleware'=>['auth:sanctum', 'ability:regular-staff']], function(){
-        Route::resources([
-            'documents'=> DocumentController::class,
-            'students'=> StudentController::class,
-        ]);
-    });
-
-    Route::group(['middleware'=>['auth:sanctum', 'ability:student']], function(){
-        Route::resources([
-            'documents'=> DocumentController::class,
-            'requests'=> RequestController::class,
-        ]);
-    });
+        Route::get('/request-documents/{id}',
+         [DocumentController::class, 'documents']);
    
     Route::post('/logout', [AuthController::class, 'logout']);
 
-});
+    Route::post('/test-email', [VerifiedDocumentsController::class, 'testEmail']);
+    
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+});

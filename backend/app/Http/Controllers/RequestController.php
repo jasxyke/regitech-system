@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Request as ModelsRequest;
 use Illuminate\Http\Request;
 
 class RequestController extends Controller
@@ -12,7 +13,7 @@ class RequestController extends Controller
      */
     public function index()
     {
-        return Request::with(['student', 'student.user'])
+        return ModelsRequest::with(['student', 'student.user'])
                     ->paginate(20);
     }
 

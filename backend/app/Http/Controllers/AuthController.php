@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Auth\Events\Registered;
 
 class AuthController extends Controller
 {
@@ -36,15 +37,15 @@ class AuthController extends Controller
         ]);
 
         if($user->role_id == 1){
-            $token = $user->createToken('regitechtoken', ['head-registrar']);
+            $token = $user->createToken('regitechtoken');
             $token = $token->plainTextToken;
         }
         else if($user->role_id == 2 || $user->role_id == 3){
-            $token = $user->createToken('regitechtoken', ['regular-staff']);
+            $token = $user->createToken('regitechtoken');
             $token = $token->plainTextToken;
         }
         else if($user->role_id == 4){
-            $token = $user->createToken('regitechtoken', ['student']);
+            $token = $user->createToken('regitechtoken');
             $token = $token->plainTextToken;
         }else{
             response()->json(['error' => 'Invalid credentials'], 401);
@@ -59,17 +60,17 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            $user = Auth::user();
+            $user = $request->user();
             if($user->role_id == 1){
-            $token = $user->createToken('regitechtoken', ['head-registrar']);
+            $token = $user->createToken('regitechtoken');
             $token = $token->plainTextToken;
         }
         else if($user->role_id == 2 || $user->role_id == 3){
-            $token = $user->createToken('regitechtoken', ['regular-staff']);
+            $token = $user->createToken('regitechtoken');
             $token = $token->plainTextToken;
         }
         else if($user->role_id == 4){
-            $token = $user->createToken('regitechtoken', ['student']);
+            $token = $user->createToken('regitechtoken');
             $token = $token->plainTextToken;
         }else{
             response()->json(['error' => 'Invalid credentials'], 401);

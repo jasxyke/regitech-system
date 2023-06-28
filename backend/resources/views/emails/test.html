@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body class="main-container">
+        <div>
+            <div class="text-center logo">
+                <img
+                    src="https://lh3.googleusercontent.com/Isnz8I7nqJ9VrRb95ckHqNcZb5_rHQHSEBy1f3heXiadbuTprc4SAjiKB6JNbTTo4XAqnoSykoM_LCLO6ZEguPTmOdaXF7YGa3ftHa2Tp6tCb8K7pHLzj6Pu9_GtbLpAmzPaWGhKT_lQWlOjpFVEniv1Xr5bzcmn7FOjWY6XOKXZVgGfJ8iw4_M2lYilo7SBOqII5G5WqOW7ADDLBbsgo7N1GebRyXXfFzuGRUnFd23sImMQxq02KMJN9ypz3aKZAT96XMC44Ta9COPIT0b24uGQBApgu1GBoqEgbl7oBjAJSqSpjcwuV8hqwaaDtQvpbz1eYLxffINRWdGi2Zd9FTpcuxX6zGW87SBVqnkgFYjDAI9V5AjlojguEEsiXF9_SKLcpH4EIUDh9__7TDwudgM2r8zFtM58O-zuzf0aY8n5R83MoQOXjKNFg3WFhR4nKH8As3m4Cv3VSECM4IQHiECX6Mq33tiUtppR2tzc2JsQbyxehwrwBsa6yznaIYLnIiS0ok6RsoDwkSc5EkYAhxQ3nGmy79jto1UCWChQwOILs4-rOhz0NwtItywteT3xObErf_o0YIqcMmABREPV5QCZlyrkIIwEMj6Z57Wcz6wq8PDJnSbGSNoSMpgVFKFvmiXw9ZY0oI-hDuf4TNDhitgRvLrncKhTPQSFPEuw1n4rrj2nuUlvW1diVn-TLQfiXuw_lmnpYWDrD048z2euebz_ExGVzwz7hWlLoOm5QSiGkGuXRZpZ9nEX-FwZE4jXXOdd63_qO4UunyT8cuFYMB58v6Tx6kLKZGdi7Wj2NY9DO8L0dTy0mf-fT1Wzjht7c0jx5X_zpzov3tPDQ1Nd0neHwXLVYcjZguhvqmWcDCTBCV6TYes31N80payI25GvsLSkwCFn3tq6o-CjEBWCa6N4u8mNryJZ6UptGfu_b-eFCoqUp7j_jZmo5ujpX-2GzqshaEakxcjH9J111GBgk1rryeLZ_KvcZvkGZCi8JjfRnYj9WkxM-nM=w88-h88-s-no?authuser=0"
+                />
+                <h1 class="text-center">
+                    Reg<span class="text-yellow">iTech</span>
+                </h1>
+            </div>
+        </div>
+
+        <h1 class="greetings">Hello {{$user}}!</h1>
+        <p>
+            This email is from the Polytechnic University of the Philippines
+            Insititute of Technology to notify you about your recently submitted
+            admission documents in which:
+        </p>
+        <p><strong>{{$result_message}}</strong></p>
+
+        <!-- @foreach($documents as $document) -->
+        <div class="document-result">
+            <div class="document">
+                <p>{{$document->document_type['name']}}</p>
+                <p>{{$document->document_status['name']}}</p>
+            </div>
+            <div class="document">
+                <p>{{$document->document_type['name']}}</p>
+                <p>{{$document->document_status['name']}}</p>
+            </div>
+        </div>
+
+        <!-- @endforeach -->
+    </body>
+
+    <style>
+        p {
+            font-size: 1.25rem;
+        }
+
+        .document-result {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .document {
+            display: flex;
+            column-gap: 60px;
+        }
+
+        .main-container {
+            background-color: #790000;
+            color: white;
+        }
+
+        .greetings {
+            font-size: 1.5rem;
+        }
+        .text-white {
+            color: white;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .logo {
+            padding: 2rem;
+            display: flex;
+        }
+
+        .text-yellow {
+            color: yellow;
+        }
+    </style>
+</html>
