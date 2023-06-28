@@ -1,62 +1,56 @@
-import css from "./AdminPage.module.css";
-
+import AdminStyles from "./AdminPage.module.css";
 import { IconContext } from "react-icons";
-import { BiEdit } from "react-icons/bi";
 import { BiTrash } from "react-icons/bi";
+import EditStaffForm from "./EditStaffForm";
+import AddStaffForm from "./AddStaffForm";
+import { useEffect, useState } from "react";
+import axiosClient from "../../../utils/axios";
+import StaffRecords from "./StaffRecords";
+import useStaffCrud from "../../../hooks/useStaffCrud";
 
-const Staffs = [
-  {
-    id: 1,
-    name: "Sean Gomez",
-    role: "Student Assistant",
-  },
-  {
-    id: 2,
-    name: "Shawn Gomez",
-    role: "Head Registrar",
-  },
-  {
-    id: 3,
-    name: "Seanny Gomez",
-    role: "Regular Staff",
-  },
-];
+// DECLARATION FOR LISTINGS (TEMPORARY)
 
-const TableItems = Staffs.map((items) => (
-  <tr key={items.id}>
-    <td>{items.id}</td>
-    <td>{items.name}</td>
-    <td>{items.role}</td>
-
-    <IconContext.Provider value={{ className: css.action_btn }}>
-      <td>
-        <div className="row actions">
-          <a href="" className={"col " + css.action_btn_cont}>
-            <BiEdit />
-          </a>
-          <a href="" className={"col " + css.action_btn_cont}>
-            <BiTrash />
-          </a>
-        </div>
-      </td>
-    </IconContext.Provider>
-  </tr>
-));
+// MAIN FUNCTION FOR THE STAFF TABLE (WITH THE ADD AND EDIT MODAL
+// FUNCTIONS INCLUDED)
 
 function StaffTable() {
+  const [tempStaffs, setTempStaffs] = useState(null);
+  const staffCRUD = useStaffCrud();
+  const staffs = staffCRUD.staffs;
+  const loading = staffCRUD.loading;
+
   return (
     <div>
-      <table className="table table-responsive-lg">
-        <thead>
-          <tr className="table_head">
-            <th className="col">ID</th>
-            <th className="col">Staff Name</th>
-            <th className="col">Role</th>
-            <th className="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>{TableItems}</tbody>
-      </table>
+      <div className="d-flex justify-content-between mt-5">
+        <p className="h2">Staff List</p>
+        <div className={AdminStyles.addstaffButton}>
+          <AddStaffForm onAddUser={staffCRUD.onAddStaff} loading={loading} />
+        </div>
+      </div>
+
+      <div className="my-2">
+        <table className="table table-responsive-lg table-hover">
+          <thead className="">
+            <tr className="table_head">
+              <th className="col">ID</th>
+              <th className="col">Staff Name</th>
+              <th className="col">Position</th>
+              <th className="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {staffs !== null ? (
+              <StaffRecords
+                staffs={staffs}
+                onDelete={staffCRUD.ondeleteStaff}
+                onEdit={staffCRUD.onEditStaff}
+                selectedStaff={staffCRUD.selectedStaff}
+                selectStaff={staffCRUD.onSelectStaff}
+              />
+            ) : null}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
