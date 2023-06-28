@@ -32,14 +32,14 @@ const StaffRecords = ({
 
       <IconContext.Provider value={{ className: AdminStyles.action_btn }}>
         <td>
-          <div className={"row " + AdminStyles.actions} >
+          <div className={AdminStyles.actions} >
             <EditStaffForm
               selectedStaff={selectedStaff}
               staffId={staff.id}
               selectStaff={selectStaff}
               handleEditStaff={onEdit}
             />
-            <span className={"col " + AdminStyles.action_btn_cont}>
+            <span className={"mx-1 " + AdminStyles.action_btn_cont}>
               <ResponseModal
                 response={response}
                 show={show}

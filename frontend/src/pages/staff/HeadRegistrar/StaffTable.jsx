@@ -34,10 +34,10 @@ function StaffTable() {
         <table className="table table-responsive-lg table-hover my-0">
           <thead>
             <tr className={AdminStyles.table_head}>
-              <th className="col-2">ID</th>
-              <th className="col-4">Staff Name</th>
-              <th className="col-4">Position</th>
-              <th className="col-2">Actions</th>
+              <th className="col-sm-2">ID</th>
+              <th className="col-sm-4">Staff Name</th>
+              <th className="col-sm-4">Position</th>
+              <th className="col-sm-2">Actions</th>
             </tr>
           </thead>
           <tbody className={AdminStyles.table_contents}>

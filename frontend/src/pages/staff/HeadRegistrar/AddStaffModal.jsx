@@ -52,6 +52,8 @@ function AddModal({ show, handleClose, onAddUser, loading }) {
   const onSuccess = (isSucess) => {
     setSuccess(isSucess);
   };
+
+
   return (
     <>
       <Modal
@@ -244,6 +246,7 @@ function AddModal({ show, handleClose, onAddUser, loading }) {
               handleClose();
               setSuccess(false);
               setError("");
+              clearForm();
             }}
           >
             Close

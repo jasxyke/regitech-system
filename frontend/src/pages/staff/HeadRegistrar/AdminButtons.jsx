@@ -16,7 +16,7 @@ function AddStaffButton(btnAdd) {
 
 function EditStaffButton(btnEdit){
   return <>
-    <a className={"col "+ AdminStyles.action_btn_cont} onClick={btnEdit.handleShow}>
+    <a className={"mx-1 " + AdminStyles.action_btn_cont} onClick={btnEdit.handleShow}>
       <BiEdit />
     </a>
   </>;
