@@ -1,5 +1,5 @@
 import TableCss from "../VerificationRequests/Verification.module.css";
-import Example from "../VerificationRequests/Modal";
+import VerificationTable from "../VerificationRequests/VereficationTable";
 
 const VerificationPage = () => {
   return (
@@ -27,107 +27,7 @@ const VerificationPage = () => {
           </p>
         </div>
       </div>
-      <table className="table table-hover fw-bold text-center overflow-hidden rounded-top rounded-bottom  table-borderless ">
-        <thead className={`align-middle ${TableCss.tablehead}`}>
-          <th scope="col">Transaction ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Document Submitted</th>
-          <th scope="col">Document Status</th>
-          <th scope="col"></th>
-        </thead>
-        <tbody className={TableCss.tablebody}>
-          <tr>
-            <th scope="row">ABC201922132</th>
-            <td>Juan Dela Cruz</td>
-            <td>Transcript of Record</td>
-            <td>
-              <button
-                disabled
-                className={
-                  TableCss.status + "  fw-bold  w-75 rounded-pill border-0"
-                }
-              >
-                Pending
-              </button>
-            </td>
-            <td>
-              <Example />
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">ABC201922132</th>
-            <td>Juan Dela Cruz</td>
-            <td>Transcript of Record</td>
-            <td>
-              <button
-                disabled
-                className={
-                  TableCss.status + "  fw-bold  w-75 rounded-pill border-0"
-                }
-              >
-                Pending
-              </button>
-            </td>
-            <td>
-              <Example />
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">ABC201922132</th>
-            <td>Juan Dela Cruz</td>
-            <td>Transcript of Record</td>
-            <td>
-              <button
-                disabled
-                className={
-                  TableCss.status + "  fw-bold  w-75 rounded-pill border-0"
-                }
-              >
-                Pending
-              </button>
-            </td>
-            <td>
-              <Example />
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">ABC201922132</th>
-            <td>Juan Dela Cruz</td>
-            <td>Transcript of Record</td>
-            <td>
-              <button
-                disabled
-                className={
-                  TableCss.status + "  fw-bold  w-75 rounded-pill border-0"
-                }
-              >
-                Pending
-              </button>
-            </td>
-            <td>
-              <Example />
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">ABC201922132</th>
-            <td>Juan Dela Cruz</td>
-            <td>Transcript of Record</td>
-            <td>
-              <button
-                disabled
-                className={
-                  TableCss.status + " fw-bold w-75 rounded-pill border-0"
-                }
-              >
-                Pending
-              </button>
-            </td>
-            <td>
-              <Example />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <VerificationTable />
       <div className="text-end">
         <button
           className={
