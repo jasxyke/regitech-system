@@ -2,7 +2,6 @@ import leftbg from "../../assets/backgroundleft.jpg";
 import LoginForm from "./LoginForm.jsx";
 import Logo from "../../components/Logo.jsx";
 import LoginCss from "./LoginPage.module.css";
-import Footer from "../../components/footers/Footer.jsx";
 
 const LoginPage = () => {
   return (
@@ -20,7 +19,11 @@ const LoginPage = () => {
           <div className="mt-3 text-center">
             <a href="/sign-up"> don't have an account yet ? </a>
           </div>
-          <Footer />
+          <div className="row text-center mt-auto">
+            <div className={LoginCss.copyright}>
+              Copyright@2022 | RegiTech | Developed DICT 3-1
+            </div>
+          </div>
         </div>
       </div>
     </div>

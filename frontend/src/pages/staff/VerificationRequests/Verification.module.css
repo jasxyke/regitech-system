@@ -1,0 +1,66 @@
+.tablehead {
+  background-color: #790000;
+  color: #f5f3f3;
+  height: 2.5rem;
+}
+
+.tablebody {
+  background-color: #f5f3f3;
+}
+
+.status {
+  background-color: #f68e56;
+  color: #f5f3f3;
+}
+
+.view,
+.cancel {
+  background-color: #790000 !important;
+  color: #f5f3f3 !important;
+  height: 1.5rem;
+}
+
+.back {
+  background-color: #790000;
+  color: #f5f3f3;
+  width: 5rem;
+}
+
+.title {
+  color: #790000;
+}
+
+.done {
+  background-color: #00a651;
+  color: #f5f3f3;
+}
+
+/* Modal */
+
+.modalHead {
+  background-color: #790000;
+  color: #f5f3f3;
+}
+.imagePreview {
+  border: 1px solid black;
+}
+
+.rejectModal {
+  background-color: #790000 !important;
+  color: #f5f3f3 !important;
+}
+
+.approveModal {
+  background-color: #00a651 !important;
+  color: #f5f3f3 !important;
+}
+
+.modalCentered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalCentered .modal-dialog {
+  margin: 0;
+}
