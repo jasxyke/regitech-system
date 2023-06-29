@@ -48,7 +48,6 @@
 
 }
 
-
 /* STYLES FOR THE ACTION BUTTONS IN STAFF TABLE */
 .actions{
     text-align: center;
@@ -69,14 +68,17 @@
 
 .add_btn{
     border-radius: 10px !important;
-    background-color: var(--status-green) !important;
-    border: var(--status-green) !important;
+    background-color: var(--main-white) !important;
+    border: var(--primary-maroon) solid 2px !important;
+    color: var(--primary-maroon) !important;
+
 
 }
 
 .add_btn:hover{
-    background-color: #198754 !important;
-    border: #198754 !important;
+    background-color: var(--primary-maroon) !important;
+    border: var(--primary-maroon) solid 2px !important;
+    color: var(--main-white) !important;
 }
 
 /* DISABLED OPTION IN FORM DROPDOWN */
@@ -86,8 +88,71 @@ option:disabled{
 
 /* STYLE FOR THE ADD STAFF TRIGGER BUTTON*/
 .addstaff_btn{
-
     float: right;
 
 }
 
+ /* STYLE FOR STAFF PAGE MODALS */
+
+.staff_modal{
+    border-radius: 12px !important;
+}
+
+.modal_header{
+    background-color: var(--primary-maroon);
+    border-radius: 10px 10px 0 0 !important;
+}
+
+.modal_header h5{
+    letter-spacing: 0.5px;
+    color: var(--main-white);
+}
+
+.modal_btn_submit{
+    border-color: var(--btn-submit) !important;
+    background-color: var(--btn-submit) !important;
+}
+
+.modal_btn_submit:hover{
+    border-color: var(--btn-hover-submit) !important;
+    background-color: var(--btn-hover-submit) !important;
+}
+
+.modal_btn_close{
+    border-color: var(--btn-close) !important;
+    background-color: var(--btn-close) !important;
+}
+
+.modal_btn_close:hover{
+    border-color: var(--btn-hover-close) !important;
+    background-color: var(--btn-hover-close) !important;
+}
+
+
+.modal_btn_submit, .modal_btn_close{
+    width: 23%;
+    letter-spacing: 0.5px;
+    border-radius: 10px !important;
+}
+
+.modal_body label, input, select{
+    letter-spacing: 0.5px;
+}
+
+.modal_body label{
+    font-weight: bold;
+}
+
+.text_muted{
+    font-weight: normal !important;
+}
+
+.modal_footer{
+    border: 0 !important;
+}
+
+.password_reveal:checked{
+    background-color: var(--primary-maroon) !important;
+    border-color: var(--primary-maroon) !important;
+    opacity: 0.8;
+}

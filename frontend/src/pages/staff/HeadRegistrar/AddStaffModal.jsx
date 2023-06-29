@@ -6,6 +6,7 @@ import { useFormInput } from "../../../hooks/useFormInput";
 import { useState } from "react";
 import { clearTextInputs } from "../../../utils/InputFormClearer";
 import { Alert } from "react-bootstrap";
+import AdminStyles from "./AdminPage.module.css"
 
 // THE FUNCION FOR THE ADD STAFF MODAL (EXCLUDING THE TRIGGER)
 
@@ -19,6 +20,8 @@ function AddModal({ show, handleClose, onAddUser, loading }) {
   const passProps = useFormInput("");
   const confirmPassProps = useFormInput("");
   const [roleId, setRoleId] = useState("2");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showCfrmPassword, setCfrmShowPassword] = useState(false);
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
@@ -52,23 +55,32 @@ function AddModal({ show, handleClose, onAddUser, loading }) {
   const onSuccess = (isSucess) => {
     setSuccess(isSucess);
   };
-
-
+  
   return (
     <>
       <Modal
         size="lg"
+        contentClassName={"" + AdminStyles.staff_modal}
         show={show}
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
       >
-        <Modal.Header closeButton>
+        <Modal.Header 
+          className={"px-4 " + AdminStyles.modal_header} 
+          closeVariant="white" 
+          closeButton
+          onHide={() => {
+            clearForm(); 
+            setSuccess(false);
+            setError("");
+          }}
+        >
           <Modal.Title>
             <h5 className="my-auto py-1">Add new user</h5>
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className={AdminStyles.modal_body}>
           {success && (
             <Alert variant="success">Successfully added new user</Alert>
           )}
@@ -94,6 +106,7 @@ function AddModal({ show, handleClose, onAddUser, loading }) {
                   ))}
                 </select>
               </div>
+
               <div className="col mb-2">
                 <label htmlFor="firstname" className="form-label">
                   {" "}
@@ -168,7 +181,7 @@ function AddModal({ show, handleClose, onAddUser, loading }) {
                   Password <span style={{ color: "red" }}> * </span>
                 </label>
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   className="form-control"
                   name="password"
                   id="password"
@@ -178,13 +191,14 @@ function AddModal({ show, handleClose, onAddUser, loading }) {
                 />
                 <div className="my-1 ms-3">
                   <input
-                    className="form-check-input"
+                    className={"form-check-input " + AdminStyles.password_reveal}
                     type="checkbox"
                     value=""
                     id="showPass"
+                    onChange={() => setShowPassword(!showPassword)}
                   />
                   <label
-                    className="form-check-label mx-2 text-muted"
+                    className={"form-check-label mx-2 text-muted " + AdminStyles.text_muted}
                     htmlFor="showPass"
                   >
                     Show password
@@ -198,7 +212,7 @@ function AddModal({ show, handleClose, onAddUser, loading }) {
                   Confirm Password <span style={{ color: "red" }}> * </span>
                 </label>
                 <input
-                  type="password"
+                  type={showCfrmPassword ? "text" : "password"}
                   className="form-control"
                   name="password_confirmation"
                   id="cfrmPass"
@@ -208,13 +222,14 @@ function AddModal({ show, handleClose, onAddUser, loading }) {
                 />
                 <div className="my-1 ms-3">
                   <input
-                    className="form-check-input"
+                    className={"form-check-input " + AdminStyles.password_reveal}
                     type="checkbox"
                     value=""
                     id="showPassConfirm"
+                    onChange={() => setCfrmShowPassword(!showCfrmPassword)}
                   />
                   <label
-                    className="form-check-label mx-2 text-muted"
+                    className={"form-check-label mx-2 text-muted " + AdminStyles.text_muted}
                     htmlFor="showPassConfirm"
                   >
                     Show password
@@ -224,11 +239,10 @@ function AddModal({ show, handleClose, onAddUser, loading }) {
             </div>
           </form>
         </Modal.Body>
-        <Modal.Footer className="py-2">
+        <Modal.Footer className={"p-2 " + AdminStyles.modal_footer}>
           <Button
             disabled={loading}
-            className="px-5"
-            variant="primary"
+            className={AdminStyles.modal_btn_submit}
             onClick={() => {
               setError("");
               onAddUser(addedStaff, onError, onSuccess);
@@ -240,7 +254,7 @@ function AddModal({ show, handleClose, onAddUser, loading }) {
             Add
           </Button>
           <Button
-            className="px-5"
+            className={AdminStyles.modal_btn_close}
             variant="secondary"
             onClick={() => {
               handleClose();
