@@ -1,3 +1,9 @@
+@media screen and (max-width: 578px){
+  .container{
+    display: none !important;
+  }
+}
+
 .container {
   display: flex;
   width: 230px;

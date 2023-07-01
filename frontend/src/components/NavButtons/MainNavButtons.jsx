@@ -5,13 +5,21 @@ import manageStaff from "../../assets/addfile.png";
 import masterlist from "../../assets/hrfile.png";
 const MainNavButtons = () => {
   return (
-    <div className={css.container}>
+    <div className={"mx-5 my-4 col " + css.container}>
       <EventButton
         icon={documentRequest}
         label={"Document Requests Verification"}
       />
-      <EventButton icon={manageStaff} label={"Manage Staff"} />
-      <EventButton icon={masterlist} label={"Student Masterlist"} />
+      
+      <EventButton 
+        icon={manageStaff} 
+        label={"Manage Staff"} 
+      />
+
+      <EventButton 
+        icon={masterlist} 
+        label={"Student Masterlist"}
+      />
     </div>
   );
 };

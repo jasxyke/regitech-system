@@ -4,6 +4,8 @@ import { roles } from "../../../data/constants";
 import { useFormInput } from "../../../hooks/useFormInput";
 import { useEffect, useState } from "react";
 import { Alert } from "react-bootstrap";
+import AdminStyles from  "./AdminPage.module.css"
+
 
 function EditModal({ show, handleClose, staff, handleEditStaff }) {
   const localRoles = [roles[1], roles[2]];
@@ -42,21 +44,31 @@ function EditModal({ show, handleClose, staff, handleEditStaff }) {
     setSuccess(isSuccess);
   };
 
+  
   return (
     <>
       <Modal
         size="lg"
+        contentClassName={"" + AdminStyles.staff_modal}
         show={show}
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
       >
-        <Modal.Header closeButton>
+        <Modal.Header 
+          className={"px-4 " + AdminStyles.modal_header} 
+          closeVariant="white" 
+          closeButton
+          onHide={() => {
+            setSuccess(false);
+            setError("");
+          }}
+        >
           <Modal.Title>
-            <h5>Edit new user</h5>
+            <h5 className="my-auto py-1">Edit new user</h5>
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className={AdminStyles.modal_body}>
           {success && <Alert variant="success">Successfully edited user</Alert>}
           {!success && error !== "" && <Alert variant="danger">{error}</Alert>}
           <form>
@@ -100,7 +112,7 @@ function EditModal({ show, handleClose, staff, handleEditStaff }) {
                 <div className="col mb-2">
                   <label htmlFor="middlename" className="form-label">
                     {" "}
-                    Middle Name <span className="text-muted">
+                    Middle Name <span className={"text-muted " + AdminStyles.text_muted}>
                       {" "}
                       (Optional){" "}
                     </span>{" "}
@@ -152,10 +164,10 @@ function EditModal({ show, handleClose, staff, handleEditStaff }) {
             </div>
           </form>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className={"p-2 " + AdminStyles.modal_footer}>
           <Button
-            className="px-5"
-            variant="primary"
+            className={AdminStyles.modal_btn_submit}
+            id="password"
             type="submit"
             onClick={() => {
               setError("");
@@ -165,8 +177,8 @@ function EditModal({ show, handleClose, staff, handleEditStaff }) {
             Edit
           </Button>
           <Button
-            className="px-5"
-            variant="secondary"
+            className={AdminStyles.modal_btn_close}
+            id="cfrm_password"
             onClick={() => {
               handleClose();
               setSuccess(false);

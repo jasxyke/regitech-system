@@ -6,7 +6,7 @@ const GreetingsHeader = ({ name }) => {
 
   return (
     <div>
-      <div className={css.greeting_header}>
+      <div className={"mt-5 mb-3 "+ css.greeting_header}>
         <h2>
           <strong>Hello, {name}!</strong>
         </h2>

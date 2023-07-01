@@ -6,6 +6,15 @@
   --status-yellow: #fff200;
   --status-orange: #f68e56;
   --status-green: #00a651;
+  --main-white: #ffffff;
+
+  /* REMOVE COMMENT IF UNDERSTOOD, THESE ARE THE COLOR VARIABLES 
+  FOR THE BUTTONS INSIDE THE MODALS */
+  --btn-submit: #198754;
+  --btn-hover-submit: #157347;
+  --btn-close: #960000;
+  --btn-hover-close: #7c0000;
+  /*-----------------------------*/
 
   --main-font: "Montserrat", sans-serif;
 }
