@@ -20,6 +20,7 @@ class Document extends Model
         'updated_by',
         'file_path',
         'with_copies',
+        'student_id',
     ];
 
     public function document_type(): BelongsTo{

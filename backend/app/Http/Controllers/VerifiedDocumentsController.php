@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Mail\VerifiedDocuments;
 use App\Models\Document;
+use App\Models\Request as ModelsRequest;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -17,14 +19,16 @@ class VerifiedDocumentsController extends Controller
 
         $verifiedDocuments = [];
         $invalidDocument = 0;
+        //return $documents;
         foreach($documents as $modifiedDocument){
             $document = Document::with('document_type')
-                        ->findOrFail($modifiedDocument->id);
-            $document->document_status_id = $modifiedDocument->document_status_id;
+                        ->findOrFail($modifiedDocument["id"]);
+            $document->document_status_id = $modifiedDocument["document_status_id"];
+            $document->with_copies = $modifiedDocument["with_copies"];
             $document->save();
             $document->load('document_status');
             array_push($verifiedDocuments, $document);
-            if($modifiedDocument->document_status_id == 2){
+            if($modifiedDocument["document_status_id"] == 2){
                 $invalidDocument++;
             }
         }
@@ -34,9 +38,22 @@ class VerifiedDocumentsController extends Controller
         }else{
             $message = "All of your submitted documents has been verified and accepted.";
         }
-        $user = $request->user();
+
+        $verification_request = ModelsRequest::findOrFail($id);
+
+        $user = Student::with('user')->where('id','=',$verification_request->student_id)->first()['user'];
+        //$testEmail = "email niyo"; replace niyo lang yung $user->email sa baba kung gusto testing
+        //$user->email
         Mail::to($user->email, $user->firstname)
                 ->send(new VerifiedDocuments($user, $verifiedDocuments, $message, $note));
+
+        
+
+        $verification_request->is_reviewed = 1;
+
+        $verification_request->save();
+
+        return response()->json(["message" => "Updated and emailed successfully"], 200);
         
     }
 

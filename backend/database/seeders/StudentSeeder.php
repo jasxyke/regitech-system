@@ -34,23 +34,23 @@ class StudentSeeder extends Seeder
             'student_status_id'=>'2',
         ]);
 
-        $user = User::create([
-            'email'=>'mamamoinamo@gmail.com',
-            'password'=>Hash::make('password'),
-            'lastname'=>'Clemente',
-            'firstname'=>'Mark Jay',
-            'midname'=>'Galang',
-            'role_id'=>'4',
-            'email_verified_at'=>now(),
-            'remember_token' => Str::random(10),
-        ]);
+        // $user = User::create([
+        //     'email'=>'mamamoinamo@gmail.com',
+        //     'password'=>Hash::make('password'),
+        //     'lastname'=>'Clemente',
+        //     'firstname'=>'Mark Jay',
+        //     'midname'=>'Galang',
+        //     'role_id'=>'4',
+        //     'email_verified_at'=>now(),
+        //     'remember_token' => Str::random(10),
+        // ]);
 
-        Student::create([
-            'user_id'=>$user->id,
-            'course_id'=>'1',
-            'year_admitted'=>'2020',
-            'student_status_id'=>'2',
-        ]);
+        // Student::create([
+        //     'user_id'=>$user->id,
+        //     'course_id'=>'1',
+        //     'year_admitted'=>'2020',
+        //     'student_status_id'=>'2',
+        // ]);
 
         User::factory(40)
             ->create(['role_id'=>'4'])

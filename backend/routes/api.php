@@ -43,10 +43,11 @@ Route::group(['middleware'=>['auth:sanctum','verified']], function(){
             'users' => UserController::class,
         ]);
         Route::get('/request-documents/{id}',
-         [DocumentController::class, 'documents']);
+         [DocumentController::class, 'getDocuments']);
    
     Route::post('/logout', [AuthController::class, 'logout']);
 
+    Route::post('/verify-documents/{id}', [VerifiedDocumentsController::class, 'verify_documents']);
     Route::post('/test-email', [VerifiedDocumentsController::class, 'testEmail']);
     
 

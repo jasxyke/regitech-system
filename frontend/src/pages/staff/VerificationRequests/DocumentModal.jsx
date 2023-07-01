@@ -4,11 +4,13 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import TableCss from "../VerificationRequests/Verification.module.css";
 
-function Example() {
+function DocumentModal({ document, withCopies, handleVerify }) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [haveCopies, setHaveCopies] = useState(withCopies);
 
   return (
     <>
@@ -28,11 +30,12 @@ function Example() {
         <Modal.Header className={TableCss.modalHead} closeButton>
           <Modal.Title>Document Name</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="d-flex justify-content-center">
           <img
-            src="path/to/your/image.jpg"
+            src={document.file_path}
             alt="Image Preview"
             className={TableCss.imagePreview}
+            width={"100%"}
           />
         </Modal.Body>
         <Modal.Footer>
@@ -41,12 +44,28 @@ function Example() {
               type="checkbox"
               id="default-checkbox"
               label="with copies"
+              checked={haveCopies}
+              onChange={(e) => {
+                setHaveCopies(!haveCopies);
+              }}
             />
           </Form>
-          <Button className={TableCss.approveModal} onClick={handleClose}>
+          <Button
+            className={TableCss.approveModal}
+            onClick={() => {
+              handleVerify(document.id, 1, haveCopies);
+              handleClose();
+            }}
+          >
             APPROVE
           </Button>
-          <Button className={TableCss.rejectModal} onClick={handleClose}>
+          <Button
+            className={TableCss.rejectModal}
+            onClick={() => {
+              handleVerify(document.id, 2, haveCopies);
+              handleClose();
+            }}
+          >
             REJECT
           </Button>
         </Modal.Footer>
@@ -55,4 +74,4 @@ function Example() {
   );
 }
 
-export default Example;
+export default DocumentModal;

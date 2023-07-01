@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import css from "./Navbar.module.css";
 import logo from "../../assets/puplogo.png";
 
-function StaffNavbar() {
+function StaffNavbar({ userRoleId }) {
   const [click, setClick] = useState(false);
   const { logout } = useAuthContext();
 
@@ -30,9 +30,11 @@ function StaffNavbar() {
               <Nav.Link as={Link} to="/staff/dashboard">
                 Staff
               </Nav.Link>
-              <Nav.Link as={Link} to="/staff/admin">
-                Admin
-              </Nav.Link>
+              {userRoleId == 1 && (
+                <Nav.Link as={Link} to="/staff/head">
+                  Admin
+                </Nav.Link>
+              )}
               <Nav.Link as={Link} to="/staff/document-verification">
                 Document Verification
               </Nav.Link>
