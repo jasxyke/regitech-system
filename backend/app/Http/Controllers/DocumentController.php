@@ -4,20 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Document;
-use Illuminate\Http\Request;
+use App\Models\Request;
 use Ramsey\Uuid\Type\Integer;
 
 class DocumentController extends Controller
 {
     //get all documents of a given request id
-    public function documents(string $id){
+    public function getDocuments(string $id){
         Request::findOrFail($id);
-        $requestDocuments = Document::with(['document_type', 'document_status'])
+        $requestDocuments = Document::with(['document_type', 'document_status', 'student.user'])
                 ->where('request_id',$id)
                 ->orderBy('document_type_id')
                 ->get();
 
-        return response()->json( $requestDocuments);
+        return $requestDocuments;
 
     }
 
