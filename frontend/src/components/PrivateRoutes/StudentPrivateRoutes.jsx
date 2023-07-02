@@ -1,6 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
 import StudentNavbar from "../navbars/StudentNavbar";
+import MainFooter from "../footers/MainFooter";
 import { UserProvider } from "../../context/UserContext";
 
 const StudentPrivateRoutes = () => {
@@ -12,8 +13,10 @@ const StudentPrivateRoutes = () => {
     <UserProvider>
       <StudentNavbar />
       <div className="container">
-        <Outlet />
+      <Outlet />
       </div>
+      <MainFooter />
+
     </UserProvider>
   ) : (
     <Navigate to="/" />

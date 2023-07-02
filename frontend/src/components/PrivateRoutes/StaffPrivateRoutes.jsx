@@ -1,6 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
 import StaffNavbar from "../navbars/StaffNavbar";
+import MainFooter from "../footers/MainFooter";
 import { UserProvider } from "../../context/UserContext";
 import { Link } from "react-router-dom";
 import MainFooter from "../footers/MainFooter";
@@ -18,6 +19,8 @@ const StaffPrivateRoutes = () => {
       <div className="container pt-3">
         <Outlet />
       </div>
+      <MainFooter />
+
     </UserProvider>
   ) : (
     <Navigate to="/" />
