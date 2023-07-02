@@ -16,6 +16,7 @@ const StudentPrivateRoutes = () => {
       <Outlet />
       </div>
       <MainFooter />
+
     </UserProvider>
   ) : (
     <Navigate to="/" />

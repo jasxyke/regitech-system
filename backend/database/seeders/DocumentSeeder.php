@@ -16,12 +16,14 @@ class DocumentSeeder extends Seeder
      */
     public function run(): void
     {
+        $student = "";
         User::factory(15)
             ->create(['role_id'=>'4'])
             ->each(function ($user){
                 Student::factory(1)
                     ->create(['user_id'=>$user->id,])
                     ->each(function ($student){
+                        $GLOBALS['student'] = $student;
                         Request::factory(1)
                         ->create(['student_id'=>$student->id])
                         ->each(function ($request){
@@ -29,6 +31,7 @@ class DocumentSeeder extends Seeder
                                 ->create([
                                     'request_id'=>$request->id,
                                     'document_type_id'=>'1',//testing muna to
+                                    'student_id'=>$GLOBALS['student']->id,
                                 ]);
                     });
                 });

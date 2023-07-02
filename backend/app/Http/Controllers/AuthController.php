@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Auth\Events\Registered;
 
 class AuthController extends Controller
 {
@@ -35,7 +36,21 @@ class AuthController extends Controller
             'student_status_id'=>'2',
         ]);
 
-        $token = $user->createToken('regitechtoken')->plainTextToken;
+        if($user->role_id == 1){
+            $token = $user->createToken('regitechtoken');
+            $token = $token->plainTextToken;
+        }
+        else if($user->role_id == 2 || $user->role_id == 3){
+            $token = $user->createToken('regitechtoken');
+            $token = $token->plainTextToken;
+        }
+        else if($user->role_id == 4){
+            $token = $user->createToken('regitechtoken');
+            $token = $token->plainTextToken;
+        }else{
+            response()->json(['error' => 'Invalid credentials'], 401);
+        }
+
 
         return response()->json(['token' => $token, 'role_id'=>$user->role_id], 201);
     }
@@ -45,8 +60,21 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-            $token = $user->createToken('regitechtoken')->plainTextToken;
+            $user = $request->user();
+            if($user->role_id == 1){
+            $token = $user->createToken('regitechtoken');
+            $token = $token->plainTextToken;
+        }
+        else if($user->role_id == 2 || $user->role_id == 3){
+            $token = $user->createToken('regitechtoken');
+            $token = $token->plainTextToken;
+        }
+        else if($user->role_id == 4){
+            $token = $user->createToken('regitechtoken');
+            $token = $token->plainTextToken;
+        }else{
+            response()->json(['error' => 'Invalid credentials'], 401);
+        }
 
             return response()->json(['token' => $token, 'role_id'=>$user->role_id], 200);
         }
@@ -56,7 +84,9 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
+        auth()->user()->tokens()->delete();
+
+        //$request->user()->currentAccessToken()->delete();
 
         return response()->json(['message' => 'Successfully logged out']);
     }

@@ -11,8 +11,10 @@ import StudentDashboard from "./pages/student/StudentDashboard/StudentDashboard"
 import StudentPrivateRoutes from "./components/PrivateRoutes/StudentPrivateRoutes";
 import StaffPrivateRoutes from "./components/PrivateRoutes/StaffPrivateRoutes";
 import GuestRoutes from "./components/PrivateRoutes/GuestRoutes";
+import useCRFKCookie from "./hooks/useCRFKCookie";
 
 function App() {
+  useCRFKCookie();
   return (
     <AuthProvider>
       <Routes>
@@ -25,9 +27,12 @@ function App() {
         </Route>
 
         <Route path="/staff" element={<StaffPrivateRoutes />}>
-          <Route path="document-verification" element={<VerificationPage />} />
+          <Route
+            path="document-verification/:id"
+            element={<VerificationPage />}
+          />
           <Route path="dashboard" element={<StaffDashboard />} />
-          <Route path="admin" element={<AdminPage />} />
+          <Route path="head" element={<AdminPage />} />
         </Route>
 
         <Route path="*" element={<h1>Not found 404</h1>} />

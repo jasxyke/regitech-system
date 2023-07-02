@@ -1,10 +1,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 :root {
   --primary-maroon: #790000;
+  --bg-grey: #f5f5f3;
+  --status-yellow: #fff200;
+  --status-orange: #f68e56;
+  --status-green: #00a651;
+  --main-white: #ffffff;
 
+  /* REMOVE COMMENT IF UNDERSTOOD, THESE ARE THE COLOR VARIABLES 
+  FOR THE BUTTONS INSIDE THE MODALS */
+  --btn-submit: #198754;
+  --btn-hover-submit: #157347;
+  --btn-close: #960000;
+  --btn-hover-close: #7c0000;
+  /*-----------------------------*/
+
+  --main-font: "Montserrat", sans-serif;
 }
 
 * {
   margin: 0;
   padding: 0;
+  font-family: var(--main-font);
 }

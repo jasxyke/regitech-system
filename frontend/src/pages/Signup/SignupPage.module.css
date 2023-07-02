@@ -1,0 +1,36 @@
+.login_page {
+  color: white;
+  font-family: "Roboto", sans-serif;
+}
+
+.left_img {
+  height: 100dvh;
+  width: 100%;
+}
+
+.right-side {
+  position: relative;
+  height: 100dvh;
+  background-color: #790000ff;
+  overflow-y: scroll;
+}
+
+.right-side::-webkit-scrollbar {
+  display: none;
+}
+
+.copyright {
+  position: absolute;
+  margin-top: auto;
+  left: 0;
+  right: 0;
+  padding: 5px;
+  background-color: white;
+  color: black;
+  font-size: 0.8rem;
+}
+
+select,
+option {
+  color: black;
+}

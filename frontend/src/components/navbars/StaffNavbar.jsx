@@ -31,6 +31,7 @@ function StaffNavbar({ userRoleId }) {
             <span style={{ color: "#f5f3f3" }}>Reg</span>
             <span style={{ color: "#fff200" }}>iTech</span>
           </Navbar.Brand>
+
           <Navbar.Toggle aria-controls="navbar-collapse" />
           <Navbar.Collapse id="navbar-collapse">
             <Nav className="ms-auto">

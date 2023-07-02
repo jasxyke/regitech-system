@@ -25,7 +25,6 @@ export function AuthProvider({ children }) {
       .post("/sign-up", userForm)
       .then((res) => {
         storeAuthDetails(res);
-        alert("signup ey");
         if (res.data.role_id === 4) {
           navigate("/student/dashboard");
         } else if (res.data.role_id >= 1 && res.data.role_id <= 3) {

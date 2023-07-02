@@ -4,6 +4,7 @@ import StaffNavbar from "../navbars/StaffNavbar";
 import MainFooter from "../footers/MainFooter";
 import { UserProvider } from "../../context/UserContext";
 import { Link } from "react-router-dom";
+import MainFooter from "../footers/MainFooter";
 
 const StaffPrivateRoutes = () => {
   const { checkAuthenticated, getUserRole } = useAuthContext();
@@ -14,9 +15,9 @@ const StaffPrivateRoutes = () => {
   console.log("user role: " + getUserRole());
   return checkAuthenticated() && allowedRoleIds.includes(getUserRole()) ? (
     <UserProvider>
-      <StaffNavbar />
-      <div className="container">
-      <Outlet />
+      <StaffNavbar userRoleId={userRoleId} />
+      <div className="container pt-3">
+        <Outlet />
       </div>
       <MainFooter />
 
