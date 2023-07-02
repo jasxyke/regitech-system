@@ -1,45 +1,49 @@
-import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
-import { Button } from "react-bootstrap";
+import { Button, Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { useAuthContext } from "../../context/AuthContext";
-import { useState } from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import React, { useState } from "react";
 import css from "./Navbar.module.css";
 import logo from "../../assets/puplogo.png";
+import LogoutButton from "./LogoutButton";
+import { Link } from "react-router-dom";
 
-function StaffNavbar() {
+function StaffNavbar({ userRoleId }) {
   const [click, setClick] = useState(false);
   const { logout } = useAuthContext();
 
   return (
     <>
-      <Navbar collapseOnSelect expand="lg" className={css.navbar}>
+      <style type="text/css">
+        {`
+      .bg-maroon{
+        background-color: #790000;
+      }
+    `}
+      </style>
+      <Navbar expand="lg" bg="maroon" variant="dark">
         <Container>
-          <Navbar.Brand href="#">
+          <Navbar.Brand href="/staff/dashboard">
             <img
               src={logo}
-              width="50"
-              height="50"
+              width="45"
+              height="45"
               className="d-inline-block align-left"
             />{" "}
             <span style={{ color: "#f5f3f3" }}>Reg</span>
             <span style={{ color: "#fff200" }}>iTech</span>
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link as={Link} to="/staff/dashboard">
-                Staff
+          <Navbar.Toggle aria-controls="navbar-collapse" />
+          <Navbar.Collapse id="navbar-collapse">
+            <Nav className="ms-auto">
+              <Nav.Link as={Link} to={"/staff/dashboard"} className={css.navlinks}>
+                Verification requests
               </Nav.Link>
-              <Nav.Link as={Link} to="/staff/admin">
-                Admin
-              </Nav.Link>
-              <Nav.Link as={Link} to="/staff/document-verification">
-                Document Verification
-              </Nav.Link>
+              {userRoleId == 1 && (
+                <Nav.Link as={Link} to={"/staff/head"} className={css.navlinks}>
+                  Head Registrar
+                </Nav.Link>
+              )}
             </Nav>
-            <Button onClick={logout} className={css.btn_logout}>
-              Logout
-            </Button>
+            <LogoutButton onLogout={logout} />
           </Navbar.Collapse>
         </Container>
       </Navbar>
