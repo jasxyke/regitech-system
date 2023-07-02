@@ -1,0 +1,74 @@
+.table_header {
+  margin: 50px 0 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--primary-maroon);
+  font-style: italic;
+}
+.table {
+  background-color: var(--primary-maroon);
+}
+.col {
+  color: white;
+}
+.DocumentStatusPending {
+  width: 60%;
+  text-align: center;
+  background-color: #e46815;
+  color: white;
+  padding: 5px;
+  border-radius: 30px;
+}
+.DocumentStatusApproved {
+  width: 60%;
+  text-align: center;
+  background-color: #06b43b;
+  color: white;
+  padding: 5px;
+  border-radius: 30px;
+}
+.DocumentStatusReceived {
+  width: 60%;
+  text-align: center;
+  background-color: #f0ec16;
+  color: white;
+  padding: 5px;
+  border-radius: 30px;
+}
+.DocumentStatusApproved {
+  width: 60%;
+  text-align: center;
+  background-color: #1d76db;
+  color: white;
+  padding: 5px;
+  border-radius: 30px;
+}
+.btncont {
+  text-align: left;
+}
+.viewBtn {
+  width: 90px;
+  background-color: var(--primary-maroon);
+  color: white;
+  text-decoration: none;
+  padding: 5px 30px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+}
+.viewBtn:hover {
+  background-color: white;
+  color: var(--primary-maroon);
+  outline: 3px solid var(--primary-maroon);
+}
+.StudentProfile {
+  width: 60%;
+  background-color: #ececdf;
+  padding: 5px;
+  border-radius: 50px;
+}
+.colActions {
+  color: white;
+  text-align: center;
+}
