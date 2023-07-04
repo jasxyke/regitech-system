@@ -1,0 +1,16 @@
+@media screen and (max-width: 1199px) {
+  .container {
+    justify-content: space-evenly;
+    padding-left: 0 !important;
+  }
+
+}
+
+.container {
+  display: flex;
+  column-gap: 24px;
+  flex-wrap: wrap;
+  padding-left:60px;
+}
+  
+  
