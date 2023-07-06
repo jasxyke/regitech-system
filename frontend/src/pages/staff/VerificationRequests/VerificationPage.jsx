@@ -107,6 +107,7 @@ const VerificationPage = () => {
           DONE
         </button>
         <ResponseModal
+          headerText={""}
           response={response}
           show={showModal}
           handleClose={handleClose}

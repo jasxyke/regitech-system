@@ -24,14 +24,14 @@ function VerificationTable({ documents, setDocuments }) {
   };
 
   return (
-    <table className="table table-hover fw-bold text-center overflow-hidden rounded-top rounded-bottom  table-borderless ">
+    <table className="table table-hover fw-bold text-center rounded-top rounded-bottom  table-borderless ">
       <thead className={`align-middle ${TableCss.tablehead}`}>
         <tr>
           <th scope="col">Transaction ID</th>
           <th scope="col">Name</th>
           <th scope="col">Document Submitted</th>
           <th scope="col">Document Status</th>
-          <th scope="col"></th>
+          <th scope="col">Actions</th>
         </tr>
       </thead>
       <tbody className={TableCss.tablebody}>

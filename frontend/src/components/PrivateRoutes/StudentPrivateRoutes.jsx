@@ -11,12 +11,11 @@ const StudentPrivateRoutes = () => {
   const authenticated = checkAuthenticated();
   return checkAuthenticated() && getUserRole() === allowedRoleId ? (
     <UserProvider>
-      <StudentNavbar />
+      <StudentNavbar userRoleId={userRoleId} />
       <div className="container">
-      <Outlet />
+        <Outlet />
       </div>
       <MainFooter />
-
     </UserProvider>
   ) : (
     <Navigate to="/" />

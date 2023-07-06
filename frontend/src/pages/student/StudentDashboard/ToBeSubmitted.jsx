@@ -1,89 +1,64 @@
 import StudentCSS from "./StudentDashboard.module.css";
-import React, { useState } from "react";
-import { useUser } from "../../../context/UserContext";
-import StudentDashboardTable from "./StudentDashboardTable";
+import PrimaryButton from "../../../components/ui/PrimaryButton";
+import UploadDocumentModal from "./UploadDocumentModal";
+import PendingDocumentRows from "./PendingDocumentRows";
+import { documentTypes } from "../../../data/constants";
+import { useState } from "react";
+import ResponseModal from "../../../components/ResponseModal";
 
-const ToBeSubmitted = () => {
-  const [tobesubmitted, setToBeSubmitted] = useState([
-    {
-      Txid: 1234567890,
-      DocumentSubmitted: "Transcript of Record",
-      DocumentStatus: "Pending",
-      Actions: "Delete",
-    },
+const ToBeSubmitted = ({
+  pendingDocuments,
+  availableDocumentTypes,
+  handleAddDocument,
+  handleRemoveDocument,
+  handleSubmitDocument,
+}) => {
+  const [showResponseModal, setShowResponseModal] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
-    {
-      Txid: 1234567890,
-      DocumentSubmitted: "SAR Form",
-      DocumentStatus: "Received",
-      Actions: "Delete",
-    },
-
-    {
-      Txid: 1234567890,
-      DocumentSubmitted: "Form 138",
-      DocumentStatus: "Approved",
-      Actions: "Delete",
-    },
-  ]);
-
-  const handleView = (Txid) => {
-    console.log("View request:", Txid);
+  const handleError = (msg) => {
+    setErrorMsg(msg);
+    setShowResponseModal(true);
+  };
+  const submitDocuments = () => {
+    handleSubmitDocument(handleError);
   };
 
   return (
-    <table className="table table-responsive-lg">
-      <thead>
-        <tr className={StudentCSS.table}>
-          <th className={StudentCSS.col}>Transaction ID</th>
-          <th className={StudentCSS.col}>Document Submitted</th>
-          <th className={StudentCSS.col}>Document Status</th>
-          <th className={StudentCSS.colActions}>Actions </th>
-          <tr></tr>
-        </tr>
-      </thead>
-      <tbody>
-        {tobesubmitted.map((request) => (
-          <tr key={request.Txid}>
-            <td>{request.Txid}</td>
-            <td>{request.DocumentSubmitted}</td>
-            <td>
-              <div
-                className={
-                  request.DocumentStatus === "Pending"
-                    ? `${StudentCSS.DocumentStatusPending}`
-                    : `${StudentCSS.DocumentStatusApproved}`
-                }
-              >
-                {request.DocumentStatus}
-              </div>
-            </td>
-            <td>
-              <div className={StudentCSS.btncont}>
-                <a
-                  href=""
-                  className={StudentCSS.viewBtn}
-                  onClick={() => handleView(request.Txid)}
-                >
-                  Upload
-                </a>
-              </div>
-            </td>
-            <td>
-              <div className={StudentCSS.btncont}>
-                <a
-                  href=""
-                  className={StudentCSS.viewBtn}
-                  onClick={() => handleView(request.Txid)}
-                >
-                  Delete
-                </a>
-              </div>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <>
+      <div className="table-container text-center rounded-top rounded-bottom">
+        <table className="table table-responsive-lg">
+          <thead className={`align-middle ${StudentCSS.tableHead}`}>
+            <tr>
+              <th className={StudentCSS.col}>Document Submitted</th>
+              <th className={StudentCSS.col}>Document Status</th>
+              <th className={StudentCSS.col}>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {pendingDocuments !== null && (
+              <PendingDocumentRows
+                pendingDocuments={pendingDocuments}
+                removeDocument={handleRemoveDocument}
+              />
+            )}
+          </tbody>
+        </table>
+      </div>
+      <div className={`mt-3 mb-3 ${StudentCSS.btnsContainer}`}>
+        <UploadDocumentModal
+          availableDocumentTypes={availableDocumentTypes}
+          addDocument={handleAddDocument}
+        />
+        <PrimaryButton text={"Submit"} onClick={submitDocuments} />
+      </div>
+      <ResponseModal
+        headerText={"No added document"}
+        response={errorMsg}
+        show={showResponseModal}
+        handleClose={() => setShowResponseModal(false)}
+      />
+    </>
   );
 };
 

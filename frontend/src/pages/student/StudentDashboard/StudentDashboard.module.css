@@ -9,66 +9,69 @@
 .table {
   background-color: var(--primary-maroon);
 }
+
+.tableHead {
+  background-color: var(--primary-maroon);
+  color: white;
+}
+
+.studentInfo {
+  background-color: white;
+  padding: 3px;
+}
+
+.tablebody {
+  background-color: #f5f3f3;
+}
+
 .col {
   color: white;
 }
-.DocumentStatusPending {
-  width: 60%;
-  text-align: center;
-  background-color: #e46815;
-  color: white;
-  padding: 5px;
-  border-radius: 30px;
+
+.btnsContainer {
+  display: flex;
+  justify-content: end;
+  column-gap: 15px;
 }
-.DocumentStatusApproved {
-  width: 60%;
-  text-align: center;
-  background-color: #06b43b;
-  color: white;
-  padding: 5px;
-  border-radius: 30px;
+
+.view {
+  background-color: #790000 !important;
+  color: #f5f3f3 !important;
+  height: 1.5rem;
 }
-.DocumentStatusReceived {
-  width: 60%;
-  text-align: center;
-  background-color: #f0ec16;
-  color: white;
-  padding: 5px;
-  border-radius: 30px;
+
+.status {
+  background-color: #f68e56;
+  color: #f5f3f3;
 }
-.DocumentStatusApproved {
-  width: 60%;
-  text-align: center;
-  background-color: #1d76db;
-  color: white;
-  padding: 5px;
-  border-radius: 30px;
-}
-.btncont {
-  text-align: left;
-}
-.viewBtn {
-  width: 90px;
+
+.modalHead {
   background-color: var(--primary-maroon);
   color: white;
-  text-decoration: none;
-  padding: 5px 30px;
-  border-radius: 30px;
-  border: none;
-  cursor: pointer;
 }
-.viewBtn:hover {
-  background-color: white;
-  color: var(--primary-maroon);
-  outline: 3px solid var(--primary-maroon);
+
+.actionsContainer {
+  display: flex;
+  column-gap: 15px;
 }
-.StudentProfile {
-  width: 60%;
-  background-color: #ececdf;
-  padding: 5px;
-  border-radius: 50px;
+
+.fileBox {
+  display: flex;
+  column-gap: 15px;
 }
-.colActions {
-  color: white;
-  text-align: center;
+
+.imagePreview {
+  border: 1px solid black;
+}
+
+@media only screen and (max-width: 768px) {
+  .actionsContainer {
+    flex-direction: column;
+    row-gap: 15px;
+  }
+
+  .fileBox {
+    flex-direction: column;
+    row-gap: 15px;
+  }
 }

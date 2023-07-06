@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Document;
 use App\Models\Request;
+use Illuminate\Support\Facades\Storage;
 use Ramsey\Uuid\Type\Integer;
 
 class DocumentController extends Controller
@@ -19,6 +20,13 @@ class DocumentController extends Controller
 
         return $requestDocuments;
 
+    }
+
+    public function getSubmittedDocuments(string $id){
+        return Document::with('document_status', 'document_type')
+                    ->where('student_id','=',$id)
+                    ->orderBy('document_type_id')
+                    ->get();
     }
 
     /**
@@ -58,6 +66,12 @@ class DocumentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $document = Document::findOrfail($id);
+
+        Storage::disk('public')->delete($document->file_path);
+
+        $document->delete();
+
+        return response()->json(["message"=> "Successfully deleted the document"]);
     }
 }

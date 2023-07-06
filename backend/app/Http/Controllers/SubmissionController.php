@@ -18,10 +18,12 @@ class SubmissionController extends Controller
         }
 
         $documents = $request->file("documents");
-        $documentInfos = $request->input("infos");
+        $documentInfos = $request->input("documentInfos");
         
         $user = $request->user();
-        $student = Student::with("course")->find($user->id);
+        $student = Student::with("course")
+                    ->where('user_id','=',$user->id)
+                    ->first();
 
         $submitRequest = ModelsRequest::create([
             "student_id"=>$student->id,

@@ -33,11 +33,7 @@ function StaffNavbar({ userRoleId }) {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbar-collapse" />
           <Navbar.Collapse id="navbar-collapse">
-            <Nav className="ms-auto">
-              <Nav.Link as={Link} to={"/student/dashboard"} className={css.navlinks}>
-                Student
-              </Nav.Link>
-            </Nav>
+            <Nav className="ms-auto"></Nav>
             <LogoutButton onLogout={logout} />
           </Navbar.Collapse>
         </Container>

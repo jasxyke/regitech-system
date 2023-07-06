@@ -43,6 +43,7 @@ return new class extends Migration
             ->onUpdate('cascade')
             ->onDelete('cascade');
             $table->string('file_path', 255);
+            $table->string('url', 255);
             $table->unsignedTinyInteger('with_copies');
         });
     }

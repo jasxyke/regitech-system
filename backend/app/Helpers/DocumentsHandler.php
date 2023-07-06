@@ -6,6 +6,7 @@ use App\Models\Document;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class DocumentsHandler{
 
@@ -25,25 +26,31 @@ class DocumentsHandler{
         $user = $this->user;
         $student = $this->student;
 
-        $fullname = sprintf("%s, %s %s.", $user->lastname, $user->firstname, $user->midname);
+        $fullname = sprintf("%s %s", $user->lastname, $user->firstname);
 
-        $path = sprintf("/%u/%s/%s",$student->year, $student->course->name, $fullname);
+        $path = sprintf("\%u\%s\%s",$student->year_admitted, $student->course->name, $fullname);
 
-        return $file->storeAs($path, $filename);
+        return $file->storeAs($path, $filename, 'public');
     }
     
     public function createDocument($path, $docTypeId, 
                                 $requestId, $withCopies){
-
+        
         $studentId = $this->student->id;
+        if($withCopies){
+            $haveCopies = 1;
+        }else{
+            $haveCopies = 0;
+        }
         return Document::create([
             "document_type_id"=> $docTypeId,
             "request_id"=> $requestId,
             "student_id"=> $studentId,
             "document_status_id"=> 3,
-            "updated_by"=> $studentId,
-            "path"=> $path,
-            "with_copies"=> $withCopies
+            "updated_by_id"=> $studentId,
+            "file_path"=> $path,
+            "url"=>Storage::disk('public')->url($path),
+            "with_copies"=>  intval($haveCopies)
         ]);
 
     }

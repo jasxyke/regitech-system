@@ -34,15 +34,16 @@ recently submitted admission documents in which:
         <tbody style="">
             @foreach ($documents as $document)
             <tr>
-                <td style="text-align:center; border: 1px solid black; border-collapse: collapse;">{{$document->document_type['name']}}</td>
+                <td style="text-align:center; border: 1px solid black; border-collapse: collapse;">{{$document["document_type"]['name']}}</td>
                 <td @style([
                     'border: 1px solid black; border-collapse: collapse;',
                     'text-align: center',
-                    'background-color: #00a651;' => $document->document_status['id'] == 1,
-                    'background-color: #790000; color: white;' => $document->document_status['id'] == 2,
-                    'background-color: #fff200' => $document->document_status['id'] == 3,
-                    'background-color: #f68e56' => $document->document_status['id'] == 4,
-                ]) >{{$document->document_status['name']}}</td>
+                    'background-color: #00a651;' => $document["document_status"]['id'] == 1,
+                    'background-color: #790000; color: white;' => $document["document_status"]['id'] == 2,
+                    'background-color: #fff200' => $document["document_status"]['id'] == 3,
+                    'background-color: #f68e56' => $document["document_status"]['id'] == 4,
+                    'background-color: #790000; color: white;' => $document["document_status"]['id'] == 5,
+                ]) >{{$document["document_status"]['name']}}</td>
             </tr>
         @endforeach
         </tbody>

@@ -2,40 +2,77 @@ import StudentCSS from "./StudentDashboard.module.css";
 import React, { useState } from "react";
 import { useUser } from "../../../context/UserContext";
 import StudentDashboardTable from "./StudentDashboardTable";
+import { Table } from "react-bootstrap";
 
 const Ewan = () => {
   const user = useUser();
   return (
-    <table className="table table-responsive-lg">
-      <thead>
-        <tr className={StudentCSS.table}>
-          <th className={StudentCSS.col}>Student Profile</th>
-        </tr>
-        <td>
-          <div>
-            <tr className={StudentCSS.StudentProfile}>
-              Fullname: Juan Dela Cruz
-            </tr>
-          </div>
-          <div>
-            <tr className={StudentCSS.StudentProfile}>
-              Email Address: juandelacruz@gmail.com
-            </tr>
-          </div>
-          <div>
-            <tr className={StudentCSS.StudentProfile}>
-              Course: Diploma in Information Communication Technology
-            </tr>
-          </div>
-          <div>
-            <tr className={StudentCSS.StudentProfile}>Year Admitted: 2021</tr>
-          </div>
-          <div>
-            <tr className={StudentCSS.StudentProfile}>Status:</tr>
-          </div>
-        </td>
-      </thead>
-    </table>
+    <div className="table-container rounded-top rounded-bottom">
+      <table className="table table-borderless fw-bold rounded-top rounded-bottom">
+        <thead className={StudentCSS.tableHead}>
+          <tr>
+            <th scope="col">Student profile</th>
+          </tr>
+        </thead>
+        <tbody className={StudentCSS.tablebody}>
+          <tr>
+            <td>
+              <span
+                className={
+                  StudentCSS.studentInfo + " rounded-top rounded-bottom"
+                }
+              >
+                Fullname: {user?.user?.firstname}
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span
+                className={
+                  StudentCSS.studentInfo + " rounded-top rounded-bottom"
+                }
+              >
+                Email address: {user?.user?.email}
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span
+                className={
+                  StudentCSS.studentInfo + " rounded-top rounded-bottom"
+                }
+              >
+                Course: {user?.course?.name}
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span
+                className={
+                  StudentCSS.studentInfo + " rounded-top rounded-bottom"
+                }
+              >
+                Year admitted: {user?.year_admitted}
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span
+                className={
+                  StudentCSS.studentInfo + " rounded-top rounded-bottom"
+                }
+              >
+                Status: {user?.student_status?.name}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   );
 };
 

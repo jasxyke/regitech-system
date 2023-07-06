@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 function StaffNavbar({ userRoleId }) {
   const [click, setClick] = useState(false);
   const { logout } = useAuthContext();
-
   return (
     <>
       <style type="text/css">
@@ -35,7 +34,11 @@ function StaffNavbar({ userRoleId }) {
           <Navbar.Toggle aria-controls="navbar-collapse" />
           <Navbar.Collapse id="navbar-collapse">
             <Nav className="ms-auto">
-              <Nav.Link as={Link} to={"/staff/dashboard"} className={css.navlinks}>
+              <Nav.Link
+                as={Link}
+                to={"/staff/dashboard"}
+                className={css.navlinks}
+              >
                 Verification requests
               </Nav.Link>
               {userRoleId == 1 && (
