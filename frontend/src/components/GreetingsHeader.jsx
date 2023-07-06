@@ -1,8 +1,8 @@
-import moment from "moment/moment";
+import { getCurrentDate } from "../utils/datesHandler";
 import css from "./GreetingsHeader.module.css";
 
 const GreetingsHeader = ({ name }) => {
-  const date = moment().format("dddd, MMMM Do, YYYY");
+  const date = getCurrentDate();
 
   return (
     <div>

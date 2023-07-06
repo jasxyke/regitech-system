@@ -6,6 +6,7 @@ import useDocuments from "../../../hooks/useDocuments";
 import useVerifyDocument from "../../../hooks/useVerifyDocument";
 import ResponseModal from "../../../components/ResponseModal";
 import { Spinner } from "react-bootstrap";
+import { getCurrentDate } from "../../../utils/datesHandler";
 
 const VerificationPage = () => {
   const navigate = useNavigate();
@@ -69,7 +70,7 @@ const VerificationPage = () => {
         </div>
         <div className="col">
           <p className={TableCss.title + "  text-end fs-6 m-1 fst-italic"}>
-            Sunday,June 25,
+            {getCurrentDate()}
           </p>
         </div>
       </div>
