@@ -13,8 +13,20 @@ const useDocuments = () => {
     }
   };
 
+  const deleteDocument = async (documentId, handleDelete) => {
+    try {
+      const res = await axiosClient.delete("/documents/" + documentId);
+      console.log(res);
+
+      handleDelete(documentId, res.data.message);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return {
     getDocuments,
+    deleteDocument,
   };
 };
 

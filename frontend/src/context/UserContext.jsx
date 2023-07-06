@@ -9,7 +9,7 @@ export function useUser() {
 }
 
 export function UserProvider({ children }) {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
     console.log("is this running");

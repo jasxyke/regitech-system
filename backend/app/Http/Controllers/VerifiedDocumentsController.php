@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Constants;
 use App\Http\Controllers\Controller;
 use App\Mail\VerifiedDocuments;
 use App\Models\Document;
@@ -18,7 +19,9 @@ class VerifiedDocumentsController extends Controller
         $note = $request->input('note');
 
         $verifiedDocuments = [];
+        $missingDocuments = [];
         $invalidDocument = 0;
+        $missingDocument = 0;
         //return $documents;
         foreach($documents as $modifiedDocument){
             $document = Document::with('document_type')
@@ -33,6 +36,25 @@ class VerifiedDocumentsController extends Controller
             }
         }
 
+        $documentTypes = Constants::DOCUMENT_TYPES;
+        $verifiedDocumentTypes = array_column($verifiedDocuments, "document_type_id");
+        foreach($documentTypes as $documentType){
+            if(!in_array($documentType["id"], $verifiedDocumentTypes )){
+                $missingDocument = array(
+                    "document_type"=>array(
+                        "name"=>$documentType["name"]
+                    ),
+                    "document_status"=>array(
+                        "id"=>"5",
+                        "name"=>"Missing"
+                    )
+                    );
+                array_push($missingDocuments, $missingDocument);
+            }
+        }
+
+        $notificationDocuments = array_merge($verifiedDocuments, $missingDocuments);
+
         if($invalidDocument > 0){
             $message = "One or more submitted document is invalid as indicated below:";
         }else{
@@ -45,7 +67,7 @@ class VerifiedDocumentsController extends Controller
         //$testEmail = "email niyo"; replace niyo lang yung $user->email sa baba kung gusto testing
         //$user->email
         Mail::to($user->email, $user->firstname)
-                ->send(new VerifiedDocuments($user, $verifiedDocuments, $message, $note));
+                ->send(new VerifiedDocuments($user, $notificationDocuments, $message, $note));
 
         
 

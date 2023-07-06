@@ -1,75 +1,43 @@
-import StudentCSS from "./StudentDashboard.module.css";
-import React, { useState } from "react";
+import TableCss from "./StudentDashboard.module.css";
+import useDocuments from "../../../hooks/useDocuments";
+import SubmittedDocumentRows from "./SubmittedDocumentRows";
+import { useEffect } from "react";
 
-const StudentDashboardTable = () => {
-  const [studentdashboard, setStudentDashboard] = useState([
-    {
-      Txid: 1234567890,
-      DocumentSubmitted: "Transcript of Record",
-      DocumentStatus: "Pending",
-      Actions: "Delete",
-    },
-
-    {
-      Txid: 1234567890,
-      DocumentSubmitted: "SAR Form",
-      DocumentStatus: "Received",
-      Actions: "Delete",
-    },
-
-    {
-      Txid: 1234567890,
-      DocumentSubmitted: "Form 138",
-      DocumentStatus: "Approved",
-      Actions: "Delete",
-    },
-  ]);
-
-  const handleView = (Txid) => {
-    console.log("View request:", Txid);
+const StudentDashboardTable = ({
+  handleDeleteDocument,
+  submittedDocuments,
+  submittedDocsHook,
+  student,
+}) => {
+  useEffect(() => {
+    submittedDocsHook.getSubmittedDocuments(student.id);
+  }, []);
+  const deleteDocument = (documentId) => {
+    let documentsHook = useDocuments();
+    documentsHook.deleteDocument(documentId, handleDeleteDocument);
+    location.reload();
   };
-
+  console.log(submittedDocuments);
   return (
-    <table className="table table-responsive-lg">
-      <thead>
-        <tr className={StudentCSS.table}>
-          <th className={StudentCSS.col}>Transaction ID</th>
-          <th className={StudentCSS.col}>Document Submitted</th>
-          <th className={StudentCSS.col}>Document Status</th>
-          <th className={StudentCSS.col}>Actions </th>
-        </tr>
-      </thead>
-      <tbody>
-        {studentdashboard.map((request) => (
-          <tr key={request.Txid}>
-            <td>{request.Txid}</td>
-            <td>{request.DocumentSubmitted}</td>
-            <td>
-              <div
-                className={
-                  request.DocumentStatus === "Pending"
-                    ? `${StudentCSS.DocumentStatusPending}`
-                    : `${StudentCSS.DocumentStatusApproved}`
-                }
-              >
-                {request.DocumentStatus}
-              </div>
-            </td>
-            <td>
-              <div className={StudentCSS.btncont}>
-                <a
-                  href=""
-                  className={StudentCSS.viewBtn}
-                  onClick={() => handleView(request.Txid)}
-                >
-                  Delete
-                </a>
-              </div>
-            </td>
+    <div className={"table-container rounded-top rounded-bottom"}>
+      <table className="table table-borderless fw-bold text-center rounded-top rounded-bottom">
+        <thead className={`align-middle ${TableCss.tableHead}`}>
+          <tr>
+            <th scope="col">Document Submitted</th>
+            <th scope="col">Document Status</th>
+            <th scope="col">Actions</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody className={TableCss.tablebody}>
+          {(submittedDocuments !== null || submittedDocuments === "") && (
+            <SubmittedDocumentRows
+              submittedDocuments={submittedDocuments}
+              deleteDocument={deleteDocument}
+            />
+          )}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

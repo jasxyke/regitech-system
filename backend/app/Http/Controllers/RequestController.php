@@ -14,6 +14,8 @@ class RequestController extends Controller
     public function index()
     {
         return ModelsRequest::with(['student', 'student.user'])
+                    ->orderBy('created_at', 'asc')
+                    ->orderBy('is_reviewed', 'asc')
                     ->paginate(20);
     }
 

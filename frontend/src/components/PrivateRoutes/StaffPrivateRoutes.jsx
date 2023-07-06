@@ -4,23 +4,29 @@ import StaffNavbar from "../navbars/StaffNavbar";
 import MainFooter from "../footers/MainFooter";
 import { UserProvider } from "../../context/UserContext";
 import { Link } from "react-router-dom";
-import MainFooter from "../footers/MainFooter";
+import { useEffect } from "react";
 
 const StaffPrivateRoutes = () => {
   const { checkAuthenticated, getUserRole } = useAuthContext();
-  const allowedRoleIds = [1, 2, 3];
+  var allowedRoleIds = [1, 2, 3];
   const userRoleId = getUserRole();
-  const authenticated = checkAuthenticated();
-  console.log(checkAuthenticated());
-  console.log("user role: " + getUserRole());
-  return checkAuthenticated() && allowedRoleIds.includes(getUserRole()) ? (
+  var authenticated;
+
+  useEffect(() => {
+    authenticated = checkAuthenticated();
+    console.log(checkAuthenticated());
+    console.log("user role: " + getUserRole());
+  }, []);
+
+  return checkAuthenticated() &&
+    allowedRoleIds.includes(userRoleId) &&
+    userRoleId !== null ? (
     <UserProvider>
       <StaffNavbar userRoleId={userRoleId} />
       <div className="container pt-3">
         <Outlet />
       </div>
       <MainFooter />
-
     </UserProvider>
   ) : (
     <Navigate to="/" />

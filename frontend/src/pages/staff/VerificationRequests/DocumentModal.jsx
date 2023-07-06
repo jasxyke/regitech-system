@@ -28,11 +28,11 @@ function DocumentModal({ document, withCopies, handleVerify }) {
         centered // Center the modal vertically and horizontally
       >
         <Modal.Header className={TableCss.modalHead} closeButton>
-          <Modal.Title>Document Name</Modal.Title>
+          <Modal.Title>{document.document_type.name}</Modal.Title>
         </Modal.Header>
         <Modal.Body className="d-flex justify-content-center">
           <img
-            src={document.file_path}
+            src={document.url}
             alt="Image Preview"
             className={TableCss.imagePreview}
             width={"100%"}

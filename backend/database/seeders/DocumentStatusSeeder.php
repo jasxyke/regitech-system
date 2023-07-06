@@ -18,6 +18,7 @@ class DocumentStatusSeeder extends Seeder
             ['name'=>'Rejected'],
             ['name'=>'Pending Approval'],
             ['name'=>'Pending Submission'],
+            ['name'=>'Missing']
         ]
         );
     }
