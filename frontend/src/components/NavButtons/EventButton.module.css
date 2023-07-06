@@ -1,6 +1,8 @@
 @media screen and (max-width: 578px){
   .container{
     display: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 }
 
@@ -18,5 +20,5 @@
 }
 
 .container img {
-  width: 128px;
+  width: 108px;
 }

@@ -1,4 +1,5 @@
-import MainNavButtons from "../../../components/NavButtons/MainNavButtons";
+import MainNavigation from "./MainNavigation";
+import ExportRecords from "./ExportRecords";
 import GreetingsHeader from "../../../components/GreetingsHeader";
 import StaffTable from "./StaffTable";
 import { useUser } from "../../../context/UserContext";
@@ -14,8 +15,9 @@ function AdminPage() {
   return (
     <>
       <GreetingsHeader name={user?.firstname || ""} />
-      <MainNavButtons />
+      <MainNavigation/>
       <StaffTable />
+      <ExportRecords />
     </>
   );
 }
