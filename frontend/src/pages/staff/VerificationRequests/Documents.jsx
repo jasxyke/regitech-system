@@ -5,11 +5,11 @@ import DocumentModal from "./DocumentModal";
 
 const getStatusColor = (status) => {
   if (status === "Accepted") {
-    return "#00a651";
+    return "var(--status-green)";
   } else if (status === "Rejected") {
-    return "#790000";
+    return "var(--primary-maroon";
   } else {
-    return "#f68e56"; // Default color for "Pending"
+    return "var(--status-orange)"; // Default color for "Pending"
   }
 };
 
@@ -22,7 +22,7 @@ const Documents = ({ documents, handleVerify }) => {
       <td>
         <button
           disabled
-          className={TableCss.status + " fw-bold w-75 rounded-pill border-0"}
+          className={"rounded-pill border-0 py-1 " + TableCss.status}
           style={{
             backgroundColor: getStatusColor(document.document_status.name),
           }}

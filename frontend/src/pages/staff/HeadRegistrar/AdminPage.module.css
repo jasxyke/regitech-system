@@ -49,7 +49,7 @@
   top: 0;
   position: sticky;
   background-color: var(--primary-maroon);
-  color: #ffffff;
+  color: var(--main-white);
   text-align: center;
   vertical-align: middle !important;
 }
@@ -123,23 +123,23 @@ option:disabled {
 }
 
 .modal_btn_submit {
-  border-color: var(--btn-submit) !important;
-  background-color: var(--btn-submit) !important;
+  border-color: var(--status-green) !important;
+  background-color: var(--status-green) !important;
 }
 
 .modal_btn_submit:hover {
-  border-color: var(--btn-hover-submit) !important;
-  background-color: var(--btn-hover-submit) !important;
+  border-color: var(--status-green-hover) !important;
+  background-color: var(--status-green-hover) !important;
 }
 
 .modal_btn_close {
-  border-color: var(--btn-close) !important;
-  background-color: var(--btn-close) !important;
+  border-color: var(--primary-maroon) !important;
+  background-color: var(--primary-maroon) !important;
 }
 
 .modal_btn_close:hover {
-  border-color: var(--btn-hover-close) !important;
-  background-color: var(--btn-hover-close) !important;
+  border-color: var(--primary-maroon-hover) !important;
+  background-color: var(--primary-maroon-hover) !important;
 }
 
 .modal_btn_submit,

@@ -15,22 +15,27 @@ function DocumentModal({ document, withCopies, handleVerify }) {
   return (
     <>
       <Button
-        className={TableCss.view + " fw-bold p-0 w-100 rounded-pill border-0"}
+        className={"py-1 mx-auto px-0 rounded-pill border-0 " + TableCss.view}
         onClick={handleShow}
-        size="sm"
+
       >
         View
       </Button>
 
       <Modal
+        contentClassName={TableCss.verify_modal}
         show={show}
         onHide={handleClose}
         centered // Center the modal vertically and horizontally
       >
-        <Modal.Header className={TableCss.modalHead} closeButton>
+        <Modal.Header 
+          className={"px-4 " + TableCss.modalHead} 
+          closeVariant="white" 
+          closeButton
+        >
           <Modal.Title>{document.document_type.name}</Modal.Title>
         </Modal.Header>
-        <Modal.Body className="d-flex justify-content-center">
+        <Modal.Body className={"d-flex justify-content-center " + TableCss.modalBody}>
           <img
             src={document.url}
             alt="Image Preview"
@@ -39,17 +44,18 @@ function DocumentModal({ document, withCopies, handleVerify }) {
           />
         </Modal.Body>
         <Modal.Footer>
-          <Form>
-            <Form.Check
-              type="checkbox"
-              id="default-checkbox"
-              label="with copies"
+          <form>
+            <input 
+              className={"form-check-input " + TableCss.with_copies}
+              type="checkbox" 
+              value=""
               checked={haveCopies}
               onChange={(e) => {
                 setHaveCopies(!haveCopies);
-              }}
-            />
-          </Form>
+              }} />
+            <label className="form-check-label mx-2 text-muted ">with copies</label>
+          
+          </form>
           <Button
             className={TableCss.approveModal}
             onClick={() => {
@@ -57,7 +63,7 @@ function DocumentModal({ document, withCopies, handleVerify }) {
               handleClose();
             }}
           >
-            APPROVE
+            Approve
           </Button>
           <Button
             className={TableCss.rejectModal}
@@ -66,7 +72,7 @@ function DocumentModal({ document, withCopies, handleVerify }) {
               handleClose();
             }}
           >
-            REJECT
+            Reject
           </Button>
         </Modal.Footer>
       </Modal>
