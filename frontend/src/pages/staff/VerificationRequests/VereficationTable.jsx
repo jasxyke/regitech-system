@@ -29,7 +29,7 @@ function VerificationTable({ documents, setDocuments }) {
         <thead>
           <tr className={TableCss.tablehead}>
             <th className="col-sm-2">Transaction ID</th>
-            <th className="col-sm-3">Name</th>
+            <th className="col-sm-3">Student Name</th>
             <th className="col-sm-2">Document Submitted</th>
             <th className="col-sm-3">Document Status</th>
             <th className="col-sm-2">Actions</th>

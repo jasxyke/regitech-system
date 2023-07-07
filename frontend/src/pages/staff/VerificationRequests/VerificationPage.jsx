@@ -51,19 +51,13 @@ const VerificationPage = () => {
   };
 
   return (
-    <div className="mt-5">
-      <Button
-        className={"mx-3 px-auto " + TableCss.back}
-      >
+    <div className="my-5 mb-5 pb-5">
+      <Button className={"mx-3 px-auto mb-5 " + TableCss.back}>
         <span className="pe-2 ps-0"> &#8592; </span> Back
       </Button>
       <div className="row">
         <div className="col">
-          <p
-            className={
-              TableCss.title + " text-start fs-4 m-1 fw-bold fst-italic"
-            }
-          >
+          <p className={TableCss.title + " text-start fs-4 m-1 fw-bold fst-italic"}>
             Submitted Documents Verification
           </p>
         </div>
