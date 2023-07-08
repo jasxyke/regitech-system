@@ -19,9 +19,14 @@
   display: none;
 }
 
-.copyright {
+.content-container {
+  position: relative;
+  padding-bottom: 60px; /* Add padding to accommodate the bottom section */
+}
+
+.bottom-section {
   position: absolute;
-  margin-top: auto;
+  bottom: 0;
   left: 0;
   right: 0;
   padding: 5px;
