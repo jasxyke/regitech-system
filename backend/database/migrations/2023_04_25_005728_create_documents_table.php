@@ -26,10 +26,10 @@ return new class extends Migration
             ->on('requests')
             ->onUpdate('cascade')
             ->onDelete('cascade');
-            // $table->foreignId('student_id')
-            // ->constrained()
-            // ->cascadeOnUpdate()
-            // ->cascadeOnDelete();
+            $table->foreignId('student_id')
+            ->constrained()
+            ->cascadeOnUpdate()
+            ->cascadeOnDelete();
             $table->unsignedTinyInteger('document_status_id');
             $table->foreign('document_status_id')
             ->references('id')
@@ -43,6 +43,7 @@ return new class extends Migration
             ->onUpdate('cascade')
             ->onDelete('cascade');
             $table->string('file_path', 255);
+            $table->string('url', 255);
             $table->unsignedTinyInteger('with_copies');
         });
     }

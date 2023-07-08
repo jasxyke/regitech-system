@@ -197,7 +197,10 @@ const SignupForm = () => {
           </select>
         </div>
 
-        <div className="form-group px-5 mb-2 text-center">
+        <div className="form-group px-5 mb-2">
+          <label htmlFor="year_admitted" className="form-label">
+            Year admitted
+          </label>
           <select
             className="form-select"
             aria-label="Default select example"

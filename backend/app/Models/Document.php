@@ -5,19 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class Document extends Model
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
         'document_type_id',
         'request_id',
         'student_id',
         'document_status_id',
-        'updated_by',
+        'updated_by_id',
         'file_path',
+        'url',
         'with_copies',
+        'student_id',
     ];
 
     public function document_type(): BelongsTo{
@@ -32,8 +36,8 @@ class Document extends Model
         return $this->belongsTo(Student::class);
     }
 
-    public function user(): BelongsTo{
-        return $this->belongsTo(User::class);
+    public function document_status(): BelongsTo{
+        return $this->belongsTo(DocumentStatus::class);
     }
 }
  

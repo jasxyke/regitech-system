@@ -1,27 +1,45 @@
-import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Button, Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { useAuthContext } from "../../context/AuthContext";
+import React, { useState } from "react";
+import css from "./Navbar.module.css";
+import logo from "../../assets/puplogo.png";
+import LogoutButton from "./LogoutButton";
+import { Link } from "react-router-dom";
 
-const StudentNavbar = () => {
+function StaffNavbar({ userRoleId }) {
+  const [click, setClick] = useState(false);
   const { logout } = useAuthContext();
-  return (
-    <nav className="navbar navbar-expand bg-dark navbar-dark">
-      <div className="container">
-        <div>
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link to="/student/dashboard" className="nav-link">
-                Student
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <Button variant="primary" onClick={logout}>
-          Logout
-        </Button>
-      </div>
-    </nav>
-  );
-};
 
-export default StudentNavbar;
+  return (
+    <>
+      <style type="text/css">
+        {`
+      .bg-maroon{
+        background-color: #790000;
+      }
+    `}
+      </style>
+      <Navbar expand="lg" bg="maroon" variant="dark">
+        <Container>
+          <Navbar.Brand href="/student/dashboard">
+            <img
+              src={logo}
+              width="45"
+              height="45"
+              className="d-inline-block align-left"
+            />{" "}
+            <span style={{ color: "#f5f3f3" }}>Reg</span>
+            <span style={{ color: "#fff200" }}>iTech</span>
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="navbar-collapse" />
+          <Navbar.Collapse id="navbar-collapse">
+            <Nav className="ms-auto"></Nav>
+            <LogoutButton onLogout={logout} />
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </>
+  );
+}
+
+export default StaffNavbar;

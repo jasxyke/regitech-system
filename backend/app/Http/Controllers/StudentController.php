@@ -17,7 +17,9 @@ class StudentController extends Controller
     public function index()
     {
         //change to something more memory friendly later on
-        Student::with('user')->get();
+        $students = Student::with('user','course','student_status')
+                ->paginate(10);
+        return $students;
     }
 
     /**
@@ -49,6 +51,12 @@ class StudentController extends Controller
      */
     public function destroy(string $id)
     {
-        Student::destroy($id);
+        $student = Student::find($id);
+        if($student != null){
+            $student->delete();
+            return response()->json(['message'=>'Successfully Deleted']);
+        }else{
+            return response()->json(['message'=>'User not found']);
+        }
     }
 }

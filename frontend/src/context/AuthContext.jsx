@@ -17,6 +17,7 @@ function storeAuthDetails(res) {
 
 export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(false);
+  const [roleId, setRoleId] = useState(0);
   const navigate = useNavigate();
 
   const signup = (userForm, onError) => {
@@ -25,8 +26,7 @@ export function AuthProvider({ children }) {
       .post("/sign-up", userForm)
       .then((res) => {
         storeAuthDetails(res);
-        alert("signup ey");
-        if (res.data.role_id === 4) {
+        if (res.data.role_id == 4) {
           navigate("/student/dashboard");
         } else if (res.data.role_id >= 1 && res.data.role_id <= 3) {
           navigate("/staff/dashboard");
@@ -104,7 +104,6 @@ export function AuthProvider({ children }) {
   };
 
   const getUserRole = () => {
-    //return userRole;
     return parseInt(JSON.parse(localStorage.getItem("role_id")));
   };
 

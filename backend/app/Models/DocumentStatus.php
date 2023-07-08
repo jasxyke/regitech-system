@@ -10,7 +10,7 @@ class DocumentStatus extends Model
 {
     use HasFactory;
 
-    protected $table = 'student_statuses';
+    protected $table = 'document_statuses';
 
     protected $fillable = [
         'name'

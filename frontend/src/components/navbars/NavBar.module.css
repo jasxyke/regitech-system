@@ -1,0 +1,38 @@
+.navbar {
+  background-color: #790000;
+  display: flex;
+  font-size: 1.2rem;
+  top: 0;
+  z-index: 999;
+}
+
+.navbar ul {
+  list-style-type: none;
+  display: flex;
+  padding: 0;
+}
+
+.navbar li {
+  margin-top: 15px;
+  margin-right: 15px;
+  font-weight: 500px;
+  text-align: center;
+}
+
+.navlinks {
+  color: #ffffff;
+  text-decoration: none;
+  word-break: break-all;
+  align-items: flex-start;
+}
+
+.navlinks:hover {
+  color: #ffffff;
+  border-bottom: 2px solid #fff200;
+  transition: all 0.2s ease-out;
+}
+
+.navlinks:active{
+  color:#fff200;
+  border-bottom: 2px solid #fff200;
+}

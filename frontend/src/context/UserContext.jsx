@@ -9,7 +9,7 @@ export function useUser() {
 }
 
 export function UserProvider({ children }) {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
     console.log("is this running");
@@ -22,6 +22,7 @@ export function UserProvider({ children }) {
       .catch((error) => {
         console.log(error);
         navigate("/");
+        location.reload();
       });
   }, []);
 
