@@ -1,14 +1,12 @@
-
-.table::-webkit-scrollbar{
+.table::-webkit-scrollbar {
   display: none;
 }
 
-.table{
+.table {
   overflow-x: scroll;
   border-radius: 10px;
   background-color: var(--bg-grey);
 }
-
 
 .table tr:last-child td:first-child {
   border-radius: 0 0 0 10px;
@@ -21,7 +19,6 @@
 .table tr:last-child td {
   border: none;
 }
-
 
 .tablehead {
   top: 0;
@@ -45,20 +42,23 @@
   width: 60%;
 }
 
-.view, .cancel, .back {
+.view,
+.cancel,
+.back {
   background-color: var(--primary-maroon) !important;
   border-color: var(--primary-maroon) !important;
   color: var(--main-white) !important;
 }
 
-.view{
+.view {
   width: 60%;
 }
 
-.view:hover, .cancel:hover, .back:hover{
+.view:hover,
+.cancel:hover,
+.back:hover {
   background-color: var(--primary-maroon-hover) !important;
   border-color: var(--primary-maroon-hover) !important;
-  
 }
 
 .back {
@@ -71,7 +71,8 @@
   color: var(--primary-maroon);
 }
 
-.cancel, .done{
+.cancel,
+.done {
   max-width: 110px;
   min-width: 110px;
   border-radius: 10px !important;
@@ -89,7 +90,16 @@
 
 /* Modal */
 
-.verify_modal{
+.whiteCloseButton .modal-header button.close {
+  color: white;
+}
+
+.modalHead {
+  background-color: #790000;
+  color: #f5f3f3;
+}
+
+.verify_modal {
   border-radius: 12px !important;
 }
 
@@ -99,18 +109,18 @@
   color: var(--main-white);
 }
 
-
 .imagePreview {
   border: 1px solid var(--main-black);
 }
 
-.with_copies:checked{
+.with_copies:checked {
   background-color: var(--primary-maroon) !important;
   border-color: var(--primary-maroon) !important;
   opacity: 0.8;
 }
 
-.rejectModal, .approveModal{
+.rejectModal,
+.approveModal {
   width: 20%;
 }
 
