@@ -7,6 +7,7 @@ import useVerifyDocument from "../../../hooks/useVerifyDocument";
 import ResponseModal from "../../../components/ResponseModal";
 import { Spinner } from "react-bootstrap";
 import { getCurrentDate } from "../../../utils/datesHandler";
+import Button from "react-bootstrap/Button";
 
 const VerificationPage = () => {
   const navigate = useNavigate();
@@ -50,21 +51,13 @@ const VerificationPage = () => {
   };
 
   return (
-    <div className="mt-5">
-      <button
-        className={
-          TableCss.back + " my-3 fw-bold rounded-top rounded-bottom border-0"
-        }
-      >
-        Back
-      </button>
+    <div className="my-5 mb-5 pb-5">
+      <Button className={"mx-3 px-auto mb-5 " + TableCss.back}>
+        <span className="pe-2 ps-0"> &#8592; </span> Back
+      </Button>
       <div className="row">
         <div className="col">
-          <p
-            className={
-              TableCss.title + " text-start fs-4 m-1 fw-bold fst-italic"
-            }
-          >
+          <p className={TableCss.title + " text-start fs-4 m-1 fw-bold fst-italic"}>
             Submitted Documents Verification
           </p>
         </div>
@@ -90,23 +83,18 @@ const VerificationPage = () => {
         />
       </div>
       <div className="text-end mb-5">
-        <button
-          className={
-            TableCss.cancel +
-            " fw-bold px-2 me-4 rounded-top rounded-bottom border-0"
-          }
+        <Button
+          className={"px-2 mx-1 " + TableCss.cancel}
           onClick={handleClose}
         >
-          CANCEL
-        </button>
-        <button
+          Cancel
+        </Button>
+        <Button
           onClick={verifyDocuments}
-          className={
-            TableCss.done + " fw-bold px-2 rounded-top rounded-bottom border-0"
-          }
+          className={"px-2 mx-1 " + TableCss.done}
         >
-          DONE
-        </button>
+          Done
+        </Button>
         <ResponseModal
           headerText={""}
           response={response}

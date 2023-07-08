@@ -24,22 +24,25 @@ function VerificationTable({ documents, setDocuments }) {
   };
 
   return (
-    <table className="table table-hover fw-bold text-center rounded-top rounded-bottom  table-borderless ">
-      <thead className={`align-middle ${TableCss.tablehead}`}>
-        <tr>
-          <th scope="col">Transaction ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Document Submitted</th>
-          <th scope="col">Document Status</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-      <tbody className={TableCss.tablebody}>
-        {documents !== null && (
-          <Documents documents={documents} handleVerify={verifyDocument} />
-        )}
-      </tbody>
-    </table>
+    <div className={"my-2 " + TableCss.table}>
+      <table className="table table-hover text-center rounded-top rounded-bottom my-0">
+        <thead>
+          <tr className={TableCss.tablehead}>
+            <th className="col-sm-2">Transaction ID</th>
+            <th className="col-sm-3">Student Name</th>
+            <th className="col-sm-2">Document Submitted</th>
+            <th className="col-sm-3">Document Status</th>
+            <th className="col-sm-2">Actions</th>
+          </tr>
+        </thead>
+        <tbody className={TableCss.tablebody}>
+          {documents !== null && (
+            <Documents documents={documents} handleVerify={verifyDocument} />
+          )}
+        </tbody>
+      </table>
+    </div>
+    
   );
 }
 
