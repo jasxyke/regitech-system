@@ -37,6 +37,10 @@
 
 /* Modal */
 
+.whiteCloseButton .modal-header button.close {
+  color: white;
+}
+
 .modalHead {
   background-color: #790000;
   color: #f5f3f3;

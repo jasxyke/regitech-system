@@ -25,7 +25,11 @@ function Example() {
         onHide={handleClose}
         centered // Center the modal vertically and horizontally
       >
-        <Modal.Header className={TableCss.modalHead} closeButton>
+        <Modal.Header
+          className={TableCss.modalHead}
+          closeVariant={"white"}
+          closeButton
+        >
           <Modal.Title>Document Name</Modal.Title>
         </Modal.Header>
         <Modal.Body>
