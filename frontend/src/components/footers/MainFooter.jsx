@@ -1,25 +1,48 @@
-import { Link } from "react-router-dom";
+import React from "react";
 import footercss from "./MainFooter.module.css";
-import logo from '../../assets/puplogo.png';
+import logo from "../../assets/puplogo.png";
 
 const MainFooter = () => {
-    return (
-      <div>
-        <a href="/">
-        <image src={logo} width="100px"></image>
-        </a>
-        <div className="footer-links">
-          <div className="footer-link-wrapper">
-              <div className="footer-link-items">
-                  <h2>Quick Links</h2>
-                  <Link to='/'>Polytechnic University of the Philippines</Link>
-                  <Link to='/'>Polytechnic University of the Philippines Student Information System | PUPSIS</Link>
-                  <Link to='/'>Polytechnic University of the Philippines Appointment System</Link>
-              </div>
-            </div>
+  return (
+    <>
+      <div className={footercss.footer}>
+        <div className={footercss.container + " container py-3 pt-4"}>
+          <div className={footercss.logoBox + " logo"}>
+            <a href="/staff/dashboard">
+              <img src={logo} className={footercss.logo}></img>
+            </a>
+            <h3>
+              <span style={{ color: "#f5f3f3" }}>Reg</span>
+              <span style={{ color: "#fff200" }}>iTech</span>
+            </h3>
+          </div>
+          <div className={footercss.ft_2 + " " + footercss.linksContainer}>
+            <h3>Quick Links</h3>
+            <ul className={footercss.navitem}>
+              <li className="nav-item">
+                <a className="nav-link" href="https://www.pup.edu.ph/">
+                  Polytechnic University of the Philippines
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="https://sis2.pup.edu.ph/">
+                  Polytechnic University of the Philippines Student Information
+                  System
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="nav-link"
+                  href="https://osssac.pup.edu.ph/knowledgebase.php?article=201/"
+                >
+                  Polytechnic University of the Philippines Appointment System
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
-    </div>
-    )
-  }
-  
-export default MainFooter
+      </div>
+    </>
+  );
+};
+export default MainFooter;

@@ -1,28 +1,174 @@
-/* STYLES FOR THE STAFF TABLE */
-
-
-
-/* STYLES FOR THE ACTION BUTTONS IN STAFF TABLE */
-
-.action_btn_cont{
-    width: 50px;
-    block-size: fit-content;
+/* MEDIA QUERIES */
+@media screen and (max-width: 578px) {
+    .event_btn_container{
+        display: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
 }
 
-.action_btn{
-    width: 20px;
-    height: 20px;
-    color: #790000;
-    cursor: pointer;
+
+/* STYLES FOR THE NAVIGATION & EXPORT BUTTONS CONTAINER */
+.event_btn_container{
+
+    max-width: 1100px;
+}
+
+
+/* STYLES FOR THE STAFF TABLE */
+.table::-webkit-scrollbar {
+  display: none;
+}
+
+.table {
+  max-height: 250px;
+  min-height: 250px;
+  overflow-x: scroll;
+  border-radius: 10px;
+  background-color: var(--bg-grey);
+}
+
+.table tr:last-child td:first-child {
+  border-radius: 0 0 0 10px;
+}
+
+.table tr:last-child td:last-child {
+  border-radius: 0 0 10px 0;
+}
+
+.table tr:last-child td {
+  border: none;
+}
+
+.table_header {
+  color: var(--primary-maroon);
+  font-style: italic;
+}
+
+.table_head {
+  top: 0;
+  position: sticky;
+  background-color: var(--primary-maroon);
+  color: var(--main-white);
+  text-align: center;
+  vertical-align: middle !important;
+}
+
+.table_contents {
+  background-color: var(--bg-grey);
+  overflow-y: scroll;
+  text-align: center;
+  vertical-align: middle !important;
+}
+
+.admin_table_container {
+  max-width: 1100px;
+}
+
+/* STYLES FOR THE ACTION BUTTONS IN STAFF TABLE */
+.actions {
+  text-align: center;
+  vertical-align: middle !important;
+}
+
+.action_btn_cont {
+  width: 50px;
+  block-size: fit-content;
+}
+
+.action_btn {
+  width: 20px;
+  height: 20px;
+  color: var(--primary-maroon);
+  cursor: pointer;
+}
+
+.add_btn {
+  border-radius: 10px !important;
+  background-color: var(--main-white) !important;
+  border: var(--primary-maroon) solid 2px !important;
+  color: var(--primary-maroon) !important;
+}
+
+.add_btn:hover {
+  background-color: var(--primary-maroon) !important;
+  border: var(--primary-maroon) solid 2px !important;
+  color: var(--main-white) !important;
 }
 
 /* DISABLED OPTION IN FORM DROPDOWN */
-option:disabled{
-    color: #a7a7a7;
+option:disabled {
+  color: #a7a7a7;
 }
 
 /* STYLE FOR THE ADD STAFF TRIGGER BUTTON*/
-.addstaffButton{
-    float: right;
+.addstaff_btn {
+  float: right;
 }
 
+/* STYLE FOR STAFF PAGE MODALS */
+
+.staff_modal {
+  border-radius: 12px !important;
+}
+
+.modal_header {
+  background-color: var(--primary-maroon);
+  border-radius: 10px 10px 0 0 !important;
+}
+
+.modal_header h5 {
+  letter-spacing: 0.5px;
+  color: var(--main-white);
+}
+
+.modal_btn_submit {
+  border-color: var(--status-green) !important;
+  background-color: var(--status-green) !important;
+}
+
+.modal_btn_submit:hover {
+  border-color: var(--status-green-hover) !important;
+  background-color: var(--status-green-hover) !important;
+}
+
+.modal_btn_close {
+  border-color: var(--primary-maroon) !important;
+  background-color: var(--primary-maroon) !important;
+}
+
+.modal_btn_close:hover {
+  border-color: var(--primary-maroon-hover) !important;
+  background-color: var(--primary-maroon-hover) !important;
+}
+
+.modal_btn_submit,
+.modal_btn_close {
+  width: 23%;
+  letter-spacing: 0.5px;
+  border-radius: 10px !important;
+}
+
+.modal_body label,
+input,
+select {
+  letter-spacing: 0.5px;
+}
+
+.modal_body label {
+  font-weight: bold;
+}
+
+.text_muted {
+  font-weight: normal !important;
+}
+
+.modal_footer {
+  border: 0 !important;
+}
+
+.password_reveal:checked {
+  background-color: var(--primary-maroon) !important;
+  border-color: var(--primary-maroon) !important;
+  opacity: 0.8;
+}

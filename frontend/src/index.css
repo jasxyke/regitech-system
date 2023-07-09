@@ -2,16 +2,32 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 :root {
   --primary-maroon: #790000;
-  --bg-grey: #f5f5f3;
+  --primary-maroon-hover: #8b0000;
+  --bg-grey: #f5f3f3;
   --status-yellow: #fff200;
   --status-orange: #f68e56;
   --status-green: #00a651;
+  --status-green-hover: #01b458;
+  --main-white: #ffffff;
+  --main-black: #000000;
 
+  /* REMOVED THE COLOR VARIABLES FOR MODAL, USE THE COLOR VARIABLES IN 
+  THE ROOT: INSTEAD (SEAN) */
   --main-font: "Montserrat", sans-serif;
+
 }
 
 * {
   margin: 0;
   padding: 0;
   font-family: var(--main-font);
+  /* LET ME KNOW IF YOU GUYS WANT TO REMOVE THE LETTER WEBSITE (SEAN) */
+  letter-spacing: 0.5px !important;
+}
+
+.table-container {
+  min-height: 250px;
+  max-height: 250px;
+  overflow: auto;
+  background-color: var(--bg-grey);
 }

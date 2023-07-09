@@ -4,19 +4,6 @@ import { useEffect } from "react";
 import axiosClient from "../../utils/axios";
 
 const GuestRoutes = () => {
-  useEffect(() => {
-    axiosClient
-      .get("/sanctum/csrf-cookie", {
-        baseURL: "http://127.0.0.1:8000",
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
   const { checkAuthenticated, getUserRole } = useAuthContext();
   const staffRoleIds = [1, 2, 3];
   const studentRoleId = 4;

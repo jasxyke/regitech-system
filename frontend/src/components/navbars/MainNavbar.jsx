@@ -27,7 +27,7 @@ const MainNavbar = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/staff/admin" className="nav-link">
+              <Link to="/staff/head" className="nav-link">
                 Admin
               </Link>
             </li>

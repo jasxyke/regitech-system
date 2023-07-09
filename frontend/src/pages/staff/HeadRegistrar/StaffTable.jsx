@@ -20,25 +20,27 @@ function StaffTable() {
   const loading = staffCRUD.loading;
 
   return (
-    <div>
+    <div className={"mx-auto " + AdminStyles.admin_table_container}>
       <div className="d-flex justify-content-between mt-5">
-        <p className="h2">Staff List</p>
-        <div className={AdminStyles.addstaffButton}>
+        <h4>
+          <strong className={AdminStyles.table_header}>Staff List</strong>
+        </h4>
+        <div className={AdminStyles.addstaff_btn}>
           <AddStaffForm onAddUser={staffCRUD.onAddStaff} loading={loading} />
         </div>
       </div>
 
-      <div className="my-2">
-        <table className="table table-responsive-lg table-hover">
-          <thead className="">
-            <tr className="table_head">
-              <th className="col">ID</th>
-              <th className="col">Staff Name</th>
-              <th className="col">Position</th>
-              <th className="col">Actions</th>
+      <div className={"my-2 " + AdminStyles.table}>
+        <table className="table table-responsive-lg table-hover my-0">
+          <thead>
+            <tr className={AdminStyles.table_head}>
+              <th className="col-sm-2">ID</th>
+              <th className="col-sm-4">Staff Name</th>
+              <th className="col-sm-4">Position</th>
+              <th className="col-sm-2">Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className={AdminStyles.table_contents}>
             {staffs !== null ? (
               <StaffRecords
                 staffs={staffs}

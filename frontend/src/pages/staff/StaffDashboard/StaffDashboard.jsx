@@ -6,10 +6,14 @@ import css from "./StaffDashboard.module.css";
 import DLbtn from "./DLbtn";
 import downloadfile from "../../../assets/downloadfile.png";
 import excelfile from "../../../assets/excelfile.png";
+import LoadingPage from "../../../components/LoadingPage";
+
 
 const StaffDashboard = () => {
   const user = useUser();
-
+  if (user === null) {
+    return <LoadingPage />;
+  }
   return (
     <div className="mt-5">
       <GreetingsHeader name={user?.firstname || "unknown"} />

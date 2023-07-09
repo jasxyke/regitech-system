@@ -1,14 +1,14 @@
-import leftbg from "../../assets/backgroundleft.jpg";
 import LoginForm from "./LoginForm.jsx";
 import Logo from "../../components/Logo.jsx";
 import LoginCss from "./LoginPage.module.css";
+import PictureCarousel from "../../components/PictureCarousel";
 
 const LoginPage = () => {
   return (
     <div className={LoginCss.login_page + " container-fluid m-0 p-0"}>
       <div className="row g-0">
         <div className="col-lg-8 col-md-6 d-none d-md-block">
-          <img src={leftbg} alt="leftbg" className={LoginCss.left_img} />
+          <PictureCarousel />
         </div>
         <div
           className={`col-lg-4 col-md-6 overflow-hidden ${LoginCss["right-side"]}`}

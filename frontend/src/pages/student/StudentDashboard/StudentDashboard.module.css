@@ -1,0 +1,77 @@
+.table_header {
+  margin: 50px 0 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--primary-maroon);
+  font-style: italic;
+}
+.table {
+  background-color: var(--primary-maroon);
+}
+
+.tableHead {
+  background-color: var(--primary-maroon);
+  color: white;
+}
+
+.studentInfo {
+  background-color: white;
+  padding: 3px;
+}
+
+.tablebody {
+  background-color: #f5f3f3;
+}
+
+.col {
+  color: white;
+}
+
+.btnsContainer {
+  display: flex;
+  justify-content: end;
+  column-gap: 15px;
+}
+
+.view {
+  background-color: #790000 !important;
+  color: #f5f3f3 !important;
+  height: 1.5rem;
+}
+
+.status {
+  background-color: #f68e56;
+  color: #f5f3f3;
+}
+
+.modalHead {
+  background-color: var(--primary-maroon);
+  color: white;
+}
+
+.actionsContainer {
+  display: flex;
+  column-gap: 15px;
+}
+
+.fileBox {
+  display: flex;
+  column-gap: 15px;
+}
+
+.imagePreview {
+  border: 1px solid black;
+}
+
+@media only screen and (max-width: 768px) {
+  .actionsContainer {
+    flex-direction: column;
+    row-gap: 15px;
+  }
+
+  .fileBox {
+    flex-direction: column;
+    row-gap: 15px;
+  }
+}

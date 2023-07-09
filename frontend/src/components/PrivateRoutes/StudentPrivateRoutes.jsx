@@ -1,6 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
 import StudentNavbar from "../navbars/StudentNavbar";
+import MainFooter from "../footers/MainFooter";
 import { UserProvider } from "../../context/UserContext";
 
 const StudentPrivateRoutes = () => {
@@ -10,10 +11,11 @@ const StudentPrivateRoutes = () => {
   const authenticated = checkAuthenticated();
   return checkAuthenticated() && getUserRole() === allowedRoleId ? (
     <UserProvider>
-      <StudentNavbar />
+      <StudentNavbar userRoleId={userRoleId} />
       <div className="container">
         <Outlet />
       </div>
+      <MainFooter />
     </UserProvider>
   ) : (
     <Navigate to="/" />

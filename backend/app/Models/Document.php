@@ -17,9 +17,11 @@ class Document extends Model
         'request_id',
         'student_id',
         'document_status_id',
-        'updated_by',
+        'updated_by_id',
         'file_path',
+        'url',
         'with_copies',
+        'student_id',
     ];
 
     public function document_type(): BelongsTo{

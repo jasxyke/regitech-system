@@ -9,6 +9,7 @@ class Constants{
         [ "id"=> 2, "name"=> "Rejected" ],
         [ "id"=> 3, "name"=> "Pending Approval" ],
         [ "id"=> 4, "name"=> "Pending Submission" ],
+        [ "id"=>5,  "name"=> "Missing"]
     );
       
       const DOCUMENT_TYPES = [

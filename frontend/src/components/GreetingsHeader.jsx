@@ -1,12 +1,12 @@
-import moment from "moment/moment";
+import { getCurrentDate } from "../utils/datesHandler";
 import css from "./GreetingsHeader.module.css";
 
 const GreetingsHeader = ({ name }) => {
-  const date = moment().format("dddd, MMMM YY, YYYY");
+  const date = getCurrentDate();
 
   return (
     <div>
-      <div className={css.greeting_header}>
+      <div className={"mt-5 mb-3 " + css.greeting_header}>
         <h2>
           <strong>Hello, {name}!</strong>
         </h2>

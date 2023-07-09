@@ -25,22 +25,23 @@ const StaffRecords = ({
   };
 
   const staffRecords = staffs.map((staff) => (
-    <tr key={staff.id}>
+    <tr className="mx-2" key={staff.id}>
       <td>{staff.id}</td>
       <td>{staff.firstname + " " + staff.lastname}</td>
       <td>{staff.role.name}</td>
 
       <IconContext.Provider value={{ className: AdminStyles.action_btn }}>
         <td>
-          <div className="row actions">
+          <div className={AdminStyles.actions}>
             <EditStaffForm
               selectedStaff={selectedStaff}
               staffId={staff.id}
               selectStaff={selectStaff}
               handleEditStaff={onEdit}
             />
-            <span className={"col " + AdminStyles.action_btn_cont}>
+            <span className={"mx-1 " + AdminStyles.action_btn_cont}>
               <ResponseModal
+                headerText={""}
                 response={response}
                 show={show}
                 handleClose={handleClose}
