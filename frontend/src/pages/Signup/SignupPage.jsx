@@ -14,13 +14,15 @@ const SignupPage = () => {
         <div className={`col-lg-4 col-md-6  ${SignupCss["right-side"]}`}>
           <Logo />
           <h2 className="px-5">Registration</h2>
-          <SignupForm />
-          <div className="mt-1 mb-5 text-center">
-            <Link to="/">Already have an account ?</Link>
-          </div>
-          <div className="row text-center mt-auto">
-            <div className={SignupCss.copyright}>
-              Copyright@2022 | RegiTech | Developed DICT 3-1
+          <div className={`${SignupCss["content-container"]}`}>
+            <SignupForm />
+            <div className="mt-1 mb-5 text-center">
+              <Link to="/">Already have an account?</Link>
+            </div>
+            <div className={`${SignupCss["bottom-section"]} text-center`}>
+              <div className={SignupCss["copyright"]}>
+                Copyright@2022 | RegiTech | Developed DICT 3-1
+              </div>
             </div>
           </div>
         </div>
