@@ -1,61 +1,35 @@
 import css from "./StaffDashboard.module.css";
 import React, { useState } from "react";
+import VerificationRequest from "./VerificationRequest";
+import useVerificationRequests from "../../../hooks/useVerificationRequests";
 
 const VerificationRequestTable = () => {
-  const [verificationRequests, setVerificationRequests] = useState([
-    { id: 1, firstName: "John", lastName: "Doe", reviewStatus: "Yes" },
-    { id: 2, firstName: "Jimi", lastName: "Hendrix", reviewStatus: "No" },
-    { id: 3, firstName: "Eddie", lastName: "Van Halen", reviewStatus: "No" },
-    { id: 4, firstName: "Chad", lastName: "Smith", reviewStatus: "Yes" },
-  ]);
-
-  const handleView = (id) => {
-    console.log("View request:", id);
-  };
+  const requestsHook = useVerificationRequests();
+  const requests = requestsHook.verificationRequests;
+  const handleView = requestsHook.viewRequests;
 
   return (
-    <table className="table table-responsive-lg">
-      <thead>
-        <tr className={css.table_head}>
-          <th className={css.col}>ID</th>
-          <th className={css.col}>First Name</th>
-          <th className={css.col}>Last Name</th>
-          <th className={css.col}>Reviewed</th>
-          <th className={css.col}> </th>
-        </tr>
-      </thead>
-      <tbody>
-        {verificationRequests.map((request) => (
-          <tr key={request.id}>
-            <td>{request.id}</td>
-            <td>{request.firstName}</td>
-            <td>{request.lastName}</td>
-            <td>
-              <div
-                className={
-                  request.reviewStatus === "Yes"
-                    ? `${css.reviewStatusYes}`
-                    : `${css.reviewStatusNo}`
-                }
-              >
-                {request.reviewStatus}
-              </div>
-            </td>
-            <td>
-              <div className={css.btncont}>
-                <a
-                  href=""
-                  className={css.viewBtn}
-                  onClick={() => handleView(request.id)}
-                >
-                  View
-                </a>
-              </div>
-            </td>
+    <div className="d-flex justify-content-center">
+      <table className={css.table}>
+        <thead className={css.thead}>
+          <tr>
+            <th>Date Submitted</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Reviewed</th>
+            <th> </th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {requests !== null && (
+            <VerificationRequest
+              verificationRequests={requests}
+              handleView={handleView}
+            />
+          )}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
