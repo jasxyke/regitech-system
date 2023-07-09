@@ -1,17 +1,53 @@
+.staff_table_container{
+    max-width: 1200px;
+}
+
+.table::-webkit-scrollbar {
+  display: none;
+}
+
+.table{
+    max-height: 300px;
+    min-height: 300px;
+    overflow-x: scroll;
+    border-radius: 10px;
+    background-color: var(--bg-grey);
+}
+
+.table tr:last-child td:first-child {
+    border-radius: 0 0 0 10px;
+}
+  
+.table tr:last-child td:last-child {
+    border-radius: 0 0 10px 0;
+}
+  
+.table tr:last-child td {
+    border: none;
+}
+
 .table_header{
-    margin: 50px 0 10px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     color: var(--primary-maroon);
     font-style: italic;
 }
+
 .table_head{
+    top: 0;
+    position: sticky;
     background-color: var(--primary-maroon);
+    color: var(--main-white);
+    text-align: center;
+    vertical-align: middle !important;
 }
-.col{
-    color: white;
+
+.table_contents{
+  background-color: var(--bg-grey);
+  overflow-y: scroll;
+  text-align: center;
+  vertical-align: middle !important;
 }
+
+
 .reviewStatusYes{
     width: 80%;
     text-align: center;
@@ -20,6 +56,7 @@
     padding: 5px;
     border-radius: 30px;
   }
+
 .reviewStatusNo{
     width: 80%;
     text-align: center;
@@ -28,21 +65,18 @@
     padding: 5px;
     border-radius: 30px;
 }
-.btncont{
-    text-align: center;
-}
+
+
 .viewBtn{
-    width: 90px;
-    background-color: var(--primary-maroon);
-    color: white;
-    text-decoration: none;
-    padding: 5px 30px;
-    border-radius: 30px;
-    border: none;
-    cursor: pointer;
+    background-color: var(--primary-maroon) !important;
+    width: 60%;
+    color: white !important;
+    outline: var(--primary-maroon) solid 2px !important;
+
 }
+
 .viewBtn:hover{
-    background-color: white;
-    color: var(--primary-maroon);
-    outline: 3px solid var(--primary-maroon);
+    background-color: var(--bg-gray) !important;
+    color: var(--primary-maroon) !important;
+    outline: var(--primary-maroon) solid 2px !important;
 }

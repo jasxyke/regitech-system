@@ -14,9 +14,6 @@ const StaffDashboard = () => {
     <>
       <GreetingsHeader name={user?.firstname || "unknown"} />
       <MainNavbButtons />
-      <div className={css.table_header}>
-        <h3>Verification Requests</h3>
-      </div>
       <VerificationRequestTable />
     </>
   );
