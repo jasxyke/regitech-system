@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::factory()
-                ->count(2)
+                ->count(10)
                 ->state(new Sequence(
                     ['role_id'=>'2'],
                     ['role_id'=>'3'],

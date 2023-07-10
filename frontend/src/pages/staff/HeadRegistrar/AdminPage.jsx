@@ -15,14 +15,13 @@ function AdminPage() {
     return <LoadingPage />;
   }
   if (user.role.name !== "Head Registrar")
-    return <Navigate to={"/staff/dashboard"} replace={true} />;
+    return <Navigate to={"/staff/verification-requests"} replace={true} />;
   return (
     <>
       <GreetingsHeader name={user?.firstname || ""} />
-      <MainNavigation/>
+      <MainNavigation />
       <StaffTable />
       <ExportRecords />
-
     </>
   );
 }

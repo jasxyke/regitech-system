@@ -4,7 +4,7 @@ import { useUser } from "../../../context/UserContext";
 import DocumentModal from "./DocumentModal";
 
 const getStatusColor = (status) => {
-  if (status === "Accepted") {
+  if (status === "Verified") {
     return "var(--status-green)";
   } else if (status === "Rejected") {
     return "var(--primary-maroon";

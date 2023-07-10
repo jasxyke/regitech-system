@@ -1,5 +1,5 @@
-@media screen and (max-width: 578px){
-  .container{
+@media screen and (max-width: 578px) {
+  .container {
     display: none !important;
     padding: 0 !important;
     margin: 0 !important;
@@ -17,6 +17,7 @@
   background-color: var(--primary-maroon);
   color: white;
   border-radius: 15px;
+  cursor: pointer;
 }
 
 .container img {

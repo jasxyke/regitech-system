@@ -8,6 +8,7 @@ use App\Http\Controllers\DocumentTypeController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\StudentDocumentController;
 use App\Http\Controllers\StudentStatusController;
 use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\UserController;
@@ -50,6 +51,9 @@ Route::group(['middleware'=>['auth:sanctum','verified']], function(){
     Route::get('/submitted-documents/{id}', [DocumentController::class, 'getSubmittedDocuments']);
     Route::post('/verify-documents/{id}', [VerifiedDocumentsController::class, 'verify_documents']);
     Route::post('/test-email', [VerifiedDocumentsController::class, 'testEmail']);
-    
-
+    Route::get('/complete-students', [StudentDocumentController::class, 'getCompleteStudentDocuments']);
+    Route::get('/incomplete-students', [StudentDocumentController::class, 'getIncompleteStudentDocuments']);
 });
+
+Route::get('/export-student-documents-report', [StudentDocumentController::class, 'exportStudentDocuments']);
+
