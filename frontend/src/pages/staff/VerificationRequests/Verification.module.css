@@ -42,9 +42,9 @@
   width: 60%;
 }
 
-.view,
-.cancel,
-.back {
+
+.cancel, .back {
+
   background-color: var(--primary-maroon) !important;
   border-color: var(--primary-maroon) !important;
   color: var(--main-white) !important;
@@ -52,11 +52,20 @@
 
 .view {
   width: 60%;
+  background-color: var(--primary-maroon) !important;
+  outline: var(--primary-maroon) !important;
+  color: var(--main-white) !important;
 }
 
-.view:hover,
-.cancel:hover,
-.back:hover {
+
+.view:hover{
+  background-color: var(--bg-gray) !important;
+  color: var(--primary-maroon) !important;
+  outline: var(--primary-maroon) solid 2px !important;
+}
+
+.cancel:hover, .back:hover{
+
   background-color: var(--primary-maroon-hover) !important;
   border-color: var(--primary-maroon-hover) !important;
 }
@@ -79,13 +88,14 @@
 }
 
 .done {
-  background-color: var(--status-green) !important;
-  border-color: var(--status-green-hover) !important;
-  color: var(--main-white);
+  background-color: var(--main-white) !important;
+  border: var(--primary-maroon) solid 2px !important;
+  color: var(--primary-maroon) !important;
 }
 
 .done:hover {
-  background-color: var(--status-green-hover) !important;
+  background-color: var(--primary-maroon) !important;
+  color: var(--main-white) !important;
 }
 
 /* Modal */
@@ -136,14 +146,14 @@
 }
 
 .approveModal {
-  background-color: var(--status-green) !important;
-  border-color: var(--status-green) !important;
-  color: var(--main-white);
+  background-color: var(--main-white) !important;
+  border: var(--primary-maroon) solid 2px !important;
+  color: var(--primary-maroon) !important;
 }
 
 .approveModal:hover {
-  background-color: var(--status-green-hover) !important;
-  border-color: var(--status-green-hover) !important;
+  background-color: var(--primary-maroon) !important;
+  color: var(--main-white) !important;
 }
 
 .modalCentered {

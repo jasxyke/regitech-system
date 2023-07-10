@@ -31,7 +31,7 @@ function StaffTable() {
       </div>
 
       <div className={"my-2 " + AdminStyles.table}>
-        <table className="table table-responsive-lg table-hover my-0">
+        <table className="table table-hover my-0">
           <thead>
             <tr className={AdminStyles.table_head}>
               <th className="col-sm-2">ID</th>

@@ -18,19 +18,6 @@ const StaffDashboard = () => {
     <div className="mt-5">
       <GreetingsHeader name={user?.firstname || "unknown"} />
       <MainNavbButtons />
-      <div className={css.title}>
-        <h4 className="fw-bold">Verification Requests</h4>
-        {/*
-        <div className={css.search_sort}>
-          <input type="text" placeholder="Search" />
-          <select>
-            <option value="">Sort By</option>
-            <option value="name">Name</option>
-            <option value="document">Document Submitted</option>
-          </select>
-        </div>
-        */}
-      </div>
       <VerificationRequestTable />
       <div className={css.dl_title}>
         <h4 className="fw-bold">Download Documents</h4>
