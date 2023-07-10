@@ -29,7 +29,7 @@ export function AuthProvider({ children }) {
         if (res.data.role_id == 4) {
           navigate("/student/dashboard");
         } else if (res.data.role_id >= 1 && res.data.role_id <= 3) {
-          navigate("/staff/dashboard");
+          navigate("/staff/verification-requests");
         } else {
           console.log("error on role id");
           navigate("/");
@@ -56,10 +56,10 @@ export function AuthProvider({ children }) {
         // setAuthenticated(true);
         // setUserRole(res.data.role_id);
         console.log(res);
-        if (res.data.role_id === 4) {
+        if (res.data.role_id == 4) {
           navigate("/student/dashboard");
         } else if (res.data.role_id >= 1 && res.data.role_id <= 3) {
-          navigate("/staff/dashboard");
+          navigate("/staff/verification-requests");
         } else {
           console.log("error on role id");
           navigate("/");
@@ -70,7 +70,7 @@ export function AuthProvider({ children }) {
         localStorage.clear();
         setLoading(false);
         console.log(error);
-        onError(error.response.data.error);
+        onError(error?.response?.data?.error);
       });
   };
 

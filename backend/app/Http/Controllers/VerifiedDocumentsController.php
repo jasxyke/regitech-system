@@ -58,7 +58,7 @@ class VerifiedDocumentsController extends Controller
         if($invalidDocument > 0){
             $message = "One or more submitted document is invalid as indicated below:";
         }else{
-            $message = "All of your submitted documents has been verified and accepted.";
+            $message = "All of your submitted documents has been Verified.";
         }
 
         $verification_request = ModelsRequest::findOrFail($id);

@@ -2,8 +2,10 @@ import axios from "axios";
 
 axios.defaults.withCredentials = true;
 
+export const DOMAIN = "192.168.254.122";
+
 const axiosClient = axios.create({
-  baseURL: "http://127.0.0.1:8000" + "/api",
+  baseURL: `http://${DOMAIN}:8000` + "/api",
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
@@ -29,7 +31,7 @@ axiosClient.interceptors.response.use(
 );
 
 export const guestAxios = axios.create({
-  baseURL: "http://127.0.0.1:8000" + "/api",
+  baseURL: `http://${DOMAIN}:8000` + "/api",
   headers: {
     "Content-Type": "application/json",
   },

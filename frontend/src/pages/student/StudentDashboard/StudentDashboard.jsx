@@ -81,10 +81,9 @@ const StudentDashboard = () => {
   }
   return (
     <div className="mb-5">
-      <div>
+      <div className="mb-3">
         <GreetingsHeader name={student?.user?.firstname || "Name Here"} />
       </div>
-      <div className={StudentCSS.table_header}></div>
       <StudentProfile />
       <div className={StudentCSS.table_header}>
         <strong>

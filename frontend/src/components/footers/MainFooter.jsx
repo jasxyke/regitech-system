@@ -8,7 +8,7 @@ const MainFooter = () => {
       <div className={footercss.footer}>
         <div className={footercss.container + " container py-3 pt-4"}>
           <div className={footercss.logoBox + " logo"}>
-            <a href="/staff/dashboard">
+            <a href="/staff/verification-requests">
               <img src={logo} className={footercss.logo}></img>
             </a>
             <h3>

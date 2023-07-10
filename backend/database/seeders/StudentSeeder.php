@@ -52,11 +52,11 @@ class StudentSeeder extends Seeder
         //     'student_status_id'=>'2',
         // ]);
 
-        User::factory(40)
-            ->create(['role_id'=>'4'])
-            ->each(function ($user){
-                Student::factory(1)
-                        ->create(['user_id'=>$user->id]);
-            });
+        // User::factory(40)
+        //     ->create(['role_id'=>'4'])
+        //     ->each(function ($user){
+        //         Student::factory(1)
+        //                 ->create(['user_id'=>$user->id]);
+        //     });
     }
 }

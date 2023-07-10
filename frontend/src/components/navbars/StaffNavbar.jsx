@@ -20,7 +20,7 @@ function StaffNavbar({ userRoleId }) {
       </style>
       <Navbar expand="lg" bg="maroon" variant="dark">
         <Container>
-          <Navbar.Brand href="/staff/dashboard">
+          <Navbar.Brand href="/staff/verification-requests">
             <img
               src={logo}
               width="45"
@@ -36,13 +36,24 @@ function StaffNavbar({ userRoleId }) {
             <Nav className="ms-auto">
               <Nav.Link
                 as={Link}
-                to={"/staff/dashboard"}
+                to={"/staff/verification-requests"}
                 className={css.navlinks}
               >
                 Verification requests
               </Nav.Link>
+              <Nav.Link
+                as={Link}
+                to={"/staff/student-masterlist"}
+                className={css.navlinks}
+              >
+                Student Masterlist
+              </Nav.Link>
               {userRoleId == 1 && (
-                <Nav.Link as={Link} to={"/staff/head"} className={css.navlinks}>
+                <Nav.Link
+                  as={Link}
+                  to={"/staff/head-registrar"}
+                  className={css.navlinks}
+                >
                   Head Registrar
                 </Nav.Link>
               )}

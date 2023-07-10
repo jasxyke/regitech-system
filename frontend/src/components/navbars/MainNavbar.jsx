@@ -22,12 +22,12 @@ const MainNavbar = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/staff/dashboard" className="nav-link">
+              <Link to="/staff/verification-requests" className="nav-link">
                 Staff
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/staff/head" className="nav-link">
+              <Link to="/staff/head-registrar" className="nav-link">
                 Admin
               </Link>
             </li>

@@ -1,5 +1,5 @@
 const documentStatuses = [
-  { id: 1, name: "Accepted" },
+  { id: 1, name: "Verified" },
   { id: 2, name: "Rejected" },
   { id: 3, name: "Pending Approval" },
   { id: 4, name: "Pending Submission" },

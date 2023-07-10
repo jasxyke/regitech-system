@@ -14,7 +14,7 @@ class DocumentStatusSeeder extends Seeder
     public function run(): void
     {
         DB::table('document_statuses')->insert([
-            ['name'=>'Accepted'],
+            ['name'=>'Verified'],
             ['name'=>'Rejected'],
             ['name'=>'Pending Approval'],
             ['name'=>'Pending Submission'],

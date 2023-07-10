@@ -3,7 +3,7 @@ import TableCss from "./StudentDashboard.module.css";
 import ViewDocumentModal from "./ViewDocumentModal";
 
 const getStatusColor = (status) => {
-  if (status === "Accepted") {
+  if (status === "Verified") {
     return "#00a651";
   } else if (status === "Rejected") {
     return "#790000";

@@ -25,7 +25,7 @@ const VerificationPage = () => {
   const [showModal, setshowModal] = useState(false);
 
   const handleClose = () => {
-    navigate("/staff/dashboard");
+    navigate("/staff/verification-requests");
   };
 
   const handleResponse = (response) => {
@@ -52,12 +52,19 @@ const VerificationPage = () => {
 
   return (
     <div className="my-5 mb-5 pb-5">
-      <Button className={"mx-3 px-auto mb-5 " + TableCss.back}>
+      <Button
+        onClick={() => navigate("/staff/verification-requests")}
+        className={"mx-3 px-auto mb-5 " + TableCss.back}
+      >
         <span className="pe-2 ps-0"> &#8592; </span> Back
       </Button>
       <div className="row">
         <div className="col">
-          <p className={TableCss.title + " text-start fs-4 m-1 fw-bold fst-italic"}>
+          <p
+            className={
+              TableCss.title + " text-start fs-4 m-1 fw-bold fst-italic"
+            }
+          >
             Submitted Documents Verification
           </p>
         </div>
@@ -96,7 +103,7 @@ const VerificationPage = () => {
           Done
         </Button>
         <ResponseModal
-          headerText={""}
+          headerText={"Server response..."}
           response={response}
           show={showModal}
           handleClose={handleClose}
