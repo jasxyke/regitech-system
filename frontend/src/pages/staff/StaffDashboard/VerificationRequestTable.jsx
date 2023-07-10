@@ -1,17 +1,12 @@
 import StaffStyles from "./StaffDashboard.module.css";
 import React, { useState } from "react";
+import VerificationRequest from "./VerificationRequest";
+import useVerificationRequests from "../../../hooks/useVerificationRequests";
 
 const VerificationRequestTable = () => {
-  const [verificationRequests, setVerificationRequests] = useState([
-    { id: 1, firstName: "John", lastName: "Doe", reviewStatus: "Yes" },
-    { id: 2, firstName: "Jimi", lastName: "Hendrix", reviewStatus: "No" },
-    { id: 3, firstName: "Eddie", lastName: "Van Halen", reviewStatus: "No" },
-    { id: 4, firstName: "Chad", lastName: "Smith", reviewStatus: "Yes" },
-  ]);
-
-  const handleView = (id) => {
-    console.log("View request:", id);
-  };
+  const requestsHook = useVerificationRequests();
+  const requests = requestsHook.verificationRequests;
+  const handleView = requestsHook.viewRequests;
 
   return (
     <div className={"mx-auto " + StaffStyles.staff_table_container}>

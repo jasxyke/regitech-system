@@ -6,7 +6,7 @@ import { useFormInput } from "../../../hooks/useFormInput";
 import { useState } from "react";
 import { clearTextInputs } from "../../../utils/InputFormClearer";
 import { Alert } from "react-bootstrap";
-import AdminStyles from "./AdminPage.module.css"
+import AdminStyles from "./AdminPage.module.css";
 
 // THE FUNCION FOR THE ADD STAFF MODAL (EXCLUDING THE TRIGGER)
 
@@ -55,7 +55,7 @@ function AddModal({ show, handleClose, onAddUser, loading }) {
   const onSuccess = (isSucess) => {
     setSuccess(isSucess);
   };
-  
+
   return (
     <>
       <Modal
@@ -66,12 +66,12 @@ function AddModal({ show, handleClose, onAddUser, loading }) {
         backdrop="static"
         keyboard={false}
       >
-        <Modal.Header 
-          className={"px-4 " + AdminStyles.modal_header} 
-          closeVariant="white" 
+        <Modal.Header
+          className={"px-4 " + AdminStyles.modal_header}
+          closeVariant="white"
           closeButton
           onHide={() => {
-            clearForm(); 
+            clearForm();
             setSuccess(false);
             setError("");
           }}
@@ -191,14 +191,19 @@ function AddModal({ show, handleClose, onAddUser, loading }) {
                 />
                 <div className="my-1 ms-3">
                   <input
-                    className={"form-check-input " + AdminStyles.password_reveal}
+                    className={
+                      "form-check-input " + AdminStyles.password_reveal
+                    }
                     type="checkbox"
                     value=""
                     id="showPass"
                     onChange={() => setShowPassword(!showPassword)}
                   />
                   <label
-                    className={"form-check-label mx-2 text-muted " + AdminStyles.text_muted}
+                    className={
+                      "form-check-label mx-2 text-muted " +
+                      AdminStyles.text_muted
+                    }
                     htmlFor="showPass"
                   >
                     Show password
@@ -222,14 +227,19 @@ function AddModal({ show, handleClose, onAddUser, loading }) {
                 />
                 <div className="my-1 ms-3">
                   <input
-                    className={"form-check-input " + AdminStyles.password_reveal}
+                    className={
+                      "form-check-input " + AdminStyles.password_reveal
+                    }
                     type="checkbox"
                     value=""
                     id="showPassConfirm"
                     onChange={() => setCfrmShowPassword(!showCfrmPassword)}
                   />
                   <label
-                    className={"form-check-label mx-2 text-muted " + AdminStyles.text_muted}
+                    className={
+                      "form-check-label mx-2 text-muted " +
+                      AdminStyles.text_muted
+                    }
                     htmlFor="showPassConfirm"
                   >
                     Show password

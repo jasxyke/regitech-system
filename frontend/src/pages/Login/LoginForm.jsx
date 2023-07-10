@@ -5,7 +5,7 @@ export const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [error, setError] = useState("");
-
+  const [showPassword, setShowPassword] = useState(false);
   const { loading, login } = useAuthContext();
 
   const onError = (error) => {
@@ -42,12 +42,27 @@ export const LoginForm = () => {
           <input
             onChange={(e) => setPass(e.target.value)}
             value={pass}
-            type="password"
+            type={showPassword ? "text" : "password"} // Use the showPassword state to toggle input type
             className="form-control"
             id="password"
             placeholder="Password"
             required
           />
+        </div>
+        <div className="form-check px-5 d-flex justify-content-end">
+          {" "}
+          {/* Add form-check class to the parent div */}
+          <input
+            className="form-check-input" // Add form-check-input class
+            type="checkbox"
+            checked={showPassword} // Bind the checkbox to the showPassword state
+            onChange={() => setShowPassword(!showPassword)} // Toggle the showPassword state
+            id="showPasswordCheckbox"
+          />
+          <label className="form-check-label" htmlFor="showPasswordCheckbox">
+            {" "}
+            Show password
+          </label>
         </div>
         <div className="d-flex justify-content-center mt-3 mb-3">
           <button

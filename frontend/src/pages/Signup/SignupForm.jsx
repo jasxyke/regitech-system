@@ -13,6 +13,7 @@ const SignupForm = () => {
     lastname: "",
     course_id: courses[0].id,
     year_admitted: years[0],
+    showPassword: false,
   });
 
   const { signup, loading } = useAuthContext();
@@ -29,6 +30,13 @@ const SignupForm = () => {
     setFormData((prevFormData) => ({
       ...prevFormData,
       [event.target.name]: event.target.value,
+    }));
+  };
+
+  const toggleShowPassword = () => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      showPassword: !prevFormData.showPassword,
     }));
   };
 
@@ -124,7 +132,7 @@ const SignupForm = () => {
 
         <div className="form-group px-5 mb-2">
           <input
-            type="password"
+            type={formData.showPassword ? "text" : "password"}
             className="form-control"
             id="password"
             placeholder="Password"
@@ -137,7 +145,7 @@ const SignupForm = () => {
 
         <div className="form-group px-5 mb-2">
           <input
-            type="password"
+            type={formData.showPassword ? "text" : "password"}
             className="form-control"
             id="confirm_password"
             placeholder="Confirm Password"
@@ -146,6 +154,19 @@ const SignupForm = () => {
             value={formData.password_confirmation}
             required
           />
+        </div>
+
+        <div className="form-check px-5 d-flex justify-content-end">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            checked={formData.showPassword}
+            onChange={toggleShowPassword}
+            id="showPasswordCheckbox"
+          />
+          <label className="form-check-label" htmlFor="showPasswordCheckbox">
+            Show password
+          </label>
         </div>
 
         <div className="form-group px-5 mb-2">
