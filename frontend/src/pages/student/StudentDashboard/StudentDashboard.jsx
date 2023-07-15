@@ -30,9 +30,9 @@ const StudentDashboard = () => {
   const setSubmittedDocuments = submittedDocsHook.setSubmittedDocuments;
 
   const handleDeleteDocument = (documentId, responseMsg) => {
-    let newSubmittedDocs = submittedDocuments.map((doc) => {
-      return doc.id != documentId;
-    });
+    let newSubmittedDocs = submittedDocuments.filter(
+      (doc) => doc.id != documentId
+    );
     setSubmittedDocuments(newSubmittedDocs);
 
     setResponseMsg(responseMsg);

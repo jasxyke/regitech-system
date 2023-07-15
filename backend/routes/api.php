@@ -1,20 +1,14 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DocumentController;
-use App\Http\Controllers\DocumentStatusController;
-use App\Http\Controllers\DocumentTypeController;
 use App\Http\Controllers\RequestController;
-use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentDocumentController;
-use App\Http\Controllers\StudentStatusController;
 use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerifiedDocumentsController;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,6 +47,7 @@ Route::group(['middleware'=>['auth:sanctum','verified']], function(){
     Route::post('/test-email', [VerifiedDocumentsController::class, 'testEmail']);
     Route::get('/complete-students', [StudentDocumentController::class, 'getCompleteStudentDocuments']);
     Route::get('/incomplete-students', [StudentDocumentController::class, 'getIncompleteStudentDocuments']);
+    Route::get('/requests/search/{searchText}', [RequestController::class, 'search']);
 });
 
 Route::get('/export-student-documents-report', [StudentDocumentController::class, 'exportStudentDocuments']);

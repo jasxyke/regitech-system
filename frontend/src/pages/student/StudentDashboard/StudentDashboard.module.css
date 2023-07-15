@@ -10,9 +10,9 @@
   background-color: var(--primary-maroon);
 }
 
-.tableHead {
-  background-color: var(--primary-maroon);
-  color: white;
+.tableHead th {
+  background-color: var(--primary-maroon) !important;
+  color: white !important;
 }
 
 .studentInfo {

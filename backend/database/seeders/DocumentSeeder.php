@@ -102,7 +102,7 @@ class DocumentSeeder extends Seeder
                         Request::factory(1)
                         ->create(['student_id'=>$student->id])
                         ->each(function ($request){
-                            Document::factory(8)
+                            Document::factory(9)
                                 ->state(new Sequence(
                                     [
                                         'request_id'=>$request->id,

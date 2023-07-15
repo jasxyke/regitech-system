@@ -18,26 +18,43 @@ class VerifiedDocumentsController extends Controller
         $documents = $request->input('documents');
         $note = $request->input('note');
 
-        $verifiedDocuments = [];
+        $verification_request = ModelsRequest::findOrFail($id);
+        $student = Student::find($verification_request->student_id);
+        $user = $student->user;
+
         $missingDocuments = [];
         $invalidDocument = 0;
-        $missingDocument = 0;
-        //return $documents;
-        foreach($documents as $modifiedDocument){
-            $document = Document::with('document_type')
-                        ->findOrFail($modifiedDocument["id"]);
-            $document->document_status_id = $modifiedDocument["document_status_id"];
-            $document->with_copies = $modifiedDocument["with_copies"];
-            $document->save();
-            $document->load('document_status');
-            array_push($verifiedDocuments, $document);
-            if($modifiedDocument["document_status_id"] == 2){
-                $invalidDocument++;
+        $missingDocs = 0;
+        $pendingDocs = 0;
+
+        $submittedDocs = Document::with('document_type', 'document_status')
+                                    ->where('student_id', $student->id)
+                                    ->get();
+        foreach($submittedDocs as $submittedDoc){
+            //verified documents from current request
+            foreach($documents as $modifiedDocument){
+                if($modifiedDocument["id"] == $submittedDoc->id){
+                    $document = $submittedDoc;
+                    $document->document_status_id = $modifiedDocument["document_status_id"];
+                    $document->with_copies = $modifiedDocument["with_copies"];
+                    $document->save();
+                    $document->load('document_status');
+
+                if($modifiedDocument["document_status_id"] == 2){
+                    $invalidDocument++;
+                }
             }
         }
+        if($submittedDoc->document_status_id == 3){
+            $pendingDocs++;
+        }
+        }
 
+        $submittedDocs = $submittedDocs->toArray();
+        
+        //figures out what's missing
         $documentTypes = Constants::DOCUMENT_TYPES;
-        $verifiedDocumentTypes = array_column($verifiedDocuments, "document_type_id");
+        $verifiedDocumentTypes = array_column($submittedDocs, "document_type_id");
         foreach($documentTypes as $documentType){
             if(!in_array($documentType["id"], $verifiedDocumentTypes )){
                 $missingDocument = array(
@@ -50,29 +67,36 @@ class VerifiedDocumentsController extends Controller
                     )
                     );
                 array_push($missingDocuments, $missingDocument);
+                $missingDocs++;
             }
         }
 
-        $notificationDocuments = array_merge($verifiedDocuments, $missingDocuments);
+        $notificationDocuments = array_merge($submittedDocs, $missingDocuments);
 
         if($invalidDocument > 0){
             $message = "One or more submitted document is invalid as indicated below:";
-        }else{
-            $message = "All of your submitted documents has been Verified.";
+        }else if($missingDocs > 0){
+            $message = "One or more requirements is missing.";
+        }else if($pendingDocs > 0){
+            $message = "One or more requirements is pending";
+        }
+        else{
+            $message = "Congratulations! all of your submitted documents has been Verified.";
         }
 
-        $verification_request = ModelsRequest::findOrFail($id);
 
-        $user = Student::with('user')->where('id','=',$verification_request->student_id)->first()['user'];
         //$testEmail = "email niyo"; replace niyo lang yung $user->email sa baba kung gusto testing
         //$user->email
         Mail::to($user->email, $user->firstname)
                 ->send(new VerifiedDocuments($user, $notificationDocuments, $message, $note));
 
+        if($missingDocs == 0 && $invalidDocument == 0 && $pendingDocs == 0){
+            $student->student_status_id = 1;
+            $student->save();
+        }
         
-
+        //set is_reviewed as done
         $verification_request->is_reviewed = 1;
-
         $verification_request->save();
 
         return response()->json(["message" => "Updated and emailed successfully"], 200);

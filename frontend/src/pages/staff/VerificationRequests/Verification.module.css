@@ -6,6 +6,12 @@
   overflow-x: scroll;
   border-radius: 10px;
   background-color: var(--bg-grey);
+  min-height: 300px;
+  max-height: 300px;
+}
+
+.table td {
+  background-color: var(--bg-grey) !important;
 }
 
 .table tr:last-child td:first-child {
@@ -20,11 +26,11 @@
   border: none;
 }
 
-.tablehead {
+.tablehead th {
   top: 0;
   position: sticky;
-  background-color: var(--primary-maroon);
-  color: var(--main-white);
+  background-color: var(--primary-maroon) !important;
+  color: var(--main-white) !important;
   text-align: center;
   vertical-align: middle !important;
 }
@@ -42,9 +48,8 @@
   width: 60%;
 }
 
-
-.cancel, .back {
-
+.cancel,
+.back {
   background-color: var(--primary-maroon) !important;
   border-color: var(--primary-maroon) !important;
   color: var(--main-white) !important;
@@ -57,15 +62,14 @@
   color: var(--main-white) !important;
 }
 
-
-.view:hover{
+.view:hover {
   background-color: var(--bg-gray) !important;
   color: var(--primary-maroon) !important;
   outline: var(--primary-maroon) solid 2px !important;
 }
 
-.cancel:hover, .back:hover{
-
+.cancel:hover,
+.back:hover {
   background-color: var(--primary-maroon-hover) !important;
   border-color: var(--primary-maroon-hover) !important;
 }
