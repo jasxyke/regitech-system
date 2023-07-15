@@ -80,6 +80,8 @@ for (let i = 2015; i < new Date().getFullYear(); i++) {
   years.push(i);
 }
 
+const FILE_SIZE_LIMIT = 1 * 1024 * 1024; //1MB
+
 export {
   years,
   documentStatuses,
@@ -87,4 +89,5 @@ export {
   studentStatuses,
   roles,
   courses,
+  FILE_SIZE_LIMIT,
 };

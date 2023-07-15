@@ -30,6 +30,7 @@ class StudentDocumentsByStatus implements FromArray, WithTitle, ShouldAutoSize, 
             $students = Student::with('user','student_status', 'course')
                         ->where('student_status_id','=','1')
                         ->orderBy('year_admitted','asc')
+                        ->orderByAsc
                         ->get();
             
         foreach($students as $student){

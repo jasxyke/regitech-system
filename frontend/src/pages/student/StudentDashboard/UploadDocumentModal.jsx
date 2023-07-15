@@ -5,10 +5,16 @@ import Modal from "react-bootstrap/Modal";
 import TableCss from "./StudentDashboard.module.css";
 import PrimaryButton from "../../../components/ui/PrimaryButton";
 import SecondaryButton from "../../../components/ui/SecondaryButton";
-import { documentTypes } from "../../../data/constants";
+import { FILE_SIZE_LIMIT, documentTypes } from "../../../data/constants";
 import { Alert } from "react-bootstrap";
 
 function UploadDocumentModal({ availableDocumentTypes, addDocument }) {
+  if (
+    !Array.isArray(availableDocumentTypes) ||
+    !availableDocumentTypes.length
+  ) {
+    return;
+  }
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -25,6 +31,7 @@ function UploadDocumentModal({ availableDocumentTypes, addDocument }) {
   }, [availableDocumentTypes]);
 
   const [showError, setShowError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const documentRef = useRef(null);
 
@@ -82,8 +89,15 @@ function UploadDocumentModal({ availableDocumentTypes, addDocument }) {
               name="file-type"
               accept="image/*"
               onChange={(e) => {
-                console.log(e.target.files[0]);
-                setDocument(e.target.files[0]);
+                let document = e.target.files[0];
+                console.log(document);
+                // if (document && document.size > FILE_SIZE_LIMIT)
+                //   setErrorMsg(
+                //     "File size exceeds the limit (1MB). Please upload a smaller file."
+                //      return;
+                //   );
+
+                setDocument(document);
               }}
             />
             <PrimaryButton
@@ -128,7 +142,7 @@ function UploadDocumentModal({ availableDocumentTypes, addDocument }) {
 
                 handleClose();
               } else {
-                console.log("no file");
+                setErrorMsg("Please upload a document");
                 setShowError(true);
               }
             }}

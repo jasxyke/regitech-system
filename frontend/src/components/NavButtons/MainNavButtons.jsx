@@ -26,9 +26,9 @@ const MainNavButtons = () => {
 
       <EventButton
         icon={masterlist}
-        label={"Student Masterlist"}
+        label={"Student Records"}
         onClick={() => {
-          navigate("/staff/student-masterlist");
+          navigate("/staff/student-records");
         }}
       />
     </div>

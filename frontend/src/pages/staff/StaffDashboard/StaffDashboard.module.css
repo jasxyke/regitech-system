@@ -1,81 +1,84 @@
-
-.staff_table_container{
-    max-width: 1200px;
+.staff_table_container {
+  max-width: 1200px;
 }
 
 .table::-webkit-scrollbar {
   display: none;
 }
 
-.table{
-    max-height: 300px;
-    min-height: 300px;
-    overflow-x: scroll;
-    border-radius: 10px;
-    background-color: var(--bg-grey);
+.table {
+  max-height: 300px;
+  min-height: 300px;
+  overflow-x: scroll;
+  border-radius: 10px;
+  background-color: var(--bg-grey);
+}
+
+.table td {
+  background-color: var(--bg-grey) !important;
+}
+
+.tableOptions {
+  display: flex;
+  column-gap: 15px;
 }
 
 .table tr:last-child td:first-child {
-    border-radius: 0 0 0 10px;
+  border-radius: 0 0 0 10px;
 }
-  
+
 .table tr:last-child td:last-child {
-    border-radius: 0 0 10px 0;
+  border-radius: 0 0 10px 0;
 }
-  
+
 .table tr:last-child td {
-    border: none;
+  border: none;
 }
 
-.table_header{
-
-    color: var(--primary-maroon);
-    font-style: italic;
+.table_header {
+  color: var(--primary-maroon);
+  font-style: italic;
 }
 
-
-.table_head{
-    top: 0;
-    position: sticky;
-    background-color: var(--primary-maroon);
-    color: var(--main-white);
-    text-align: center;
-    vertical-align: middle !important;
+.table_head th {
+  top: 0;
+  position: sticky;
+  background-color: var(--primary-maroon) !important;
+  color: var(--main-white) !important;
+  text-align: center;
+  vertical-align: middle !important;
 }
 
-.table_contents{
+.table_contents {
   background-color: var(--bg-grey);
   overflow-y: scroll;
   text-align: center;
   vertical-align: middle !important;
 }
 
-
-.reviewStatusYes{
-    text-align: center;
-    background-color: #00a651;
-    color: white;
-    border-radius: 30px;
-  }
-
-
-.reviewStatusNo{
-    text-align: center;
-    background-color: #f68e58;
-    color: white;
-    border-radius: 30px;
+.reviewStatusYes {
+  text-align: center;
+  background-color: #00a651;
+  color: white;
+  border-radius: 30px;
 }
 
-
-.viewBtn{
-    background-color: var(--primary-maroon) !important;
-    width: 60%;
-    color: white !important;
-    outline: var(--primary-maroon) solid 2px !important;
+.reviewStatusNo {
+  text-align: center;
+  background-color: #f68e58;
+  color: white;
+  border-radius: 30px;
 }
 
-.viewBtn:hover{
-    background-color: var(--bg-gray) !important;
-    color: var(--primary-maroon) !important;
-    outline: var(--primary-maroon) solid 2px !important;
+.viewBtn {
+  background-color: var(--primary-maroon) !important;
+  width: 60%;
+  color: white !important;
+  outline: var(--primary-maroon) solid 2px !important;
+}
+
+.viewBtn:hover {
+  background-color: var(--bg-gray) !important;
+  color: var(--primary-maroon) !important;
+  outline: var(--primary-maroon) solid 2px !important;
 }

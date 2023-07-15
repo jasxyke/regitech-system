@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Request as ModelsRequest;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class RequestController extends Controller
@@ -13,10 +14,31 @@ class RequestController extends Controller
      */
     public function index()
     {
-        return ModelsRequest::with(['student', 'student.user'])
+        $requests = ModelsRequest::with('student.user')
                     ->orderBy('created_at', 'desc')
-                    ->orderBy('is_reviewed', 'asc')
                     ->paginate(20);
+        if(count($requests) == 0){
+            return null;
+        }else{
+            return $requests;
+        }
+    }
+
+    public function search(string $searchText){
+
+        $searchFunction = function(Builder $query) use($searchText){
+            $query->where('firstname','like','%' . $searchText . '%')
+            ->orWhere('lastname','like', '%' . $searchText . '%');
+        };
+        $requests = ModelsRequest::with('student.user')
+                    ->whereHas('student.user',$searchFunction )
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(20);
+        if(count($requests) == 0){
+            return null;
+        }else{
+            return $requests;
+        }
     }
 
     /**

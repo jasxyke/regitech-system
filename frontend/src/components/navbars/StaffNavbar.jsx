@@ -43,10 +43,10 @@ function StaffNavbar({ userRoleId }) {
               </Nav.Link>
               <Nav.Link
                 as={Link}
-                to={"/staff/student-masterlist"}
+                to={"/staff/student-records"}
                 className={css.navlinks}
               >
-                Student Masterlist
+                Student Records
               </Nav.Link>
               {userRoleId == 1 && (
                 <Nav.Link

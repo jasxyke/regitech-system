@@ -53,7 +53,7 @@ const ToBeSubmitted = ({
         <PrimaryButton text={"Submit"} onClick={submitDocuments} />
       </div>
       <ResponseModal
-        headerText={"No added document"}
+        headerText={"Error"}
         response={errorMsg}
         show={showResponseModal}
         handleClose={() => setShowResponseModal(false)}

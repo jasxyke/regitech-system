@@ -15,7 +15,6 @@ const StudentDashboardTable = ({
   const deleteDocument = (documentId) => {
     let documentsHook = useDocuments();
     documentsHook.deleteDocument(documentId, handleDeleteDocument);
-    location.reload();
   };
   console.log(submittedDocuments);
   return (

@@ -67,10 +67,15 @@ class DocumentController extends Controller
     public function destroy(string $id)
     {
         $document = Document::findOrfail($id);
+        $request = $document->request;
 
         Storage::disk('public')->delete($document->file_path);
 
         $document->delete();
+
+        if(count($request->documents) == 0){
+            $request->delete();
+        }
 
         return response()->json(["message"=> "Successfully deleted the document"]);
     }
