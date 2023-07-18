@@ -14,22 +14,15 @@ class Document extends Model
 
     protected $fillable = [
         'document_type_id',
-        'request_id',
         'student_id',
         'document_status_id',
         'updated_by_id',
-        'file_path',
-        'url',
         'with_copies',
         'student_id',
     ];
 
     public function document_type(): BelongsTo{
         return $this->belongsTo(DocumentType::class);
-    }
-
-    public function request(): BelongsTo{
-        return $this->belongsTo(Request::class);
     }
 
     public function student(): BelongsTo{

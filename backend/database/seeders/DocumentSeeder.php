@@ -34,49 +34,41 @@ class DocumentSeeder extends Seeder
                             Document::factory(8)
                                 ->state(new Sequence(
                                     [
-                                        'request_id'=>$request->id,
                                         'document_type_id'=>'1',
                                         'student_id'=>$GLOBALS['incompleteStudent']->id,
                                         'document_status_id'=>'3'
                                     ],
                                     [
-                                        'request_id'=>$request->id,
                                         'document_type_id'=>'2',
                                         'student_id'=>$GLOBALS['incompleteStudent']->id,
                                         'document_status_id'=>'3'
                                     ],
                                     [
-                                        'request_id'=>$request->id,
                                         'document_type_id'=>'3',
                                         'student_id'=>$GLOBALS['incompleteStudent']->id,
                                         'document_status_id'=>'3'
                                     ],
                                     [
-                                        'request_id'=>$request->id,
                                         'document_type_id'=>'4',
                                         'student_id'=>$GLOBALS['incompleteStudent']->id,
                                         'document_status_id'=>'3'
                                     ],
                                     [
-                                        'request_id'=>$request->id,
                                         'document_type_id'=>'5',
                                         'student_id'=>$GLOBALS['incompleteStudent']->id,
                                         'document_status_id'=>'3'
                                     ],
                                     [
-                                        'request_id'=>$request->id,
                                         'document_type_id'=>'6',
                                         'student_id'=>$GLOBALS['incompleteStudent']->id,
                                         'document_status_id'=>'3'
                                     ],
                                     [
-                                        'request_id'=>$request->id,
                                         'document_type_id'=>'7',
                                         'student_id'=>$GLOBALS['incompleteStudent']->id,
                                         'document_status_id'=>'3'
                                     ],
                                     [
-                                        'request_id'=>$request->id,
                                         'document_type_id'=>'8',
                                         'student_id'=>$GLOBALS['incompleteStudent']->id,
                                         'document_status_id'=>'3'
@@ -105,55 +97,46 @@ class DocumentSeeder extends Seeder
                             Document::factory(9)
                                 ->state(new Sequence(
                                     [
-                                        'request_id'=>$request->id,
                                         'document_type_id'=>'1',
                                         'student_id'=>$GLOBALS['completeStudent']->id,
                                         'document_status_id'=>'1'
                                     ],
                                     [
-                                        'request_id'=>$request->id,
                                         'document_type_id'=>'2',
                                         'student_id'=>$GLOBALS['completeStudent']->id,
                                         'document_status_id'=>'1'
                                     ],
                                     [
-                                        'request_id'=>$request->id,
                                         'document_type_id'=>'3',
                                         'student_id'=>$GLOBALS['completeStudent']->id,
                                         'document_status_id'=>'1'
                                     ],
                                     [
-                                        'request_id'=>$request->id,
                                         'document_type_id'=>'4',
                                         'student_id'=>$GLOBALS['completeStudent']->id,
                                         'document_status_id'=>'1'
                                     ],
                                     [
-                                        'request_id'=>$request->id,
                                         'document_type_id'=>'5',
                                         'student_id'=>$GLOBALS['completeStudent']->id,
                                         'document_status_id'=>'1'
                                     ],
                                     [
-                                        'request_id'=>$request->id,
                                         'document_type_id'=>'6',
                                         'student_id'=>$GLOBALS['completeStudent']->id,
                                         'document_status_id'=>'1'
                                     ],
                                     [
-                                        'request_id'=>$request->id,
                                         'document_type_id'=>'7',
                                         'student_id'=>$GLOBALS['completeStudent']->id,
                                         'document_status_id'=>'1'
                                     ],
                                     [
-                                        'request_id'=>$request->id,
                                         'document_type_id'=>'8',
                                         'student_id'=>$GLOBALS['completeStudent']->id,
                                         'document_status_id'=>'1'
                                     ],
                                     [
-                                        'request_id'=>$request->id,
                                         'document_type_id'=>'9',
                                         'student_id'=>$GLOBALS['completeStudent']->id,
                                         'document_status_id'=>'1'

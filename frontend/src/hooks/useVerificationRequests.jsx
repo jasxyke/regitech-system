@@ -71,8 +71,10 @@ const useVerificationRequests = () => {
     }
   };
 
-  const viewRequests = async (id) => {
-    navigate("/staff/document-verification/" + id);
+  const viewRequests = async (id, url, requestId) => {
+    navigate("/staff/document-verification/" + id, {
+      state: { pdfSrc: url, requestId: requestId },
+    });
   };
 
   return {

@@ -37,8 +37,6 @@ Route::group(['middleware'=>['auth:sanctum','verified']], function(){
             'requests' => RequestController::class,
             'users' => UserController::class,
         ]);
-        Route::get('/request-documents/{id}',
-         [DocumentController::class, 'getDocuments']);
    
     Route::post('/logout', [AuthController::class, 'logout']);
 
@@ -48,6 +46,7 @@ Route::group(['middleware'=>['auth:sanctum','verified']], function(){
     Route::get('/complete-students', [StudentDocumentController::class, 'getCompleteStudentDocuments']);
     Route::get('/incomplete-students', [StudentDocumentController::class, 'getIncompleteStudentDocuments']);
     Route::get('/requests/search/{searchText}', [RequestController::class, 'search']);
+    Route::get('/student-pdfs/{id}', [StudentController::class, 'getPdfs']);
 });
 
 Route::get('/export-student-documents-report', [StudentDocumentController::class, 'exportStudentDocuments']);

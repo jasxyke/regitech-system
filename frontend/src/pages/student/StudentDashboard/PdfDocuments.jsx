@@ -1,12 +1,11 @@
+import React from "react";
 import { convertStampToDate } from "../../../utils/datesHandler";
-import StaffStyles from "./StaffDashboard.module.css";
+import StaffStyles from "../../staff/StaffDashboard/StaffDashboard.module.css";
 
-const VerificationRequest = ({ verificationRequests, handleView }) => {
-  const requests = verificationRequests.map((request) => (
+const PdfDocuments = ({ pdfDocuments }) => {
+  const documents = pdfDocuments.map((request) => (
     <tr key={request.id}>
       <td>{convertStampToDate(request.created_at)}</td>
-      <td>{request.student.user.lastname}</td>
-      <td>{request.student.user.firstname}</td>
       <td>
         <div
           className={
@@ -23,9 +22,7 @@ const VerificationRequest = ({ verificationRequests, handleView }) => {
           className={
             "btn py-1 mx-auto px-0 rounded-pill my-0 " + StaffStyles.viewBtn
           }
-          onClick={() =>
-            handleView(request.student.id, request.url, request.id)
-          }
+          onClick={() => window.open(request.url, "_newtab")}
         >
           {" "}
           View{" "}
@@ -33,8 +30,7 @@ const VerificationRequest = ({ verificationRequests, handleView }) => {
       </td>
     </tr>
   ));
-
-  return <>{requests}</>;
+  return <>{documents}</>;
 };
 
-export default VerificationRequest;
+export default PdfDocuments;

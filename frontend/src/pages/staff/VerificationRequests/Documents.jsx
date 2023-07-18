@@ -7,9 +7,11 @@ const getStatusColor = (status) => {
   if (status === "Verified") {
     return "var(--status-green)";
   } else if (status === "Rejected") {
-    return "var(--primary-maroon";
+    return "var(--primary-maroon)";
+  } else if (status === "Pending Submission" || status === "Pending Aproval") {
+    return "var(--status-yellow)";
   } else {
-    return "var(--status-orange)"; // Default color for "Pending"
+    return "var(--status-orange)"; // Default color for "Missing"
   }
 };
 

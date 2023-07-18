@@ -20,12 +20,6 @@ return new class extends Migration
             ->on('document_types')
             ->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->unsignedBigInteger('request_id');
-            $table->foreign('request_id')
-            ->references('id')
-            ->on('requests')
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
             $table->foreignId('student_id')
             ->constrained()
             ->cascadeOnUpdate()
@@ -42,8 +36,6 @@ return new class extends Migration
             ->on('users')
             ->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->string('file_path', 255);
-            $table->string('url', 255);
             $table->unsignedTinyInteger('with_copies');
         });
     }

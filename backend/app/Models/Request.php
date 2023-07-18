@@ -15,7 +15,9 @@ class Request extends Model
 
     protected $fillable = [
         'student_id',
-        'is_reviewed'
+        'is_reviewed',
+        'file_path',
+        'url',
     ];
 
     public function student(): BelongsTo {
