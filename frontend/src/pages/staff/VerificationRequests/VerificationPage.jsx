@@ -53,10 +53,6 @@ const VerificationPage = () => {
         <Spinner animation="border" role="status" />
       </div>
     );
-    let verifiedDocumentsHook = useVerifyDocument({
-      handleResponse,
-      handleError,
-    });
     verifyDocumentsHook.verifyDocuments(id, documents, note);
   };
 

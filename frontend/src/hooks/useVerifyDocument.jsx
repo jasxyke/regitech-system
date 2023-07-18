@@ -2,8 +2,6 @@ import { useState } from "react";
 import axiosClient from "../utils/axios";
 
 const useVerifyDocument = ({ handleResponse, handleError }) => {
-  const [verifiedDocuments, setVerifiedDocuments] = useState([]);
-
   const verifyDocuments = async (
     requestId,
     verifiedDocuments,
