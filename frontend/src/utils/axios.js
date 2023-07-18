@@ -2,7 +2,7 @@ import axios from "axios";
 
 axios.defaults.withCredentials = true;
 
-export const DOMAIN = "192.168.254.122";
+export const DOMAIN = "192.168.1.3";
 
 const axiosClient = axios.create({
   baseURL: `http://${DOMAIN}:8000` + "/api",
