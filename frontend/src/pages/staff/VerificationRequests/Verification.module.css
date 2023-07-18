@@ -10,6 +10,19 @@
   max-height: 300px;
 }
 
+.documentVerifyBox {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pdfView {
+  width: 40%;
+}
+
+.verifyView {
+  width: 55%;
+}
+
 .table td {
   background-color: var(--bg-grey) !important;
 }
@@ -168,4 +181,9 @@
 
 .modalCentered .modal-dialog {
   margin: 0;
+}
+
+.verifyBtns {
+  display: flex;
+  column-gap: 15px;
 }

@@ -13,6 +13,7 @@ import StaffPrivateRoutes from "./components/PrivateRoutes/StaffPrivateRoutes";
 import GuestRoutes from "./components/PrivateRoutes/GuestRoutes";
 import useCRFKCookie from "./hooks/useCRFKCookie";
 import StudentRecordsPage from "./pages/staff/StudentRecords/StudentRecordsPage";
+import SubmissionPage from "./pages/student/Submission/SubmissionPage";
 
 function App() {
   useCRFKCookie();
@@ -25,6 +26,7 @@ function App() {
         </Route>
         <Route path="/student" element={<StudentPrivateRoutes />}>
           <Route path="dashboard" element={<StudentDashboard />} />
+          <Route path="submission-page" element={<SubmissionPage />} />
         </Route>
 
         <Route path="/staff" element={<StaffPrivateRoutes />}>

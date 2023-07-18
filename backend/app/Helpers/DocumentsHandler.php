@@ -19,9 +19,9 @@ class DocumentsHandler{
         $this->student = $student;
     }
 
-    public function saveDocument(UploadedFile $file, $docType ){
+    public function saveDocument(UploadedFile $file, $filename ){
         $extension = $file->getClientOriginalExtension();
-        $filename = $docType . '.' . $extension;
+        $filename = $filename . '.' . $extension;
 
         $user = $this->user;
         $student = $this->student;
@@ -34,7 +34,7 @@ class DocumentsHandler{
     }
     
     public function createDocument($path, $docTypeId, 
-                                $requestId, $withCopies){
+                                 $withCopies){
         
         $studentId = $this->student->id;
         if($withCopies){
@@ -44,7 +44,6 @@ class DocumentsHandler{
         }
         return Document::create([
             "document_type_id"=> $docTypeId,
-            "request_id"=> $requestId,
             "student_id"=> $studentId,
             "document_status_id"=> 3,
             "updated_by_id"=> $studentId,

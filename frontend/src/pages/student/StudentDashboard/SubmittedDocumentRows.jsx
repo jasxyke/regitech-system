@@ -19,22 +19,13 @@ const SubmittedDocumentRows = ({ submittedDocuments, deleteDocument }) => {
       <td>
         <button
           disabled
-          className={TableCss.status + " fw-bold w-75 rounded-pill border-0"}
+          className={TableCss.status + " fw-bold w-100 rounded-pill border-0"}
           style={{
             backgroundColor: getStatusColor(document.document_status.name),
           }}
         >
           {document.document_status.name}
         </button>
-      </td>
-      <td>
-        <div className={TableCss.actionsContainer}>
-          <ViewDocumentModal document={document} />
-          <DeleteDocumentModal
-            documentId={document.id}
-            handleDeleteDocument={deleteDocument}
-          />
-        </div>
       </td>
     </tr>
   ));

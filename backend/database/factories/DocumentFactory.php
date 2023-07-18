@@ -19,8 +19,6 @@ class DocumentFactory extends Factory
     {
         return [
             'with_copies'=>rand(0,1),
-            'url'=> Storage::disk('public')->url('testdocument.jpg') ,
-            'file_path'=>'testdocument.jpg',
             'updated_by_id'=>'2'
         ];
     }

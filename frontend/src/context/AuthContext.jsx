@@ -27,7 +27,7 @@ export function AuthProvider({ children }) {
       .then((res) => {
         storeAuthDetails(res);
         if (res.data.role_id == 4) {
-          navigate("/student/dashboard");
+          navigate("/student/submission-page");
         } else if (res.data.role_id >= 1 && res.data.role_id <= 3) {
           navigate("/staff/verification-requests");
         } else {

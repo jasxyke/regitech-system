@@ -10,17 +10,6 @@ use Ramsey\Uuid\Type\Integer;
 
 class DocumentController extends Controller
 {
-    //get all documents of a given request id
-    public function getDocuments(string $id){
-        Request::findOrFail($id);
-        $requestDocuments = Document::with(['document_type', 'document_status', 'student.user'])
-                ->where('request_id',$id)
-                ->orderBy('document_type_id')
-                ->get();
-
-        return $requestDocuments;
-
-    }
 
     public function getSubmittedDocuments(string $id){
         return Document::with('document_status', 'document_type')
