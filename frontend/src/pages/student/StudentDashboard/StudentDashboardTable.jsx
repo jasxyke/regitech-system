@@ -15,7 +15,6 @@ const StudentDashboardTable = ({
   const deleteDocument = (documentId) => {
     let documentsHook = useDocuments();
     documentsHook.deleteDocument(documentId, handleDeleteDocument);
-    location.reload();
   };
   console.log(submittedDocuments);
   return (
@@ -25,7 +24,6 @@ const StudentDashboardTable = ({
           <tr>
             <th scope="col">Document Submitted</th>
             <th scope="col">Document Status</th>
-            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody className={TableCss.tablebody}>

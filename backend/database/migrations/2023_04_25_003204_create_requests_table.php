@@ -18,6 +18,8 @@ return new class extends Migration
             ->cascadeOnUpdate()
             ->cascadeOnDelete();
             $table->unsignedTinyInteger('is_reviewed');
+            $table->string('file_path', 255);
+            $table->string('url', 255);
             $table->timestamps();
         });
     }

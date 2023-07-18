@@ -4,13 +4,13 @@
 }
 
 .left_img {
-  height: 100dvh;
+  height: 100vh;
   width: 100%;
 }
 
 .right-side {
   position: relative;
-  height: 100dvh;
+  height: 100vh;
   background-color: #790000ff;
   overflow-y: scroll;
 }

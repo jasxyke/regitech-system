@@ -5,7 +5,7 @@ namespace App\Helpers;
 class Constants{
     
     const DOCUMENT_STATUSES = array(
-        [ "id"=> 1, "name"=> "Accepted" ],
+        [ "id"=> 1, "name"=> "Verified" ],
         [ "id"=> 2, "name"=> "Rejected" ],
         [ "id"=> 3, "name"=> "Pending Approval" ],
         [ "id"=> 4, "name"=> "Pending Submission" ],
@@ -24,21 +24,21 @@ class Constants{
         [ "id"=> 9, "name"=> "Form 137 SHS" ],
       ];
       
-      const roles = [
+      const ROLES = [
         [ "id"=> 1, "name"=> "Head Registrar" ],
         [ "id"=> 2, "name"=> "Regular Staff" ],
         [ "id"=> 3, "name"=> "Student Assistant" ],
         [ "id"=> 4, "name"=> "Student" ],
       ];
       
-      const studentStatuses = [
+      const STUDENT_STATUSES = [
         [ "id"=> 1, "name"=> "Complete" ],
-        [ "id"=> 1, "name"=> "Incomplete" ],
-        [ "id"=> 1, "name"=> "Pull-out" ],
-        [ "id"=> 1, "name"=> "Transferee" ],
+        [ "id"=> 2, "name"=> "Incomplete" ],
+        [ "id"=> 3, "name"=> "Pull-out" ],
+        [ "id"=> 4, "name"=> "Transferee" ],
       ];
       
-      const courses = [
+      const COURSES = [
         [
           "id"=> 1,
           "name"=> "Diploma in Civil Engineering Technology (DCvET)",

@@ -6,11 +6,11 @@ import StudentDashboardTable from "./StudentDashboardTable";
 import StudentProfile from "./StudentProfile";
 import ToBeSubmitted from "./ToBeSubmitted";
 import useUploadHandler from "../../../hooks/useUploadHandler";
-import useDocuments from "../../../hooks/useDocuments";
 import useSubmittedDocuments from "../../../hooks/useSubmittedDocuments";
 import ResponseModal from "../../../components/ResponseModal";
 import LoadingPage from "../../../components/LoadingPage";
 import { documentTypes } from "../../../data/constants";
+import PdfDocumentsTable from "./PdfDocumentsTable";
 
 const StudentDashboard = () => {
   const student = useUser();
@@ -30,9 +30,9 @@ const StudentDashboard = () => {
   const setSubmittedDocuments = submittedDocsHook.setSubmittedDocuments;
 
   const handleDeleteDocument = (documentId, responseMsg) => {
-    let newSubmittedDocs = submittedDocuments.map((doc) => {
-      return doc.id != documentId;
-    });
+    let newSubmittedDocs = submittedDocuments.filter(
+      (doc) => doc.id != documentId
+    );
     setSubmittedDocuments(newSubmittedDocs);
 
     setResponseMsg(responseMsg);
@@ -45,62 +45,19 @@ const StudentDashboard = () => {
   //   document_type_id: 1,
 
   // }
-  const pendingDocumentsHook = useUploadHandler();
-  const pendingDocuments = pendingDocumentsHook.pendingDocuments;
-  const pendingDocumentTypes = pendingDocumentsHook.documentInfos;
-  const addDocument = pendingDocumentsHook.addDocument;
-  const removeDocument = pendingDocumentsHook.removeDocument;
-  // available documents for dropdown list (select tag)
-  const [availableDocumentTypes, setAvailableDocumentTypes] = useState(null);
-  useEffect(() => {
-    let filteredDocTypes = documentTypes;
-    if (submittedDocuments !== null) {
-      filteredDocTypes = filteredDocTypes.filter((docType) => {
-        const isInSubmittedDocs = submittedDocuments.some(
-          (submittedDoc) => submittedDoc.document_type.id == docType.id
-        );
-
-        return !isInSubmittedDocs;
-      });
-    }
-    if (pendingDocuments !== null) {
-      filteredDocTypes = filteredDocTypes.filter((docType) => {
-        const isInPendingDocs = pendingDocumentTypes.some(
-          (pendingDoc) => pendingDoc.document_type_id == docType.id
-        );
-
-        return !isInPendingDocs;
-      });
-    }
-
-    setAvailableDocumentTypes(filteredDocTypes);
-  }, [submittedDocuments, pendingDocuments]);
 
   if (student === null) {
     return <LoadingPage />;
   }
   return (
     <div className="mb-5">
-      <div>
+      <div className="mb-3">
         <GreetingsHeader name={student?.user?.firstname || "Name Here"} />
       </div>
-      <div className={StudentCSS.table_header}></div>
       <StudentProfile />
       <div className={StudentCSS.table_header}>
-        <strong>
-          <h2>To Be Submitted Documents</h2>
-        </strong>
-      </div>
-      <ToBeSubmitted
-        pendingDocuments={pendingDocuments}
-        availableDocumentTypes={availableDocumentTypes}
-        handleAddDocument={addDocument}
-        handleRemoveDocument={removeDocument}
-        handleSubmitDocument={pendingDocumentsHook.uploadDocuments}
-      />
-      <div className={StudentCSS.table_header}>
         <h2>
-          <strong>Submitted Documents</strong>
+          <strong>Document status</strong>
         </h2>
       </div>
       <StudentDashboardTable
@@ -109,6 +66,12 @@ const StudentDashboard = () => {
         submittedDocsHook={submittedDocsHook}
         student={student}
       />
+      <div className={StudentCSS.table_header}>
+        <h2>
+          <strong>Verification requests</strong>
+        </h2>
+      </div>
+      <PdfDocumentsTable student={student} />
       <ResponseModal
         headerText={"About to delete file"}
         show={showResponseModal}

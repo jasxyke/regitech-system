@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import axiosClient from "../utils/axios";
+import axiosClient, { DOMAIN } from "../utils/axios";
 
 const useCRFKCookie = () => {
   useEffect(() => {
     axiosClient
       .get("/sanctum/csrf-cookie", {
-        baseURL: "http://127.0.0.1:8000",
+        baseURL: `http://${DOMAIN}:8000`,
       })
       .then((res) => {
         console.log(res);

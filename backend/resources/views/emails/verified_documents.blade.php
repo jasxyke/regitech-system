@@ -42,7 +42,7 @@ recently submitted admission documents in which:
                     'background-color: #790000; color: white;' => $document["document_status"]['id'] == 2,
                     'background-color: #fff200' => $document["document_status"]['id'] == 3,
                     'background-color: #f68e56' => $document["document_status"]['id'] == 4,
-                    'background-color: #790000; color: white;' => $document["document_status"]['id'] == 5,
+                    'background-color: #f68e56; color: white;' => $document["document_status"]['id'] == 5,
                 ]) >{{$document["document_status"]['name']}}</td>
             </tr>
         @endforeach

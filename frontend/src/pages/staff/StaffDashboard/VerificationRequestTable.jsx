@@ -1,61 +1,136 @@
-import css from "./StaffDashboard.module.css";
-import React, { useState } from "react";
+import StaffStyles from "./StaffDashboard.module.css";
+import React, { useEffect, useState } from "react";
+import VerificationRequest from "./VerificationRequest";
+import useVerificationRequests from "../../../hooks/useVerificationRequests";
+import { convertStampToDate } from "../../../utils/datesHandler";
+import PrimaryButton from "../../../components/ui/PrimaryButton";
+import { Dropdown, DropdownButton, Spinner } from "react-bootstrap";
+import { FiRefreshCw } from "react-icons/fi";
+import AppDropdown from "../../../components/AppDropdown";
+import Form from "react-bootstrap/Form";
+import SecondaryButton from "../../../components/ui/SecondaryButton";
+import { PaginationControl } from "react-bootstrap-pagination-control";
 
 const VerificationRequestTable = () => {
-  const [verificationRequests, setVerificationRequests] = useState([
-    { id: 1, firstName: "John", lastName: "Doe", reviewStatus: "Yes" },
-    { id: 2, firstName: "Jimi", lastName: "Hendrix", reviewStatus: "No" },
-    { id: 3, firstName: "Eddie", lastName: "Van Halen", reviewStatus: "No" },
-    { id: 4, firstName: "Chad", lastName: "Smith", reviewStatus: "Yes" },
-  ]);
+  const requestsHook = useVerificationRequests();
+  const requests = requestsHook.verificationRequests;
+  const handleView = requestsHook.viewRequests;
 
-  const handleView = (id) => {
-    console.log("View request:", id);
+  const [searchText, setSearchText] = useState("");
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    requestsHook.getVerificationRequets();
+  }, []);
+
+  const handleSelect = (eventKey) => {
+    if (eventKey === "Newest first") {
+      requestsHook.getVerificationRequets();
+    } else if (eventKey === "Oldest first") {
+    } else if (eventKey === "Not reviewed") {
+    } else if (eventKey === "Have been reviewed") {
+    } else if (eventKey === "Alphabetically") {
+    }
   };
 
   return (
-    <table className="table table-responsive-lg">
-      <thead>
-        <tr className={css.table_head}>
-          <th className={css.col}>ID</th>
-          <th className={css.col}>First Name</th>
-          <th className={css.col}>Last Name</th>
-          <th className={css.col}>Reviewed</th>
-          <th className={css.col}> </th>
-        </tr>
-      </thead>
-      <tbody>
-        {verificationRequests.map((request) => (
-          <tr key={request.id}>
-            <td>{request.id}</td>
-            <td>{request.firstName}</td>
-            <td>{request.lastName}</td>
-            <td>
-              <div
-                className={
-                  request.reviewStatus === "Yes"
-                    ? `${css.reviewStatusYes}`
-                    : `${css.reviewStatusNo}`
-                }
-              >
-                {request.reviewStatus}
-              </div>
-            </td>
-            <td>
-              <div className={css.btncont}>
-                <a
-                  href=""
-                  className={css.viewBtn}
-                  onClick={() => handleView(request.id)}
-                >
-                  View
-                </a>
-              </div>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div className={"mx-auto " + StaffStyles.staff_table_container}>
+      <div className={"mt-5 " + StaffStyles.tableOptions}>
+        <h4 className="me-auto">
+          <strong className={StaffStyles.table_header}>
+            {" "}
+            Verification Requests{" "}
+          </strong>
+        </h4>
+        <PrimaryButton
+          text={<FiRefreshCw />}
+          onClick={requestsHook.getVerificationRequets}
+        />
+        <AppDropdown
+          handleSelect={handleSelect}
+          dropdownItems={[
+            "Newest first",
+            "Oldest first",
+            "Not reviewed",
+            "Have been reviewed",
+            "Alphabetically",
+          ]}
+        />
+        <input
+          type="text"
+          value={searchText}
+          onChange={(e) => {
+            setSearchText(e.target.value);
+            if (e.target.value === "") {
+              requestsHook.getVerificationRequets();
+            }
+          }}
+        />
+        <SecondaryButton
+          text={"Search"}
+          onClick={() => {
+            requestsHook.searchRequestByName(searchText);
+          }}
+        />
+      </div>
+      <div className={"my-3 " + StaffStyles.table}>
+        <table className="table table-hover my-0">
+          <thead>
+            <tr className={StaffStyles.table_head}>
+              <th className="col-sm-2">Date submitted</th>
+              <th className="col-sm-3">First Name</th>
+              <th className="col-sm-2">Last Name</th>
+              <th className="col-sm-3">Reviewed</th>
+              <th className="col-sm-2"> Actions </th>
+            </tr>
+          </thead>
+          <tbody className={StaffStyles.table_contents}>
+            {/* {requests !== null && (
+              <VerificationRequest
+                verificationRequests={requests}
+                handleView={handleView}
+              />
+            )} */}
+            {requestsHook.loading ? (
+              <tr>
+                <td colSpan={5}>
+                  <Spinner />
+                </td>
+              </tr>
+            ) : requests !== null ? (
+              <VerificationRequest
+                verificationRequests={requests}
+                handleView={handleView}
+              />
+            ) : null}
+          </tbody>
+        </table>
+      </div>
+      <style type="text/css">
+        {`
+          .page-link{
+            color: black;
+          }
+
+          .active .page-link{
+            background-color: var(--primary-maroon) !important;
+            border-color: black
+          }
+        `}
+      </style>
+      {requests !== null && (
+        <PaginationControl
+          page={page}
+          between={3}
+          total={requestsHook.pagination.total}
+          limit={requestsHook.pagination.per_page}
+          changePage={(page) => {
+            requestsHook.changePage(page);
+            setPage(page);
+          }}
+        />
+      )}
+    </div>
   );
 };
 

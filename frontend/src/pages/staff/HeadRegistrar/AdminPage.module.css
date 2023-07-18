@@ -1,19 +1,16 @@
 /* MEDIA QUERIES */
 @media screen and (max-width: 578px) {
-    .event_btn_container{
-        display: none !important;
-        padding: 0 !important;
-        margin: 0 !important;
-    }
+  .event_btn_container {
+    display: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
 }
-
 
 /* STYLES FOR THE NAVIGATION & EXPORT BUTTONS CONTAINER */
-.event_btn_container{
-
-    max-width: 1100px;
+.event_btn_container {
+  max-width: 1100px;
 }
-
 
 /* STYLES FOR THE STAFF TABLE */
 .table::-webkit-scrollbar {
@@ -26,6 +23,10 @@
   overflow-x: scroll;
   border-radius: 10px;
   background-color: var(--bg-grey);
+}
+
+.table td {
+  background-color: var(--bg-grey) !important;
 }
 
 .table tr:last-child td:first-child {
@@ -45,11 +46,11 @@
   font-style: italic;
 }
 
-.table_head {
+.table_head th {
   top: 0;
   position: sticky;
-  background-color: var(--primary-maroon);
-  color: var(--main-white);
+  background-color: var(--primary-maroon) !important;
+  color: var(--main-white) !important;
   text-align: center;
   vertical-align: middle !important;
 }
@@ -62,7 +63,7 @@
 }
 
 .admin_table_container {
-  max-width: 1100px;
+  max-width: 1200px;
 }
 
 /* STYLES FOR THE ACTION BUTTONS IN STAFF TABLE */
@@ -123,13 +124,15 @@ option:disabled {
 }
 
 .modal_btn_submit {
-  border-color: var(--status-green) !important;
-  background-color: var(--status-green) !important;
+  color: var(--primary-maroon) !important;
+  border: var(--primary-maroon) solid 2px !important;
+  background-color: var(--main-white) !important;
 }
 
 .modal_btn_submit:hover {
-  border-color: var(--status-green-hover) !important;
-  background-color: var(--status-green-hover) !important;
+  color: var(--main-white) !important;
+  border: var(--primary-maroon) solid 2px !important;
+  background-color: var(--primary-maroon) !important;
 }
 
 .modal_btn_close {
@@ -171,4 +174,10 @@ select {
   background-color: var(--primary-maroon) !important;
   border-color: var(--primary-maroon) !important;
   opacity: 0.8;
+}
+
+/* dropdown styles */
+.dropdown {
+  background-color: var(--primary-maroon) !important;
+  color: white;
 }

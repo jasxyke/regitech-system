@@ -18,11 +18,7 @@ class DocumentFactory extends Factory
     public function definition(): array
     {
         return [
-            'with_copies'=>'0',
-            'url'=> Storage::disk('public')->url('testdocument.jpg') ,
-            'file_path'=>'testdocument.jpg',
-            'document_status_id'=>rand(1,3),
-            'document_status_id'=>rand(1,3),
+            'with_copies'=>rand(0,1),
             'updated_by_id'=>'2'
         ];
     }

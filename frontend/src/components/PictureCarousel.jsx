@@ -13,7 +13,7 @@ function PictureCarousel() {
       fade
       controls={false}
       indicators={false}
-      interval={3000}
+      interval={5000}
       pause={false}
     >
       <Carousel.Item>

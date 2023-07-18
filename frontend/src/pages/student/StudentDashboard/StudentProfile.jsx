@@ -22,7 +22,7 @@ const Ewan = () => {
                   StudentCSS.studentInfo + " rounded-top rounded-bottom"
                 }
               >
-                Fullname: {user?.user?.firstname}
+                Fullname: {user?.user?.firstname + " " + user.user.lastname}
               </span>
             </td>
           </tr>

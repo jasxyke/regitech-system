@@ -22,7 +22,7 @@ const GuestRoutes = () => {
       return <Navigate to="/student/dashboard" />;
     } else if (staffRoleIds.includes(getUserRole())) {
       console.log("staff");
-      return <Navigate to="/staff/dashboard" />;
+      return <Navigate to="/staff/verification-requests" />;
     }
   }
 };
