@@ -15,6 +15,7 @@ import GuestRoutes from "./components/PrivateRoutes/GuestRoutes";
 import useCRFKCookie from "./hooks/useCRFKCookie";
 import StudentRecordsPage from "./pages/staff/StudentRecords/StudentRecordsPage";
 import SubmissionPage from "./pages/student/Submission/SubmissionPage";
+import CheckInbox from "./pages/Signup/CheckInbox";
 
 function App() {
   useCRFKCookie();
@@ -25,6 +26,7 @@ function App() {
           <Route path="/" element={<LoginPage />} />
           <Route path="/reset" element={<ResetPage />} />
           <Route path="/sign-up" element={<SignupPage />} />
+          <Route path="/check" element={<CheckInbox />} />
         </Route>
         <Route path="/student" element={<StudentPrivateRoutes />}>
           <Route path="dashboard" element={<StudentDashboard />} />
