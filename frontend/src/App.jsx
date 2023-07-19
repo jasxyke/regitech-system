@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import LoginPage from "./pages/Login/LoginPage";
+import ResetPage from "./pages/Login/ResetPage";
 import VerificationPage from "./pages/staff/VerificationRequests/VerificationPage";
 import SignupPage from "./pages/Signup/SignupPage";
 import StudentLayout from "./components/layouts/StudentLayout";
@@ -22,6 +23,7 @@ function App() {
       <Routes>
         <Route element={<GuestRoutes />}>
           <Route path="/" element={<LoginPage />} />
+          <Route path="/reset" element={<ResetPage />} />
           <Route path="/sign-up" element={<SignupPage />} />
         </Route>
         <Route path="/student" element={<StudentPrivateRoutes />}>

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useAuthContext } from "../../context/AuthContext";
 
-export const LoginForm = () => {
+export const SetPassForm = () => {
   const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const { loading, login } = useAuthContext();
@@ -14,12 +15,12 @@ export const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //palitan ang if dito forda database
-    login(email, pass, onError);
+    login(email, password, onError);
   };
 
-  // suggested pwedeng improvement if ever useful. dagdag sa error message display if hindi registered sa database
-  // "No account is registered with this email"
+  const toggleShowPassword = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
 
   return (
     <div>
@@ -38,43 +39,53 @@ export const LoginForm = () => {
             required
           />
         </div>
-        <div className="form-group px-5">
+
+        <div className="form-group px-5 mb-2">
           <input
-            onChange={(e) => setPass(e.target.value)}
-            value={pass}
-            type={showPassword ? "text" : "password"} // Use the showPassword state to toggle input type
+            type={showPassword ? "text" : "password"}
             className="form-control"
             id="password"
             placeholder="Password"
+            name="password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            required
+          />
+        </div>
+
+        <div className="form-group px-5 mb-2">
+          <input
+            type={showPassword ? "text" : "password"}
+            className="form-control"
+            id="confirm_password"
+            placeholder="Confirm Password"
+            name="password_confirmation"
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            value={confirmPassword}
             required
           />
         </div>
 
         <div className="form-check px-5 d-flex justify-content-end">
-          {" "}
-          {/* Add form-check class to the parent div */}
           <input
-            className="form-check-input" // Add form-check-input class
+            className="form-check-input"
             type="checkbox"
-            checked={showPassword} // Bind the checkbox to the showPassword state
-            onChange={() => setShowPassword(!showPassword)} // Toggle the showPassword state
+            checked={showPassword}
+            onChange={toggleShowPassword}
             id="showPasswordCheckbox"
           />
           <label className="form-check-label" htmlFor="showPasswordCheckbox">
-            {" "}
             Show password
           </label>
         </div>
-        <div className="px-5 d-flex justify-content-end">
-          <a href="/reset"> Forgot Password? </a>
-        </div>
+
         <div className="d-flex justify-content-center mt-3 mb-3">
           <button
             type="submit"
             className="btn btn-warning w-50"
             disabled={loading}
           >
-            Submit
+            Reset Password
           </button>
         </div>
       </form>
@@ -82,4 +93,4 @@ export const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SetPassForm;
