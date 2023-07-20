@@ -15,6 +15,7 @@ import GuestRoutes from "./components/PrivateRoutes/GuestRoutes";
 import useCRFKCookie from "./hooks/useCRFKCookie";
 import StudentRecordsPage from "./pages/staff/StudentRecords/StudentRecordsPage";
 import SubmissionPage from "./pages/student/Submission/SubmissionPage";
+import ViewStudentPage from "./pages/staff/StudentView/ViewStudentPage";
 
 function App() {
   useCRFKCookie();
@@ -39,6 +40,7 @@ function App() {
           <Route path="verification-requests" element={<StaffDashboard />} />
           <Route path="head-registrar" element={<AdminPage />} />
           <Route path="student-records" element={<StudentRecordsPage />} />
+          <Route path="student-record/:id" element={<ViewStudentPage />} />
         </Route>
 
         <Route path="*" element={<h1>Not found 404</h1>} />

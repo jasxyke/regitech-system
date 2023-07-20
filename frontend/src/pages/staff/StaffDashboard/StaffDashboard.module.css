@@ -21,6 +21,8 @@
 .tableOptions {
   display: flex;
   column-gap: 15px;
+  flex-wrap: wrap;
+  row-gap: 15px;
 }
 
 .table tr:last-child td:first-child {
@@ -72,7 +74,8 @@
 
 .viewBtn {
   background-color: var(--primary-maroon) !important;
-  width: 60%;
+  min-width: 60%;
+  max-width: fit-content;
   color: white !important;
   outline: var(--primary-maroon) solid 2px !important;
 }

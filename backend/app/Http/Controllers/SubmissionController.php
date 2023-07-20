@@ -47,7 +47,7 @@ class SubmissionController extends Controller
                 Document::create([
                     "document_type_id"=>$documentType["id"],
                     "student_id"=>$student->id,
-                    "document_status_id"=>"3",
+                    "document_status_id"=>"5",
                     "updated_by_id"=>$student->id,
                     "with_copies"=>0
                 ]);

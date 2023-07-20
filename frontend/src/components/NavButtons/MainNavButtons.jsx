@@ -4,7 +4,7 @@ import documentRequest from "../../assets/submitfile.png";
 import manageStaff from "../../assets/addfile.png";
 import masterlist from "../../assets/hrfile.png";
 import { useNavigate } from "react-router-dom";
-const MainNavButtons = () => {
+const MainNavButtons = ({ userRole }) => {
   const navigate = useNavigate();
   return (
     <div className={"mx-5 my-4 col " + MainBtnStyles.container}>
@@ -16,13 +16,15 @@ const MainNavButtons = () => {
         }}
       />
 
-      <EventButton
-        icon={manageStaff}
-        label={"Manage Staff"}
-        onClick={() => {
-          navigate("/staff/head-registrar");
-        }}
-      />
+      {userRole === "Head Registrar" && (
+        <EventButton
+          icon={manageStaff}
+          label={"Manage Staff"}
+          onClick={() => {
+            navigate("/staff/head-registrar");
+          }}
+        />
+      )}
 
       <EventButton
         icon={masterlist}

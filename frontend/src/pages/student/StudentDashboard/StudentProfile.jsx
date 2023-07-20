@@ -4,8 +4,8 @@ import { useUser } from "../../../context/UserContext";
 import StudentDashboardTable from "./StudentDashboardTable";
 import { Table } from "react-bootstrap";
 
-const Ewan = () => {
-  const user = useUser();
+const Ewan = ({ student }) => {
+  const user = student;
   return (
     <div className="table-container rounded-top rounded-bottom">
       <table className="table table-borderless fw-bold rounded-top rounded-bottom">

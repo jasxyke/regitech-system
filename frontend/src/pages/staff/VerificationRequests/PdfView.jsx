@@ -7,7 +7,7 @@ const PdfView = ({ pdfSrc }) => {
       {/* <Document file={pdfSrc}>
         <Page pageNumber={1} />
       </Document> */}
-      <iframe src={pdfSrc} width={"100%"} height={"750px"}></iframe>
+      <iframe src={pdfSrc} width={"100%"} height={"600px"}></iframe>
     </div>
   );
 };

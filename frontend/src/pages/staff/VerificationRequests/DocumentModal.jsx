@@ -17,7 +17,6 @@ function DocumentModal({ document, withCopies, handleVerify }) {
       <Button
         className={"py-1 mx-auto px-0 rounded-pill border-0 " + TableCss.view}
         onClick={handleShow}
-
       >
         View
       </Button>
@@ -28,14 +27,16 @@ function DocumentModal({ document, withCopies, handleVerify }) {
         onHide={handleClose}
         centered // Center the modal vertically and horizontally
       >
-        <Modal.Header 
-          className={"px-4 " + TableCss.modalHead} 
-          closeVariant="white" 
+        <Modal.Header
+          className={"px-4 " + TableCss.modalHead}
+          closeVariant="white"
           closeButton
         >
           <Modal.Title>{document.document_type.name}</Modal.Title>
         </Modal.Header>
-        <Modal.Body className={"d-flex justify-content-center " + TableCss.modalBody}>
+        <Modal.Body
+          className={"d-flex justify-content-center " + TableCss.modalBody}
+        >
           <img
             src={document.url}
             alt="Image Preview"
@@ -45,16 +46,18 @@ function DocumentModal({ document, withCopies, handleVerify }) {
         </Modal.Body>
         <Modal.Footer>
           <form>
-            <input 
+            <input
               className={"form-check-input " + TableCss.with_copies}
-              type="checkbox" 
+              type="checkbox"
               value=""
               checked={haveCopies}
               onChange={(e) => {
                 setHaveCopies(!haveCopies);
-              }} />
-            <label className="form-check-label mx-2 text-muted ">with copies</label>
-          
+              }}
+            />
+            <label className="form-check-label mx-2 text-muted ">
+              with copies
+            </label>
           </form>
           <Button
             className={TableCss.approveModal}
