@@ -5,27 +5,32 @@
 .table {
   overflow-x: scroll;
   border-radius: 10px;
-  background-color: var(--bg-grey);
   min-height: 300px;
-  max-height: 300px;
 }
 
 .documentVerifyBox {
   display: flex;
   justify-content: space-between;
+  column-gap: 50px;
+}
+
+@media only screen and (max-width: 768px) {
+  .documentVerifyBox {
+    flex-wrap: wrap;
+  }
 }
 
 .pdfView {
-  width: 40%;
+  width: 100%;
 }
 
 .verifyView {
-  width: 55%;
+  width: 100%;
 }
 
-.table td {
+/* .table td {
   background-color: var(--bg-grey) !important;
-}
+} */
 
 .table tr:last-child td:first-child {
   border-radius: 0 0 0 10px;
@@ -58,7 +63,7 @@
 .status {
   background-color: var(--status-orange);
   color: var(--main-white);
-  width: 60%;
+  width: 100%;
 }
 
 .cancel,
@@ -186,4 +191,5 @@
 .verifyBtns {
   display: flex;
   column-gap: 15px;
+  justify-content: center;
 }

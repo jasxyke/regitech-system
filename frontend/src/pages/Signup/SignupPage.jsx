@@ -17,7 +17,9 @@ const SignupPage = () => {
           <div className={`${SignupCss["content-container"]}`}>
             <SignupForm />
             <div className="mt-1 mb-5 text-center">
-              <Link to="/">Already have an account?</Link>
+              <Link to="/" className="text-white">
+                Already have an account?
+              </Link>
             </div>
             <div className={`${SignupCss["bottom-section"]} text-center`}>
               <div className={SignupCss["copyright"]}>

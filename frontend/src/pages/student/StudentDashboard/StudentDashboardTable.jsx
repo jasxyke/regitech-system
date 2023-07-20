@@ -18,15 +18,15 @@ const StudentDashboardTable = ({
   };
   console.log(submittedDocuments);
   return (
-    <div className={"table-container rounded-top rounded-bottom"}>
-      <table className="table table-borderless fw-bold text-center rounded-top rounded-bottom">
-        <thead className={`align-middle ${TableCss.tableHead}`}>
-          <tr>
+    <div className={"my-2 " + TableCss.table}>
+      <table className="table table-hover my-0">
+        <thead>
+          <tr className={TableCss.table_head}>
             <th scope="col">Document Submitted</th>
             <th scope="col">Document Status</th>
           </tr>
         </thead>
-        <tbody className={TableCss.tablebody}>
+        <tbody className={TableCss.table_contents}>
           {(submittedDocuments !== null || submittedDocuments === "") && (
             <SubmittedDocumentRows
               submittedDocuments={submittedDocuments}

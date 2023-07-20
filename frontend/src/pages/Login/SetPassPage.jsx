@@ -17,7 +17,10 @@ const SetPassPage = () => {
           <h2 className="px-5">Reset Password</h2>
           <SetPassForm />
           <div className="mt-3 text-center">
-            <a href="/sign-up"> don't have an account yet ? </a>
+            <a href="/sign-up" className="text-white">
+              {" "}
+              Don't have an account yet ?{" "}
+            </a>
           </div>
           <div className="row text-center mt-auto">
             <div className={LoginCss.copyright}>

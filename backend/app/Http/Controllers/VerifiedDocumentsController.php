@@ -45,7 +45,7 @@ class VerifiedDocumentsController extends Controller
                 }
             }
         }
-        if($submittedDoc->document_status_id == 3){
+        if($submittedDoc->document_status_id == 3 || $submittedDoc->document_status_id == 5){
             $pendingDocs++;
         }
         }

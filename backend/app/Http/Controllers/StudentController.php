@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Request as ModelsRequest;
 use App\Models\Student;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use UserValidator;
 
 class StudentController extends Controller
 {
@@ -24,11 +23,94 @@ class StudentController extends Controller
     public function index()
     {
         //change to something more memory friendly later on
-        $students = Student::with('user','course','student_status')
-                ->paginate(10);
-        return $students;
+        $students = Student::with('user', 'course','student_status')
+               ->orderBy('year_admitted', 'desc')
+               ->orderBy('student_status_id','asc')
+                // ->join('users', 'users.id', '=', 'students.user_id')
+                // ->orderBy('users.lastname', 'asc')
+                ->paginate(20);
+        if(count($students) == 0){
+            return null;
+        }else{
+            return $students;
+        }
     }
 
+    public function search(string $searchText){
+
+        $searchFunction = function(Builder $query) use($searchText){
+            $query->where('firstname','like','%' . $searchText . '%')
+            ->orWhere('lastname','like', '%' . $searchText . '%');
+        };
+        $students = Student::with('user', 'course','student_status')
+                    ->whereHas('user',$searchFunction )
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(20);
+        if(count($students) == 0){
+            return null;
+        }else{
+            return $students;
+        }
+    }
+
+    public function newestStudentsFirst(){
+        //change to something more memory friendly later on
+        $students = Student::with('user','course','student_status')
+                ->orderBy('year_admitted','desc')
+                ->paginate(20);
+        if(count($students) == 0){
+            return null;
+        }else{
+            return $students;
+        }
+    }
+    
+    public function oldestStudentsFirst(){
+        //change to something more memory friendly later on
+        $students = Student::with('user','course','student_status')
+                ->orderBy('year_admitted','asc')
+                ->paginate(20);
+        if(count($students) == 0){
+            return null;
+        }else{
+            return $students;
+        }
+    }
+
+    public function incompleteStudentsFirst(){
+        $students = Student::with('user','course','student_status')
+                ->where('student_status_id', '2')
+                ->orderBy('created_at','desc')
+                ->paginate(20);
+        if(count($students) == 0){
+            return null;
+        }else{
+            return $students;
+        }
+    }
+
+    public function completeStudentsFirst(){
+        $students = Student::with('user','course','student_status')
+                ->where('student_status_id', '1')
+                ->orderBy('created_at','desc')
+                ->paginate(20);
+        if(count($students) == 0){
+            return null;
+        }else{
+            return $students;
+        }
+    }
+
+    public function alphabeticalStudents(){
+        $students = Student::with('user','course','student_status')
+                ->orderBy('user.lastname','asc')
+                ->paginate(20);
+        if(count($students) == 0){
+            return null;
+        }else{
+            return $students;
+        }
+    }
     /**
      * Store a newly created resource in storage.
      */
@@ -42,7 +124,12 @@ class StudentController extends Controller
      */
     public function show(string $id)
     {
-        return Student::with('user')->where('id', '=', $id);
+        $student = Student::with('user','course','student_status')->find($id);
+        if($student != null){
+            return $student;
+        }else{
+            return response()->json(['message'=>'User not found']);
+        }
     }
 
     /**

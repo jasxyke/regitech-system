@@ -65,9 +65,7 @@ export const LoginForm = () => {
             Show password
           </label>
         </div>
-        <div className="px-5 d-flex justify-content-end">
-          <a href="/reset"> Forgot Password? </a>
-        </div>
+
         <div className="d-flex justify-content-center mt-3 mb-3">
           <button
             type="submit"

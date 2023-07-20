@@ -22,7 +22,7 @@ class UserController extends Controller
         return User::with('role')
                     ->where('role_id', '=', '2')
                     ->orWhere('role_id', '=', '3')
-                    ->orderBy('created_at')
+                    ->orderBy('created_at', 'desc')
                     ->get();
     }
 

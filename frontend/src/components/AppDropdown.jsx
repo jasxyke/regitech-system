@@ -14,22 +14,11 @@ const AppDropdown = ({ handleSelect, dropdownItems }) => {
           `}
       </style>
       <DropdownButton variant="maroon" title="Sort by" onSelect={handleSelect}>
-        {dropdownItems.map((item) => {
-          <Dropdown.Item key={item} eventKey={"Newest first"}>
-            Newest first
-          </Dropdown.Item>;
-        })}
-        <Dropdown.Item eventKey={"Newest first"}>Newest first</Dropdown.Item>
-        <Dropdown.Item eventKey={"Oldest first"}>Oldest first</Dropdown.Item>
-        <Dropdown.Item eventKey={"Not reviewed"}>
-          Have been reviewed
-        </Dropdown.Item>
-        <Dropdown.Item eventKey={"Have been reviewed"}>
-          Have been reviewed
-        </Dropdown.Item>
-        <Dropdown.Item eventKey={"Alphabetically"}>
-          Alphabetically
-        </Dropdown.Item>
+        {dropdownItems.map((item) => (
+          <Dropdown.Item key={item} eventKey={item}>
+            {item}
+          </Dropdown.Item>
+        ))}
       </DropdownButton>
     </>
   );

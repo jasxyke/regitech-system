@@ -47,6 +47,20 @@ Route::group(['middleware'=>['auth:sanctum','verified']], function(){
     Route::get('/incomplete-students', [StudentDocumentController::class, 'getIncompleteStudentDocuments']);
     Route::get('/requests/search/{searchText}', [RequestController::class, 'search']);
     Route::get('/student-pdfs/{id}', [StudentController::class, 'getPdfs']);
+
+    //request sort routes
+    Route::get('/oldest-request-first', [RequestController::class, 'oldestRequestsFirst']);
+    Route::get('/not-reviewed-requests', [RequestController::class, 'notReviewedRequests']);
+    Route::get('/reviewed-requests', [RequestController::class, 'reviewedRequests']);
+    Route::get('/alphabetical-requests', [RequestController::class, 'alphabeticalRequests']);
+
+    //student sort routes
+    Route::get('/oldest-students-first', [StudentController::class, 'oldestStudentsFirst']);
+    Route::get('/newest-students-first', [StudentController::class, 'newestStudentsFirst']);
+    Route::get('/incomplete-students-first', [StudentController::class, 'incompleteStudentsFirst']);
+    Route::get('/complete-students-first', [StudentController::class, 'completeStudentsFirst']);
+    Route::get('/students-alphabetical', [StudentController::class, 'alphabeticalStudents']);
+
 });
 
 Route::get('/export-student-documents-report', [StudentDocumentController::class, 'exportStudentDocuments']);

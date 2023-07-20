@@ -3,17 +3,20 @@ import axiosClient from "../utils/axios";
 import { converToFileList } from "../utils/fileListConverter";
 import { useNavigate } from "react-router-dom";
 
-const useUploadHandler = () => {
+const useUploadHandler = ({ handleResponse, handleError }) => {
   const [pdf, setPdf] = useState(null);
   const [pdfSrc, setPdfSrc] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const addDocument = (doc) => {
+    setLoading(true);
     const pdfFile = new File([doc], "compiled_images.pdf", {
       type: "application/pdf",
     });
     setPdf(pdfFile);
+    setLoading(false);
   };
 
   const removeDocument = () => {
@@ -21,8 +24,17 @@ const useUploadHandler = () => {
     setPdfSrc(null);
   };
 
-  const uploadDocuments = async (handleError) => {
+  const uploadDocuments = async () => {
+    setLoading(true);
     try {
+      console.log("PDF: ");
+      console.log(pdf);
+      console.log("pdfsrc:");
+      console.log(pdfSrc);
+      if (pdf === null || pdfSrc === null) {
+        handleError("Please upload your document images");
+        return;
+      }
       const res = await axiosClient.post(
         "/upload",
         {
@@ -35,10 +47,13 @@ const useUploadHandler = () => {
         }
       );
       console.log(res);
+      handleResponse(res.data.message);
       navigate("/student/dashboard");
+      setLoading(false);
     } catch (error) {
       console.error(error);
       handleError(error?.data?.message);
+      setLoading(false);
     }
   };
 
@@ -46,6 +61,9 @@ const useUploadHandler = () => {
     uploadDocuments,
     removeDocument,
     addDocument,
+    loading,
+    pdfSrc,
+    setPdfSrc,
   };
 };
 

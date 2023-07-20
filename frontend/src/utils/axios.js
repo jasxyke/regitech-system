@@ -2,10 +2,11 @@ import axios from "axios";
 
 axios.defaults.withCredentials = true;
 
-export const DOMAIN = "192.168.1.3";
+export const DOMAIN = "http://192.168.181.213:8000";
+//export const DOMAIN = "https://regitech.co"
 
 const axiosClient = axios.create({
-  baseURL: `http://${DOMAIN}:8000` + "/api",
+  baseURL: DOMAIN + "/api",
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
@@ -31,7 +32,7 @@ axiosClient.interceptors.response.use(
 );
 
 export const guestAxios = axios.create({
-  baseURL: `http://${DOMAIN}:8000` + "/api",
+  baseURL: DOMAIN + "/api",
   headers: {
     "Content-Type": "application/json",
   },

@@ -2,6 +2,7 @@ import ResetLinkForm from "./ResetLinkForm";
 import Logo from "../../components/Logo.jsx";
 import LoginCss from "./LoginPage.module.css";
 import PictureCarousel from "../../components/PictureCarousel";
+import { useState } from "react";
 
 const ResetPage = () => {
   return (
@@ -17,7 +18,10 @@ const ResetPage = () => {
           <h2 className="px-5">Reset Password</h2>
           <ResetLinkForm />
           <div className="mt-3 text-center">
-            <a href="/sign-up"> don't have an account yet ? </a>
+            <a href="/sign-up" className="text-white">
+              {" "}
+              Don't have an account yet ?{" "}
+            </a>
           </div>
           <div className="row text-center mt-auto">
             <div className={LoginCss.copyright}>

@@ -27,9 +27,11 @@ const VerificationRequestTable = () => {
     if (eventKey === "Newest first") {
       requestsHook.getVerificationRequets();
     } else if (eventKey === "Oldest first") {
+      requestsHook.getRequests("/oldest-request-first");
     } else if (eventKey === "Not reviewed") {
+      requestsHook.getRequests("/not-reviewed-requests");
     } else if (eventKey === "Have been reviewed") {
-    } else if (eventKey === "Alphabetically") {
+      requestsHook.getRequests("/reviewed-requests");
     }
   };
 
@@ -53,7 +55,6 @@ const VerificationRequestTable = () => {
             "Oldest first",
             "Not reviewed",
             "Have been reviewed",
-            "Alphabetically",
           ]}
         />
         <input
@@ -78,8 +79,8 @@ const VerificationRequestTable = () => {
           <thead>
             <tr className={StaffStyles.table_head}>
               <th className="col-sm-2">Date submitted</th>
-              <th className="col-sm-3">First Name</th>
-              <th className="col-sm-2">Last Name</th>
+              <th className="col-sm-3">Last Name</th>
+              <th className="col-sm-2">First Name</th>
               <th className="col-sm-3">Reviewed</th>
               <th className="col-sm-2"> Actions </th>
             </tr>
