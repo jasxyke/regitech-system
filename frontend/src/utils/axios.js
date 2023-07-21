@@ -2,7 +2,7 @@ import axios from "axios";
 
 axios.defaults.withCredentials = true;
 
-export const DOMAIN = "http://192.168.181.213:8000";
+export const DOMAIN = "http://192.168.254.122:8000";
 //export const DOMAIN = "https://regitech.co"
 
 const axiosClient = axios.create({

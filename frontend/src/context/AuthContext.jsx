@@ -82,6 +82,7 @@ export function AuthProvider({ children }) {
         .then((res) => {
           console.log(res);
           localStorage.clear();
+
           navigate("/");
           //window.location.reload();
         })

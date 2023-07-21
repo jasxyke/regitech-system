@@ -25,11 +25,7 @@
             <h1 style="font-size: 1.5rem">Good day {{$fullname}}!</h1>
             <p>Click the link below to reset your password:</p>
             <div style="display: flex; justify-content: center">
-                <a
-                    href="{{$link}}"
-                    style="margin-right: auto; margin-left: auto"
-                    >Reset Password</a
-                >
+                <a href="{{$link}}" style="color: yellow">Reset Password</a>
             </div>
             <p>
                 If you did not request a password reset, please ignore this

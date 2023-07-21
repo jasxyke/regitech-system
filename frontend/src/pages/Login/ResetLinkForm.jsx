@@ -1,21 +1,29 @@
 import React, { useState } from "react";
 import { useAuthContext } from "../../context/AuthContext";
+import useResetPassword from "../../hooks/useResetPassword";
+import { Link, useNavigate } from "react-router-dom";
 
 export const ResetLinkForm = () => {
   const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
   const [error, setError] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const { loading, login } = useAuthContext();
-
-  const onError = (error) => {
-    setError(error);
+  const [msg, setMsg] = useState("");
+  const handleError = (msg) => {
+    setError(msg);
   };
+
+  const handleResponse = (msg) => {
+    setMsg(msg);
+  };
+
+  const { sendResetLink, loading } = useResetPassword({
+    handleError,
+    handleResponse,
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    sendResetLink(email);
     //palitan ang if dito forda database
-    login(email, pass, onError);
   };
 
   // suggested pwedeng improvement if ever useful. dagdag sa error message display if hindi registered sa database
@@ -24,7 +32,10 @@ export const ResetLinkForm = () => {
   return (
     <div>
       <div className="px-5">
-        {error && <div className="alert alert-danger">{error}</div>}
+        {error && msg === "" && (
+          <div className="alert alert-danger">{error}</div>
+        )}
+        {msg && <div className="alert alert-success">{msg}</div>}
       </div>
       <form onSubmit={handleSubmit}>
         <div className="form-group px-5 mb-3">
