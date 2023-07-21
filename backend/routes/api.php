@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\RequestController;
+use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentDocumentController;
 use App\Http\Controllers\SubmissionController;
@@ -61,7 +63,10 @@ Route::group(['middleware'=>['auth:sanctum','verified']], function(){
     Route::get('/complete-students-first', [StudentController::class, 'completeStudentsFirst']);
     Route::get('/students-alphabetical', [StudentController::class, 'alphabeticalStudents']);
 
+    
 });
 
+Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
+Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.reset');
 Route::get('/export-student-documents-report', [StudentDocumentController::class, 'exportStudentDocuments']);
 

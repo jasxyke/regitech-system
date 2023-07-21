@@ -1,21 +1,36 @@
 import React, { useState } from "react";
 import { useAuthContext } from "../../context/AuthContext";
+import { Link, useLocation } from "react-router-dom";
+import useResetPassword from "../../hooks/useResetPassword";
 
 export const SetPassForm = () => {
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const { loading, login } = useAuthContext();
+  const [msg, setMsg] = useState("");
 
-  const onError = (error) => {
-    setError(error);
+  const queryParams = new URLSearchParams(window.location.search);
+
+  const email = queryParams.get("email");
+  const token = queryParams.get("token");
+  console.log(email);
+  const handleError = (msg) => {
+    setError(msg);
   };
+
+  const handleResponse = (msg) => {
+    setMsg(msg);
+  };
+
+  const { resetPassword, loading } = useResetPassword({
+    handleError,
+    handleResponse,
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login(email, password, onError);
+    resetPassword(email, token, password, confirmPassword);
   };
 
   const toggleShowPassword = () => {
@@ -26,20 +41,15 @@ export const SetPassForm = () => {
     <div>
       <div className="px-5">
         {error && <div className="alert alert-danger">{error}</div>}
+        {msg && (
+          <div className="alert alert-success">
+            {msg}
+            {"\n"}{" "}
+            <Link to={"/"}>Click here to go back to the login page.</Link>
+          </div>
+        )}
       </div>
       <form onSubmit={handleSubmit}>
-        <div className="form-group px-5 mb-3">
-          <input
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            type="email"
-            className="form-control"
-            id="Email"
-            placeholder="Email"
-            required
-          />
-        </div>
-
         <div className="form-group px-5 mb-2">
           <input
             type={showPassword ? "text" : "password"}

@@ -24,7 +24,7 @@ const LoginPage = () => {
             </Link>
           </div>
           <div className="px-5 mt-4 d-flex justify-content-center">
-            <a href="/reset" className="text-white">
+            <a href="/forgot-password" className="text-white">
               {" "}
               Forgot Password?{" "}
             </a>

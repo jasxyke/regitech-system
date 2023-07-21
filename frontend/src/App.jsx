@@ -16,6 +16,7 @@ import useCRFKCookie from "./hooks/useCRFKCookie";
 import StudentRecordsPage from "./pages/staff/StudentRecords/StudentRecordsPage";
 import SubmissionPage from "./pages/student/Submission/SubmissionPage";
 import ViewStudentPage from "./pages/staff/StudentView/ViewStudentPage";
+import SetPassPage from "./pages/Login/SetPassPage";
 
 function App() {
   useCRFKCookie();
@@ -24,7 +25,8 @@ function App() {
       <Routes>
         <Route element={<GuestRoutes />}>
           <Route path="/" element={<LoginPage />} />
-          <Route path="/reset" element={<ResetPage />} />
+          <Route path="/forgot-password" element={<ResetPage />} />
+          <Route path="/reset-password" element={<SetPassPage />} />
           <Route path="/sign-up" element={<SignupPage />} />
         </Route>
         <Route path="/student" element={<StudentPrivateRoutes />}>
