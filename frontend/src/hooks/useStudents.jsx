@@ -2,19 +2,20 @@ import React, { useEffect, useState } from "react";
 import axiosClient from "../utils/axios";
 import { useNavigate } from "react-router-dom";
 
-const useVerificationRequests = () => {
-  const [verificationRequests, setVerificationRequests] = useState(null);
+const useStudents = () => {
+  const [students, setStudents] = useState(null);
+  const [student, setStudent] = useState(null);
   const [pagination, setPagination] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const getRequests = (route) => {
+  const getStudents = (route) => {
     setLoading(true);
     axiosClient
       .get(route)
       .then((res) => {
         console.log(res);
-        setVerificationRequests(res.data.data);
+        setStudents(res.data.data);
         setPagination(res.data);
         setLoading(false);
       })
@@ -24,13 +25,30 @@ const useVerificationRequests = () => {
       });
   };
 
-  const getVerificationRequets = () => {
+  const getStudent = (studentId) => {
     setLoading(true);
     axiosClient
-      .get("/requests")
+      .get("/students/" + studentId)
       .then((res) => {
         console.log(res);
-        setVerificationRequests(res.data.data);
+        console.log("STUDENT REQUEST");
+        setStudent(res.data);
+        //setPagination(res.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
+  const getDefaultStudents = () => {
+    setLoading(true);
+    axiosClient
+      .get("/students")
+      .then((res) => {
+        console.log(res);
+        setStudents(res.data.data);
         setPagination(res.data);
         setLoading(false);
       })
@@ -43,9 +61,9 @@ const useVerificationRequests = () => {
   const changePage = (page) => {
     setLoading(true);
     axiosClient
-      .get("/requests?page=" + page)
+      .get("/students?page=" + page)
       .then((res) => {
-        setVerificationRequests(res.data.data);
+        setStudents(res.data.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -54,21 +72,21 @@ const useVerificationRequests = () => {
       });
   };
 
-  const searchRequestByName = (searchText) => {
+  const searchStudentByName = (searchText) => {
     if (searchText === "") {
-      getVerificationRequets();
+      getStudents("/students");
     }
     setLoading(true);
     axiosClient
-      .get("/requests/search/" + searchText)
+      .get("/students/search/" + searchText)
       .then((res) => {
         console.log(res);
         let searchResult = res.data.data;
         if (searchResult == undefined) {
-          setVerificationRequests(null);
+          setStudents(null);
           setPagination(null);
         } else {
-          setVerificationRequests(res.data.data);
+          setStudents(res.data.data);
           setPagination(res.data);
         }
         setLoading(false);
@@ -79,22 +97,22 @@ const useVerificationRequests = () => {
       });
   };
 
-  const viewRequests = async (id, url, requestId) => {
-    navigate("/staff/document-verification/" + id, {
-      state: { pdfSrc: url, requestId: requestId },
-    });
+  const viewStudent = async (id) => {
+    navigate("/staff/student-record/" + id);
   };
 
   return {
-    verificationRequests,
-    viewRequests,
-    getVerificationRequets,
+    students,
+    viewStudent,
     loading,
-    searchRequestByName,
+    searchStudentByName,
     pagination,
     changePage,
-    getRequests,
+    getStudents,
+    getDefaultStudents,
+    getStudent,
+    student,
   };
 };
 
-export default useVerificationRequests;
+export default useStudents;

@@ -9,20 +9,35 @@ import SecondaryButton from "../../../components/ui/SecondaryButton";
 
 import jsPDF from "jspdf";
 import useUploadHandler from "../../../hooks/useUploadHandler";
+import ResponseModal from "../../../components/ResponseModal";
 
 const SubmissionPage = () => {
   const student = useUser();
 
-  const [pdfSrc, setPdfSrc] = useState(null);
   const [errorMsg, setErrorMsg] = useState("");
-  const [loading, setLoading] = useState(false);
 
-  const uploadHook = useUploadHandler();
+  const [showModal, setShowModal] = useState(false);
+  const [response, setResponse] = useState(null);
+  const [headerText, setHeaderText] = useState("");
 
+  const handleError = (error) => {
+    setShowModal(true);
+    setResponse(error);
+    setHeaderText("Error");
+  };
+
+  const handleResponse = (response) => {
+    setShowModal(true);
+    setResponse(response);
+    setHeaderText("Success!");
+  };
+
+  const uploadHook = useUploadHandler({ handleResponse, handleError });
+  const pdfSrc = uploadHook.pdfSrc;
+  const setPdfSrc = uploadHook.setPdfSrc;
   const fileInputRef = useRef(null);
 
   const handleFileInputChange = (event) => {
-    setLoading(true);
     const files = event.target.files;
     const doc = new jsPDF();
 
@@ -48,16 +63,12 @@ const SubmissionPage = () => {
       setPdfSrc(pdfUrl);
 
       uploadHook.addDocument(doc.output("blob"));
-      setLoading(false);
     };
 
     compileImagesToPDF();
   };
 
-  const handleError = (error) => {};
-
   const submitDocument = () => {
-    if (pdfSrc === null) return;
     uploadHook.uploadDocuments();
   };
 
@@ -70,16 +81,55 @@ const SubmissionPage = () => {
 
       <div className={StudentCSS.table_header}>
         <h2>
-          <strong>Submit Documents</strong>
+          <strong>Submit Requirements</strong>
         </h2>
+      </div>
+      <div className="container">
+        <strong>
+          <p className="h5">Instructions in submitting the requirements:</p>
+        </strong>
+        <ol>
+          <li>
+            <b>Prepare the following documents:</b>
+            <ul>
+              <li>SAR Form</li>
+              <li>Form 138 Grade 10</li>
+              <li>Form 138 Grade 11</li>
+              <li>Form 138 Grade 12</li>
+              <li>PSA Birth Certificate"</li>
+              <li>Certificate of Good Moral/Completion</li>
+              <li>Undertaking</li>
+              <li>Medical Information Sheet</li>
+              <li>Form 137 SHS</li>
+            </ul>
+          </li>
+          <b>
+            <li>Take a picture each document</li>
+          </b>
+          <b>
+            <li>
+              Upload the images using the "Select document images" button below
+            </li>
+          </b>
+          <b>
+            <li>
+              You can check your compiled documents using the "View documents"
+              button
+            </li>
+          </b>
+          <b>
+            <li>Then press submit</li>
+          </b>
+          <b>
+            <li>
+              After submitting here, proceed to the registrar's office with your
+              documents and submit the original copies you submitted here.
+            </li>
+          </b>
+        </ol>
       </div>
       <div className={StudentCSS.submitDocBox + " mb-3"}>
         {errorMsg !== "" && <Alert variant="primary"></Alert>}
-        {loading ? (
-          <div className="d-flex mb-5 justify-content-center">
-            <Spinner animation="border" />
-          </div>
-        ) : null}
         {pdfSrc !== null && (
           <div className="d-flex mb-5">
             <p className="me-auto h5 my-auto">
@@ -96,7 +146,7 @@ const SubmissionPage = () => {
         {pdfSrc === null ? (
           <div className="mb-3 mt-3 d-grid">
             <SecondaryButton
-              text={"Add documents"}
+              text={"Select document images"}
               onClick={() => fileInputRef.current.click()}
             />
             <input
@@ -120,8 +170,28 @@ const SubmissionPage = () => {
           </div>
         )}
         <div className="mt-3 mb-3 d-flex justify-content-end">
-          <PrimaryButton text={"Submit"} onClick={submitDocument} />
+          <PrimaryButton
+            text={"Submit"}
+            onClick={() => {
+              submitDocument();
+              setShowModal(true);
+              setResponse(
+                <div className="d-flex justify-content-center">
+                  <Spinner animation="border" />
+                </div>
+              );
+              setHeaderText("Uploading...");
+            }}
+          />
         </div>
+        <ResponseModal
+          response={response}
+          show={showModal}
+          headerText={headerText}
+          handleClose={() => {
+            setShowModal(false);
+          }}
+        />
       </div>
     </div>
   );

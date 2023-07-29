@@ -2,6 +2,7 @@ import LoginForm from "./LoginForm.jsx";
 import Logo from "../../components/Logo.jsx";
 import LoginCss from "./LoginPage.module.css";
 import PictureCarousel from "../../components/PictureCarousel";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   return (
@@ -17,7 +18,16 @@ const LoginPage = () => {
           <h2 className="px-5">Login</h2>
           <LoginForm />
           <div className="mt-3 text-center">
-            <a href="/sign-up"> don't have an account yet ? </a>
+            <Link to="/sign-up" className="text-white ">
+              {" "}
+              Don't have an account yet?
+            </Link>
+          </div>
+          <div className="px-5 mt-4 d-flex justify-content-center">
+            <a href="/forgot-password" className="text-white">
+              {" "}
+              Forgot Password?{" "}
+            </a>
           </div>
           <div className="row text-center mt-auto">
             <div className={LoginCss.copyright}>

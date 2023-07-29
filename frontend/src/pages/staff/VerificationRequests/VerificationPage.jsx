@@ -53,7 +53,11 @@ const VerificationPage = () => {
         <Spinner animation="border" role="status" />
       </div>
     );
-    verifyDocumentsHook.verifyDocuments(id, documents, note);
+    verifyDocumentsHook.verifyDocuments(
+      location.state.requestId,
+      documents,
+      note
+    );
   };
 
   return (
@@ -80,7 +84,7 @@ const VerificationPage = () => {
           </p>
         </div>
       </div>
-      <div className={TableCss.documentVerifyBox}>
+      <div className={TableCss.documentVerifyBox + " mt-4"}>
         <div className={TableCss.pdfView}>
           <PdfView pdfSrc={location.state.pdfSrc} />
         </div>

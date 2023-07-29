@@ -5,7 +5,7 @@ const useCRFKCookie = () => {
   useEffect(() => {
     axiosClient
       .get("/sanctum/csrf-cookie", {
-        baseURL: `http://${DOMAIN}:8000`,
+        baseURL: DOMAIN,
       })
       .then((res) => {
         console.log(res);

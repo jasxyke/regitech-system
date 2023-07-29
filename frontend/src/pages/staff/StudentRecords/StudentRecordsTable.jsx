@@ -1,7 +1,5 @@
 import StaffStyles from "../StaffDashboard/StaffDashboard.module.css";
 import React, { useEffect, useState } from "react";
-import useVerificationRequests from "../../../hooks/useVerificationRequests";
-import { convertStampToDate } from "../../../utils/datesHandler";
 import PrimaryButton from "../../../components/ui/PrimaryButton";
 import { Dropdown, DropdownButton, Spinner } from "react-bootstrap";
 import { FiRefreshCw } from "react-icons/fi";
@@ -9,30 +7,32 @@ import AppDropdown from "../../../components/AppDropdown";
 import Form from "react-bootstrap/Form";
 import SecondaryButton from "../../../components/ui/SecondaryButton";
 import { PaginationControl } from "react-bootstrap-pagination-control";
+import useStudents from "../../../hooks/useStudents";
+import StudentRecords from "./StudentRecords";
 
 const StudentsRecordTable = () => {
-  const requestsHook = useVerificationRequests();
-  const requests = requestsHook.verificationRequests;
-  const handleView = requestsHook.viewRequests;
+  const studentsHook = useStudents();
+  const students = studentsHook.students;
+  const handleView = studentsHook.viewStudent;
 
   const [searchText, setSearchText] = useState("");
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    requestsHook.getVerificationRequets();
+    studentsHook.getDefaultStudents();
   }, []);
 
   const handleSelect = (eventKey) => {
     if (eventKey === "Newest first") {
-      requestsHook.getVerificationRequets();
+      studentsHook.getStudents("/newest-students-first");
     } else if (eventKey === "Oldest first") {
-    } else if (eventKey === "INCOMPLETE") {
-      // Sort by INCOMPLETE
-    } else if (eventKey === "COMPLETE") {
-      // Sort by COMPLETE
-    } else if (eventKey === "VERIFIED") {
-      // Sort by VERIFIED
+      studentsHook.getStudents("/oldest-students-first");
+    } else if (eventKey === "Incomplete") {
+      studentsHook.getStudents("/incomplete-students-first");
+    } else if (eventKey === "Complete") {
+      studentsHook.getStudents("/complete-students-first");
     } else if (eventKey === "Alphabetically") {
+      studentsHook.getDefaultStudents();
     }
   };
 
@@ -47,16 +47,15 @@ const StudentsRecordTable = () => {
         </h4>
         <PrimaryButton
           text={<FiRefreshCw />}
-          onClick={requestsHook.getVerificationRequets}
+          onClick={studentsHook.getDefaultStudents}
         />
         <AppDropdown
           handleSelect={handleSelect}
           dropdownItems={[
             "Newest first",
             "Oldest first",
-            "INCOMPLETE",
-            "COMPLETE",
-            "VERIFIED",
+            "Incomplete",
+            "Complete",
             "Alphabetically",
           ]}
         />
@@ -67,45 +66,53 @@ const StudentsRecordTable = () => {
           onChange={(e) => {
             setSearchText(e.target.value);
             if (e.target.value === "") {
-              requestsHook.getVerificationRequets();
+              studentsHook.getDefaultStudents();
             }
           }}
         />
         <SecondaryButton
           text={"Search"}
           onClick={() => {
-            requestsHook.searchRequestByName(searchText);
+            studentsHook.searchRequestByName(searchText);
           }}
         />
       </div>
-      <div className={"my-3 " + StaffStyles.table}>
+      <div className={"my-3 table-responsive " + StaffStyles.table}>
         <table className="table table-hover my-0">
           <thead>
             <tr className={StaffStyles.table_head}>
-              <th className="col-sm-2">Student Name</th>
-              <th className="col-sm-2">Year Admitted</th>
-              <th className="col-sm-2">Course</th>
-              <th className="col-sm-2">Student Status</th>
-              <th className="col-sm-4"></th>
+              <th scope="col" className="col-sm-2" style={{ width: "30%" }}>
+                Student Name
+              </th>
+              <th scope="col" className="col-sm-2" style={{ width: "15%" }}>
+                Year Admitted
+              </th>
+              <th scope="col" className="col-sm-2" style={{ width: "15%" }}>
+                Course
+              </th>
+              <th scope="col" className="col-sm-2" style={{ width: "20%" }}>
+                Student Status
+              </th>
+              <th
+                scope="col"
+                className="col-sm-4"
+                style={{ width: "20%" }}
+              ></th>
             </tr>
           </thead>
           <tbody className={StaffStyles.table_contents}>
-            <tr>
-              <td>Juan Dela Cruz</td>
-              <td>2020</td>
-              <td>DICT</td>
-              <td>INCOMPLETE</td>
-              <td>
-                <button
-                  className={
-                    "btn py-1 mx-auto px-0 rounded-pill my-0 " +
-                    StaffStyles.viewBtn
-                  }
-                >
-                  View Student Profile
-                </button>
-              </td>
-            </tr>
+            {studentsHook.loading ? (
+              <tr>
+                <td colSpan={5}>
+                  <Spinner />
+                </td>
+              </tr>
+            ) : students !== null ? (
+              <StudentRecords
+                studentRecords={students}
+                handleView={handleView}
+              />
+            ) : null}
           </tbody>
         </table>
       </div>
@@ -121,14 +128,14 @@ const StudentsRecordTable = () => {
           }
         `}
       </style>
-      {requests !== null && (
+      {students !== null && (
         <PaginationControl
           page={page}
           between={3}
-          total={requestsHook.pagination.total}
-          limit={requestsHook.pagination.per_page}
+          total={studentsHook.pagination.total}
+          limit={studentsHook.pagination.per_page}
           changePage={(page) => {
-            requestsHook.changePage(page);
+            studentsHook.changePage(page);
             setPage(page);
           }}
         />

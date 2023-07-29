@@ -3,6 +3,9 @@ import TableCss from "../VerificationRequests/Verification.module.css";
 import { AiOutlineCheckCircle, AiOutlineCloseCircle } from "react-icons/ai";
 import PrimaryButton from "../../../components/ui/PrimaryButton";
 import SecondaryButton from "../../../components/ui/SecondaryButton";
+import ApproveIcon from "../../../components/icons/ApproveIcon";
+import RejectIcon from "../../../components/icons/RejectIcon";
+import MissingIcon from "../../../components/icons/MissingIcon";
 const getStatusColor = (status) => {
   if (status === "Verified") {
     return "var(--status-green)";
@@ -22,7 +25,7 @@ const SubmittedDocumentsVerification = ({ documents, verifyDocument }) => {
       <td>
         <button
           disabled
-          className={"rounded-pill border-0 py-1 " + TableCss.status}
+          className={"rounded-pill border-0 py-1  " + TableCss.status}
           style={{
             backgroundColor: getStatusColor(document.document_status.name),
           }}
@@ -32,7 +35,7 @@ const SubmittedDocumentsVerification = ({ documents, verifyDocument }) => {
       </td>
       <td>
         <div className={TableCss.verifyBtns}>
-          <PrimaryButton
+          {/* <PrimaryButton
             text={"Approve"}
             onClick={() => {
               const verifiedDoc = {
@@ -42,8 +45,18 @@ const SubmittedDocumentsVerification = ({ documents, verifyDocument }) => {
               };
               verifyDocument(verifiedDoc);
             }}
+          /> */}
+          <ApproveIcon
+            handleClick={() => {
+              const verifiedDoc = {
+                ...document,
+                document_status: { id: "1", name: "Verified" },
+                document_status_id: "1",
+              };
+              verifyDocument(verifiedDoc);
+            }}
           />
-          <SecondaryButton
+          {/* <SecondaryButton
             text={"Reject"}
             onClick={() => {
               const rejectedDoc = {
@@ -53,10 +66,30 @@ const SubmittedDocumentsVerification = ({ documents, verifyDocument }) => {
               };
               verifyDocument(rejectedDoc);
             }}
+          /> */}
+          <RejectIcon
+            handleClick={() => {
+              const rejectedDoc = {
+                ...document,
+                document_status: { id: "2", name: "Rejected" },
+                document_status_id: "2",
+              };
+              verifyDocument(rejectedDoc);
+            }}
           />
-          <SecondaryButton
+          {/* <SecondaryButton
             text={"Missing"}
             onClick={() => {
+              const misingDoc = {
+                ...document,
+                document_status: { id: "5", name: "Missing" },
+                document_status_id: "5",
+              };
+              verifyDocument(misingDoc);
+            }}
+          /> */}
+          <MissingIcon
+            handleClick={() => {
               const misingDoc = {
                 ...document,
                 document_status: { id: "5", name: "Missing" },
@@ -75,7 +108,7 @@ const SubmittedDocumentsVerification = ({ documents, verifyDocument }) => {
         <thead>
           <tr>
             <th scope="col" style={{ width: "40%" }}></th>
-            <th scope="col text-center" style={{ width: "40%" }}></th>
+            <th scope="col text-center" style={{ width: "30%" }}></th>
             <th scope="col" style={{ width: "30%" }}></th>
           </tr>
         </thead>

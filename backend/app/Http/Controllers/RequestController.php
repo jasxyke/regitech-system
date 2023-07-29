@@ -41,6 +41,52 @@ class RequestController extends Controller
         }
     }
 
+    public function oldestRequestsFirst(){
+        $requests = ModelsRequest::with('student.user')
+                    ->orderBy('created_at', 'asc')
+                    ->paginate(20);
+        if(count($requests) == 0){
+            return null;
+        }else{
+            return $requests;
+        }
+    }
+
+    public function notReviewedRequests(){
+        $requests = ModelsRequest::with('student.user')
+                    ->where('is_reviewed', '=', '0')
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(20);
+        if(count($requests) == 0){
+            return null;
+        }else{
+            return $requests;
+        }
+    }
+
+    public function reviewedRequests(){
+        $requests = ModelsRequest::with('student.user')
+                    ->where('is_reviewed', '=', '1')
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(20);
+        if(count($requests) == 0){
+            return null;
+        }else{
+            return $requests;
+        }
+    }
+
+    public function alphabeticalRequests(){
+        $requests = ModelsRequest::with('student.user')
+                    ->orderBy('student.user.firstname', 'desc')
+                    ->paginate(20);
+        if(count($requests) == 0){
+            return null;
+        }else{
+            return $requests;
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      */

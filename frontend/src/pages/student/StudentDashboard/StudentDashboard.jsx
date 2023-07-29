@@ -11,13 +11,14 @@ import ResponseModal from "../../../components/ResponseModal";
 import LoadingPage from "../../../components/LoadingPage";
 import { documentTypes } from "../../../data/constants";
 import PdfDocumentsTable from "./PdfDocumentsTable";
+import PrimaryButton from "../../../components/ui/PrimaryButton";
+import { useNavigate } from "react-router-dom";
 
-const StudentDashboard = () => {
-  const student = useUser();
-
+const StudentDashboard = ({ studentProp = null }) => {
+  const student = studentProp !== null ? studentProp : useUser();
   const [responseMsg, setResponseMsg] = useState("");
   const [showResponseModal, setShowResponseModal] = useState(false);
-
+  const navigate = useNavigate();
   const closeModal = () => {
     setShowResponseModal(false);
   };
@@ -52,9 +53,25 @@ const StudentDashboard = () => {
   return (
     <div className="mb-5">
       <div className="mb-3">
-        <GreetingsHeader name={student?.user?.firstname || "Name Here"} />
+        {studentProp !== null && (
+          <PrimaryButton
+            text={"< Back to dashboard"}
+            onClick={() => {
+              navigate(-1);
+            }}
+          />
+        )}
+        {studentProp === null ? (
+          <GreetingsHeader name={student?.user?.firstname || "Name Here"} />
+        ) : (
+          <div className={StudentCSS.table_header}>
+            <h2>
+              <strong>Student Record View</strong>
+            </h2>
+          </div>
+        )}
       </div>
-      <StudentProfile />
+      <StudentProfile student={student} />
       <div className={StudentCSS.table_header}>
         <h2>
           <strong>Document status</strong>

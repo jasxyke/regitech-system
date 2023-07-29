@@ -16,7 +16,7 @@ const StaffDashboard = () => {
   return (
     <div className="mt-5">
       <GreetingsHeader name={user?.firstname || "unknown"} />
-      <MainNavbButtons />
+      <MainNavbButtons userRole={user.role.name} />
       <VerificationRequestTable />
       <div className="mb-5"></div>
       {/* <div className={css.dl_title}>

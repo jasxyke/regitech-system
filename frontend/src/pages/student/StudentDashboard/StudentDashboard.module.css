@@ -85,3 +85,58 @@
     row-gap: 15px;
   }
 }
+
+/* STYLES FOR THE STAFF TABLE */
+
+.table::-webkit-scrollbar {
+  display: none;
+}
+
+.table {
+  max-height: 250px;
+  min-height: 250px;
+  overflow-x: scroll;
+  border-radius: 10px;
+  background-color: var(--bg-grey);
+}
+
+.table td {
+  background-color: var(--bg-grey) !important;
+}
+
+.table tr:last-child td:first-child {
+  border-radius: 0 0 0 10px;
+}
+
+.table tr:last-child td:last-child {
+  border-radius: 0 0 10px 0;
+}
+
+.table tr:last-child td {
+  border: none;
+}
+
+.table_header {
+  color: var(--primary-maroon);
+  font-style: italic;
+}
+
+.table_head th {
+  top: 0;
+  position: sticky;
+  background-color: var(--primary-maroon) !important;
+  color: var(--main-white) !important;
+  text-align: center;
+  vertical-align: middle !important;
+}
+
+.table_contents {
+  background-color: var(--bg-grey);
+  overflow-y: scroll;
+  text-align: center;
+  vertical-align: middle !important;
+}
+
+.admin_table_container {
+  max-width: 1200px;
+}
