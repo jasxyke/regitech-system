@@ -36,7 +36,7 @@ const useResetPassword = ({ handleError, handleResponse }) => {
       });
       console.log(res);
       handleResponse(res.data.message);
-      navigate("/");
+      //navigate("/");
     } catch (error) {
       console.log(error);
       handleError(error.response.data.message);
