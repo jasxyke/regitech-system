@@ -15,11 +15,11 @@ const getStatusColor = (status) => {
 const SubmittedDocumentRows = ({ submittedDocuments, deleteDocument }) => {
   const tableRows = submittedDocuments.map((document, index) => (
     <tr key={document.id}>
-      <td>{document.document_type.name}</td>
-      <td>
+      <td className="bg-grey">{document.document_type.name}</td>
+      <td className="bg-grey">
         <button
           disabled
-          className={TableCss.status + " fw-bold w-100 rounded-pill border-0"}
+          className={TableCss.status + " fw-bold rounded-pill border-0"}
           style={{
             backgroundColor: getStatusColor(document.document_status.name),
           }}

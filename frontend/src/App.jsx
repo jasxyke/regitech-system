@@ -18,7 +18,7 @@ import SubmissionPage from "./pages/student/Submission/SubmissionPage";
 import CheckInbox from "./pages/Signup/CheckInbox";
 import ViewStudentPage from "./pages/staff/StudentView/ViewStudentPage";
 import SetPassPage from "./pages/Login/SetPassPage";
-
+import ManualEntryPage from "./pages/staff/ManualEntry/ManualEntryPage";
 
 function App() {
   useCRFKCookie();
@@ -39,13 +39,14 @@ function App() {
 
         <Route path="/staff" element={<StaffPrivateRoutes />}>
           <Route
-            path="document-verification/:id"
+            path="document-verification/:id/:studentId"
             element={<VerificationPage />}
           />
           <Route path="verification-requests" element={<StaffDashboard />} />
           <Route path="head-registrar" element={<AdminPage />} />
           <Route path="student-records" element={<StudentRecordsPage />} />
           <Route path="student-record/:id" element={<ViewStudentPage />} />
+          <Route path="manual-entry" element={<ManualEntryPage />} />
         </Route>
 
         <Route path="*" element={<h1>Not found 404</h1>} />

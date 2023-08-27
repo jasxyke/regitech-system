@@ -20,6 +20,11 @@ return new class extends Migration
             ->on('document_types')
             ->onUpdate('cascade')
             ->onDelete('cascade');
+            $table->foreignId('pdf_id')
+            ->nullable()
+            ->constrained()
+            ->cascadeOnUpdate()
+            ->nullOnDelete();
             $table->foreignId('student_id')
             ->constrained()
             ->cascadeOnUpdate()

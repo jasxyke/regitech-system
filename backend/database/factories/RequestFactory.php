@@ -19,8 +19,6 @@ class RequestFactory extends Factory
     {
         return [
             'is_reviewed'=>rand(0,1),
-            'url'=> Storage::disk('public')->url('testpdf.pdf') ,
-            'file_path'=>'testpdf.pdf',
         ];
     }
 }

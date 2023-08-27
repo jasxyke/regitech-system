@@ -4,33 +4,35 @@ import { useUser } from "../../../context/UserContext";
 import StudentDashboardTable from "./StudentDashboardTable";
 import { Table } from "react-bootstrap";
 
-const Ewan = ({ student }) => {
+const StudentProfile = ({ student, hideHeader = false }) => {
   const user = student;
   return (
-    <div className="table-container rounded-top rounded-bottom">
+    <div className={"}rounded-top rounded-bottom " + StudentCSS.fullTable}>
       <table className="table table-borderless fw-bold rounded-top rounded-bottom">
         <thead className={StudentCSS.tableHead}>
-          <tr>
-            <th scope="col">Student profile</th>
-          </tr>
+          {!hideHeader && (
+            <tr>
+              <th scope="col">Student profile</th>
+            </tr>
+          )}
         </thead>
         <tbody className={StudentCSS.tablebody}>
           <tr>
-            <td>
+            <td className="bg-grey">
               <span
                 className={
-                  StudentCSS.studentInfo + " rounded-top rounded-bottom"
+                  StudentCSS.studentInfo + " rounded-top rounded-bottom bg-grey"
                 }
               >
-                Fullname: {user?.user?.firstname + " " + user.user.lastname}
+                Name: {user?.user?.firstname + " " + user.user.lastname}
               </span>
             </td>
           </tr>
           <tr>
-            <td>
+            <td className="bg-grey">
               <span
                 className={
-                  StudentCSS.studentInfo + " rounded-top rounded-bottom"
+                  StudentCSS.studentInfo + " rounded-top rounded-bottom bg-grey"
                 }
               >
                 Email address: {user?.user?.email}
@@ -38,10 +40,10 @@ const Ewan = ({ student }) => {
             </td>
           </tr>
           <tr>
-            <td>
+            <td className="bg-grey">
               <span
                 className={
-                  StudentCSS.studentInfo + " rounded-top rounded-bottom"
+                  StudentCSS.studentInfo + " rounded-top rounded-bottom bg-grey"
                 }
               >
                 Course: {user?.course?.name}
@@ -49,10 +51,10 @@ const Ewan = ({ student }) => {
             </td>
           </tr>
           <tr>
-            <td>
+            <td className="bg-grey">
               <span
                 className={
-                  StudentCSS.studentInfo + " rounded-top rounded-bottom"
+                  StudentCSS.studentInfo + " rounded-top rounded-bottom bg-grey"
                 }
               >
                 Year admitted: {user?.year_admitted}
@@ -60,10 +62,10 @@ const Ewan = ({ student }) => {
             </td>
           </tr>
           <tr>
-            <td>
+            <td className="bg-grey">
               <span
                 className={
-                  StudentCSS.studentInfo + " rounded-top rounded-bottom"
+                  StudentCSS.studentInfo + " rounded-top rounded-bottom bg-grey"
                 }
               >
                 Status: {user?.student_status?.name}
@@ -76,4 +78,4 @@ const Ewan = ({ student }) => {
   );
 };
 
-export default Ewan;
+export default StudentProfile;

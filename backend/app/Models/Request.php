@@ -15,19 +15,15 @@ class Request extends Model
 
     protected $fillable = [
         'student_id',
-        'is_reviewed',
-        'file_path',
-        'url',
+        'pdf_id',
+        'is_reviewed'
     ];
 
     public function student(): BelongsTo {
         return $this->belongsTo(Student::class);
     }
 
-    public function documents(): HasMany{
-        return $this->hasMany(Document::class);
+    public function pdf(): BelongsTo{
+        return $this->belongsTo(Pdf::class);
     }
-
-    
-
 }

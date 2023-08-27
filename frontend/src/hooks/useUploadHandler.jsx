@@ -8,8 +8,6 @@ const useUploadHandler = ({ handleResponse, handleError }) => {
   const [pdfSrc, setPdfSrc] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const navigate = useNavigate();
-
   const addDocument = (doc) => {
     setLoading(true);
     const pdfFile = new File([doc], "compiled_images.pdf", {
@@ -48,11 +46,10 @@ const useUploadHandler = ({ handleResponse, handleError }) => {
       );
       console.log(res);
       handleResponse(res.data.message);
-      navigate("/student/dashboard");
       setLoading(false);
     } catch (error) {
       console.error(error);
-      handleError(error?.data?.message);
+      handleError(error?.response?.data?.message);
       setLoading(false);
     }
   };

@@ -2,6 +2,7 @@ import TableCss from "./StudentDashboard.module.css";
 import useDocuments from "../../../hooks/useDocuments";
 import SubmittedDocumentRows from "./SubmittedDocumentRows";
 import { useEffect } from "react";
+import { Spinner } from "react-bootstrap";
 
 const StudentDashboardTable = ({
   handleDeleteDocument,
@@ -18,7 +19,7 @@ const StudentDashboardTable = ({
   };
   console.log(submittedDocuments);
   return (
-    <div className={"my-2 " + TableCss.table}>
+    <div className={"my-2 " + TableCss.fullTable}>
       <table className="table table-hover my-0">
         <thead>
           <tr className={TableCss.table_head}>
@@ -27,11 +28,19 @@ const StudentDashboardTable = ({
           </tr>
         </thead>
         <tbody className={TableCss.table_contents}>
-          {(submittedDocuments !== null || submittedDocuments === "") && (
-            <SubmittedDocumentRows
-              submittedDocuments={submittedDocuments}
-              deleteDocument={deleteDocument}
-            />
+          {submittedDocsHook.loading ? (
+            <tr>
+              <td colSpan={5}>
+                <Spinner />
+              </td>
+            </tr>
+          ) : (
+            (submittedDocuments !== null || submittedDocuments === "") && (
+              <SubmittedDocumentRows
+                submittedDocuments={submittedDocuments}
+                deleteDocument={deleteDocument}
+              />
+            )
           )}
         </tbody>
       </table>

@@ -19,7 +19,6 @@ class DocumentFactory extends Factory
     {
         return [
             'with_copies'=>rand(0,1),
-            'updated_by_id'=>'2'
         ];
     }
 }

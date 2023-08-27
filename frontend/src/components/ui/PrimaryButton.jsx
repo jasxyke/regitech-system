@@ -9,6 +9,10 @@ const PrimaryButton = ({ text, onClick }) => {
                 background-color: var(--primary-maroon);
                 color: white;
             }
+
+            .btn-main:hover{
+              border: 1px solid var(--primary-maroon);
+            }
         `}
       </style>
       <Button
@@ -24,3 +28,4 @@ const PrimaryButton = ({ text, onClick }) => {
 };
 
 export default PrimaryButton;
+

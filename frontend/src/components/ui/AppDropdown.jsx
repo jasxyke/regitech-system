@@ -11,6 +11,9 @@ const AppDropdown = ({ handleSelect, dropdownItems }) => {
               color: white;
             }
             
+            .btn-maroon:hover{
+              border: 1px solid var(--primary-maroon);
+            }
           `}
       </style>
       <DropdownButton variant="maroon" title="Sort by" onSelect={handleSelect}>

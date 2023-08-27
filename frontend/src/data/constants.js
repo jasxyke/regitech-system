@@ -3,6 +3,7 @@ const documentStatuses = [
   { id: 2, name: "Rejected" },
   { id: 3, name: "Pending Approval" },
   { id: 4, name: "Pending Submission" },
+  { id: 5, name: "Missing" },
 ];
 
 const documentTypes = [
@@ -77,7 +78,7 @@ const courses = [
 
 const years = [];
 for (let i = 2015; i < new Date().getFullYear(); i++) {
-  years.push(i);
+  years.push(i.toString());
 }
 
 const FILE_SIZE_LIMIT = 1 * 1024 * 1024; //1MB

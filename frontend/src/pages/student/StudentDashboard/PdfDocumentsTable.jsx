@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import StaffStyles from "../../staff/StaffDashboard/StaffDashboard.module.css";
-import useSubmittedPdfs from "../../../hooks/useSubmittedPdfs";
 import PdfDocuments from "./PdfDocuments";
 import { Spinner } from "react-bootstrap";
+import useRequest from "../../../hooks/useRequest";
 
 const PdfDocumentsTable = ({ student }) => {
-  const pdfHook = useSubmittedPdfs();
-  const pdfs = pdfHook.pdfs;
+  const requestsHook = useRequest();
+  const pdfs = requestsHook.studentRequests;
   useEffect(() => {
-    pdfHook.getPdfs(student.id);
+    requestsHook.getAllRequests(student.id);
   }, []);
 
   return (
@@ -28,7 +28,7 @@ const PdfDocumentsTable = ({ student }) => {
                 handleView={handleView}
               />
             )} */}
-          {pdfHook.loading ? (
+          {requestsHook.loading ? (
             <tr>
               <td colSpan={5}>
                 <Spinner />

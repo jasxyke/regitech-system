@@ -100,7 +100,9 @@ class RequestController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $request = ModelsRequest::with('student.user', 'student.course', 'student.student_status','pdf')
+                    ->findOrFail($id);
+        return $request; 
     }
 
     /**

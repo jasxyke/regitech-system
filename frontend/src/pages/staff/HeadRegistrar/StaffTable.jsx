@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import axiosClient from "../../../utils/axios";
 import StaffRecords from "./StaffRecords";
 import useStaffCrud from "../../../hooks/useStaffCrud";
+import { Spinner } from "react-bootstrap";
+import SectionHeader from "../../../components/SectionHeader";
 
 // DECLARATION FOR LISTINGS (TEMPORARY)
 
@@ -22,9 +24,7 @@ function StaffTable() {
   return (
     <div className={"mx-auto " + AdminStyles.admin_table_container}>
       <div className="d-flex justify-content-between mt-5">
-        <h4>
-          <strong className={AdminStyles.table_header}>Staff List</strong>
-        </h4>
+        <SectionHeader text={"Staff list"} />
         <div className={AdminStyles.addstaff_btn}>
           <AddStaffForm onAddUser={staffCRUD.onAddStaff} loading={loading} />
         </div>
@@ -34,14 +34,37 @@ function StaffTable() {
         <table className="table table-hover my-0">
           <thead>
             <tr className={AdminStyles.table_head}>
-              <th className="col-sm-2">ID</th>
-              <th className="col-sm-4">Staff Name</th>
-              <th className="col-sm-4">Position</th>
-              <th className="col-sm-2">Actions</th>
+              <th scope="col" className="col-sm-2">
+                ID
+              </th>
+              <th scope="col" className="col-sm-4">
+                Staff Name
+              </th>
+              <th scope="col" className="col-sm-4">
+                Position
+              </th>
+              <th scope="col" className="col-sm-2">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody className={AdminStyles.table_contents}>
-            {staffs !== null ? (
+            {/* {staffs !== null ? (
+              <StaffRecords
+                staffs={staffs}
+                onDelete={staffCRUD.ondeleteStaff}
+                onEdit={staffCRUD.onEditStaff}
+                selectedStaff={staffCRUD.selectedStaff}
+                selectStaff={staffCRUD.onSelectStaff}
+              />
+            ) : null} */}
+            {loading ? (
+              <tr>
+                <td colSpan={4}>
+                  <Spinner />
+                </td>
+              </tr>
+            ) : staffs !== null ? (
               <StaffRecords
                 staffs={staffs}
                 onDelete={staffCRUD.ondeleteStaff}

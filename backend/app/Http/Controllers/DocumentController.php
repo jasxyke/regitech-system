@@ -18,6 +18,14 @@ class DocumentController extends Controller
                     ->get();
     }
 
+    public function getUnverifiedDocuments(string $id){
+        return Document::with('document_status', 'document_type')
+                ->where('student_id','=',$id)
+                ->whereNot('document_status_id', '=', '1')
+                ->orderBy('document_type_id')
+                ->get();
+    }
+
     /**
      * Display a listing of the resource.
      */
