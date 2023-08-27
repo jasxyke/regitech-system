@@ -43,6 +43,13 @@
 .status {
   background-color: #f68e56;
   color: #f5f3f3;
+  width: 70%;
+}
+
+@media (max-width: 768px) {
+  .status {
+    width: 100%;
+  }
 }
 
 .modalHead {
@@ -100,8 +107,20 @@
   background-color: var(--bg-grey);
 }
 
+.fullTable {
+  overflow-x: auto;
+  border-radius: 10px;
+  background-color: var(--bg-grey);
+  min-height: 250px;
+}
+
 .table td {
   background-color: var(--bg-grey) !important;
+}
+
+.fullTable td {
+  background-color: var(--bg-grey) !important;
+  border-bottom-width: 0px !important;
 }
 
 .table tr:last-child td:first-child {

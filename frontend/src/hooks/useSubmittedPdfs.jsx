@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import axiosClient from "../utils/axios";
 
-const useSubmittedPdfs = () => {
+const useSubmittedRequests = () => {
   const [loading, setLoading] = useState(false);
-  const [pdfs, setPdfs] = useState(null);
+  const [requests, setRequests] = useState(null);
 
-  const getPdfs = async (student_id) => {
+  const getRequests = async (student_id) => {
     try {
-      let res = await axiosClient.get("/student-pdfs/" + student_id);
-      setPdfs(res.data);
+      let res = await axiosClient.get("/student-requests/" + student_id);
+      setRequests(res.data);
     } catch (error) {
       console.log(error);
     }
   };
-  return { loading, pdfs, getPdfs };
+  return { loading, requests, getRequests };
 };
 
-export default useSubmittedPdfs;
+export default useSubmittedRequests;

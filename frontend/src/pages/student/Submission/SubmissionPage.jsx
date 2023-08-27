@@ -10,6 +10,7 @@ import SecondaryButton from "../../../components/ui/SecondaryButton";
 import jsPDF from "jspdf";
 import useUploadHandler from "../../../hooks/useUploadHandler";
 import ResponseModal from "../../../components/ResponseModal";
+import { Link } from "react-router-dom";
 
 const SubmissionPage = () => {
   const student = useUser();
@@ -28,8 +29,16 @@ const SubmissionPage = () => {
 
   const handleResponse = (response) => {
     setShowModal(true);
-    setResponse(response);
-    setHeaderText("Success!");
+    setResponse(
+      <div>
+        <p>{response}</p>
+        <p>
+          Success! Click <Link to="/student/dashboard">here</Link> to view your
+          document status
+        </p>
+      </div>
+    );
+    setHeaderText("uploading...");
   };
 
   const uploadHook = useUploadHandler({ handleResponse, handleError });
@@ -53,7 +62,7 @@ const SubmissionPage = () => {
         const imgWidth = pageWidth - 20;
         const x = 10;
         const y = 10;
-        doc.addImage(imageUrl, "JPEG", x, y, imgWidth, imgHeight);
+        doc.addImage(imageUrl, "JPEG", x, y, imgWidth, imgHeight, "", "FAST");
         if (i + 1 < files.length) {
           doc.addPage();
         }

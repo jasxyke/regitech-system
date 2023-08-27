@@ -17,9 +17,12 @@ return new class extends Migration
             ->constrained()
             ->cascadeOnUpdate()
             ->cascadeOnDelete();
+            $table->foreignId('pdf_id')
+            ->nullable()
+            ->constrained()
+            ->cascadeOnUpdate()
+            ->nullOnDelete();
             $table->unsignedTinyInteger('is_reviewed');
-            $table->string('file_path', 255);
-            $table->string('url', 255);
             $table->timestamps();
         });
     }

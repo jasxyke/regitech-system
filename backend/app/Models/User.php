@@ -67,11 +67,13 @@ class User extends Authenticatable
         return $this->hasOne(Student::class);
     }
 
+    public function verifiedDocuments(): HasMany{
+        return $this->hasMany(Document::class, 'updated_by_id');
+    }
+
     public function role(): BelongsTo{
         return $this->belongsTo(Role::class);
     }
 
-    public function Documents(): HasMany{
-        return $this->hasMany(Document::class);
-    }
+
 }

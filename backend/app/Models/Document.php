@@ -19,7 +19,14 @@ class Document extends Model
         'updated_by_id',
         'with_copies',
         'student_id',
+        'pdf_id'
     ];
+
+    protected $with = ['updated_by'];
+
+    public function pdf(): BelongsTo{
+        return $this->belongsTo(Pdf::class);
+    }
 
     public function document_type(): BelongsTo{
         return $this->belongsTo(DocumentType::class);
@@ -31,6 +38,10 @@ class Document extends Model
 
     public function document_status(): BelongsTo{
         return $this->belongsTo(DocumentStatus::class);
+    }
+
+    public function updated_by(): BelongsTo{
+        return $this->belongsTo(User::class, 'updated_by_id');
     }
 }
  

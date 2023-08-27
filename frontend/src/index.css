@@ -16,12 +16,45 @@
   --main-font: "Montserrat", sans-serif;
 }
 
+* {
+}
+
+.bg-grey {
+  background-color: var(--bg-grey) !important;
+}
+
+.text-grey {
+  color: var(--bg-grey);
+}
+
 .text-yellow {
   color: var(--status-yellow);
 }
 
 .text-orange {
   color: var(--status-orange);
+}
+
+.text-green {
+  color: var(--status-green) !important;
+}
+
+.text-red {
+  color: var(--primary-maroon);
+}
+
+.section-header {
+  color: var(--primary-maroon);
+  font-style: italic;
+  margin-right: auto;
+}
+
+.section-header-block {
+  color: white;
+  padding: 10px;
+  background-color: var(--primary-maroon);
+  font-style: italic;
+  margin-right: auto;
 }
 
 * {
@@ -37,4 +70,8 @@
   max-height: 250px;
   overflow: auto;
   background-color: var(--bg-grey);
+}
+
+.table-min {
+  min-height: 500px;
 }

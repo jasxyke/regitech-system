@@ -51,62 +51,10 @@ const SignupForm = () => {
       {year}
     </option>
   ));
-  // const validateForm = () => {
-  //   let err = {};
-
-  //   if (formData.fname === "") {
-  //     err.fname = "First Name required!";
-  //   }
-  //   if (formData.mname === "") {
-  //     err.mname = "Middle Name required!";
-  //   }
-  //   if (formData.lname === "") {
-  //     err.lname = "Last Name required!";
-  //   }
-  //   if (formData.email === "") {
-  //     err.email = "Email required!";
-  //   } else {
-  //     let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  //     if (!regex.test(formData.email)) {
-  //       err.email = "Email not valid!";
-  //     }
-  //   }
-
-  //   if (formData.password === "" || formData.cpassword === "") {
-  //     err.password = "Password and Confirm Password required!";
-  //   } else {
-  //     if (formData.password !== formData.cpassword) {
-  //       err.password = "Password not matched!";
-  //     } else {
-  //       if (formData.password.length < 6) {
-  //         err.password = "Password should be greater than 6 characters!";
-  //       }
-  //     }
-  //   }
-
-  //   if (formData.course === "") {
-  //     err.course = "Course required!";
-  //   }
-  //   if (formData.year === "") {
-  //     err.year = "Year Admitted required!";
-  //   }
-
-  //   setFormError({ ...err });
-
-  //   return Object.keys(err).length < 1;
-  // };
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    // let isValid = validateForm();
 
-    // if (isValid) {
-    //   alert("Submitted");
-    //   // API call to server
-    // } else {
-    //   const errorMessage = Object.values(formError).join(" ");
-    //   alert(`Invalid Form: ${errorMessage}`);
-    // }
     signup(formData, onError);
   };
   return (
@@ -213,7 +161,11 @@ const SignupForm = () => {
             aria-label="Default select example"
             name="course_id"
             onChange={onChangeHandler}
+            required
           >
+            <option disabled selected>
+              Course or Program
+            </option>
             {courseOptions}
           </select>
         </div>
@@ -227,7 +179,11 @@ const SignupForm = () => {
             aria-label="Default select example"
             name="year_admitted"
             onChange={onChangeHandler}
+            required
           >
+            <option disabled selected>
+              Please select year admitted
+            </option>
             {yearOptions}
           </select>
         </div>

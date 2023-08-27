@@ -19,17 +19,17 @@ class DocumentsHandler{
         $this->student = $student;
     }
 
-    public function saveDocument(UploadedFile $file, $filename ){
+    public function saveDocument(UploadedFile $file){
         $extension = $file->getClientOriginalExtension();
-        $filename = $filename . '.' . $extension;
 
         $user = $this->user;
         $student = $this->student;
 
         $fullname = sprintf("%s %s", $user->lastname, $user->firstname);
-
+        $dateSubmitted = date("Y_m_d");
         $path = sprintf("\%u\%s\%s",$student->year_admitted, $student->course->name, $fullname);
-
+        $filename = sprintf("%s_%s_%u_%s.%s",$dateSubmitted, $student->course->short_name, 
+        $student->year_admitted, $fullname,$extension);
         return $file->storeAs($path, $filename, 'public');
     }
     

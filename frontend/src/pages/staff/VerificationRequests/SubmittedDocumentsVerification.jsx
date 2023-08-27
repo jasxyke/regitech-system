@@ -6,6 +6,13 @@ import SecondaryButton from "../../../components/ui/SecondaryButton";
 import ApproveIcon from "../../../components/icons/ApproveIcon";
 import RejectIcon from "../../../components/icons/RejectIcon";
 import MissingIcon from "../../../components/icons/MissingIcon";
+import SelectDocumentStatus from "../../../components/ui/SelectDocumentStatus";
+import Checkbox from "../../../components/forms/Checkbox";
+import SectionHeader from "../../../components/SectionHeader";
+import { getStatus } from "../../../utils/getStatus";
+import DocumentRow from "./DocumentRow";
+import { Accordion, Alert } from "react-bootstrap";
+import StudentProfile from "../../student/StudentDashboard/StudentProfile";
 const getStatusColor = (status) => {
   if (status === "Verified") {
     return "var(--status-green)";
@@ -18,102 +25,33 @@ const getStatusColor = (status) => {
   }
 };
 
-const SubmittedDocumentsVerification = ({ documents, verifyDocument }) => {
-  const verifyDocuments = documents.map((document) => (
-    <tr key={document.id}>
-      <td className="d-5">{document.document_type.name}</td>
-      <td>
-        <button
-          disabled
-          className={"rounded-pill border-0 py-1  " + TableCss.status}
-          style={{
-            backgroundColor: getStatusColor(document.document_status.name),
-          }}
-        >
-          {document.document_status.name}
-        </button>
-      </td>
-      <td>
-        <div className={TableCss.verifyBtns}>
-          {/* <PrimaryButton
-            text={"Approve"}
-            onClick={() => {
-              const verifiedDoc = {
-                ...document,
-                document_status: { id: "1", name: "Verified" },
-                document_status_id: "1",
-              };
-              verifyDocument(verifiedDoc);
-            }}
-          /> */}
-          <ApproveIcon
-            handleClick={() => {
-              const verifiedDoc = {
-                ...document,
-                document_status: { id: "1", name: "Verified" },
-                document_status_id: "1",
-              };
-              verifyDocument(verifiedDoc);
-            }}
-          />
-          {/* <SecondaryButton
-            text={"Reject"}
-            onClick={() => {
-              const rejectedDoc = {
-                ...document,
-                document_status: { id: "2", name: "Rejected" },
-                document_status_id: "2",
-              };
-              verifyDocument(rejectedDoc);
-            }}
-          /> */}
-          <RejectIcon
-            handleClick={() => {
-              const rejectedDoc = {
-                ...document,
-                document_status: { id: "2", name: "Rejected" },
-                document_status_id: "2",
-              };
-              verifyDocument(rejectedDoc);
-            }}
-          />
-          {/* <SecondaryButton
-            text={"Missing"}
-            onClick={() => {
-              const misingDoc = {
-                ...document,
-                document_status: { id: "5", name: "Missing" },
-                document_status_id: "5",
-              };
-              verifyDocument(misingDoc);
-            }}
-          /> */}
-          <MissingIcon
-            handleClick={() => {
-              const misingDoc = {
-                ...document,
-                document_status: { id: "5", name: "Missing" },
-                document_status_id: "5",
-              };
-              verifyDocument(misingDoc);
-            }}
-          />
-        </div>
-      </td>
-    </tr>
-  ));
+const SubmittedDocumentsVerification = ({
+  documents,
+  verifyDocument,
+  note,
+  setNote,
+}) => {
+  const documentRows = documents.map((document) => {
+    return <DocumentRow document={document} verifyDocument={verifyDocument} />;
+  });
+
   return (
-    <div className="table-responsive">
-      <table className="table table-sm table-borderless">
-        <thead>
-          <tr>
-            <th scope="col" style={{ width: "40%" }}></th>
-            <th scope="col text-center" style={{ width: "30%" }}></th>
-            <th scope="col" style={{ width: "30%" }}></th>
-          </tr>
-        </thead>
-        <tbody>{verifyDocuments}</tbody>
-      </table>
+    <div className="w-100">
+      {documentRows}
+      <div className="mt-3 mb-3">
+        <label htmlFor="note" className="form-label">
+          <strong>Registrar note:</strong>
+        </label>
+        <input
+          className="form-control"
+          name="note"
+          type="text"
+          value={note}
+          onChange={(e) => {
+            setNote(e.target.value);
+          }}
+        />
+      </div>
     </div>
   );
 };

@@ -4,7 +4,6 @@ import SignupCss from "../pages/Login/LoginPage.module.css";
 import pic1 from "../assets/1.jpg";
 import pic2 from "../assets/2.jpg";
 import pic3 from "../assets/3.jpg";
-import pic4 from "../assets/4.jpg";
 import pic5 from "../assets/5.jpg";
 
 function PictureCarousel() {
@@ -35,13 +34,6 @@ function PictureCarousel() {
           className={`${SignupCss.left_img} d-block w-100`}
           src={pic3}
           alt="Third slide"
-        />
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className={`${SignupCss.left_img} d-block w-100`}
-          src={pic4}
-          alt="Fourth slide"
         />
       </Carousel.Item>
       <Carousel.Item>

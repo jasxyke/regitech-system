@@ -1,29 +1,53 @@
 import TableCss from "../VerificationRequests/Verification.module.css";
 import VerificationTable from "../VerificationRequests/VereficationTable";
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useDocuments from "../../../hooks/useDocuments";
 import useVerifyDocument from "../../../hooks/useVerifyDocument";
 import ResponseModal from "../../../components/ResponseModal";
-import { Spinner } from "react-bootstrap";
+import { Spinner, Tab, Tabs } from "react-bootstrap";
 import { getCurrentDate } from "../../../utils/datesHandler";
 import Button from "react-bootstrap/Button";
 import PdfView from "./PdfView";
 import SubmittedDocumentsVerification from "./SubmittedDocumentsVerification";
 import useSubmittedDocuments from "../../../hooks/useSubmittedDocuments";
 import SecondaryButton from "../../../components/ui/SecondaryButton";
+import BackButton from "../../../components/ui/BackButton";
+import useRequest from "../../../hooks/useRequest";
+import LoadingPage from "../../../components/LoadingPage";
+import SectionHeader from "../../../components/SectionHeader";
+import StudentProfile from "../../student/StudentDashboard/StudentProfile";
+import PrimaryButton from "../../../components/ui/PrimaryButton";
+import EditPDFs from "./EditPDFs";
+import { useUser } from "../../../context/UserContext";
+import usePdf from "../../../hooks/usePdf";
 
 const VerificationPage = () => {
-  const navigate = useNavigate();
+  const staff = useUser();
 
+  const requestHook = useRequest();
+  const request = requestHook.request;
+
+  //pdf hooks and dependencies
+  const pdfHook = usePdf();
+  const allPdfs = pdfHook.studentPdfs;
+
+  const navigate = useNavigate();
   const [note, setNote] = useState("");
-  const { id } = useParams();
-  const location = useLocation();
+  const { id, studentId } = useParams();
   const submittedDocsHook = useSubmittedDocuments();
   const documents = submittedDocsHook.submittedDocuments;
 
+  const [pdf, setPdf] = useState("");
+
+  const onLoad = (pdf) => {
+    setPdf(pdf);
+  };
+
   useEffect(() => {
-    submittedDocsHook.getSubmittedDocuments(id);
+    submittedDocsHook.getSubmittedDocuments(studentId);
+    requestHook.getRequest(id, onLoad);
+    pdfHook.getAllPdfs(studentId);
   }, []);
 
   const [response, setResponse] = useState(null);
@@ -53,30 +77,19 @@ const VerificationPage = () => {
         <Spinner animation="border" role="status" />
       </div>
     );
-    verifyDocumentsHook.verifyDocuments(
-      location.state.requestId,
-      documents,
-      note
-    );
+    verifyDocumentsHook.verifyDocuments(request.id, documents, note, staff.id);
   };
+
+  if (request === null) {
+    return <LoadingPage />;
+  }
 
   return (
     <div className="my-5 mb-5 pb-5">
-      <Button
-        onClick={() => navigate("/staff/verification-requests")}
-        className={"mx-3 px-auto mb-5 " + TableCss.back}
-      >
-        <span className="pe-2 ps-0"> &#8592; </span> Back
-      </Button>
+      <BackButton text={"Back to dashboard"} />
       <div className="row">
         <div className="col">
-          <p
-            className={
-              TableCss.title + " text-start fs-4 m-1 fw-bold fst-italic"
-            }
-          >
-            Verify Documents
-          </p>
+          <SectionHeader text={"Verify documents"} block={false} />
         </div>
         <div className="col">
           <p className={TableCss.title + "  text-end fs-6 m-1 fst-italic"}>
@@ -84,41 +97,89 @@ const VerificationPage = () => {
           </p>
         </div>
       </div>
-      <div className={TableCss.documentVerifyBox + " mt-4"}>
-        <div className={TableCss.pdfView}>
-          <PdfView pdfSrc={location.state.pdfSrc} />
-        </div>
-        <div className={TableCss.verifyView}>
-          {documents !== null && (
-            <SubmittedDocumentsVerification
-              documents={documents}
-              verifyDocument={submittedDocsHook.verifyDocument}
-            />
+      <div className={"row" + " mt-4"}>
+        <div className={"col-sm-6"}>
+          {pdf !== null ? (
+            <PdfView pdf={pdf} />
+          ) : (
+            <div className="d-flex justify-content-center">
+              <Spinner animation="border" role="status" />
+            </div>
           )}
-          <div className="mt-3 mb-3">
-            <label htmlFor="note" className="form-label">
-              <strong>Registrar note:</strong>
-            </label>
-            <input
-              className="form-control"
-              name="note"
-              type="text"
-              value={note}
-              onChange={(e) => {
-                setNote(e.target.value);
-              }}
-            />
-          </div>
-          <div className="text-end mb-5">
+        </div>
+        <div className={"col-sm-6"}>
+          <style type="text/css">
+            {`
+              .verification-tab .nav-link{
+                color: var(--primary-maroon);
+                font-weight: bold;
+              }
+
+              .verification-tab .nav-item{
+                border: 1px solid var(--bg-grey)
+              }
+
+              .verification-tab .nav-link:hover{
+                color: var(--primary-maroon)
+              }
+
+              .tab-content{
+                border: 1px solid var(--bg-grey);
+                padding: 10px;
+              }
+
+              .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+                color: var(--main-white);
+                background-color: var(--primary-maroon);
+                border-color: var(--primary-maroon);
+            }
+            `}
+          </style>
+          <Tabs
+            defaultActiveKey={"checklist"}
+            id="verification-tab"
+            className="verification-tab"
+          >
+            <Tab eventKey="checklist" title="Checklist">
+              <div className="mt-3"></div>
+              {documents !== null && (
+                <SubmittedDocumentsVerification
+                  documents={documents}
+                  verifyDocument={submittedDocsHook.verifyDocument}
+                  note={note}
+                  setNote={setNote}
+                />
+              )}
+            </Tab>
+            <Tab eventKey={"profile"} title="Student profile">
+              <div className="mt-3"></div>
+              <StudentProfile student={request.student} hideHeader={true} />
+            </Tab>
+            <Tab eventKey={"prev-request"} title="Edit PDFs">
+              {allPdfs !== null ? (
+                <EditPDFs
+                  allPdfs={allPdfs}
+                  currentPdf={request.pdf}
+                  changePDF={setPdf}
+                />
+              ) : (
+                <div className="d-flex justify-content">
+                  <Spinner animation="border" />
+                </div>
+              )}
+            </Tab>
+          </Tabs>
+
+          <div className="text-end mb-5 mt-5">
             <Button
-              className={"px-2 mx-1 " + TableCss.cancel}
+              className={"px-2 mx-1 " + TableCss.done}
               onClick={handleClose}
             >
               Cancel
             </Button>
             <Button
               onClick={verifyDocuments}
-              className={"px-2 mx-1 " + TableCss.done}
+              className={"px-2 mx-1 " + TableCss.cancel}
             >
               Done
             </Button>

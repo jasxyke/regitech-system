@@ -17,7 +17,7 @@
     </h1>
     <p>This email is from the 
 Polytechnic University of the Philippines 
-Insititute of Technology to notify you about your
+Insititute of Technology notifying you about your
 recently submitted admission documents in which:
 </p>
 <p style="font-size: 1.25rem; 

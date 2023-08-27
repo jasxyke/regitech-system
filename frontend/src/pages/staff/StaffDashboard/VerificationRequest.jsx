@@ -23,9 +23,7 @@ const VerificationRequest = ({ verificationRequests, handleView }) => {
           className={
             "btn py-1 mx-auto px-0 rounded-pill my-0 " + StaffStyles.viewBtn
           }
-          onClick={() =>
-            handleView(request.student.id, request.url, request.id)
-          }
+          onClick={() => handleView(request.id, request.student_id)}
         >
           {" "}
           View{" "}

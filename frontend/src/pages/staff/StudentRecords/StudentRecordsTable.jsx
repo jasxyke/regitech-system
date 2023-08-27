@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import PrimaryButton from "../../../components/ui/PrimaryButton";
 import { Dropdown, DropdownButton, Spinner } from "react-bootstrap";
 import { FiRefreshCw } from "react-icons/fi";
-import AppDropdown from "../../../components/AppDropdown";
+import AppDropdown from "../../../components/ui/AppDropdown";
 import Form from "react-bootstrap/Form";
 import SecondaryButton from "../../../components/ui/SecondaryButton";
 import { PaginationControl } from "react-bootstrap-pagination-control";
@@ -36,13 +36,17 @@ const StudentsRecordTable = () => {
     }
   };
 
+  const handleSearch = () => {
+    studentsHook.searchStudentByName(searchText);
+  };
+
   return (
     <div className={"mx-auto " + StaffStyles.staff_table_container}>
       <div className={"mt-5 " + StaffStyles.tableOptions}>
         <h4 className="me-auto">
           <strong className={StaffStyles.table_header}>
             {" "}
-            Student Masterlist{" "}
+            Student Records{" "}
           </strong>
         </h4>
         <PrimaryButton
@@ -69,13 +73,13 @@ const StudentsRecordTable = () => {
               studentsHook.getDefaultStudents();
             }
           }}
-        />
-        <SecondaryButton
-          text={"Search"}
-          onClick={() => {
-            studentsHook.searchRequestByName(searchText);
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }
           }}
         />
+        <SecondaryButton text={"Search"} onClick={handleSearch} />
       </div>
       <div className={"my-3 table-responsive " + StaffStyles.table}>
         <table className="table table-hover my-0">

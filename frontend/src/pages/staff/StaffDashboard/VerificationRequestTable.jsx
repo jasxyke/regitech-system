@@ -6,10 +6,11 @@ import { convertStampToDate } from "../../../utils/datesHandler";
 import PrimaryButton from "../../../components/ui/PrimaryButton";
 import { Dropdown, DropdownButton, Spinner } from "react-bootstrap";
 import { FiRefreshCw } from "react-icons/fi";
-import AppDropdown from "../../../components/AppDropdown";
+import AppDropdown from "../../../components/ui/AppDropdown";
 import Form from "react-bootstrap/Form";
 import SecondaryButton from "../../../components/ui/SecondaryButton";
 import { PaginationControl } from "react-bootstrap-pagination-control";
+import SectionHeader from "../../../components/SectionHeader";
 
 const VerificationRequestTable = () => {
   const requestsHook = useVerificationRequests();
@@ -35,15 +36,16 @@ const VerificationRequestTable = () => {
     }
   };
 
+  const handleSearch = () => {
+    requestsHook.searchRequestByName(searchText);
+  };
+
   return (
     <div className={"mx-auto " + StaffStyles.staff_table_container}>
       <div className={"mt-5 " + StaffStyles.tableOptions}>
-        <h4 className="me-auto">
-          <strong className={StaffStyles.table_header}>
-            {" "}
-            Verification Requests{" "}
-          </strong>
-        </h4>
+        <div className="me-auto">
+          <SectionHeader text={"Verification requests"} block={false} />
+        </div>
         <PrimaryButton
           text={<FiRefreshCw />}
           onClick={requestsHook.getVerificationRequets}
@@ -66,13 +68,13 @@ const VerificationRequestTable = () => {
               requestsHook.getVerificationRequets();
             }
           }}
-        />
-        <SecondaryButton
-          text={"Search"}
-          onClick={() => {
-            requestsHook.searchRequestByName(searchText);
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              handleSearch();
+            }
           }}
         />
+        <SecondaryButton text={"Search"} onClick={handleSearch} />
       </div>
       <div className={"my-3 " + StaffStyles.table}>
         <table className="table table-hover my-0">

@@ -4,8 +4,14 @@ import documentRequest from "../../assets/submitfile.png";
 import manageStaff from "../../assets/addfile.png";
 import masterlist from "../../assets/hrfile.png";
 import { useNavigate } from "react-router-dom";
+import todoList from "../../assets/to-do-list.png";
+import { useMediaQuery } from "react-responsive";
 const MainNavButtons = ({ userRole }) => {
   const navigate = useNavigate();
+  const isMobile = useMediaQuery({ query: "(max-width: 578px)" });
+  if (isMobile) {
+    return null;
+  }
   return (
     <div className={"mx-5 my-4 col " + MainBtnStyles.container}>
       <EventButton
@@ -31,6 +37,13 @@ const MainNavButtons = ({ userRole }) => {
         label={"Student Records"}
         onClick={() => {
           navigate("/staff/student-records");
+        }}
+      />
+      <EventButton
+        icon={todoList}
+        label={"Manual Entry"}
+        onClick={() => {
+          navigate("/staff/manual-entry");
         }}
       />
     </div>

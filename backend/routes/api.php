@@ -43,12 +43,15 @@ Route::group(['middleware'=>['auth:sanctum','verified']], function(){
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::get('/submitted-documents/{id}', [DocumentController::class, 'getSubmittedDocuments']);
-    Route::post('/verify-documents/{id}', [VerifiedDocumentsController::class, 'verify_documents']);
+    Route::get('/unverified-documents/{id}', [DocumentController::class, 'getUnverifiedDocuments']);
+    Route::post('/verify-documents/{id}/{updated_by_id}', [VerifiedDocumentsController::class, 'verify_documents']);
     Route::post('/test-email', [VerifiedDocumentsController::class, 'testEmail']);
     Route::get('/complete-students', [StudentDocumentController::class, 'getCompleteStudentDocuments']);
     Route::get('/incomplete-students', [StudentDocumentController::class, 'getIncompleteStudentDocuments']);
     Route::get('/requests/search/{searchText}', [RequestController::class, 'search']);
+    Route::get('/student-requests/{id}', [StudentController::class, 'getRequests']);
     Route::get('/student-pdfs/{id}', [StudentController::class, 'getPdfs']);
+    Route::get('/students/search/{searchText}', [StudentController::class, 'search']);
 
     //request sort routes
     Route::get('/oldest-request-first', [RequestController::class, 'oldestRequestsFirst']);

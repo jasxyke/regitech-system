@@ -3,8 +3,10 @@ import axiosClient from "../utils/axios";
 
 const useSubmittedDocuments = () => {
   const [submittedDocuments, setSubmittedDocuments] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const verifyDocument = (document) => {
+    setLoading(true);
     const docIndex = submittedDocuments.findIndex(
       (doc) => doc.id === document.id
     );
@@ -14,6 +16,7 @@ const useSubmittedDocuments = () => {
       ...submittedDocuments[docIndex],
       document_status_id: document.document_status_id,
       document_status: document.document_status,
+      with_copies: document.with_copies,
     };
 
     // Create a new array with the updated object
@@ -21,35 +24,14 @@ const useSubmittedDocuments = () => {
     updatedDocuments[docIndex] = verifiedDoc;
 
     setSubmittedDocuments(updatedDocuments);
+    setLoading(false);
   };
 
-  // const submitVerification = async (
-  //   requestId,
-  //   verifiedDocuments,
-  //   registrarNote
-  // ) => {
-  //   try {
-  //     console.log("request id: ", requestId);
-  //     console.log("documents: ");
-  //     console.log(verifiedDocuments);
-  //     console.log("note: ", registrarNote);
-  //     const res = await axiosClient.post(`/verify-documents/${requestId}`, {
-  //       note: registrarNote,
-  //       documents: verifiedDocuments,
-  //     });
-  //     console.log(res);
-  //     handleResponse(res.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //     handleError(error);
-  //   }
-  // };
-
-  const getSubmittedDocuments = async (student_id) => {
+  const getVerifiedDocuments = async (student_id) => {
     try {
       console.log("stud id");
       console.log(student_id);
-      let res = await axiosClient.get("/submitted-documents/" + student_id);
+      let res = await axiosClient.get("/verified-documents/" + student_id);
       console.log("submitted docs: ");
       console.log(typeof res.data);
       console.log(res.data);
@@ -61,12 +43,49 @@ const useSubmittedDocuments = () => {
     }
   };
 
+  const getUnverifiedDocuments = async (student_id) => {
+    try {
+      console.log("stud id");
+      console.log(student_id);
+      let res = await axiosClient.get("/unverified-documents/" + student_id);
+      console.log("submitted docs: ");
+      console.log(typeof res.data);
+      console.log(res.data);
+      console.log(res);
+      console.log(res.data === "");
+      setSubmittedDocuments(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getSubmittedDocuments = async (student_id) => {
+    try {
+      setLoading(true);
+      console.log("stud id");
+      console.log(student_id);
+      let res = await axiosClient.get("/submitted-documents/" + student_id);
+      console.log("submitted docs: ");
+      console.log(typeof res.data);
+      console.log(res.data);
+      console.log(res);
+      console.log(res.data === "");
+      setSubmittedDocuments(res.data);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
   return {
     submittedDocuments,
     setSubmittedDocuments,
     getSubmittedDocuments,
     verifyDocument,
     //submitVerification,
+    loading,
+    getUnverifiedDocuments,
   };
 };
 

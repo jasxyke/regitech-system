@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Mail;
 class VerifiedDocumentsController extends Controller
 {
     //verify a list of documents
-    public function verify_documents(Request $request, string $id){
+    public function verify_documents(Request $request, string $id, string $updated_by_id){
         $documents = $request->input('documents');
         $note = $request->input('note');
 
@@ -37,6 +37,8 @@ class VerifiedDocumentsController extends Controller
                     $document = $submittedDoc;
                     $document->document_status_id = $modifiedDocument["document_status_id"];
                     $document->with_copies = $modifiedDocument["with_copies"];
+                    $document->updated_by_id = $updated_by_id;
+                    $document->pdf_id = ($modifiedDocument["document_status_id"] == "1") ? $verification_request->pdf_id : null;
                     $document->save();
                     $document->load('document_status');
 
@@ -45,33 +47,34 @@ class VerifiedDocumentsController extends Controller
                 }
             }
         }
-        if($submittedDoc->document_status_id == 3 || $submittedDoc->document_status_id == 5){
+        if($submittedDoc->document_status_id == 3){
             $pendingDocs++;
+        }
+        if( $submittedDoc->document_status_id == 5){
+            $missingDocs++;
         }
         }
 
         $submittedDocs = $submittedDocs->toArray();
         
-        //figures out what's missing
-        $documentTypes = Constants::DOCUMENT_TYPES;
-        $verifiedDocumentTypes = array_column($submittedDocs, "document_type_id");
-        foreach($documentTypes as $documentType){
-            if(!in_array($documentType["id"], $verifiedDocumentTypes )){
-                $missingDocument = array(
-                    "document_type"=>array(
-                        "name"=>$documentType["name"]
-                    ),
-                    "document_status"=>array(
-                        "id"=>"5",
-                        "name"=>"Missing"
-                    )
-                    );
-                array_push($missingDocuments, $missingDocument);
-                $missingDocs++;
-            }
-        }
-
-        $notificationDocuments = array_merge($submittedDocs, $missingDocuments);
+        // //figures out what's missing
+        // $documentTypes = Constants::DOCUMENT_TYPES;
+        // $verifiedDocumentTypes = array_column($submittedDocs, "document_type_id");
+        // foreach($documentTypes as $documentType){
+        //     if(!in_array($documentType["id"], $verifiedDocumentTypes )){
+        //         $missingDocument = array(
+        //             "document_type"=>array(
+        //                 "name"=>$documentType["name"]
+        //             ),
+        //             "document_status"=>array(
+        //                 "id"=>"5",
+        //                 "name"=>"Missing"
+        //             )
+        //             );
+        //         array_push($missingDocuments, $missingDocument);
+        //         $missingDocs++;
+        //     }
+        // }
 
         if($invalidDocument > 0){
             $message = "One or more submitted document is invalid as indicated below:";
@@ -88,7 +91,7 @@ class VerifiedDocumentsController extends Controller
         //$testEmail = "email niyo"; replace niyo lang yung $user->email sa baba kung gusto testing
         //$user->email
         Mail::to($user->email, $user->firstname)
-                ->send(new VerifiedDocuments($user, $notificationDocuments, $message, $note));
+                ->send(new VerifiedDocuments($user, $submittedDocs, $message, $note));
 
         if($missingDocs == 0 && $invalidDocument == 0 && $pendingDocs == 0){
             $student->student_status_id = 1;

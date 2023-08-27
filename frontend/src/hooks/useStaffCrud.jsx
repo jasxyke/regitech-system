@@ -7,14 +7,17 @@ const useStaffCrud = () => {
   const [selectedStaff, setSelectedStaff] = useState(null);
 
   useEffect(() => {
+    setLoading(true);
     axiosClient
       .get("/users")
       .then((res) => {
         console.log(res);
         setStaffs(res.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
         //handleError()
       });
   }, []);

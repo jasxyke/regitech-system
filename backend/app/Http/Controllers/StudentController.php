@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Pdf;
 use App\Models\Request as ModelsRequest;
 use App\Models\Student;
 use Illuminate\Database\Eloquent\Builder;
@@ -11,9 +12,15 @@ use Illuminate\Http\Request;
 class StudentController extends Controller
 {
 
-    public function getPdfs(string $id){
+    public function getRequests(string $id){
         return ModelsRequest::where('student_id','=',$id)
                 ->orderBy('created_at', 'desc')            
+                ->get();
+    }
+
+    public function getPdfs(string $id){
+        return Pdf::where('student_id','=',$id)
+                ->orderBy('created_at', 'desc')
                 ->get();
     }
     
@@ -22,12 +29,9 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //change to something more memory friendly later on
-        $students = Student::with('user', 'course','student_status')
-               ->orderBy('year_admitted', 'desc')
+        $students = Student::with(['user', 'course','student_status'])
+               //->orderBy('year_admitted', 'desc')
                ->orderBy('student_status_id','asc')
-                // ->join('users', 'users.id', '=', 'students.user_id')
-                // ->orderBy('users.lastname', 'asc')
                 ->paginate(20);
         if(count($students) == 0){
             return null;

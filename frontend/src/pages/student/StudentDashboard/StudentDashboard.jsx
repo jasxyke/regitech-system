@@ -13,12 +13,13 @@ import { documentTypes } from "../../../data/constants";
 import PdfDocumentsTable from "./PdfDocumentsTable";
 import PrimaryButton from "../../../components/ui/PrimaryButton";
 import { useNavigate } from "react-router-dom";
+import BackButton from "../../../components/ui/BackButton";
+import SectionHeader from "../../../components/SectionHeader";
 
 const StudentDashboard = ({ studentProp = null }) => {
   const student = studentProp !== null ? studentProp : useUser();
   const [responseMsg, setResponseMsg] = useState("");
   const [showResponseModal, setShowResponseModal] = useState(false);
-  const navigate = useNavigate();
   const closeModal = () => {
     setShowResponseModal(false);
   };
@@ -53,14 +54,7 @@ const StudentDashboard = ({ studentProp = null }) => {
   return (
     <div className="mb-5">
       <div className="mb-3">
-        {studentProp !== null && (
-          <PrimaryButton
-            text={"< Back to dashboard"}
-            onClick={() => {
-              navigate(-1);
-            }}
-          />
-        )}
+        {studentProp !== null && <BackButton text={"Back to dashboard"} />}
         {studentProp === null ? (
           <GreetingsHeader name={student?.user?.firstname || "Name Here"} />
         ) : (
@@ -74,7 +68,7 @@ const StudentDashboard = ({ studentProp = null }) => {
       <StudentProfile student={student} />
       <div className={StudentCSS.table_header}>
         <h2>
-          <strong>Document status</strong>
+          <b>Document status</b>
         </h2>
       </div>
       <StudentDashboardTable

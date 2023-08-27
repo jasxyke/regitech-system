@@ -43,6 +43,13 @@ function StaffNavbar({ userRoleId }) {
               </Nav.Link>
               <Nav.Link
                 as={Link}
+                to={"/staff/manual-entry"}
+                className={css.navlinks}
+              >
+                Manual Entry
+              </Nav.Link>
+              <Nav.Link
+                as={Link}
                 to={"/staff/student-records"}
                 className={css.navlinks}
               >
