@@ -1,3 +1,4 @@
+import { formatFullName } from "../../../utils/dataFormatter";
 import DeleteDocumentModal from "./DeleteDocumentModal";
 import TableCss from "./StudentDashboard.module.css";
 import ViewDocumentModal from "./ViewDocumentModal";
@@ -26,6 +27,15 @@ const SubmittedDocumentRows = ({ submittedDocuments, deleteDocument }) => {
         >
           {document.document_status.name}
         </button>
+      </td>
+      <td className="bg-grey">
+        {document.updated_by_id !== document.student_id
+          ? formatFullName(
+              document.updated_by.firstname,
+              document.updated_by.lastname,
+              false
+            )
+          : ""}
       </td>
     </tr>
   ));

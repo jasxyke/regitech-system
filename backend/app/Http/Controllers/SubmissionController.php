@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Constants;
 use App\Helpers\DocumentsHandler;
+use App\Helpers\UrlConverter;
 use App\Helpers\Validators\UserValidator;
 use App\Http\Controllers\Controller;
+use App\Mail\VerifiedDocuments;
 use App\Models\Document;
 use App\Models\Pdf;
 use App\Models\Request as ModelsRequest;
@@ -13,6 +15,7 @@ use App\Models\Student;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class SubmissionController extends Controller
@@ -36,7 +39,6 @@ class SubmissionController extends Controller
 
         //$filename = $user->lastname . ' ' . $requestCount;
         $path = $documentHandler->saveDocument($document);
-
         $pdf = Pdf::create([
             'student_id'=>$student->id,
             "url"=>Storage::disk('public')->url($path),
@@ -69,44 +71,123 @@ class SubmissionController extends Controller
         
     }
 
-    function manualUpload(Request $request){
+    function addToMasterlist(Request $request){
+        if(!$request->hasFile('pdfFile')){
+            return response()->json(['message' => 'No files uploaded', 'request' => $request],400); 
+        }
+
         $staff = $request->user();
-
+        $hasNoEmail = $request->input('hasNoEmail');
+        
         $fields = UserValidator::validateManualUpload($request);
-
-        $user = User::create([
-            'email'=>$fields['email'],
-            'password'=>bcrypt($fields['password']),
-            'email'=>$fields['email'],
-            'lastname'=>$fields['lastname'],
-            'firstname'=>$fields['firstname'],
-            'midname'=>$fields['midname'],
-            'role_id'=>'4',
-            'email_verified_at'=>now(),
-            'remember_token'=>Str::random(10)
-        ]);
-
+        //create student account
+        if($hasNoEmail){
+            $studentUser = User::create([
+                'password'=>bcrypt(strtolower($fields['lastname']) . '123'),//default password muna, <lastname>123
+                'lastname'=>$fields['lastname'],
+                'firstname'=>$fields['firstname'],
+                'midname'=>$fields['midname'],
+                'role_id'=>'4',
+                'email_verified_at'=>now(),
+                'remember_token'=>Str::random(10)
+            ]);
+        }else{
+            $studentUser = User::create([
+                'email'=>$fields['email'],
+                'password'=>bcrypt(strtolower($fields['lastname']) . '123'),//default password muna, <lastname>123
+                'lastname'=>$fields['lastname'],
+                'firstname'=>$fields['firstname'],
+                'midname'=>$fields['midname'],
+                'role_id'=>'4',
+                'email_verified_at'=>now(),
+                'remember_token'=>Str::random(10)
+            ]);
+        }
+        
         $student = Student::create([
-            'user_id'=>$user->id,
+            'user_id'=>$studentUser->id,
             'course_id'=>$request->input('course_id'),
             'year_admitted'=>$request->input('year_admitted'),
             'student_status_id'=>'2',
         ]);
 
-        $verifiedDocuments = $fields['documents'];
+        
+        $pdfFile = $request->file("pdfFile");
+        $documentsChecklist = $request->input('checklist');
+        $note = $request->input('note');
 
-        foreach($verifiedDocuments as $document){
-            Document::create([
-                "document_type_id"=>$document["document_type_id"],
+        $documentsHandler = new DocumentsHandler($studentUser, $student);
+
+        $path = $documentsHandler->saveDocument($pdfFile);
+        $pdf = Pdf::create([
+            "student_id"=>$student->id,
+            "url"=>Storage::disk('public')->url($path),
+            "file_path"=>$path
+        ]);
+
+        $invalidDocument = 0;
+        $missingDocs = 0;
+        $pendingDocs = 0;
+
+        $submittedDocuments = [];
+
+        //create documents and its checklist
+        foreach($documentsChecklist as $document){
+            $newDocument = Document::create([
+                "document_type_id"=>$document["documentType"]["id"],
                 "student_id"=>$student->id,
                 "document_status_id"=>$document["document_status_id"],
                 "updated_by_id"=>$staff->id,
-                "with_copies"=>$document["with_copies"]
+                "with_copies"=>(int) $document["with_copies"],
+
+                //add its pdf id when it is verified or rejected, to signal that it is there
+                "pdf_id"=>($document["document_status_id"] == "1" ||
+                 $document["document_status_id"] == "2") ? $pdf->id : null
             ]) ;
+
+            array_push($submittedDocuments, $newDocument);
+
+            //check for any invalid, rejected, and 
+            //missing documents for the email message
+            if($document["document_status_id"] == 3){
+                $pendingDocs++;
+            }
+            if($document["document_status_id"] == 5){
+                $missingDocs++;
+            }
+            if($document["document_status_id"] == 2){
+                $invalidDocument++;
+            }
+        }
+
+        //email student
+        if($invalidDocument > 0){
+            $message = "One or more submitted document is invalid as indicated below:";
+        }else if($missingDocs > 0){
+            $message = "One or more requirements is missing.";
+        }else if($pendingDocs > 0){
+            $message = "One or more requirements is pending";
+        }
+        else{
+            $message = "Congratulations! all of your submitted documents has been Verified.";
+        }
+
+        if($missingDocs == 0 && $invalidDocument == 0 && $pendingDocs == 0){
+            $student->student_status_id = 1;
+            $student->save();
+        }
+
+        if(!$hasNoEmail){
+            Mail::to($studentUser->email, $studentUser->firstname)
+            ->send(new VerifiedDocuments($studentUser, $submittedDocuments, $message, $note));
+
+            return response()->json([
+                "message"=>"Student account created, checklist added to masterlist, and emailed the student"
+            ]);
         }
 
         return response()->json([
-            "message"=>"Student and documents successfully added to masterlist"
+            "message"=>"Student info and checklist added to masterlist.t"
         ]);
         
     }

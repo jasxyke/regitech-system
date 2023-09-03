@@ -22,7 +22,6 @@ class VerifiedDocumentsController extends Controller
         $student = Student::find($verification_request->student_id);
         $user = $student->user;
 
-        $missingDocuments = [];
         $invalidDocument = 0;
         $missingDocs = 0;
         $pendingDocs = 0;
@@ -38,7 +37,11 @@ class VerifiedDocumentsController extends Controller
                     $document->document_status_id = $modifiedDocument["document_status_id"];
                     $document->with_copies = $modifiedDocument["with_copies"];
                     $document->updated_by_id = $updated_by_id;
-                    $document->pdf_id = ($modifiedDocument["document_status_id"] == "1") ? $verification_request->pdf_id : null;
+
+                    //add its pdf id when it is verified or rejected, to signal that it is there
+                    $document->pdf_id = ($modifiedDocument["document_status_id"] == "1" || 
+                    $modifiedDocument["document_status_id"] == "2") ? $verification_request->pdf_id : null;
+
                     $document->save();
                     $document->load('document_status');
 
@@ -56,25 +59,6 @@ class VerifiedDocumentsController extends Controller
         }
 
         $submittedDocs = $submittedDocs->toArray();
-        
-        // //figures out what's missing
-        // $documentTypes = Constants::DOCUMENT_TYPES;
-        // $verifiedDocumentTypes = array_column($submittedDocs, "document_type_id");
-        // foreach($documentTypes as $documentType){
-        //     if(!in_array($documentType["id"], $verifiedDocumentTypes )){
-        //         $missingDocument = array(
-        //             "document_type"=>array(
-        //                 "name"=>$documentType["name"]
-        //             ),
-        //             "document_status"=>array(
-        //                 "id"=>"5",
-        //                 "name"=>"Missing"
-        //             )
-        //             );
-        //         array_push($missingDocuments, $missingDocument);
-        //         $missingDocs++;
-        //     }
-        // }
 
         if($invalidDocument > 0){
             $message = "One or more submitted document is invalid as indicated below:";

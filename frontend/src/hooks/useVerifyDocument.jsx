@@ -20,7 +20,7 @@ const useVerifyDocument = ({ handleResponse, handleError }) => {
           documents: verifiedDocuments,
         }
       );
-      console.log(res);
+      console.log(res.data);
       handleResponse(res.data);
     } catch (error) {
       console.log(error);

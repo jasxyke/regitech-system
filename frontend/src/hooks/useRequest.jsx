@@ -12,7 +12,7 @@ const useRequest = () => {
       .get("/requests/" + student_id)
       .then((res) => {
         console.log("request:");
-        console.log(res);
+        console.log(res.data);
         setRequest(res.data);
         onLoad(res.data.pdf);
         setLoading(false);
@@ -28,7 +28,7 @@ const useRequest = () => {
     axiosClient
       .get("/student-requests/" + student_id)
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         setStudentRequests(res.data);
         setLoading(false);
       })

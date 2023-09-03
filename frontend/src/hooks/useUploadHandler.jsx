@@ -44,7 +44,7 @@ const useUploadHandler = ({ handleResponse, handleError }) => {
           },
         }
       );
-      console.log(res);
+      console.log(res.data);
       handleResponse(res.data.message);
       setLoading(false);
     } catch (error) {

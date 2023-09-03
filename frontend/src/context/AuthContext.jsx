@@ -55,7 +55,7 @@ export function AuthProvider({ children }) {
         storeAuthDetails(res);
         // setAuthenticated(true);
         // setUserRole(res.data.role_id);
-        console.log(res);
+        console.log(res.data);
         if (res.data.role_id == 4) {
           navigate("/student/dashboard");
         } else if (res.data.role_id >= 1 && res.data.role_id <= 3) {
@@ -80,7 +80,7 @@ export function AuthProvider({ children }) {
       axiosClient
         .post("/logout")
         .then((res) => {
-          console.log(res);
+          console.log(res.data);
           localStorage.clear();
 
           navigate("/");

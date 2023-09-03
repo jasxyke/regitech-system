@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Pdf;
 use App\Models\Request as ModelsRequest;
 use App\Models\Student;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
@@ -13,13 +14,15 @@ class StudentController extends Controller
 {
 
     public function getRequests(string $id){
-        return ModelsRequest::where('student_id','=',$id)
+        return ModelsRequest::with('pdf')
+                ->where('student_id','=',$id)
                 ->orderBy('created_at', 'desc')            
                 ->get();
     }
 
     public function getPdfs(string $id){
-        return Pdf::where('student_id','=',$id)
+        return Pdf::with('documents','documents.document_type')
+                ->where('student_id','=',$id)
                 ->orderBy('created_at', 'desc')
                 ->get();
     }
@@ -29,10 +32,15 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::with(['user', 'course','student_status'])
-               //->orderBy('year_admitted', 'desc')
-               ->orderBy('student_status_id','asc')
-                ->paginate(20);
+        // $students = Student::with(['user', 'course','student_status'])
+        //        ->orderBy('year_admitted', 'desc')
+        //         ->paginate(20);
+
+        $students = User::with(['student', 'student.course', 'student.student_status'])
+                        ->where('role_id','=','4')
+                        ->orderBy('lastname', 'asc')
+                        ->paginate(20);
+
         if(count($students) == 0){
             return null;
         }else{
@@ -42,14 +50,22 @@ class StudentController extends Controller
 
     public function search(string $searchText){
 
-        $searchFunction = function(Builder $query) use($searchText){
-            $query->where('firstname','like','%' . $searchText . '%')
-            ->orWhere('lastname','like', '%' . $searchText . '%');
-        };
-        $students = Student::with('user', 'course','student_status')
-                    ->whereHas('user',$searchFunction )
-                    ->orderBy('created_at', 'desc')
-                    ->paginate(20);
+        // $searchFunction = function(Builder $query) use($searchText){
+        //     $query->where('firstname','like','%' . $searchText . '%')
+        //     ->orWhere('lastname','like', '%' . $searchText . '%');
+        // };
+        // $students = Student::with('user', 'course','student_status')
+        //             ->whereHas('user',$searchFunction )
+        //             ->orderBy('created_at', 'desc')
+        //             ->paginate(20);
+        $students = User::with('student', 'student.course', 'student.student_status')
+                        ->where('role_id','=','4')
+                        ->where(function (Builder $query) use ($searchText){
+                            $query->where('firstname','like','%' . $searchText . '%')
+                            ->orWhere('lastname','like', '%' . $searchText . '%');
+                        })
+                        ->orderBy('lastname', 'asc')
+                        ->paginate(20);
         if(count($students) == 0){
             return null;
         }else{
@@ -62,6 +78,12 @@ class StudentController extends Controller
         $students = Student::with('user','course','student_status')
                 ->orderBy('year_admitted','desc')
                 ->paginate(20);
+
+        // $students = User::with('student','student.course','student.status_status')
+        //                 ->where('role_id', '=', '4')
+        //                 ->orderBy('student.year_admitted')
+        //                 ->orderBy('lastname', 'asc')
+        //                 ->paginate(20);
         if(count($students) == 0){
             return null;
         }else{

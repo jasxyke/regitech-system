@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 :root {
   --primary-maroon: #790000;
-  --primary-maroon-hover: #8b0000;
+  --primary-maroon-hover: #8b00009f;
   --bg-grey: #f5f3f3;
   --status-yellow: #fff200;
   --status-orange: #f68e56;
@@ -75,3 +75,16 @@
 .table-min {
   min-height: 500px;
 }
+
+/* custom select  */
+/* .form-select:focus {
+  border-color: var(--primary-maroon-hover) !important;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem var(--primary-maroon-hover) !important;
+} */
+
+/* .form-control:focus {
+  border-color: var(--primary-maroon-hover) !important;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem var(--primary-maroon-hover) !important;
+} */

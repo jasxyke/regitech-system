@@ -11,7 +11,7 @@ const useStaffCrud = () => {
     axiosClient
       .get("/users")
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         setStaffs(res.data);
         setLoading(false);
       })
@@ -48,7 +48,7 @@ const useStaffCrud = () => {
       const res = await axiosClient.delete("/users/" + staffId, staffId);
       let response = res.data.message;
       onResponse(response);
-      console.log(res);
+      console.log(res.data);
       setStaffs(staffs.filter((obj) => obj.id !== staffId));
     } catch (error) {
       console.log(error);

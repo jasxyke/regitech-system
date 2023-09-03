@@ -5,7 +5,7 @@ const useDocuments = () => {
   const getDocuments = async (requestId, setDocuments) => {
     try {
       const res = await axiosClient.get(`/request-documents/${requestId}`);
-      console.log(res);
+      console.log(res.data);
 
       setDocuments(res.data);
     } catch (error) {
@@ -16,7 +16,7 @@ const useDocuments = () => {
   const deleteDocument = async (documentId, handleDelete) => {
     try {
       const res = await axiosClient.delete("/documents/" + documentId);
-      console.log(res);
+      console.log(res.data);
 
       handleDelete(documentId, res.data.message);
     } catch (error) {

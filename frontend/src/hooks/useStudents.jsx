@@ -14,7 +14,7 @@ const useStudents = () => {
     axiosClient
       .get(route)
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         setStudents(res.data.data);
         setPagination(res.data);
         setLoading(false);
@@ -30,7 +30,7 @@ const useStudents = () => {
     axiosClient
       .get("/students/" + studentId)
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         console.log("STUDENT REQUEST");
         setStudent(res.data);
         //setPagination(res.data);
@@ -47,7 +47,7 @@ const useStudents = () => {
     axiosClient
       .get("/students")
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         setStudents(res.data.data);
         setPagination(res.data);
         setLoading(false);
@@ -80,7 +80,7 @@ const useStudents = () => {
     axiosClient
       .get("/students/search/" + searchText)
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         let searchResult = res.data.data;
         if (searchResult == undefined) {
           setStudents(null);

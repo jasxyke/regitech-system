@@ -8,7 +8,7 @@ import todoList from "../../assets/to-do-list.png";
 import { useMediaQuery } from "react-responsive";
 const MainNavButtons = ({ userRole }) => {
   const navigate = useNavigate();
-  const isMobile = useMediaQuery({ query: "(max-width: 578px)" });
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
   if (isMobile) {
     return null;
   }

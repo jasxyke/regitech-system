@@ -11,7 +11,7 @@ const useResetPassword = ({ handleError, handleResponse }) => {
       const res = await guestAxios.post("/password/email", {
         email: email,
       });
-      console.log(res);
+      console.log(res.data);
       handleResponse(res.data.message);
     } catch (error) {
       console.log(error);
@@ -34,7 +34,7 @@ const useResetPassword = ({ handleError, handleResponse }) => {
         password: password,
         password_confirmation: password_confirmation,
       });
-      console.log(res);
+      console.log(res.data);
       handleResponse(res.data.message);
       //navigate("/");
     } catch (error) {

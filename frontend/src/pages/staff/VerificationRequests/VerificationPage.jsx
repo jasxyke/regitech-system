@@ -38,10 +38,10 @@ const VerificationPage = () => {
   const submittedDocsHook = useSubmittedDocuments();
   const documents = submittedDocsHook.submittedDocuments;
 
-  const [pdf, setPdf] = useState("");
+  const [pdfUrl, setPdfUrl] = useState("");
 
   const onLoad = (pdf) => {
-    setPdf(pdf);
+    setPdfUrl(pdf.url);
   };
 
   useEffect(() => {
@@ -99,8 +99,8 @@ const VerificationPage = () => {
       </div>
       <div className={"row" + " mt-4"}>
         <div className={"col-sm-6"}>
-          {pdf !== null ? (
-            <PdfView pdf={pdf} />
+          {pdfUrl !== null ? (
+            <PdfView pdfUrl={pdfUrl} />
           ) : (
             <div className="d-flex justify-content-center">
               <Spinner animation="border" role="status" />
@@ -160,7 +160,7 @@ const VerificationPage = () => {
                 <EditPDFs
                   allPdfs={allPdfs}
                   currentPdf={request.pdf}
-                  changePDF={setPdf}
+                  changePDF={setPdfUrl}
                 />
               ) : (
                 <div className="d-flex justify-content">

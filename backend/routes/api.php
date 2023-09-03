@@ -31,8 +31,6 @@ Route::post('/sign-up', [AuthController::class, 'register']);
 Route::group(['middleware'=>['auth:sanctum','verified']], function(){
     Route::post('/me', [AuthController::class, 'me']);
     Route::resource('requests', RequestController::class);
-        Route::post('/upload', [SubmissionController::class, 
-        'upload']);
         Route::resources([
             'students' => StudentController::class,
             'documents' => DocumentController::class,
@@ -53,6 +51,10 @@ Route::group(['middleware'=>['auth:sanctum','verified']], function(){
     Route::get('/student-pdfs/{id}', [StudentController::class, 'getPdfs']);
     Route::get('/students/search/{searchText}', [StudentController::class, 'search']);
 
+    //uploading files/masterlist
+    Route::post('/upload', [SubmissionController::class, 'upload']);
+    Route::post('/add-to-masterlist', [SubmissionController::class, 'addToMasterlist']);
+    
     //request sort routes
     Route::get('/oldest-request-first', [RequestController::class, 'oldestRequestsFirst']);
     Route::get('/not-reviewed-requests', [RequestController::class, 'notReviewedRequests']);

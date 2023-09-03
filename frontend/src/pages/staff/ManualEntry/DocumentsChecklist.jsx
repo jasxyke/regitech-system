@@ -1,23 +1,16 @@
-import React, { useState } from "react";
-import { documentTypes } from "../../../data/constants";
-import DocumentRow from "../VerificationRequests/DocumentRow";
-import SelectDocumentStatus from "../../../components/ui/SelectDocumentStatus";
 import Checkbox from "../../../components/forms/Checkbox";
+import SelectDocumentStatus from "../../../components/ui/SelectDocumentStatus";
 
-const documentsList = documentTypes.map((documentType) => {
-  return { documentType, document_status_id: "5", with_copies: 0 };
-});
-
-const DocumentsChecklist = () => {
-  const [documents, setDocuments] = useState(documentsList);
-
+const DocumentsChecklist = ({ setDocuments, documents }) => {
   const editChecklist = (editedDocument) => {
-    const editedChecklist = documentsList.map((document) => {
+    const editedChecklist = documents.map((document) => {
       if (document.documentType.id === editedDocument.documentType.id) {
         return editedDocument;
       }
       return document;
     });
+    console.log("checklist: ");
+    console.log(editedChecklist);
     setDocuments(editedChecklist);
   };
 
