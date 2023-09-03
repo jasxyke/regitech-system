@@ -4,13 +4,6 @@ import Form from "react-bootstrap/Form";
 const SelectDocumentStatus = ({ status, handleChange }) => {
   return (
     <>
-      <style type="text/css">{`
-          .form-select:focus {
-            border-color: #790000;
-            outline: 0;
-            box-shadow: 0 0 0 0.25rem #790000;
-        }
-        `}</style>
       <Form.Select
         name="documentStatus"
         id="documentStatus"

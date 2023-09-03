@@ -26,11 +26,13 @@ class DocumentsHandler{
         $student = $this->student;
 
         $fullname = sprintf("%s %s", $user->lastname, $user->firstname);
-        $dateSubmitted = date("Y_m_d");
+        $dateSubmitted = date('Y_F_d_H_i_s');
         $path = sprintf("\%u\%s\%s",$student->year_admitted, $student->course->name, $fullname);
         $filename = sprintf("%s_%s_%u_%s.%s",$dateSubmitted, $student->course->short_name, 
         $student->year_admitted, $fullname,$extension);
-        return $file->storeAs($path, $filename, 'public');
+        $validFilePath = UrlConverter::converToValidUrl($path);
+        $validFileName = UrlConverter::converToValidUrl($filename);
+        return $file->storeAs($validFilePath, $validFileName, 'public');
     }
     
     public function createDocument($path, $docTypeId, 

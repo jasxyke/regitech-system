@@ -20,11 +20,12 @@ const StudentDashboardTable = ({
   console.log(submittedDocuments);
   return (
     <div className={"my-2 " + TableCss.fullTable}>
-      <table className="table table-hover my-0">
+      <table className="table table-responsive table-hover my-0">
         <thead>
           <tr className={TableCss.table_head}>
             <th scope="col">Document Submitted</th>
             <th scope="col">Document Status</th>
+            <th scope="col">Last checked by</th>
           </tr>
         </thead>
         <tbody className={TableCss.table_contents}>

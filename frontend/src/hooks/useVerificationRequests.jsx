@@ -13,7 +13,7 @@ const useVerificationRequests = () => {
     axiosClient
       .get(route)
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         setVerificationRequests(res.data.data);
         setPagination(res.data);
         setLoading(false);
@@ -29,7 +29,7 @@ const useVerificationRequests = () => {
     axiosClient
       .get("/requests")
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         setVerificationRequests(res.data.data);
         setPagination(res.data);
         setLoading(false);
@@ -62,7 +62,7 @@ const useVerificationRequests = () => {
     axiosClient
       .get("/requests/search/" + searchText)
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         let searchResult = res.data.data;
         if (searchResult == undefined) {
           setVerificationRequests(null);

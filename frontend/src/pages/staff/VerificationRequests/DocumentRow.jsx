@@ -1,9 +1,6 @@
-import React from "react";
+import Checkbox from "../../../components/forms/Checkbox";
 import SelectDocumentStatus from "../../../components/ui/SelectDocumentStatus";
 import { getStatus } from "../../../utils/getStatus";
-import Checkbox from "../../../components/forms/Checkbox";
-import { OverlayTrigger } from "react-bootstrap";
-import LastEditPopover from "../../../components/ui/LastEditPopover";
 
 const DocumentRow = ({ document, verifyDocument }) => {
   const hasBeenReviewed =

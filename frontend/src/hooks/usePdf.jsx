@@ -12,7 +12,7 @@ const usePdf = () => {
       .get("/pdf/" + student_id)
       .then((res) => {
         console.log("pdf:");
-        console.log(res);
+        console.log(res.data);
         setPdf(res.data);
         onLoad(res.data.url);
         setLoading(false);
@@ -28,7 +28,7 @@ const usePdf = () => {
     axiosClient
       .get("/student-pdfs/" + student_id)
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         setStudentPdfs(res.data);
         setLoading(false);
       })

@@ -79,7 +79,7 @@ const StudentDashboard = ({ studentProp = null }) => {
       />
       <div className={StudentCSS.table_header}>
         <h2>
-          <strong>Verification requests</strong>
+          <strong>PDF Documents</strong>
         </h2>
       </div>
       <PdfDocumentsTable student={student} />

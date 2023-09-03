@@ -35,7 +35,7 @@ const useSubmittedDocuments = () => {
       console.log("submitted docs: ");
       console.log(typeof res.data);
       console.log(res.data);
-      console.log(res);
+      console.log(res.data);
       console.log(res.data === "");
       setSubmittedDocuments(res.data);
     } catch (error) {
@@ -51,7 +51,7 @@ const useSubmittedDocuments = () => {
       console.log("submitted docs: ");
       console.log(typeof res.data);
       console.log(res.data);
-      console.log(res);
+      console.log(res.data);
       console.log(res.data === "");
       setSubmittedDocuments(res.data);
     } catch (error) {
@@ -68,7 +68,7 @@ const useSubmittedDocuments = () => {
       console.log("submitted docs: ");
       console.log(typeof res.data);
       console.log(res.data);
-      console.log(res);
+      console.log(res.data);
       console.log(res.data === "");
       setSubmittedDocuments(res.data);
       setLoading(false);

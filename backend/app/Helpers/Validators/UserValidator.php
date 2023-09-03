@@ -33,11 +33,6 @@ class UserValidator{
     public static function validateManualUpload(Request $request){
         $fields = $request->validate([
             'email'=>'string|email:rfc,dns|unique:users,email|max:255',
-            'password'=>['required', 'confirmed', 
-            Password::min(8)
-                    ->letters()
-                    ->numbers()
-            ],
             'lastname'=>'required|string|max:50',
             'firstname'=>'required|string|max:100',
             'midname'=>'string|max:50|nullable',
