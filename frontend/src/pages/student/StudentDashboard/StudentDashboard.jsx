@@ -1,20 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import GreetingsHeader from "../../../components/GreetingsHeader";
+import LoadingPage from "../../../components/LoadingPage";
+import ResponseModal from "../../../components/ResponseModal";
+import BackButton from "../../../components/ui/BackButton";
 import { useUser } from "../../../context/UserContext";
+import useSubmittedDocuments from "../../../hooks/useSubmittedDocuments";
+import EditStudentDocumentsModal from "../../staff/StudentView/EditStudentDocumentsModal";
+import PdfDocumentsTable from "./PdfDocumentsTable";
 import StudentCSS from "./StudentDashboard.module.css";
 import StudentDashboardTable from "./StudentDashboardTable";
 import StudentProfile from "./StudentProfile";
-import ToBeSubmitted from "./ToBeSubmitted";
-import useUploadHandler from "../../../hooks/useUploadHandler";
-import useSubmittedDocuments from "../../../hooks/useSubmittedDocuments";
-import ResponseModal from "../../../components/ResponseModal";
-import LoadingPage from "../../../components/LoadingPage";
-import { documentTypes } from "../../../data/constants";
-import PdfDocumentsTable from "./PdfDocumentsTable";
-import PrimaryButton from "../../../components/ui/PrimaryButton";
-import { useNavigate } from "react-router-dom";
-import BackButton from "../../../components/ui/BackButton";
-import SectionHeader from "../../../components/SectionHeader";
 
 const StudentDashboard = ({ studentProp = null }) => {
   const student = studentProp !== null ? studentProp : useUser();
@@ -67,9 +62,12 @@ const StudentDashboard = ({ studentProp = null }) => {
       </div>
       <StudentProfile student={student} />
       <div className={StudentCSS.table_header}>
-        <h2>
-          <b>Document status</b>
+        <h2 className="me-auto">
+          <b>Documents status</b>
         </h2>
+        {studentProp !== null && submittedDocuments !== null && (
+          <EditStudentDocumentsModal documents={submittedDocuments} />
+        )}
       </div>
       <StudentDashboardTable
         submittedDocuments={submittedDocuments}

@@ -37,6 +37,9 @@ const StudentsRecordTable = () => {
   };
 
   const handleSearch = () => {
+    if (searchText === "") {
+      studentsHook.getDefaultStudents();
+    }
     studentsHook.searchStudentByName(searchText);
   };
 

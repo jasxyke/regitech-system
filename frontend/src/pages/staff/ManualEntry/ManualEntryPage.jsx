@@ -12,8 +12,8 @@ import useMasterlist from "../../../hooks/useMasterlist";
 import ResponseModal from "../../../components/ResponseModal";
 import { Spinner } from "react-bootstrap";
 
-const documentsList = documentTypes.map((documentType) => {
-  return { documentType, document_status_id: "5", with_copies: 0 };
+const documentsList = documentTypes.map((document_type) => {
+  return { document_type, document_status_id: "5", with_copies: 0 };
 });
 
 const ManualEntryPage = () => {

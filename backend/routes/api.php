@@ -43,7 +43,6 @@ Route::group(['middleware'=>['auth:sanctum','verified']], function(){
     Route::get('/submitted-documents/{id}', [DocumentController::class, 'getSubmittedDocuments']);
     Route::get('/unverified-documents/{id}', [DocumentController::class, 'getUnverifiedDocuments']);
     Route::post('/verify-documents/{id}/{updated_by_id}', [VerifiedDocumentsController::class, 'verify_documents']);
-    Route::post('/test-email', [VerifiedDocumentsController::class, 'testEmail']);
     Route::get('/complete-students', [StudentDocumentController::class, 'getCompleteStudentDocuments']);
     Route::get('/incomplete-students', [StudentDocumentController::class, 'getIncompleteStudentDocuments']);
     Route::get('/requests/search/{searchText}', [RequestController::class, 'search']);
@@ -54,6 +53,9 @@ Route::group(['middleware'=>['auth:sanctum','verified']], function(){
     //uploading files/masterlist
     Route::post('/upload', [SubmissionController::class, 'upload']);
     Route::post('/add-to-masterlist', [SubmissionController::class, 'addToMasterlist']);
+
+    //checklist or masterlist
+    Route::post('/save-masterlist', [DocumentController::class, 'editDocuments']);
     
     //request sort routes
     Route::get('/oldest-request-first', [RequestController::class, 'oldestRequestsFirst']);

@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { Button } from "react-bootstrap";
 
-const PrimaryButton = ({ text, onClick }) => {
+const PrimaryButton = ({ text, onClick, color = "maroon" }) => {
   return (
     <>
       <style type="text/css">
@@ -13,10 +14,38 @@ const PrimaryButton = ({ text, onClick }) => {
             .btn-main:hover{
               border: 1px solid var(--primary-maroon);
             }
+
+            .btn-green{
+              background-color: var(--status-green);
+                color: white;
+            }
+
+            .btn-green:hover{
+              border: 1px solid var(--status-green);
+              color: black;
+            }
+
+            .btn-orange{
+              background-color: var(--status-orange);
+                color: white;
+            }
+
+            .btn-orange:hover{
+              border: 1px solid var(--status-orange);
+              color: black;
+            } 
         `}
       </style>
       <Button
-        variant="main"
+        variant={
+          color === "green"
+            ? "green"
+            : color === "orange"
+            ? "orange"
+            : color === "primary"
+            ? "primary"
+            : "main"
+        }
         onClick={(e) => {
           onClick();
         }}
@@ -28,4 +57,3 @@ const PrimaryButton = ({ text, onClick }) => {
 };
 
 export default PrimaryButton;
-

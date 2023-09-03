@@ -48,14 +48,15 @@ class VerifiedDocumentsController extends Controller
                 if($modifiedDocument["document_status_id"] == 2){
                     $invalidDocument++;
                 }
+                if($modifiedDocument["document_status_id"] == 3){
+                    $pendingDocs++;
+                }
+                if($modifiedDocument["document_status_id"] == 5){
+                    $missingDocs++;
+                }
             }
         }
-        if($submittedDoc->document_status_id == 3){
-            $pendingDocs++;
-        }
-        if( $submittedDoc->document_status_id == 5){
-            $missingDocs++;
-        }
+        
         }
 
         $submittedDocs = $submittedDocs->toArray();

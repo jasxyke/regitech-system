@@ -4,7 +4,7 @@ import SelectDocumentStatus from "../../../components/ui/SelectDocumentStatus";
 const DocumentsChecklist = ({ setDocuments, documents }) => {
   const editChecklist = (editedDocument) => {
     const editedChecklist = documents.map((document) => {
-      if (document.documentType.id === editedDocument.documentType.id) {
+      if (document.document_type.id === editedDocument.document_type.id) {
         return editedDocument;
       }
       return document;
@@ -17,8 +17,8 @@ const DocumentsChecklist = ({ setDocuments, documents }) => {
   const documentsChecklist = documents.map((document, index) => {
     return (
       <div key={index} className="row pb-2">
-        <div className="col-sm-4">{document.documentType.name}</div>
-        <div className="col-sm-2">
+        <div className="col-sm-4">{document.document_type?.name}</div>
+        <div className="col-sm-3">
           <SelectDocumentStatus
             status={document.document_status_id}
             handleChange={(e) => {
@@ -31,7 +31,7 @@ const DocumentsChecklist = ({ setDocuments, documents }) => {
             }}
           />
         </div>
-        <div className="col-sm-6">
+        <div className="col-sm-5">
           <Checkbox
             label={"Photocopies"}
             checked={document.with_copies}
