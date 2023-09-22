@@ -140,7 +140,7 @@ const ManualEntryPage = () => {
         </div>
         <div className="mt-3 mb-3">
           <label htmlFor="note" className="form-label">
-            <strong>Registrar note:</strong>
+            <strong>Registrar note (for email):</strong>
           </label>
           <input
             className="form-control"

@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 
-const PrimaryButton = ({ text, onClick, color = "maroon" }) => {
+const PrimaryButton = ({
+  text,
+  onClick,
+  color = "maroon",
+  size = "",
+  disabled = false,
+}) => {
   return (
     <>
       <style type="text/css">
@@ -49,6 +55,8 @@ const PrimaryButton = ({ text, onClick, color = "maroon" }) => {
         onClick={(e) => {
           onClick();
         }}
+        size={size}
+        disabled={disabled}
       >
         {text}
       </Button>

@@ -20,11 +20,15 @@ use Illuminate\Support\Facades\Storage;
 
 class SubmissionController extends Controller
 {
-    
-    function upload(Request $request){
-        if(!$request->hasFile('document')){
+
+    public static function checkUploadedFile(Request $request, $filename){
+        if(!$request->hasFile($filename)){
             return response()->json(['message' => 'No files uploaded', 'request' => $request],400); 
         }
+    }
+    
+    function upload(Request $request){
+        self::checkUploadedFile($request, 'document');
 
         $document = $request->file("document");
         
@@ -72,9 +76,7 @@ class SubmissionController extends Controller
     }
 
     function addToMasterlist(Request $request){
-        if(!$request->hasFile('pdfFile')){
-            return response()->json(['message' => 'No files uploaded', 'request' => $request],400); 
-        }
+        self::checkUploadedFile($request, 'pdfFile');
 
         $staff = $request->user();
         $hasNoEmail = $request->input('hasNoEmail');
@@ -83,7 +85,7 @@ class SubmissionController extends Controller
         //create student account
         if($hasNoEmail){
             $studentUser = User::create([
-                'password'=>bcrypt(strtolower($fields['lastname']) . '123'),//default password muna, <lastname>123
+                //'password'=>bcrypt(strtolower($fields['lastname']) . '123'),//default password muna, <lastname>123
                 'lastname'=>$fields['lastname'],
                 'firstname'=>$fields['firstname'],
                 'midname'=>$fields['midname'],
@@ -190,5 +192,34 @@ class SubmissionController extends Controller
             "message"=>"Student info and checklist added to masterlist.t"
         ]);
         
+    }
+
+    public function addCredentials(Request $request, $studentId){
+        self::checkUploadedFile($request, 'pdfFile');
+
+        $staff = $request->user();
+        $student = Student::with('user')
+                        ->where('id','=',$studentId)
+                        ->firstOrFail();
+        
+        $pdfFile = $request->file('pdfFile');
+        $documentsChecklist = $request->input('checklist');
+        $note = $request->input('note');
+
+        $documentsHandler = new DocumentsHandler($student->user, $student);
+
+        $path = $documentsHandler->saveDocument($pdfFile);
+        $pdf = PDF::create([
+            "student_id"=>$student->id,
+            "url"=>Storage::disk('public')->url($path),
+            "file_path"=>$path
+        ]);
+
+       $updatedChecklist = $documentsHandler->updateChecklist($documentsChecklist, $note, $staff->id, $pdf->id);
+
+       $pdf = $pdf->load('documents', 'documents.document_type');
+
+       return response()->json(["message"=>"Successfully added student credentials.", 
+                        "checklist"=>$updatedChecklist, "pdfRecord"=>$pdf]);
     }
 }

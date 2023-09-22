@@ -55,7 +55,8 @@ Route::group(['middleware'=>['auth:sanctum','verified']], function(){
     Route::post('/add-to-masterlist', [SubmissionController::class, 'addToMasterlist']);
 
     //checklist or masterlist
-    Route::post('/save-masterlist', [DocumentController::class, 'editDocuments']);
+    Route::post('/save-masterlist/{id}', [DocumentController::class, 'editDocuments']);
+    Route::post('/add-credentials/{studentId}',[SubmissionController::class, 'addCredentials']);
     
     //request sort routes
     Route::get('/oldest-request-first', [RequestController::class, 'oldestRequestsFirst']);

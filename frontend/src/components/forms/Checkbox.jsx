@@ -1,6 +1,4 @@
-import { Form } from "react-bootstrap";
-
-const Checkbox = ({ checked, handleChange, label }) => {
+const Checkbox = ({ checked, handleChange, label, id }) => {
   return (
     <>
       <style type="text/css">
@@ -9,16 +7,25 @@ const Checkbox = ({ checked, handleChange, label }) => {
                 background-color: var(--primary-maroon);
                 border-color: var(--primary-maroon);
             }
+
+            .form-check-label{
+              cursor: pointer;
+            }
         `}
       </style>
-      <Form.Check
-        type="checkbox"
-        label={label}
-        checked={checked}
-        onChange={handleChange}
-
-        //className="form-check-input"
-      />
+      <div className="form-check">
+        <input
+          type="checkbox"
+          checked={checked}
+          onChange={handleChange}
+          className="form-check-input"
+          id={id}
+          name={id}
+        />
+        <label htmlFor={id} className="form-check-label">
+          {label}
+        </label>
+      </div>
     </>
   );
 };

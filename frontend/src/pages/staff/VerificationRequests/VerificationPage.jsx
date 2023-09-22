@@ -184,7 +184,7 @@ const VerificationPage = () => {
               Done
             </Button>
             <ResponseModal
-              headerText={"Server response..."}
+              headerText={"Updating checklist..."}
               response={response}
               show={showModal}
               handleClose={handleClose}

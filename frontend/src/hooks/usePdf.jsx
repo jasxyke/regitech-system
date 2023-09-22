@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axiosClient from "../utils/axios";
 
 const usePdf = () => {
   const [loading, setLoading] = useState(false);
   const [pdf, setPdf] = useState(null);
   const [studentPdfs, setStudentPdfs] = useState(null);
+
+  const addPdf = (newPdf) => {
+    setStudentPdfs([...studentPdfs, newPdf]);
+  };
 
   const getPdf = (student_id, onLoad) => {
     setLoading(true);
@@ -38,7 +42,7 @@ const usePdf = () => {
       });
   };
 
-  return { loading, pdf, studentPdfs, getPdf, getAllPdfs };
+  return { loading, pdf, studentPdfs, getPdf, getAllPdfs, addPdf };
 };
 
 export default usePdf;
