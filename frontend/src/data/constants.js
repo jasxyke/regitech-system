@@ -18,6 +18,7 @@ const documentTypes = [
   { id: 9, name: "School ID SHS" },
   { id: 10, name: "2x2 Picture" },
   { id: 11, name: "Form 137 SHS" },
+  { id: 12, name: "TOR Copy for PUP" },
 ];
 
 const roles = [
@@ -29,9 +30,9 @@ const roles = [
 
 const studentStatuses = [
   { id: 1, name: "Complete" },
-  { id: 1, name: "Incomplete" },
-  { id: 1, name: "Pull-out" },
-  { id: 1, name: "Transferee" },
+  { id: 2, name: "Incomplete" },
+  { id: 3, name: "Pull-out" },
+  { id: 4, name: "Transferee" },
 ];
 
 const courses = [

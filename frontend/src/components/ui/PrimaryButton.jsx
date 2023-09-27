@@ -7,6 +7,7 @@ const PrimaryButton = ({
   color = "maroon",
   size = "",
   disabled = false,
+  type = "button",
 }) => {
   return (
     <>
@@ -57,6 +58,7 @@ const PrimaryButton = ({
         }}
         size={size}
         disabled={disabled}
+        type={type}
       >
         {text}
       </Button>

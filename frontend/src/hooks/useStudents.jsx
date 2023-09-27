@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import axiosClient from "../utils/axios";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axiosClient from "../utils/axios";
 
 const useStudents = () => {
   const [students, setStudents] = useState(null);

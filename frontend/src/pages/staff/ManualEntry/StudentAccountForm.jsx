@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { courses, years } from "../../../data/constants";
 import { useFormInput } from "../../../hooks/useFormInput";
 import { clearTextInputs } from "../../../utils/InputFormClearer";
+import { courseOptions, yearOptions } from "../../../utils/options";
+import Checkbox from "../../../components/forms/Checkbox";
 
 const StudentAccountForm = ({
   isFormResetted,
@@ -14,24 +16,18 @@ const StudentAccountForm = ({
   const lastname = useFormInput("");
   const [courseId, setCourseId] = useState("");
   const [yearAdmitted, setYearAdmitted] = useState("");
+  const [isTransferee, setIsTransferee] = useState(false);
 
-  const courseOptions = courses.map((course) => (
-    <option key={course.id} value={course.id}>
-      {course.name}
-    </option>
-  ));
-
-  const yearOptions = years.map((year, index) => (
-    <option key={index} value={year}>
-      {year}
-    </option>
-  ));
-
-  if (isFormResetted) {
+  const resetForm = () => {
+    console.log("form resetted");
     clearTextInputs(email, firstname, midname, lastname);
     setCourseId("");
     setYearAdmitted("");
-  }
+    setIsTransferee(false);
+  };
+  useEffect(() => {
+    resetForm();
+  }, [isFormResetted]);
 
   return (
     <div className="">
@@ -147,6 +143,18 @@ const StudentAccountForm = ({
               </option>
               {yearOptions}
             </select>
+          </div>
+        </div>
+        <div className="row mt-2">
+          <div className="col-sm-6">
+            <Checkbox
+              checked={isTransferee}
+              handleChange={() => {
+                setIsTransferee(!isTransferee);
+              }}
+              label={"Transferee"}
+              id={"transferee"}
+            />
           </div>
         </div>
       </div>

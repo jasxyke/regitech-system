@@ -22,10 +22,6 @@ const EditStudentDocumentsModal = ({
   };
   const handleShow = () => setShow(true);
 
-  const [pdfFile, setPdfFile] = useState(null);
-  const pdfFileRef = useRef(null);
-  const [note, setNote] = useState("");
-
   const [response, setResponse] = useState("");
   const [error, setError] = useState("");
 
@@ -38,6 +34,10 @@ const EditStudentDocumentsModal = ({
   const handleError = (error) => {
     setError(error);
   };
+
+  const [pdfFile, setPdfFile] = useState(null);
+  const pdfFileRef = useRef(null);
+  const [note, setNote] = useState("");
 
   const masterlist = useMasterlist(handleError, handleSuccess);
 
@@ -69,7 +69,6 @@ const EditStudentDocumentsModal = ({
           size={"lg"}
         />
       </div>
-      <form></form>
       <Modal size="lg" show={show} onHide={handleClose} centered>
         <Modal.Header className="modalHead" closeVariant="white" closeButton>
           <Modal.Title>Add credentials</Modal.Title>

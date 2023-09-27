@@ -37,7 +37,7 @@ class DocumentSeeder extends Seeder
                                 Request::factory(1)
                                 ->create(['student_id'=>$pdf->student_id, 'pdf_id'=>$pdf->id])
                                 ->each(function ($request){
-                                    Document::factory(11)
+                                    Document::factory(12)
                                     ->state(new Sequence(
                                         [
                                             'document_type_id'=>'1',
@@ -111,6 +111,13 @@ class DocumentSeeder extends Seeder
                                         ],
                                         [
                                             'document_type_id'=>'11',
+                                            'student_id'=>$GLOBALS['incompleteStudent']->id,
+                                            'document_status_id'=>'3',
+                                            'pdf_id'=>$request->id,
+                                            'updated_by_id'=>$request->student_id
+                                        ],
+                                        [
+                                            'document_type_id'=>'12',
                                             'student_id'=>$GLOBALS['incompleteStudent']->id,
                                             'document_status_id'=>'3',
                                             'pdf_id'=>$request->id,
@@ -144,7 +151,7 @@ class DocumentSeeder extends Seeder
                             Request::factory(1)
                             ->create(['student_id'=>$pdf->student_id, 'pdf_id'=>$pdf->id])
                                 ->each(function ($request){
-                                    Document::factory(11)
+                                    Document::factory(12)
                                     ->state(new Sequence(
                                         [
                                             'document_type_id'=>'1',
@@ -218,6 +225,13 @@ class DocumentSeeder extends Seeder
                                         ],
                                         [
                                             'document_type_id'=>'11',
+                                            'student_id'=>$GLOBALS['completeStudent']->id,
+                                            'document_status_id'=>'1',
+                                            'pdf_id'=>$request->pdf_id,
+                                            'updated_by_id'=>$request->student_id
+                                        ],
+                                        [
+                                            'document_type_id'=>'12',
                                             'student_id'=>$GLOBALS['completeStudent']->id,
                                             'document_status_id'=>'1',
                                             'pdf_id'=>$request->pdf_id,

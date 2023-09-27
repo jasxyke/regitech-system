@@ -23,6 +23,16 @@
   text-decoration: none;
 }
 
+.file-input {
+  width: 100% !important;
+}
+
+@media screen and (min-width: 576px) {
+  .file-input {
+    width: 25% !important;
+  }
+}
+
 .bg-grey {
   background-color: var(--bg-grey) !important;
 }

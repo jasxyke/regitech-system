@@ -1,17 +1,17 @@
-import React from "react";
+import { formatFullName } from "../../../utils/dataFormatter";
 import StaffStyles from "../StaffDashboard/StaffDashboard.module.css";
-import { convertStampToDate } from "../../../utils/datesHandler";
 
 const StudentRecords = ({ studentRecords, handleView }) => {
   const students = studentRecords.map((student) => {
     return (
       <tr key={student.student.id}>
         <td>
-          {student.lastname +
-            ", " +
-            student.firstname +
-            " " +
-            student.midname || ""}
+          {formatFullName(
+            student.firstname,
+            student.lastname,
+            student.midname,
+            true
+          )}
         </td>
         <td>{student.student.year_admitted}</td>
         <td>{student.student.course.short_name}</td>

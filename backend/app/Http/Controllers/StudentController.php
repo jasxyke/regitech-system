@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Validators\UserValidator;
 use App\Http\Controllers\Controller;
 use App\Models\Pdf;
 use App\Models\Request as ModelsRequest;
@@ -75,15 +76,15 @@ class StudentController extends Controller
 
     public function newestStudentsFirst(){
         //change to something more memory friendly later on
-        $students = Student::with('user','course','student_status')
-                ->orderBy('year_admitted','desc')
-                ->paginate(20);
+        // $students = Student::with('user','course','student_status')
+        //         ->orderBy('year_admitted','desc')
+        //         ->paginate(20);
 
-        // $students = User::with('student','student.course','student.status_status')
-        //                 ->where('role_id', '=', '4')
-        //                 ->orderBy('student.year_admitted')
-        //                 ->orderBy('lastname', 'asc')
-        //                 ->paginate(20);
+        $students = User::with('student','student.course','student.status_status')
+                        ->where('role_id', '=', '4')
+                        ->orderBy('student.year_admitted')
+                        ->orderBy('lastname', 'asc')
+                        ->paginate(20);
         if(count($students) == 0){
             return null;
         }else{
@@ -96,6 +97,12 @@ class StudentController extends Controller
         $students = Student::with('user','course','student_status')
                 ->orderBy('year_admitted','asc')
                 ->paginate(20);
+        $students = User::with('student','student.course','student.student_status')
+                        ->where('role_id', '=', '4')
+                        ->orderBy('student.year_admitted')
+                        ->orderBy('lastname', 'asc')
+                        ->paginate(20);
+                        
         if(count($students) == 0){
             return null;
         }else{
@@ -163,7 +170,31 @@ class StudentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $student = Student::findOrFail($id);
+        $studentUser = User::findOrFail($student->user_id);
+
+        $userFields = UserValidator::validateUpdate($request);
+
+        $isTransferee = $request->input('transferee');
+
+        $studentUser->email = $request->input('email');
+        $studentUser->firstname = $request->input('firstname');
+        $studentUser->midname = $request->input('midname');
+        $studentUser->lastname = $request->input('lastname');
+        $studentUser->save();
+        
+        $student->course_id = $request->input('course_id');
+        $student->year_admitted = $request->input('year_admitted');
+        $student->student_status_id = $isTransferee ? "4" : "2";
+        $student->save();
+
+        //load user
+        $student = $student->load('user','course','student_status');
+
+        return response()->json(['message'=>'Student profile successfully updated!',
+                                'student'=>$student]);
+                                
+
     }
 
     /**

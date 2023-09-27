@@ -70,7 +70,40 @@ const useMasterlist = (onError, onSuccess) => {
       setLoading(false);
     }
   };
-  return { addToMasterlist, loading, addCredentials };
+
+  const updateStudentProfile = async (
+    studentId,
+    email,
+    firstname,
+    midname,
+    lastname,
+    course_id,
+    year_admitted,
+    isTransferee
+  ) => {
+    try {
+      setLoading(true);
+      const studentData = {
+        email: email,
+        firstname: firstname,
+        midname: midname,
+        lastname: lastname,
+        course_id: course_id,
+        year_admitted: year_admitted,
+        transferee: isTransferee,
+      };
+      console.log("student data: ");
+      console.log(studentData);
+      const res = await axiosClient.put("/students/" + studentId, studentData);
+      console.log("updated masterlist: ");
+      console.log(res.data);
+      onSuccess(res?.data?.message, res?.data?.student);
+    } catch (error) {
+      console.log(error.response);
+      onError(error?.response?.data?.message);
+    }
+  };
+  return { addToMasterlist, loading, addCredentials, updateStudentProfile };
 };
 
 export default useMasterlist;

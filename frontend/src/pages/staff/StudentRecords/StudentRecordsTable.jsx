@@ -1,13 +1,11 @@
-import StaffStyles from "../StaffDashboard/StaffDashboard.module.css";
-import React, { useEffect, useState } from "react";
-import PrimaryButton from "../../../components/ui/PrimaryButton";
-import { Dropdown, DropdownButton, Spinner } from "react-bootstrap";
-import { FiRefreshCw } from "react-icons/fi";
-import AppDropdown from "../../../components/ui/AppDropdown";
-import Form from "react-bootstrap/Form";
-import SecondaryButton from "../../../components/ui/SecondaryButton";
+import { useEffect, useState } from "react";
+import { Spinner } from "react-bootstrap";
 import { PaginationControl } from "react-bootstrap-pagination-control";
+import { FiRefreshCw } from "react-icons/fi";
+import PrimaryButton from "../../../components/ui/PrimaryButton";
+import SecondaryButton from "../../../components/ui/SecondaryButton";
 import useStudents from "../../../hooks/useStudents";
+import StaffStyles from "../StaffDashboard/StaffDashboard.module.css";
 import StudentRecords from "./StudentRecords";
 
 const StudentsRecordTable = () => {
@@ -56,7 +54,7 @@ const StudentsRecordTable = () => {
           text={<FiRefreshCw />}
           onClick={studentsHook.getDefaultStudents}
         />
-        <AppDropdown
+        {/* <AppDropdown
           handleSelect={handleSelect}
           dropdownItems={[
             "Newest first",
@@ -65,7 +63,7 @@ const StudentsRecordTable = () => {
             "Complete",
             "Alphabetically",
           ]}
-        />
+        /> */}
 
         <input
           type="text"

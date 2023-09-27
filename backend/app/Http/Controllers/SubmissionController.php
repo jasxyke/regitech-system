@@ -80,15 +80,16 @@ class SubmissionController extends Controller
 
         $staff = $request->user();
         $hasNoEmail = $request->input('hasNoEmail');
+        $isTransferee = $request->input('transferee');
         
         $fields = UserValidator::validateManualUpload($request);
         //create student account
         if($hasNoEmail){
             $studentUser = User::create([
-                //'password'=>bcrypt(strtolower($fields['lastname']) . '123'),//default password muna, <lastname>123
+                'password'=>bcrypt(strtolower($fields['lastname']) . '123'),//default password muna, <lastname>123
                 'lastname'=>$fields['lastname'],
                 'firstname'=>$fields['firstname'],
-                'midname'=>$fields['midname'],
+                'midname'=>$request->input('midname'),
                 'role_id'=>'4',
                 'email_verified_at'=>now(),
                 'remember_token'=>Str::random(10)
@@ -99,7 +100,7 @@ class SubmissionController extends Controller
                 'password'=>bcrypt(strtolower($fields['lastname']) . '123'),//default password muna, <lastname>123
                 'lastname'=>$fields['lastname'],
                 'firstname'=>$fields['firstname'],
-                'midname'=>$fields['midname'],
+                'midname'=>$request->input('midname'),
                 'role_id'=>'4',
                 'email_verified_at'=>now(),
                 'remember_token'=>Str::random(10)
@@ -110,7 +111,7 @@ class SubmissionController extends Controller
             'user_id'=>$studentUser->id,
             'course_id'=>$request->input('course_id'),
             'year_admitted'=>$request->input('year_admitted'),
-            'student_status_id'=>'2',
+            'student_status_id'=>(!$isTransferee) ? '2' : '4',
         ]);
 
         
@@ -136,7 +137,7 @@ class SubmissionController extends Controller
         //create documents and its checklist
         foreach($documentsChecklist as $document){
             $newDocument = Document::create([
-                "document_type_id"=>$document["documentType"]["id"],
+                "document_type_id"=>$document["document_type"]["id"],
                 "student_id"=>$student->id,
                 "document_status_id"=>$document["document_status_id"],
                 "updated_by_id"=>$staff->id,
@@ -189,7 +190,7 @@ class SubmissionController extends Controller
         }
 
         return response()->json([
-            "message"=>"Student info and checklist added to masterlist.t"
+            "message"=>"Student info and checklist added to masterlist."
         ]);
         
     }

@@ -77,7 +77,7 @@ function AddModal({ show, handleClose, onAddUser, loading }) {
           }}
         >
           <Modal.Title>
-            <h5 className="my-auto py-1">Add new user</h5>
+            <h5 className="my-auto py-1">Add new staff</h5>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className={AdminStyles.modal_body}>
@@ -251,20 +251,7 @@ function AddModal({ show, handleClose, onAddUser, loading }) {
         </Modal.Body>
         <Modal.Footer className={"p-2 " + AdminStyles.modal_footer}>
           <Button
-            disabled={loading}
             className={AdminStyles.modal_btn_submit}
-            onClick={() => {
-              setError("");
-              onAddUser(addedStaff, onError, onSuccess);
-              if (success) {
-                clearForm();
-              }
-            }}
-          >
-            Add
-          </Button>
-          <Button
-            className={AdminStyles.modal_btn_close}
             variant="secondary"
             onClick={() => {
               handleClose();
@@ -274,6 +261,19 @@ function AddModal({ show, handleClose, onAddUser, loading }) {
             }}
           >
             Close
+          </Button>
+          <Button
+            disabled={loading}
+            className={AdminStyles.modal_btn_close}
+            onClick={() => {
+              setError("");
+              onAddUser(addedStaff, onError, onSuccess);
+              if (success) {
+                clearForm();
+              }
+            }}
+          >
+            Add
           </Button>
         </Modal.Footer>
       </Modal>
