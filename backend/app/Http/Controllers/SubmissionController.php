@@ -20,11 +20,15 @@ use Illuminate\Support\Facades\Storage;
 
 class SubmissionController extends Controller
 {
-    
-    function upload(Request $request){
-        if(!$request->hasFile('document')){
+
+    public static function checkUploadedFile(Request $request, $filename){
+        if(!$request->hasFile($filename)){
             return response()->json(['message' => 'No files uploaded', 'request' => $request],400); 
         }
+    }
+    
+    function upload(Request $request){
+        self::checkUploadedFile($request, 'document');
 
         $document = $request->file("document");
         
@@ -72,12 +76,11 @@ class SubmissionController extends Controller
     }
 
     function addToMasterlist(Request $request){
-        if(!$request->hasFile('pdfFile')){
-            return response()->json(['message' => 'No files uploaded', 'request' => $request],400); 
-        }
+        self::checkUploadedFile($request, 'pdfFile');
 
         $staff = $request->user();
         $hasNoEmail = $request->input('hasNoEmail');
+        $isTransferee = $request->input('transferee');
         
         $fields = UserValidator::validateManualUpload($request);
         //create student account
@@ -86,7 +89,7 @@ class SubmissionController extends Controller
                 'password'=>bcrypt(strtolower($fields['lastname']) . '123'),//default password muna, <lastname>123
                 'lastname'=>$fields['lastname'],
                 'firstname'=>$fields['firstname'],
-                'midname'=>$fields['midname'],
+                'midname'=>$request->input('midname'),
                 'role_id'=>'4',
                 'email_verified_at'=>now(),
                 'remember_token'=>Str::random(10)
@@ -97,7 +100,7 @@ class SubmissionController extends Controller
                 'password'=>bcrypt(strtolower($fields['lastname']) . '123'),//default password muna, <lastname>123
                 'lastname'=>$fields['lastname'],
                 'firstname'=>$fields['firstname'],
-                'midname'=>$fields['midname'],
+                'midname'=>$request->input('midname'),
                 'role_id'=>'4',
                 'email_verified_at'=>now(),
                 'remember_token'=>Str::random(10)
@@ -108,7 +111,7 @@ class SubmissionController extends Controller
             'user_id'=>$studentUser->id,
             'course_id'=>$request->input('course_id'),
             'year_admitted'=>$request->input('year_admitted'),
-            'student_status_id'=>'2',
+            'student_status_id'=>(!$isTransferee) ? '2' : '4',
         ]);
 
         
@@ -134,7 +137,7 @@ class SubmissionController extends Controller
         //create documents and its checklist
         foreach($documentsChecklist as $document){
             $newDocument = Document::create([
-                "document_type_id"=>$document["documentType"]["id"],
+                "document_type_id"=>$document["document_type"]["id"],
                 "student_id"=>$student->id,
                 "document_status_id"=>$document["document_status_id"],
                 "updated_by_id"=>$staff->id,
@@ -187,8 +190,37 @@ class SubmissionController extends Controller
         }
 
         return response()->json([
-            "message"=>"Student info and checklist added to masterlist.t"
+            "message"=>"Student info and checklist added to masterlist."
         ]);
         
+    }
+
+    public function addCredentials(Request $request, $studentId){
+        self::checkUploadedFile($request, 'pdfFile');
+
+        $staff = $request->user();
+        $student = Student::with('user')
+                        ->where('id','=',$studentId)
+                        ->firstOrFail();
+        
+        $pdfFile = $request->file('pdfFile');
+        $documentsChecklist = $request->input('checklist');
+        $note = $request->input('note');
+
+        $documentsHandler = new DocumentsHandler($student->user, $student);
+
+        $path = $documentsHandler->saveDocument($pdfFile);
+        $pdf = PDF::create([
+            "student_id"=>$student->id,
+            "url"=>Storage::disk('public')->url($path),
+            "file_path"=>$path
+        ]);
+
+       $updatedChecklist = $documentsHandler->updateChecklist($documentsChecklist, $note, $staff->id, $pdf->id);
+
+       $pdf = $pdf->load('documents', 'documents.document_type');
+
+       return response()->json(["message"=>"Successfully added student credentials.", 
+                        "checklist"=>$updatedChecklist, "pdfRecord"=>$pdf]);
     }
 }

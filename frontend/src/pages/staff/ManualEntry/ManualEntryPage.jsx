@@ -12,8 +12,8 @@ import useMasterlist from "../../../hooks/useMasterlist";
 import ResponseModal from "../../../components/ResponseModal";
 import { Spinner } from "react-bootstrap";
 
-const documentsList = documentTypes.map((documentType) => {
-  return { documentType, document_status_id: "5", with_copies: 0 };
+const documentsList = documentTypes.map((document_type) => {
+  return { document_type, document_status_id: "5", with_copies: 0 };
 });
 
 const ManualEntryPage = () => {
@@ -48,13 +48,13 @@ const ManualEntryPage = () => {
   const handleSuccess = (response) => {
     setShowModal(true);
     setResponse(response);
-
     //reset form after successfull submit
     setFormResetted(true);
     setDocumentsChecklist(documentsList);
     setPdfFile(null);
     pdfFileRef.current.value = null;
     setFormResetted(false);
+    setInvalidForm(false);
   };
 
   const masterlistHook = useMasterlist(handleError, handleSuccess);
@@ -63,13 +63,16 @@ const ManualEntryPage = () => {
     e.preventDefault();
     const data = new FormData(e.target);
 
+    const isTransferee = data.get("transferee") === "on" ? true : false;
+    const midname = data.get("midname") === "" ? null : data.get("midname");
     const studentForm = {
       email: data.get("email"),
       firstname: data.get("firstname"),
       lastname: data.get("lastname"),
-      midname: data.get("midname"),
+      midname: midname,
       course_id: data.get("course_id"),
       year_admitted: data.get("year_admitted"),
+      transferee: isTransferee,
     };
 
     masterlistHook.addToMasterlist(
@@ -125,7 +128,7 @@ const ManualEntryPage = () => {
           <SectionHeader text={"Digitized documents"} block={true} />
           <div className="mt-3 px-4 py-3">
             <input
-              className="form-control w-25"
+              className="form-control file-input"
               name="pdf"
               type="file"
               onChange={(e) => {
@@ -140,7 +143,7 @@ const ManualEntryPage = () => {
         </div>
         <div className="mt-3 mb-3">
           <label htmlFor="note" className="form-label">
-            <strong>Registrar note:</strong>
+            <strong>Registrar note (for email):</strong>
           </label>
           <input
             className="form-control"
@@ -150,6 +153,7 @@ const ManualEntryPage = () => {
             onChange={(e) => {
               setNote(e.target.value);
             }}
+            disabled={hasNoEmail}
           />
         </div>
         <div className="mb-5 mt-3 d-flex">

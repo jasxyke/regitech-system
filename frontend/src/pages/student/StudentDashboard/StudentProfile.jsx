@@ -1,13 +1,11 @@
+import { formatFullName } from "../../../utils/dataFormatter";
 import StudentCSS from "./StudentDashboard.module.css";
-import React, { useState } from "react";
-import { useUser } from "../../../context/UserContext";
-import StudentDashboardTable from "./StudentDashboardTable";
-import { Table } from "react-bootstrap";
 
 const StudentProfile = ({ student, hideHeader = false }) => {
   const user = student;
+  console.log("USER!!!!!" + user.user.firstname);
   return (
-    <div className={"}rounded-top rounded-bottom " + StudentCSS.fullTable}>
+    <div className={"rounded-top rounded-bottom " + StudentCSS.fullTable}>
       <table className="table table-borderless fw-bold rounded-top rounded-bottom">
         <thead className={StudentCSS.tableHead}>
           {!hideHeader && (
@@ -24,7 +22,13 @@ const StudentProfile = ({ student, hideHeader = false }) => {
                   StudentCSS.studentInfo + " rounded-top rounded-bottom bg-grey"
                 }
               >
-                Name: {user?.user?.firstname + " " + user.user.lastname}
+                Name:{" "}
+                {formatFullName(
+                  user?.user?.firstname,
+                  user?.user?.lastname,
+                  user?.user?.midname,
+                  false
+                ) || ""}
               </span>
             </td>
           </tr>

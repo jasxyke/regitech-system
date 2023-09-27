@@ -22,7 +22,10 @@ class DocumentTypeSeeder extends Seeder
             ['name'=>'Certificate of Good Moral/Completion'],
             ['name'=>'Undertaking'],
             ['name'=>'Medical Information Sheet'],
+            ['name'=>'Schoold ID SHS'],
+            ['name'=>'2x2 Picture'],
             ['name'=>'Form 137 SHS'],
+            ['name'=>'TOR Copy for PUP']
         ]
     );
 }

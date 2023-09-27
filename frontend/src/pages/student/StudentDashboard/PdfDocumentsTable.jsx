@@ -3,15 +3,7 @@ import StaffStyles from "../../staff/StaffDashboard/StaffDashboard.module.css";
 import PdfDocuments from "./PdfDocuments";
 import { Spinner } from "react-bootstrap";
 
-import usePdf from "../../../hooks/usePdf";
-
-const PdfDocumentsTable = ({ student }) => {
-  const pdfHook = usePdf();
-  const pdfs = pdfHook.studentPdfs;
-  useEffect(() => {
-    pdfHook.getAllPdfs(student.id);
-  }, []);
-
+const PdfDocumentsTable = ({ pdfs, loading }) => {
   return (
     <div className={"my-3 " + StaffStyles.table}>
       <table className="table table-hover my-0">
@@ -29,7 +21,7 @@ const PdfDocumentsTable = ({ student }) => {
                 handleView={handleView}
               />
             )} */}
-          {pdfHook.loading ? (
+          {loading ? (
             <tr>
               <td colSpan={5}>
                 <Spinner />

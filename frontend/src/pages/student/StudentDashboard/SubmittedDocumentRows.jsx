@@ -1,7 +1,5 @@
 import { formatFullName } from "../../../utils/dataFormatter";
-import DeleteDocumentModal from "./DeleteDocumentModal";
 import TableCss from "./StudentDashboard.module.css";
-import ViewDocumentModal from "./ViewDocumentModal";
 
 const getStatusColor = (status) => {
   if (status === "Verified") {
@@ -33,6 +31,7 @@ const SubmittedDocumentRows = ({ submittedDocuments, deleteDocument }) => {
           ? formatFullName(
               document.updated_by.firstname,
               document.updated_by.lastname,
+              document.updated_by.midname,
               false
             )
           : ""}

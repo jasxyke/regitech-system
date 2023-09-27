@@ -5,6 +5,10 @@ const useSubmittedDocuments = () => {
   const [submittedDocuments, setSubmittedDocuments] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const updateDocuments = (updatedDocuments) => {
+    setSubmittedDocuments(updatedDocuments);
+  };
+
   const verifyDocument = (document) => {
     setLoading(true);
     const docIndex = submittedDocuments.findIndex(
@@ -80,7 +84,7 @@ const useSubmittedDocuments = () => {
 
   return {
     submittedDocuments,
-    setSubmittedDocuments,
+    updateDocuments,
     getSubmittedDocuments,
     verifyDocument,
     //submitVerification,

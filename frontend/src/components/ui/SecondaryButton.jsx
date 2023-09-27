@@ -1,6 +1,6 @@
 import { Button } from "react-bootstrap";
 
-const SecondaryButton = ({ text, onClick }) => {
+const SecondaryButton = ({ text, onClick, disabled = false }) => {
   return (
     <>
       <style type="text/css">
@@ -15,7 +15,11 @@ const SecondaryButton = ({ text, onClick }) => {
             }
         `}
       </style>
-      <Button variant="outline-maroon" onClick={(e) => onClick()}>
+      <Button
+        variant="outline-maroon"
+        onClick={(e) => onClick()}
+        disabled={disabled}
+      >
         {text}
       </Button>
     </>

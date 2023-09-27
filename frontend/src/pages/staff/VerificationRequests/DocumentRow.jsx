@@ -39,6 +39,7 @@ const DocumentRow = ({ document, verifyDocument }) => {
             };
             verifyDocument(withCopiesDoc);
           }}
+          id={document.id}
         />
       </div>
     </div>

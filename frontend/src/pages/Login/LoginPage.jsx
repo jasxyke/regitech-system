@@ -31,7 +31,7 @@ const LoginPage = () => {
           </div>
           <div className="row text-center mt-auto">
             <div className={LoginCss.copyright}>
-              Copyright@2022 | RegiTech | Developed DICT 3-1
+              RegiTech | Developed by DICT 3-1 Group 5 batch 2023
             </div>
           </div>
         </div>

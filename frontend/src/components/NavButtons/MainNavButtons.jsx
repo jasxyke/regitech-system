@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import todoList from "../../assets/to-do-list.png";
 import { useMediaQuery } from "react-responsive";
 const MainNavButtons = ({ userRole }) => {
-  const navigate = useNavigate();
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
   if (isMobile) {
     return null;
@@ -17,34 +16,26 @@ const MainNavButtons = ({ userRole }) => {
       <EventButton
         icon={documentRequest}
         label={"Verification requests"}
-        onClick={() => {
-          navigate("/staff/verification-requests");
-        }}
+        route={"/staff/verification-requests"}
       />
 
       {userRole === "Head Registrar" && (
         <EventButton
           icon={manageStaff}
           label={"Manage Staff"}
-          onClick={() => {
-            navigate("/staff/head-registrar");
-          }}
+          route={"/staff/head-registrar"}
         />
       )}
 
       <EventButton
         icon={masterlist}
         label={"Student Records"}
-        onClick={() => {
-          navigate("/staff/student-records");
-        }}
+        route={"/staff/student-records"}
       />
       <EventButton
         icon={todoList}
         label={"Manual Entry"}
-        onClick={() => {
-          navigate("/staff/manual-entry");
-        }}
+        route={"/staff/manual-entry"}
       />
     </div>
   );

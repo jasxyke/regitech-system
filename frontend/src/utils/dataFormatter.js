@@ -1,13 +1,20 @@
-export function formatFullName(
-  firstname,
-  lastname,
-  lastNameFirst,
-  middlename = ""
-) {
-  if (lastNameFirst) {
-    return lastname + ", " + firstname;
+export function formatFullName(firstname, lastname, middlename, lastNameFirst) {
+  if (middlename === null) {
+    middlename = "";
   } else {
-    return firstname + " " + lastname;
+    middlename = middlename.slice(0, 1).toUpperCase() + ".";
+  }
+  lastname = lastname.charAt(0).toUpperCase() + lastname.slice(1).toLowerCase();
+
+  firstname = firstname
+    .split(" ")
+    .map((name) => name.charAt(0).toUpperCase() + name.slice(1).toLowerCase())
+    .join(" ");
+
+  if (lastNameFirst) {
+    return lastname + ", " + firstname + " " + middlename;
+  } else {
+    return firstname + " " + middlename + " " + lastname;
   }
 }
 

@@ -49,6 +49,10 @@ class CourseSeeder extends Seeder
             [
                 'name'=>'Diploma in Railway Engineering Technology (DRET)',
                 'short_name'=>'DRET',
+            ],
+            [
+                'name'=>'Diploma in Computer Engineering Technology (DCPET)',
+                'short_name'=>'DCPET'
             ]
         ]
             );//di pako sure sa ibang name since may rename daw na naganap

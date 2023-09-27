@@ -29,7 +29,7 @@ export function AuthProvider({ children }) {
         if (res.data.role_id == 4) {
           navigate("/student/submission-page");
         } else if (res.data.role_id >= 1 && res.data.role_id <= 3) {
-          navigate("/staff/verification-requests");
+          navigate("/staff/student-records");
         } else {
           console.log("error on role id");
           navigate("/");
@@ -59,7 +59,7 @@ export function AuthProvider({ children }) {
         if (res.data.role_id == 4) {
           navigate("/student/dashboard");
         } else if (res.data.role_id >= 1 && res.data.role_id <= 3) {
-          navigate("/staff/verification-requests");
+          navigate("/staff/student-records");
         } else {
           console.log("error on role id");
           navigate("/");

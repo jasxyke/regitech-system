@@ -1,0 +1,191 @@
+.addCredentialsBtn {
+  position: fixed;
+  z-index: 100;
+  bottom: 20px;
+  right: 50px;
+}
+
+.editStudentInfoBtn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+@media screen and (max-width: 576px) {
+  .editStudentInfoBtn {
+    position: static;
+    display: flex;
+    justify-content: end;
+    margin-top: 16px;
+  }
+  .addCredentialsBtn {
+    bottom: 20px;
+    right: 10px;
+  }
+}
+
+.studProfile {
+  position: relative;
+}
+
+.table_header {
+  margin: 50px 0 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--primary-maroon);
+  font-style: italic;
+}
+.table {
+  background-color: var(--primary-maroon);
+}
+
+.tableHead th {
+  background-color: var(--primary-maroon) !important;
+  color: white !important;
+}
+
+.studentInfo {
+  background-color: white;
+  padding: 3px;
+}
+
+.tablebody {
+  background-color: #f5f3f3;
+}
+
+.col {
+  color: white;
+}
+
+.btnsContainer {
+  display: flex;
+  justify-content: end;
+  column-gap: 15px;
+}
+
+.view {
+  background-color: #790000 !important;
+  color: #f5f3f3 !important;
+  height: 1.5rem;
+}
+
+.status {
+  background-color: #f68e56;
+  color: #f5f3f3;
+  width: 70%;
+}
+
+@media (max-width: 768px) {
+  .status {
+    width: 100%;
+  }
+}
+
+.modalHead {
+  background-color: var(--primary-maroon);
+  color: white;
+}
+
+.actionsContainer {
+  display: flex;
+  column-gap: 15px;
+}
+
+.fileBox {
+  display: flex;
+  column-gap: 15px;
+}
+
+.imagePreview {
+  border: 1px solid black;
+}
+
+.submitDocBox {
+  background-color: var(--bg-grey);
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.pdfView {
+  width: 100%;
+  height: 500px;
+}
+@media only screen and (max-width: 768px) {
+  .actionsContainer {
+    flex-direction: column;
+    row-gap: 15px;
+  }
+
+  .fileBox {
+    flex-direction: column;
+    row-gap: 15px;
+  }
+}
+
+/* STYLES FOR THE STAFF TABLE */
+
+.table::-webkit-scrollbar {
+  display: none;
+}
+
+.table {
+  max-height: 250px;
+  min-height: 250px;
+  overflow-x: scroll;
+  border-radius: 10px;
+  background-color: var(--bg-grey);
+}
+
+.fullTable {
+  overflow-x: auto;
+  border-radius: 10px;
+  background-color: var(--bg-grey);
+  min-height: 250px;
+}
+
+.table td {
+  background-color: var(--bg-grey) !important;
+}
+
+.fullTable td {
+  background-color: var(--bg-grey) !important;
+  border-bottom-width: 0px !important;
+}
+
+.table tr:last-child td:first-child {
+  border-radius: 0 0 0 10px;
+}
+
+.table tr:last-child td:last-child {
+  border-radius: 0 0 10px 0;
+}
+
+.table tr:last-child td {
+  border: none;
+}
+
+.table_header {
+  color: var(--primary-maroon);
+  font-style: italic;
+}
+
+.table_head th {
+  top: 0;
+  position: sticky;
+  background-color: var(--primary-maroon) !important;
+  color: var(--main-white) !important;
+  text-align: center;
+  vertical-align: middle !important;
+}
+
+.table_contents {
+  background-color: var(--bg-grey);
+  overflow-y: scroll;
+  text-align: center;
+  vertical-align: middle !important;
+}
+
+.admin_table_container {
+  max-width: 1200px;
+}
