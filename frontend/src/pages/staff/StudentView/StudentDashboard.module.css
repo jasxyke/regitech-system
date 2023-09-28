@@ -189,3 +189,7 @@
 .admin_table_container {
   max-width: 1200px;
 }
+
+.pdfBtnsContainer {
+  display: flex;
+}

@@ -18,7 +18,7 @@ const EditProfileModal = ({ student, updateStudent }) => {
     setShow(false);
     setResponse("");
     setError("");
-
+    //cancels the changes that may have made after closing
     email.changeValue(student.user.email || "");
     firstname.changeValue(student.user.firstname);
     midname.changeValue(student.user.midname);

@@ -1,4 +1,3 @@
-import React from "react";
 import Toast from "react-bootstrap/Toast";
 import logo from "../../assets/puplogo.png";
 import { getCurrentTime } from "../../utils/datesHandler";

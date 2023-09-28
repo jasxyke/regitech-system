@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\StudentController;
@@ -36,6 +37,7 @@ Route::group(['middleware'=>['auth:sanctum','verified']], function(){
             'documents' => DocumentController::class,
             'requests' => RequestController::class,
             'users' => UserController::class,
+            'pdfs' => PdfController::class
         ]);
    
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -55,7 +57,7 @@ Route::group(['middleware'=>['auth:sanctum','verified']], function(){
     Route::post('/add-to-masterlist', [SubmissionController::class, 'addToMasterlist']);
 
     //checklist or masterlist
-    Route::post('/save-masterlist/{id}', [DocumentController::class, 'editDocuments']);
+    Route::put('/save-checklist/{id}', [DocumentController::class, 'editDocuments']);
     Route::post('/add-credentials/{studentId}',[SubmissionController::class, 'addCredentials']);
     
     //request sort routes

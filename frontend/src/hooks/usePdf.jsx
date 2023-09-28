@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axiosClient from "../utils/axios";
 
-const usePdf = () => {
+const usePdf = (handleSuccess, handleError) => {
   const [loading, setLoading] = useState(false);
   const [pdf, setPdf] = useState(null);
   const [studentPdfs, setStudentPdfs] = useState(null);
@@ -10,6 +10,24 @@ const usePdf = () => {
     setStudentPdfs([...studentPdfs, newPdf]);
   };
 
+  const deletePdf = async (pdf_id) => {
+    setLoading(true);
+    try {
+      console.log("deleting pdf: " + pdf_id);
+      const res = await axiosClient.delete("/pdfs/" + pdf_id);
+      let updatedPdfList = studentPdfs.filter(
+        (pdf) => pdf.id != res.data.pdf_id
+      );
+      console.log(res.data.pdf_id);
+      setStudentPdfs(updatedPdfList);
+      handleSuccess(res.data.message, res.data.pdf_id);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      handleError(error.data.response.message);
+      setLoading(false);
+    }
+  };
   const getPdf = (student_id, onLoad) => {
     setLoading(true);
     axiosClient
@@ -42,7 +60,7 @@ const usePdf = () => {
       });
   };
 
-  return { loading, pdf, studentPdfs, getPdf, getAllPdfs, addPdf };
+  return { loading, pdf, studentPdfs, getPdf, getAllPdfs, addPdf, deletePdf };
 };
 
 export default usePdf;

@@ -1,21 +1,16 @@
-import React from "react";
+import { Modal } from "react-bootstrap";
 import css from "./ResponseModal.module.css";
-import { Button, Modal } from "react-bootstrap";
+import PrimaryButton from "./ui/PrimaryButton";
 
 const ResponseModal = ({ show, handleClose, response, headerText }) => {
   return (
     <Modal show={show} onHide={handleClose}>
-      <Modal.Header closeButton className={css.modalHead}>
+      <Modal.Header closeButton className={css.modalHead} closeVariant="white">
         <Modal.Title>{headerText}</Modal.Title>
       </Modal.Header>
       <Modal.Body>{response}</Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-          Close
-        </Button>
-        <Button variant="primary" onClick={handleClose}>
-          Ok
-        </Button>
+        <PrimaryButton text={"Ok"} onClick={handleClose} />
       </Modal.Footer>
     </Modal>
   );

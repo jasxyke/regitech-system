@@ -71,6 +71,9 @@ class DocumentsHandler{
             foreach($updatedDocuments as $modifiedDocument){
                 if($modifiedDocument["id"] == $submittedDoc->id){
                     $document = $submittedDoc;
+                    if($document->document_status_id == $modifiedDocument["document_status_id"] ){
+                        continue;
+                    }
                     //add its pdf id when it is verified or rejected, to signal that it is there
                     if($document->document_status_id != "1"){
                         $document->pdf_id = ($modifiedDocument["document_status_id"] == "1" || 

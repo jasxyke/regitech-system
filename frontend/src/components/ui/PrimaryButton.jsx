@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 
 const PrimaryButton = ({
   text,
@@ -8,6 +8,7 @@ const PrimaryButton = ({
   size = "",
   disabled = false,
   type = "button",
+  loading = false,
 }) => {
   return (
     <>
@@ -40,7 +41,17 @@ const PrimaryButton = ({
             .btn-orange:hover{
               border: 1px solid var(--status-orange);
               color: black;
-            } 
+            }
+            
+            .btn-yellow{
+              background-color: var(--status-yellow);
+                color: black;
+            }
+
+            .btn-yellow:hover{
+              border: 1px solid var(--status-yellow);
+              color: black;
+            }
         `}
       </style>
       <Button
@@ -51,16 +62,18 @@ const PrimaryButton = ({
             ? "orange"
             : color === "primary"
             ? "primary"
+            : color === "yellow"
+            ? "yellow"
             : "main"
         }
         onClick={(e) => {
           onClick();
         }}
         size={size}
-        disabled={disabled}
+        disabled={loading ? true : disabled}
         type={type}
       >
-        {text}
+        {loading ? <Spinner animation="border" /> : text}
       </Button>
     </>
   );

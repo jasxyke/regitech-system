@@ -103,7 +103,32 @@ const useMasterlist = (onError, onSuccess) => {
       onError(error?.response?.data?.message);
     }
   };
-  return { addToMasterlist, loading, addCredentials, updateStudentProfile };
+
+  const saveChecklist = async (student_id, checklist) => {
+    try {
+      setLoading(true);
+      console.log("saving student checklist: ");
+      console.log(checklist);
+      const res = await axiosClient.put("/save-checklist/" + student_id, {
+        checklist: checklist,
+      });
+      console.log("updated checklist: ");
+      console.log(res.data);
+      onSuccess(res?.data?.message, res.data.checklist);
+      setLoading(false);
+    } catch (error) {
+      console.log(error.response);
+      onError(error?.response?.data?.message);
+      setLoading(false);
+    }
+  };
+  return {
+    addToMasterlist,
+    loading,
+    addCredentials,
+    updateStudentProfile,
+    saveChecklist,
+  };
 };
 
 export default useMasterlist;
