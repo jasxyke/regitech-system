@@ -9,7 +9,7 @@ class Constants{
         [ "id"=> 2, "name"=> "Rejected" ],
         [ "id"=> 3, "name"=> "Pending Approval" ],
         [ "id"=> 4, "name"=> "Pending Submission" ],
-        [ "id"=>5,  "name"=> "Missing"]
+        [ "id"=> 5,  "name"=> "Missing"]
     );
       
       const DOCUMENT_TYPES = [
@@ -21,7 +21,10 @@ class Constants{
         [ "id"=> 6, "name"=> "Certificate of Good Moral/Completion" ],
         [ "id"=> 7, "name"=> "Undertaking" ],
         [ "id"=> 8, "name"=> "Medical Information Sheet" ],
-        [ "id"=> 9, "name"=> "Form 137 SHS" ],
+        [ "id"=> 9, 'name'=> 'Schoold ID SHS'],
+        [ "id"=> 10, "name"=> "2x2 Picture"],
+        [ "id"=> 11, "name"=> "Form 137 SHS" ],
+        [ "id"=> 12, "name"=> "TOR Copy for PUP"],
       ];
       
       const ROLES = [
@@ -80,6 +83,11 @@ class Constants{
           "name"=> "Diploma in Railway Engineering Technology (DRET)",
           "short_name"=> "DRET",
         ],
+        [
+          "id"=> 10,
+          'name'=>'Diploma in Computer Engineering Technology (DCPET)',
+          'short_name'=>'DCPET'
+        ]
       ];
       
 

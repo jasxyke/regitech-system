@@ -29,6 +29,11 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/sign-up', [AuthController::class, 'register']);
 
+//reset/forgot password routes
+Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
+Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.reset');
+
+//logged in routes
 Route::group(['middleware'=>['auth:sanctum','verified']], function(){
     Route::post('/me', [AuthController::class, 'me']);
     Route::resource('requests', RequestController::class);
@@ -73,10 +78,8 @@ Route::group(['middleware'=>['auth:sanctum','verified']], function(){
     Route::get('/complete-students-first', [StudentController::class, 'completeStudentsFirst']);
     Route::get('/students-alphabetical', [StudentController::class, 'alphabeticalStudents']);
 
+    Route::get('/export-masterlist', [StudentDocumentController::class, 'exportStudentDocuments']);
     
 });
 
-Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
-Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.reset');
-Route::get('/export-student-documents-report', [StudentDocumentController::class, 'exportStudentDocuments']);
 
