@@ -11,6 +11,8 @@ import StudentAccountForm from "./StudentAccountForm";
 import useMasterlist from "../../../hooks/useMasterlist";
 import ResponseModal from "../../../components/ResponseModal";
 import { Spinner } from "react-bootstrap";
+import { clearTextInputs } from "../../../utils/InputFormClearer";
+import { useFormInput } from "../../../hooks/useFormInput";
 
 const documentsList = documentTypes.map((document_type) => {
   return { document_type, document_status_id: "5", with_copies: 0 };
@@ -28,6 +30,8 @@ const ManualEntryPage = () => {
 
   const handleClose = () => {
     setShowModal(false);
+    //scroll to top
+    window.scrollTo(0, 0);
   };
 
   //form API data
@@ -37,8 +41,22 @@ const ManualEntryPage = () => {
   const [note, setNote] = useState("");
   const [hasNoEmail, setHasNoEmail] = useState(false);
 
-  //helpers
-  const [formReseted, setFormResetted] = useState(false);
+  //student account form
+  const email = useFormInput("");
+  const firstname = useFormInput("");
+  const midname = useFormInput("");
+  const lastname = useFormInput("");
+  const [courseId, setCourseId] = useState("");
+  const [yearAdmitted, setYearAdmitted] = useState("");
+  const [isTransferee, setIsTransferee] = useState(false);
+
+  const resetForm = () => {
+    console.log("form resetted");
+    clearTextInputs(email, firstname, midname, lastname);
+    setCourseId("");
+    setYearAdmitted("");
+    setIsTransferee(false);
+  };
 
   const handleError = (error) => {
     setShowModal(true);
@@ -49,11 +67,10 @@ const ManualEntryPage = () => {
     setShowModal(true);
     setResponse(response);
     //reset form after successfull submit
-    setFormResetted(true);
+    resetForm();
     setDocumentsChecklist(documentsList);
     setPdfFile(null);
     pdfFileRef.current.value = null;
-    setFormResetted(false);
     setInvalidForm(false);
   };
 
@@ -109,9 +126,20 @@ const ManualEntryPage = () => {
           <SectionHeader text={"Student info"} block={true} />
           <div className="container px-4 py-3 pb-5">
             <StudentAccountForm
-              isFormResetted={formReseted}
               hasNoEmail={hasNoEmail}
               onHasNoEmailChange={setHasNoEmail}
+              email={email}
+              firstname={firstname}
+              midname={midname}
+              lastname={lastname}
+              courseId={courseId}
+              yearAdmitted={yearAdmitted}
+              isTransferee={isTransferee}
+              changeCourse={(course_id) => setCourseId(course_id)}
+              changeTransferee={(state) => {
+                setIsTransferee(state);
+              }}
+              changeYearAdmitted={(year) => setYearAdmitted(year)}
             />
           </div>
         </div>

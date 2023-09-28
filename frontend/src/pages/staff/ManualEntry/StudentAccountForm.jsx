@@ -6,29 +6,19 @@ import { courseOptions, yearOptions } from "../../../utils/options";
 import Checkbox from "../../../components/forms/Checkbox";
 
 const StudentAccountForm = ({
-  isFormResetted,
+  email,
+  firstname,
+  midname,
+  lastname,
+  courseId,
+  yearAdmitted,
+  isTransferee,
+  changeCourse,
+  changeYearAdmitted,
+  changeTransferee,
   hasNoEmail,
   onHasNoEmailChange,
 }) => {
-  const email = useFormInput("");
-  const firstname = useFormInput("");
-  const midname = useFormInput("");
-  const lastname = useFormInput("");
-  const [courseId, setCourseId] = useState("");
-  const [yearAdmitted, setYearAdmitted] = useState("");
-  const [isTransferee, setIsTransferee] = useState(false);
-
-  const resetForm = () => {
-    console.log("form resetted");
-    clearTextInputs(email, firstname, midname, lastname);
-    setCourseId("");
-    setYearAdmitted("");
-    setIsTransferee(false);
-  };
-  useEffect(() => {
-    resetForm();
-  }, [isFormResetted]);
-
   return (
     <div className="">
       <div className="row">
@@ -114,7 +104,7 @@ const StudentAccountForm = ({
               name="course_id"
               value={courseId}
               onChange={(e) => {
-                setCourseId(e.target.value);
+                changeCourse(e.target.value);
               }}
               required
             >
@@ -134,7 +124,7 @@ const StudentAccountForm = ({
               value={yearAdmitted}
               name="year_admitted"
               onChange={(e) => {
-                setYearAdmitted(e.target.value);
+                changeYearAdmitted(e.target.value);
               }}
               required
             >
@@ -150,7 +140,7 @@ const StudentAccountForm = ({
             <Checkbox
               checked={isTransferee}
               handleChange={() => {
-                setIsTransferee(!isTransferee);
+                changeTransferee(!isTransferee);
               }}
               label={"Transferee"}
               id={"transferee"}

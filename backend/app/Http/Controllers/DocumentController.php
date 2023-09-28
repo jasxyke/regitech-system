@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\DocumentsHandler;
 use App\Http\Controllers\Controller;
 use App\Models\Document;
 use App\Models\Student;
@@ -28,50 +29,20 @@ class DocumentController extends Controller
     }
 
     public function editDocuments(Request $request, string $id){
-        $student = Student::findOrfail($id);
+        $student = Student::with('user')
+                    ->findOrfail($id);
         $staff = $request->user();
 
         $checkList = $request->input('checklist');
-        $invalidDocument = 0;
-        $missingDocs = 0;
-        $pendingDocs = 0;
+        
+        $handler = new DocumentsHandler($student->user, $student);
 
-        $submittedDocs = Document::with('document_type', 'document_status')
-                        ->where('student_id', $student->id)
-                        ->get();
+        $updatedChecklist = $handler->updateChecklist($checkList, "", $staff->id, null);
 
-        foreach($submittedDocs as $submittedDoc){
-            //verified documents from current request
-            foreach($checkList as $documentsChecklist){
-                if($checkList["id"] == $submittedDoc->id){
-                    $document = $submittedDoc;
-                    $document->document_status_id = $documentsChecklist["document_status_id"];
-                    $document->with_copies = $documentsChecklist["with_copies"];
-                    $document->updated_by_id = $staff->id;
-
-                    $document->save();
-                    $document->load('document_status');
-
-                    if($checkList["document_status_id"] == 2){
-                        $invalidDocument++;
-                    }
-                    if($checkList["document_status_id"] == 3){
-                        $pendingDocs++;
-                    }
-                    if($checkList["document_status_id"] == 5){
-                        $missingDocs++;
-                    }
-                }
-            }
-        }
-        if($missingDocs == 0 && $invalidDocument == 0 && $pendingDocs == 0){
-            $student->student_status_id = 1;
-            $student->save();
-        }
-
-        return response()->json(["message"=>"Checklist saved"]);
+        return response()->json(["message"=>"Checklist saved", "checklist"=>$updatedChecklist]);
         
     }
+
 
     /**
      * Display a listing of the resource.

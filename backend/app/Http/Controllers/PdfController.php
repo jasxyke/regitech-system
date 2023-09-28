@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PdfController extends Controller
 {
@@ -60,6 +62,12 @@ class PdfController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $pdf = Pdf::findOrFail($id);
+
+        Storage::disk('public')->delete($pdf->file_path);
+
+        $pdf->delete();
+
+        return response()->json(["message" => "Successfully deleted the pdf", "pdf_id"=>$id]);
     }
 }

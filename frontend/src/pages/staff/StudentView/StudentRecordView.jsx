@@ -5,21 +5,19 @@ import ResponseModal from "../../../components/ResponseModal";
 import BackButton from "../../../components/ui/BackButton";
 import usePdf from "../../../hooks/usePdf";
 import useSubmittedDocuments from "../../../hooks/useSubmittedDocuments";
-import PdfDocumentsTable from "../../student/StudentDashboard/PdfDocumentsTable";
+import PdfDocumentsTable from "./PdfDocumentsTable";
 import StudentDashboardTable from "../../student/StudentDashboard/StudentDashboardTable";
 import StudentProfile from "../../student/StudentDashboard/StudentProfile";
 import EditProfileModal from "./EditProfileModal";
 import EditStudentDocumentsModal from "./EditStudentDocumentsModal";
 import StudentCSS from "./StudentDashboard.module.css";
+import EditChecklistModal from "./EditChecklistModal";
+import Notification from "../../../components/ui/Notification";
 
 const StudentRecordView = ({ studentProp }) => {
   const [student, setStudent] = useState(studentProp);
-  const pdfHook = usePdf();
-  const pdfs = pdfHook.studentPdfs;
-  useEffect(() => {
-    pdfHook.getAllPdfs(student.id);
-  }, []);
-  const [responseMsg, setResponseMsg] = useState("");
+
+  const [responseMsg, setResponseMsg] = useState("hello world");
   const [showResponseModal, setShowResponseModal] = useState(false);
   const closeModal = () => {
     setShowResponseModal(false);
@@ -40,6 +38,26 @@ const StudentRecordView = ({ studentProp }) => {
 
     setResponseMsg(responseMsg);
     openModal();
+  };
+
+  const handleSuccess = (message) => {
+    setResponseMsg(message);
+    openModal();
+  };
+
+  const handleError = (message) => {
+    setResponseMsg(message);
+    openModal();
+  };
+
+  const pdfHook = usePdf(handleSuccess, handleError);
+  const pdfs = pdfHook.studentPdfs;
+  useEffect(() => {
+    pdfHook.getAllPdfs(student.id);
+  }, []);
+
+  const deletePdf = (pdf_id) => {
+    pdfHook.deletePdf(pdf_id);
   };
 
   const updateStudent = (student) => {
@@ -77,6 +95,13 @@ const StudentRecordView = ({ studentProp }) => {
           <b>Documents checklist</b>
         </h2>
         {studentProp !== null && submittedDocuments !== null && (
+          <EditChecklistModal
+            student={student}
+            documentsChecklist={submittedDocuments}
+            onCheklistUpdate={setSubmittedDocuments}
+          />
+        )}
+        {studentProp !== null && submittedDocuments !== null && (
           <EditStudentDocumentsModal
             documents={submittedDocuments}
             student={student}
@@ -96,7 +121,11 @@ const StudentRecordView = ({ studentProp }) => {
           <strong>PDF Documents</strong>
         </h2>
       </div>
-      <PdfDocumentsTable pdfs={pdfs} loading={pdfHook.loading} />
+      <PdfDocumentsTable
+        pdfs={pdfs}
+        loading={pdfHook.loading}
+        onDeletePdf={deletePdf}
+      />
       <ResponseModal
         headerText={"About to delete file"}
         show={showResponseModal}

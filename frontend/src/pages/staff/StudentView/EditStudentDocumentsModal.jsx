@@ -19,6 +19,7 @@ const EditStudentDocumentsModal = ({
     setShow(false);
     setResponse("");
     setError("");
+    setDocumentsChecklist(documents);
   };
   const handleShow = () => setShow(true);
 
@@ -113,17 +114,11 @@ const EditStudentDocumentsModal = ({
         <Modal.Footer>
           <SecondaryButton text={"Cancel"} onClick={handleClose} />
           <PrimaryButton
-            text={
-              masterlist.loading ? (
-                <Spinner animation="border" />
-              ) : (
-                "Add and save checklist"
-              )
-            }
+            text={"Add and save checklist"}
             onClick={() => {
               addCredentials();
             }}
-            disabled={masterlist.loading}
+            loading={masterlist.loading}
           />
         </Modal.Footer>
       </Modal>

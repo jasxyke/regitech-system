@@ -109,3 +109,47 @@
 .modal-80w {
   width: 80%;
 }
+
+.default-table {
+  max-height: 315px !important;
+  min-height: 315px !important;
+  overflow-x: auto !important;
+  border-radius: 10px !important;
+  background-color: var(--bg-grey) !important;
+}
+
+.default-table td {
+  background-color: var(--bg-grey) !important;
+}
+
+.table-head th {
+  top: 0 !important;
+  position: sticky !important;
+  background-color: var(--primary-maroon) !important;
+  color: var(--main-white) !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+.table-contents {
+  background-color: var(--bg-grey) !important;
+  overflow-y: scroll !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+.view-btn {
+  background-color: var(--primary-maroon) !important;
+  min-width: 60% !important;
+  max-width: fit-content !important;
+  color: white !important;
+  outline: var(--primary-maroon) solid 2px !important;
+}
+
+.delete-btn {
+  /* background-color: var(--primary-maroon) !important; */
+  min-width: 30% !important;
+  max-width: fit-content !important;
+  color: black !important;
+  outline: var(--primary-maroon) solid 2px !important;
+}
