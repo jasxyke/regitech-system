@@ -1,0 +1,26 @@
+.yearsContainer {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  row-gap: 10px;
+}
+
+.coursesContainer {
+  display: grid;
+  grid-template-columns: auto auto;
+  row-gap: 5px;
+}
+
+.btnsContainer {
+  display: flex;
+  column-gap: 15px;
+}
+
+@media screen and (max-width: 576px) {
+  .coursesContainer {
+    grid-template-columns: auto;
+  }
+
+  .yearsContainer {
+    grid-template-columns: auto auto auto;
+  }
+}

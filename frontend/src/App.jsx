@@ -1,24 +1,23 @@
 import { Route, Routes } from "react-router-dom";
+import GuestRoutes from "./components/PrivateRoutes/GuestRoutes";
+import StaffPrivateRoutes from "./components/PrivateRoutes/StaffPrivateRoutes";
+import StudentPrivateRoutes from "./components/PrivateRoutes/StudentPrivateRoutes";
+import { AuthProvider } from "./context/AuthContext";
+import useCRFKCookie from "./hooks/useCRFKCookie";
 import LoginPage from "./pages/Login/LoginPage";
 import ResetPage from "./pages/Login/ResetPage";
-import VerificationPage from "./pages/staff/VerificationRequests/VerificationPage";
-import SignupPage from "./pages/Signup/SignupPage";
-import StudentLayout from "./components/layouts/StudentLayout";
-import StafflLayout from "./components/layouts/StafflLayout";
-import { AuthProvider } from "./context/AuthContext";
-import StaffDashboard from "./pages/staff/StaffDashboard/StaffDashboard";
-import AdminPage from "./pages/staff/HeadRegistrar/AdminPage";
-import StudentDashboard from "./pages/student/StudentDashboard/StudentDashboard";
-import StudentPrivateRoutes from "./components/PrivateRoutes/StudentPrivateRoutes";
-import StaffPrivateRoutes from "./components/PrivateRoutes/StaffPrivateRoutes";
-import GuestRoutes from "./components/PrivateRoutes/GuestRoutes";
-import useCRFKCookie from "./hooks/useCRFKCookie";
-import StudentRecordsPage from "./pages/staff/StudentRecords/StudentRecordsPage";
-import SubmissionPage from "./pages/student/Submission/SubmissionPage";
-import CheckInbox from "./pages/Signup/CheckInbox";
-import ViewStudentPage from "./pages/staff/StudentView/ViewStudentPage";
 import SetPassPage from "./pages/Login/SetPassPage";
+import CheckInbox from "./pages/Signup/CheckInbox";
+import SignupPage from "./pages/Signup/SignupPage";
+import AdminPage from "./pages/staff/HeadRegistrar/AdminPage";
 import ManualEntryPage from "./pages/staff/ManualEntry/ManualEntryPage";
+import StaffDashboard from "./pages/staff/StaffDashboard/StaffDashboard";
+import StudentRecordsPage from "./pages/staff/StudentRecords/StudentRecordsPage";
+import ViewStudentPage from "./pages/staff/StudentView/ViewStudentPage";
+import VerificationPage from "./pages/staff/VerificationRequests/VerificationPage";
+import StudentDashboard from "./pages/student/StudentDashboard/StudentDashboard";
+import SubmissionPage from "./pages/student/Submission/SubmissionPage";
+import ExportMasterlistPage from "./pages/staff/HeadRegistrar/ExportPage/ExportMasterlistPage";
 
 function App() {
   useCRFKCookie();
@@ -47,6 +46,10 @@ function App() {
           <Route path="student-records" element={<StudentRecordsPage />} />
           <Route path="student-record/:id" element={<ViewStudentPage />} />
           <Route path="manual-entry" element={<ManualEntryPage />} />
+          <Route
+            path="export-masterlist-page"
+            element={<ExportMasterlistPage />}
+          />
         </Route>
 
         <Route path="*" element={<h1>Not found 404</h1>} />

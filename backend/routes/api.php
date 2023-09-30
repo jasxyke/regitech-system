@@ -78,7 +78,7 @@ Route::group(['middleware'=>['auth:sanctum','verified']], function(){
     Route::get('/complete-students-first', [StudentController::class, 'completeStudentsFirst']);
     Route::get('/students-alphabetical', [StudentController::class, 'alphabeticalStudents']);
 
-    Route::get('/export-masterlist', [StudentDocumentController::class, 'exportStudentDocuments']);
+    Route::post('/export-masterlist', [StudentDocumentController::class, 'exportStudentDocuments']);
     
 });
 

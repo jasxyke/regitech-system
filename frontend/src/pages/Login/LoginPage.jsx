@@ -31,7 +31,8 @@ const LoginPage = () => {
           </div>
           <div className="row text-center mt-auto">
             <div className={LoginCss.copyright}>
-              RegiTech | Developed by DICT 3-1 Group 5 batch 2023
+              RegiTech | Developed by DICT 3-1 Group 5 batch 2023 | Led by
+              Jaspher Xyke M. Cortez
             </div>
           </div>
         </div>
