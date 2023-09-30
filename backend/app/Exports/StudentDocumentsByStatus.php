@@ -4,7 +4,6 @@ namespace App\Exports;
 
 use App\Helpers\Constants;
 use App\Models\Document;
-use App\Models\DocumentStatus;
 use App\Models\Student;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;

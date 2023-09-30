@@ -11,41 +11,17 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class StudentDocumentController extends Controller
 {
-    function getCompleteStudentDocuments(){
-        $students = Student::with('user','student_status')
-                        ->where('student_status_id','=','1')
-                        ->orderBy('year_admitted','asc')
-                        ->get();
 
-        foreach($students as $student){
-            $documents = Document::with('document_status', 'document_type')
-                    ->where('student_id','=',$student->id)
-                    ->orderBy('document_type_id', 'asc')
-                    ->get();
-                $student['documents'] = $documents;
-        }
+    function exportStudentDocuments(Request $request){
 
-        return $students;
-    }
+        $years = $request->input('years');
+        $courses = $request->input('courses');
+        $documents = $request->input('documents');
+        $studentColumns = $request->input('studentColumns');
 
-    function getIncompleteStudentDocuments(){
-        $students = Student::with('user','student_status')
-                        ->where('student_status_id','=','2')
-                        ->orderBy('year_admitted','asc')
-                        ->get();
+        return Excel::download(new StudentDocumentsExport($years, $courses, 
+        $documents, $studentColumns), 'Student documents report.xlsx');
 
-        foreach($students as $student){
-            $documents = Document::with('document_status', 'document_type')
-                    ->where('student_id','=',$student->id)
-                    ->orderBy('document_type_id', 'asc')
-                    ->get();
-                $student['documents'] = $documents;
-        }
-
-        return $students;
-    }
-
-    function exportStudentDocuments(){
-        return Excel::download(new StudentDocumentsExport, 'Student documents report.xlsx');
+        
     }
 }
