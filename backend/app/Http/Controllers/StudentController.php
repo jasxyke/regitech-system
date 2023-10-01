@@ -41,12 +41,7 @@ class StudentController extends Controller
                         ->where('role_id','=','4')
                         ->orderBy('lastname', 'asc')
                         ->paginate(20);
-
-        if(count($students) == 0){
-            return null;
-        }else{
             return $students;
-        }
     }
 
     public function search(string $searchText){
@@ -67,11 +62,7 @@ class StudentController extends Controller
                         })
                         ->orderBy('lastname', 'asc')
                         ->paginate(20);
-        if(count($students) == 0){
-            return null;
-        }else{
             return $students;
-        }
     }
 
     public function newestStudentsFirst(){
@@ -85,11 +76,7 @@ class StudentController extends Controller
                         ->orderBy('student.year_admitted')
                         ->orderBy('lastname', 'asc')
                         ->paginate(20);
-        if(count($students) == 0){
-            return null;
-        }else{
             return $students;
-        }
     }
     
     public function oldestStudentsFirst(){
@@ -101,13 +88,8 @@ class StudentController extends Controller
                         ->where('role_id', '=', '4')
                         ->orderBy('student.year_admitted')
                         ->orderBy('lastname', 'asc')
-                        ->paginate(20);
-                        
-        if(count($students) == 0){
-            return null;
-        }else{
+                        ->paginate(20);   
             return $students;
-        }
     }
 
     public function incompleteStudentsFirst(){
@@ -115,11 +97,7 @@ class StudentController extends Controller
                 ->where('student_status_id', '2')
                 ->orderBy('created_at','desc')
                 ->paginate(20);
-        if(count($students) == 0){
-            return null;
-        }else{
             return $students;
-        }
     }
 
     public function completeStudentsFirst(){
@@ -127,22 +105,14 @@ class StudentController extends Controller
                 ->where('student_status_id', '1')
                 ->orderBy('created_at','desc')
                 ->paginate(20);
-        if(count($students) == 0){
-            return null;
-        }else{
             return $students;
-        }
     }
 
     public function alphabeticalStudents(){
         $students = Student::with('user','course','student_status')
                 ->orderBy('user.lastname','asc')
                 ->paginate(20);
-        if(count($students) == 0){
-            return null;
-        }else{
             return $students;
-        }
     }
     /**
      * Store a newly created resource in storage.

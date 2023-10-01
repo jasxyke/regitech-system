@@ -28,22 +28,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
-            'email'=>'jasxyke23.jxc@gmail.com',
-            'password'=>Hash::make('password'),
-            'lastname'=>'Cortez',
-            'firstname'=>'Jaspher Xyke',
-            'midname'=>'Mendones',
-            'role_id'=>'1',
-            'email_verified_at'=>now(),
-            'remember_token' => Str::random(10),
-        ]);
-
-        User::create([
-            'email'=>'mamamoinamo@gmail.com',
-            'password'=>Hash::make('password'),
-            'lastname'=>'Clemente',
-            'firstname'=>'Mark Jay',
-            'midname'=>'Galang',
+            'email'=> ENV('HEAD_EMAIL'),
+            'password'=>Hash::make(ENV('HEAD_PASSWORD')),
+            'lastname'=>ENV('HEAD_LASTNAME'),
+            'firstname'=>ENV('HEAD_FIRSTNAME'),
+            'midname'=>ENV('HEAD_MIDNAME'),
             'role_id'=>'1',
             'email_verified_at'=>now(),
             'remember_token' => Str::random(10),

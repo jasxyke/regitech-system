@@ -19,8 +19,8 @@ const StudentRecords = ({ studentRecords, handleView }) => {
           <div
             className={
               student.student.student_status_id === 1
-                ? `${"mx-auto " + StaffStyles.reviewStatusYes}`
-                : `${"mx-auto " + StaffStyles.reviewStatusNo}`
+                ? `${"mx-auto " + "reviewStatusYes"}`
+                : `${"mx-auto " + "reviewStatusNo"}`
             }
           >
             {student.student.student_status_id == 1
@@ -30,9 +30,7 @@ const StudentRecords = ({ studentRecords, handleView }) => {
         </td>
         <td>
           <button
-            className={
-              "btn py-1 mx-auto px-0 rounded-pill my-0 " + StaffStyles.viewBtn
-            }
+            className={"btn rounded-pill view-btn"}
             onClick={() => handleView(student.student.id)}
           >
             {" "}

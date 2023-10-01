@@ -11,6 +11,7 @@ import Form from "react-bootstrap/Form";
 import SecondaryButton from "../../../components/ui/SecondaryButton";
 import { PaginationControl } from "react-bootstrap-pagination-control";
 import SectionHeader from "../../../components/SectionHeader";
+import LoadingTable from "../../../components/ui/LoadingTable";
 
 const VerificationRequestTable = () => {
   const requestsHook = useVerificationRequests();
@@ -94,18 +95,17 @@ const VerificationRequestTable = () => {
                 handleView={handleView}
               />
             )} */}
-            {requestsHook.loading ? (
-              <tr>
-                <td colSpan={5}>
-                  <Spinner />
-                </td>
-              </tr>
-            ) : requests !== null ? (
-              <VerificationRequest
-                verificationRequests={requests}
-                handleView={handleView}
-              />
-            ) : null}
+            <LoadingTable
+              loading={requestsHook.loading}
+              records={requests}
+              table={
+                <VerificationRequest
+                  verificationRequests={requests}
+                  handleView={handleView}
+                />
+              }
+              recordDescription={"requests"}
+            />
           </tbody>
         </table>
       </div>

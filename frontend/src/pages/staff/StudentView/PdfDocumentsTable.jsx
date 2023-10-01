@@ -1,5 +1,6 @@
 import { Spinner } from "react-bootstrap";
 import PdfDocuments from "./PdfDocuments";
+import LoadingTable from "../../../components/ui/LoadingTable";
 
 const PdfDocumentsTable = ({ pdfs, loading, onDeletePdf }) => {
   return (
@@ -13,15 +14,12 @@ const PdfDocumentsTable = ({ pdfs, loading, onDeletePdf }) => {
           </tr>
         </thead>
         <tbody className={"table-contents"}>
-          {loading ? (
-            <tr>
-              <td colSpan={5}>
-                <Spinner />
-              </td>
-            </tr>
-          ) : pdfs !== null ? (
-            <PdfDocuments pdfDocuments={pdfs} deletePdf={onDeletePdf} />
-          ) : null}
+          <LoadingTable
+            recordDescription={"PDFs"}
+            records={pdfs}
+            loading={loading}
+            table={<PdfDocuments pdfDocuments={pdfs} deletePdf={onDeletePdf} />}
+          />
         </tbody>
       </table>
     </div>
