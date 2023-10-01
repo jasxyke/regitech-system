@@ -7,6 +7,8 @@ import SecondaryButton from "../../../components/ui/SecondaryButton";
 import useStudents from "../../../hooks/useStudents";
 import StaffStyles from "../StaffDashboard/StaffDashboard.module.css";
 import StudentRecords from "./StudentRecords";
+import EmptyTable from "../../../components/EmptyTable";
+import LoadingTable from "../../../components/ui/LoadingTable";
 
 const StudentsRecordTable = () => {
   const studentsHook = useStudents();
@@ -98,26 +100,23 @@ const StudentsRecordTable = () => {
               <th scope="col" className="col-sm-2" style={{ width: "20%" }}>
                 Student Status
               </th>
-              <th
-                scope="col"
-                className="col-sm-4"
-                style={{ width: "20%" }}
-              ></th>
+              <th scope="col" className="col-sm-4">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody className={StaffStyles.table_contents}>
-            {studentsHook.loading ? (
-              <tr>
-                <td colSpan={5}>
-                  <Spinner />
-                </td>
-              </tr>
-            ) : students !== null ? (
-              <StudentRecords
-                studentRecords={students}
-                handleView={handleView}
-              />
-            ) : null}
+            <LoadingTable
+              loading={studentsHook.loading}
+              records={students}
+              table={
+                <StudentRecords
+                  studentRecords={students}
+                  handleView={handleView}
+                />
+              }
+              recordDescription={"student records"}
+            />
           </tbody>
         </table>
       </div>

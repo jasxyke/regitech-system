@@ -11,9 +11,7 @@ const ConfirmDeleteModal = ({ handleDelete, id, headerText, message }) => {
   return (
     <>
       <button
-        className={
-          "btn btn-outline py-1 mx-auto px-0 rounded-pill my-0 delete-btn"
-        }
+        className={"btn btn-outline rounded-pill delete-btn"}
         onClick={handleShow}
       >
         {" "}

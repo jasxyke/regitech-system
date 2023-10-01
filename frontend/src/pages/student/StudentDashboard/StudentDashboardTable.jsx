@@ -3,6 +3,7 @@ import useDocuments from "../../../hooks/useDocuments";
 import SubmittedDocumentRows from "./SubmittedDocumentRows";
 import { useEffect } from "react";
 import { Spinner } from "react-bootstrap";
+import LoadingTable from "../../../components/ui/LoadingTable";
 
 const StudentDashboardTable = ({
   handleDeleteDocument,
@@ -29,20 +30,17 @@ const StudentDashboardTable = ({
           </tr>
         </thead>
         <tbody className={TableCss.table_contents}>
-          {submittedDocsHook.loading ? (
-            <tr>
-              <td colSpan={5}>
-                <Spinner />
-              </td>
-            </tr>
-          ) : (
-            (submittedDocuments !== null || submittedDocuments === "") && (
+          <LoadingTable
+            recordDescription={"documents checklist record"}
+            records={submittedDocuments}
+            loading={submittedDocsHook.loading}
+            table={
               <SubmittedDocumentRows
                 submittedDocuments={submittedDocuments}
                 deleteDocument={deleteDocument}
               />
-            )
-          )}
+            }
+          />
         </tbody>
       </table>
     </div>

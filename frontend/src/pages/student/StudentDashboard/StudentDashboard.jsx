@@ -1,24 +1,17 @@
 import { useEffect, useState } from "react";
-import GreetingsHeader from "../../../components/GreetingsHeader";
 import LoadingPage from "../../../components/LoadingPage";
 import ResponseModal from "../../../components/ResponseModal";
-import BackButton from "../../../components/ui/BackButton";
 import { useUser } from "../../../context/UserContext";
+import usePdf from "../../../hooks/usePdf";
 import useSubmittedDocuments from "../../../hooks/useSubmittedDocuments";
-import EditStudentDocumentsModal from "../../staff/StudentView/EditStudentDocumentsModal";
 import PdfDocumentsTable from "./PdfDocumentsTable";
 import StudentCSS from "./StudentDashboard.module.css";
 import StudentDashboardTable from "./StudentDashboardTable";
 import StudentProfile from "./StudentProfile";
-import usePdf from "../../../hooks/usePdf";
 
 const StudentDashboard = () => {
   const student = useUser();
-  const pdfHook = usePdf();
-  const pdfs = pdfHook.studentPdfs;
-  useEffect(() => {
-    pdfHook.getAllPdfs(student.id);
-  }, []);
+
   const [responseMsg, setResponseMsg] = useState("");
   const [showResponseModal, setShowResponseModal] = useState(false);
   const closeModal = () => {
@@ -41,17 +34,11 @@ const StudentDashboard = () => {
     setResponseMsg(responseMsg);
     openModal();
   };
-  // to be submitted documents
-  // {
-  //   with_copies: false,
-  //   document_type: 'SAR FORM',
-  //   document_type_id: 1,
-
-  // }
 
   if (student === null) {
     return <LoadingPage />;
   }
+
   return (
     <div className="mb-5">
       <div className="mb-3">
@@ -78,7 +65,7 @@ const StudentDashboard = () => {
           <strong>PDF Documents</strong>
         </h2>
       </div>
-      <PdfDocumentsTable pdfs={pdfs} loading={pdfHook.loading} />
+      <PdfDocumentsTable student={student} />
       <ResponseModal
         headerText={"About to delete file"}
         show={showResponseModal}

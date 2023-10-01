@@ -9,6 +9,7 @@ import StaffRecords from "./StaffRecords";
 import useStaffCrud from "../../../hooks/useStaffCrud";
 import { Spinner } from "react-bootstrap";
 import SectionHeader from "../../../components/SectionHeader";
+import LoadingTable from "../../../components/ui/LoadingTable";
 
 // DECLARATION FOR LISTINGS (TEMPORARY)
 
@@ -58,21 +59,20 @@ function StaffTable() {
                 selectStaff={staffCRUD.onSelectStaff}
               />
             ) : null} */}
-            {loading ? (
-              <tr>
-                <td colSpan={4}>
-                  <Spinner />
-                </td>
-              </tr>
-            ) : staffs !== null ? (
-              <StaffRecords
-                staffs={staffs}
-                onDelete={staffCRUD.ondeleteStaff}
-                onEdit={staffCRUD.onEditStaff}
-                selectedStaff={staffCRUD.selectedStaff}
-                selectStaff={staffCRUD.onSelectStaff}
-              />
-            ) : null}
+            <LoadingTable
+              loading={loading}
+              records={staffs}
+              table={
+                <StaffRecords
+                  staffs={staffs}
+                  onDelete={staffCRUD.ondeleteStaff}
+                  onEdit={staffCRUD.onEditStaff}
+                  selectedStaff={staffCRUD.selectedStaff}
+                  selectStaff={staffCRUD.onSelectStaff}
+                />
+              }
+              recordDescription={"registrar's staff"}
+            />
           </tbody>
         </table>
       </div>

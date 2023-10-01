@@ -4,15 +4,17 @@ import StaffStyles from "./StaffDashboard.module.css";
 const VerificationRequest = ({ verificationRequests, handleView }) => {
   const requests = verificationRequests.map((request) => (
     <tr key={request.id}>
-      <td>{convertStampToDate(request.created_at)}</td>
+      <td style={{ whiteSpace: "nowrap" }}>
+        {convertStampToDate(request.created_at)}
+      </td>
       <td>{request.student.user.lastname}</td>
       <td>{request.student.user.firstname}</td>
       <td>
         <div
           className={
             request.is_reviewed === 1
-              ? `${"mx-auto " + StaffStyles.reviewStatusYes}`
-              : `${"mx-auto " + StaffStyles.reviewStatusNo}`
+              ? `${"mx-auto " + "reviewStatusYes"}`
+              : `${"mx-auto " + "reviewStatusNo"}`
           }
         >
           {request.is_reviewed == 1 ? "Yes" : "No"}
@@ -20,9 +22,7 @@ const VerificationRequest = ({ verificationRequests, handleView }) => {
       </td>
       <td>
         <button
-          className={
-            "btn py-1 mx-auto px-0 rounded-pill my-0 " + StaffStyles.viewBtn
-          }
+          className={"btn rounded-pill view-btn"}
           onClick={() => handleView(request.id, request.student_id)}
         >
           {" "}

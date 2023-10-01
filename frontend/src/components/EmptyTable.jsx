@@ -1,10 +1,10 @@
-import React from "react";
-
 const EmptyTable = ({ data }) => {
   return (
-    <div>
-      <h2>No {data} found</h2>
-    </div>
+    <tr>
+      <td colSpan={5}>
+        <h4>No {data} found</h4>
+      </td>
+    </tr>
   );
 };
 

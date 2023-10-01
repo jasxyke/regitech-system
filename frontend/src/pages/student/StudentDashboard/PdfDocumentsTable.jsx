@@ -1,9 +1,17 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
+import LoadingTable from "../../../components/ui/LoadingTable";
+import usePdf from "../../../hooks/usePdf";
 import StaffStyles from "../../staff/StaffDashboard/StaffDashboard.module.css";
 import PdfDocuments from "./PdfDocuments";
-import { Spinner } from "react-bootstrap";
 
-const PdfDocumentsTable = ({ pdfs, loading }) => {
+const PdfDocumentsTable = ({ student }) => {
+  const pdfHook = usePdf();
+  const loading = pdfHook.loading;
+  const pdfs = pdfHook.studentPdfs;
+
+  useEffect(() => {
+    pdfHook.getAllPdfs(student.id);
+  }, []);
   return (
     <div className={"my-3 " + StaffStyles.table}>
       <table className="table table-hover my-0">
@@ -15,21 +23,12 @@ const PdfDocumentsTable = ({ pdfs, loading }) => {
           </tr>
         </thead>
         <tbody className={StaffStyles.table_contents}>
-          {/* {requests !== null && (
-              <VerificationRequest
-                verificationRequests={requests}
-                handleView={handleView}
-              />
-            )} */}
-          {loading ? (
-            <tr>
-              <td colSpan={5}>
-                <Spinner />
-              </td>
-            </tr>
-          ) : pdfs !== null ? (
-            <PdfDocuments pdfDocuments={pdfs} />
-          ) : null}
+          <LoadingTable
+            recordDescription={"PDFs"}
+            records={pdfs}
+            table={<PdfDocuments pdfDocuments={pdfs} />}
+            loading={loading}
+          />
         </tbody>
       </table>
     </div>

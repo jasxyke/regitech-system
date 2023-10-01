@@ -17,6 +17,11 @@
 }
 
 * {
+  margin: 0;
+  padding: 0;
+  font-family: var(--main-font);
+  /* LET ME KNOW IF YOU GUYS WANT TO REMOVE THE LETTER WEBSITE (SEAN) */
+  letter-spacing: 0.5px !important;
 }
 
 .link {
@@ -71,13 +76,11 @@
   margin-right: auto;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  font-family: var(--main-font);
-  /* LET ME KNOW IF YOU GUYS WANT TO REMOVE THE LETTER WEBSITE (SEAN) */
-  letter-spacing: 0.5px !important;
+.no-wrap-text {
+  white-space: nowrap !important;
 }
+
+/* table classes */
 
 .table-container {
   min-height: 250px;
@@ -88,6 +91,22 @@
 
 .table-min {
   min-height: 500px;
+}
+
+.reviewStatusYes {
+  text-align: center;
+  background-color: #00a651;
+  color: white;
+  border-radius: 30px;
+  padding: 3px 10px;
+}
+
+.reviewStatusNo {
+  text-align: center;
+  background-color: #f68e58;
+  color: white;
+  border-radius: 30px;
+  padding: 3px 10px;
 }
 
 /* Modal */
@@ -144,6 +163,9 @@
   max-width: fit-content !important;
   color: white !important;
   outline: var(--primary-maroon) solid 2px !important;
+  padding: 3px 10px !important;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .delete-btn {
@@ -152,4 +174,7 @@
   max-width: fit-content !important;
   color: black !important;
   outline: var(--primary-maroon) solid 2px !important;
+  padding: 3px 10px !important;
+  margin-top: 0;
+  margin-bottom: 0;
 }

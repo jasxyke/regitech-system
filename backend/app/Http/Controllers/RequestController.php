@@ -17,11 +17,7 @@ class RequestController extends Controller
         $requests = ModelsRequest::with('student.user')
                     ->orderBy('created_at', 'desc')
                     ->paginate(20);
-        if(count($requests) == 0){
-            return null;
-        }else{
-            return $requests;
-        }
+        return $requests;
     }
 
     public function search(string $searchText){
@@ -34,22 +30,14 @@ class RequestController extends Controller
                     ->whereHas('student.user',$searchFunction )
                     ->orderBy('created_at', 'desc')
                     ->paginate(20);
-        if(count($requests) == 0){
-            return null;
-        }else{
-            return $requests;
-        }
+        return $requests;
     }
 
     public function oldestRequestsFirst(){
         $requests = ModelsRequest::with('student.user')
                     ->orderBy('created_at', 'asc')
                     ->paginate(20);
-        if(count($requests) == 0){
-            return null;
-        }else{
-            return $requests;
-        }
+        return $requests;
     }
 
     public function notReviewedRequests(){
@@ -57,11 +45,7 @@ class RequestController extends Controller
                     ->where('is_reviewed', '=', '0')
                     ->orderBy('created_at', 'desc')
                     ->paginate(20);
-        if(count($requests) == 0){
-            return null;
-        }else{
-            return $requests;
-        }
+        return $requests;
     }
 
     public function reviewedRequests(){
@@ -69,22 +53,14 @@ class RequestController extends Controller
                     ->where('is_reviewed', '=', '1')
                     ->orderBy('created_at', 'desc')
                     ->paginate(20);
-        if(count($requests) == 0){
-            return null;
-        }else{
-            return $requests;
-        }
+        return $requests;
     }
 
     public function alphabeticalRequests(){
         $requests = ModelsRequest::with('student.user')
                     ->orderBy('student.user.firstname', 'desc')
                     ->paginate(20);
-        if(count($requests) == 0){
-            return null;
-        }else{
-            return $requests;
-        }
+        return $requests;
     }
 
     /**
