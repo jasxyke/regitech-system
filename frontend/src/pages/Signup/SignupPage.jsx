@@ -23,8 +23,7 @@ const SignupPage = () => {
             </div>
             <div className={`${SignupCss["bottom-section"]} text-center`}>
               <div className={SignupCss["copyright"]}>
-                RegiTech | Developed by DICT 3-1 Group 5 batch 2023 | Jaspher
-                Xyke M. Cortez
+                © RegiTech | Developed by DICT 3-1 Group 5 batch 2023
               </div>
             </div>
           </div>
