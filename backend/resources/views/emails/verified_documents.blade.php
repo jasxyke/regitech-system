@@ -15,14 +15,14 @@
     <h1 style="font-size: 1.5rem">
         Hello {{$user->firstname}}!
     </h1>
-    <p>This email is from the 
+    <p>This is a system generated email from the 
 Polytechnic University of the Philippines 
 Insititute of Technology notifying you about your
-recently submitted admission documents in which:
+recently submitted admission documents with the following statuses:
 </p>
-<p style="font-size: 1.25rem; 
+{{-- <p style="font-size: 1.25rem; 
     padding: 5px 0;
-    font-style:italic;"><strong>{{$result_message}}</strong></p>
+    font-style:italic;"><strong>{{$result_message}}</strong></p> --}}
 <div style="background-color: white; padding: 15px 10px">
     <table style="width:100%; border-collapse: collapse; color: black;">
         <thead>

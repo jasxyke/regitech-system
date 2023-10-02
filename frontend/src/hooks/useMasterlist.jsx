@@ -9,7 +9,8 @@ const useMasterlist = (onError, onSuccess) => {
     checklist,
     pdfFile,
     note,
-    hasNoEmail
+    hasNoEmail,
+    isTransferee
   ) => {
     try {
       setLoading(true);
@@ -18,7 +19,8 @@ const useMasterlist = (onError, onSuccess) => {
         checklist: checklist,
         pdfFile: pdfFile,
         note: note,
-        hasNoEmail: hasNoEmail,
+        hasNoEmail: Number(hasNoEmail),
+        transferee: Number(isTransferee),
       };
       console.log(formData);
       const res = await axiosClient.post("/add-to-masterlist", formData, {
@@ -90,7 +92,7 @@ const useMasterlist = (onError, onSuccess) => {
         lastname: lastname,
         course_id: course_id,
         year_admitted: year_admitted,
-        transferee: isTransferee,
+        transferee: Number(isTransferee),
       };
       console.log("student data: ");
       console.log(studentData);

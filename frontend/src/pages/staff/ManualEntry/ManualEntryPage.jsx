@@ -89,7 +89,6 @@ const ManualEntryPage = () => {
       midname: midname,
       course_id: data.get("course_id"),
       year_admitted: data.get("year_admitted"),
-      transferee: isTransferee,
     };
 
     masterlistHook.addToMasterlist(
@@ -97,7 +96,8 @@ const ManualEntryPage = () => {
       documentsChecklist,
       pdfFile,
       note,
-      hasNoEmail
+      hasNoEmail,
+      isTransferee
     );
 
     setShowModal(true);

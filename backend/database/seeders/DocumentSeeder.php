@@ -18,7 +18,7 @@ class DocumentSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(15)
+        User::factory(100)
             ->create(['role_id'=>'4'])
             ->each(function ($user){
                 Student::factory(1)

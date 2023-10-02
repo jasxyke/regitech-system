@@ -1,9 +1,5 @@
-import { useEffect, useState } from "react";
-import { courses, years } from "../../../data/constants";
-import { useFormInput } from "../../../hooks/useFormInput";
-import { clearTextInputs } from "../../../utils/InputFormClearer";
-import { courseOptions, yearOptions } from "../../../utils/options";
 import Checkbox from "../../../components/forms/Checkbox";
+import { courseOptions, yearOptions } from "../../../utils/options";
 
 const StudentAccountForm = ({
   email,
@@ -54,6 +50,21 @@ const StudentAccountForm = ({
         <div className="valid-feedback">Valid.</div>
         <div className="invalid-feedback">Please fill out this field.</div>
         <div className="col-sm-6">
+          <label htmlFor="lastname" className="form-label">
+            Last name
+          </label>
+          <input
+            type="text"
+            name="lastname"
+            id="lastname"
+            className="form-control"
+            required
+            {...lastname.inputProps}
+          />
+        </div>
+      </div>
+      <div className="row mt-2">
+        <div className="col-sm-6">
           <label htmlFor="firstname" className="form-label">
             First name
           </label>
@@ -66,8 +77,6 @@ const StudentAccountForm = ({
             {...firstname.inputProps}
           />
         </div>
-      </div>
-      <div className="row mt-2">
         <div className="col-sm-6">
           <label htmlFor="firstname" className="form-label">
             Middle name
@@ -78,19 +87,6 @@ const StudentAccountForm = ({
             id="midname"
             className="form-control"
             {...midname.inputProps}
-          />
-        </div>
-        <div className="col-sm-6">
-          <label htmlFor="lastname" className="form-label">
-            Last name
-          </label>
-          <input
-            type="text"
-            name="lastname"
-            id="lastname"
-            className="form-control"
-            required
-            {...lastname.inputProps}
           />
         </div>
         <div className="row mt-2">
