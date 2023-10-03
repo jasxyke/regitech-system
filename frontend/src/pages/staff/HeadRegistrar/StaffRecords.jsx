@@ -4,6 +4,7 @@ import { IconContext } from "react-icons";
 import EditStaffForm from "./EditStaffForm";
 import { BiTrash } from "react-icons/bi";
 import ResponseModal from "../../../components/ResponseModal";
+import ConfirmDeleteModal from "../../../components/modals/ConfirmDeleteModal";
 
 const StaffRecords = ({
   staffs,
@@ -46,7 +47,15 @@ const StaffRecords = ({
                 show={show}
                 handleClose={handleClose}
               />
-              <BiTrash onClick={() => onDelete(staff.id, handleResponse)} />
+              <ConfirmDeleteModal
+                headerText={"Deleting staff"}
+                message={"Are you sure you want to delete this staff?"}
+                handleDelete={() => {
+                  onDelete(staff.id, handleResponse);
+                }}
+                deleteButton={<BiTrash />}
+              />
+              {/* <BiTrash onClick={() => onDelete(staff.id, handleResponse)} /> */}
             </span>
           </div>
         </td>
