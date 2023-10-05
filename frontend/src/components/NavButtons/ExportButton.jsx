@@ -8,7 +8,7 @@ const ExportButton = () => {
       <EventButton
         icon={exportReport}
         label={"Export Student Documents Report Page"}
-        route={"/staff/export-masterlist-page"}
+        route={"/staff/head-registrar/export-masterlist-page"}
       />
     </div>
   );

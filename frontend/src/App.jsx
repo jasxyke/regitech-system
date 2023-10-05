@@ -46,10 +46,13 @@ function App() {
           <Route path="student-records" element={<StudentRecordsPage />} />
           <Route path="student-record/:id" element={<ViewStudentPage />} />
           <Route path="manual-entry" element={<ManualEntryPage />} />
-          <Route
-            path="export-masterlist-page"
-            element={<ExportMasterlistPage />}
-          />
+          <Route path="/staff/head-registrar">
+            <Route path="" element={<AdminPage />} />
+            <Route
+              path="export-masterlist-page"
+              element={<ExportMasterlistPage />}
+            />
+          </Route>
         </Route>
 
         <Route path="*" element={<h1>Not found 404</h1>} />
