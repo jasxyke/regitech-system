@@ -18,8 +18,9 @@ const PdfDocuments = ({ pdfDocuments, deletePdf }) => {
             View{" "}
           </button>
           <ConfirmDeleteModal
-            handleDelete={deletePdf}
-            id={pdf.id}
+            handleDelete={() => {
+              deletePdf(pdf.id);
+            }}
             headerText={"Deleting PDF"}
             message={"Are you sure you want to delete this PDF?"}
           />

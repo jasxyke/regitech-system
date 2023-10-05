@@ -25,7 +25,7 @@ function StaffTable() {
   return (
     <div className={"mx-auto " + AdminStyles.admin_table_container}>
       <div className="d-flex justify-content-between mt-5">
-        <SectionHeader text={"Staff list"} />
+        <SectionHeader text={"Staff list"} block={false} />
         <div className={AdminStyles.addstaff_btn}>
           <AddStaffForm onAddUser={staffCRUD.onAddStaff} loading={loading} />
         </div>

@@ -1,8 +1,11 @@
 import React, { useContext, useState } from "react";
 import axiosClient, { guestAxios } from "../utils/axios";
 import { useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
 
 const AuthContext = React.createContext(null);
+// 7 days expiration for cookies
+const cookies = new Cookies({ path: "/", expires: 604800 });
 
 export function useAuthContext() {
   return useContext(AuthContext);
@@ -11,13 +14,14 @@ export function useAuthContext() {
 function storeAuthDetails(res) {
   let token = JSON.stringify(res.data.token);
   let role_id = JSON.stringify(res.data.role_id);
-  localStorage.setItem("token", token);
-  localStorage.setItem("role_id", role_id);
+  cookies.set("token", JSON.stringify(token));
+  cookies.set("role_id", role_id);
+  // localStorage.setItem("token", token);
+  // localStorage.setItem("role_id", role_id);
 }
 
 export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(false);
-  const [roleId, setRoleId] = useState(0);
   const navigate = useNavigate();
 
   const signup = (userForm, onError) => {
@@ -82,6 +86,9 @@ export function AuthProvider({ children }) {
         .then((res) => {
           console.log(res.data);
           localStorage.clear();
+          cookies.remove("role_id");
+          cookies.remove("token");
+          cookies.remove("user");
 
           navigate("/");
           //window.location.reload();
@@ -96,7 +103,8 @@ export function AuthProvider({ children }) {
   };
 
   const checkAuthenticated = () => {
-    let token = JSON.parse(localStorage.getItem("token"));
+    //let token = JSON.parse(localStorage.getItem("token"));
+    let token = cookies.get("token");
     if (!token) {
       return false;
     } else {
@@ -105,7 +113,8 @@ export function AuthProvider({ children }) {
   };
 
   const getUserRole = () => {
-    return parseInt(JSON.parse(localStorage.getItem("role_id")));
+    return parseInt(cookies.get("role_id"));
+    //return parseInt(JSON.parse(localStorage.getItem("role_id")));
   };
 
   const value = {
