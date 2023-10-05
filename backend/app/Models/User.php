@@ -22,10 +22,12 @@ class User extends Authenticatable
 
     public function sendPasswordResetNotification($token)
     {
-        Mail::to($this->email, $this->firstname . ' ' . $this->lastname)
+        if(env('MAIL_ENABLED')){
+            Mail::to($this->email, $this->firstname . ' ' . $this->lastname)
             ->send(new PasswordResetNotification(
                 $this->firstname . ' ' . $this->lastname,
                 url(env('WEB_APP_URL').'/reset-password'.'?token='.$token . '&email=' . $this->email)));
+        }  
     }
 
     /**

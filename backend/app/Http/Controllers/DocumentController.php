@@ -39,8 +39,9 @@ class DocumentController extends Controller
 
         $updatedChecklist = $handler->updateChecklist($checkList, "", $staff->id, null);
 
-        return response()->json(["message"=>"Checklist saved", "checklist"=>$updatedChecklist]);
-        
+        if($student->user->email !== null){
+            return response()->json(["message"=>"Checklist saved", "checklist"=>$updatedChecklist]);
+        } 
     }
 
 

@@ -84,6 +84,11 @@ const courses = [
     name: "Diploma in Computer Engineering Technology (DCPET)",
     short_name: "DCPET",
   },
+  {
+    id: 11,
+    name: "Diploma in Railway Engineering Technology (DREMT)",
+    short_name: "DREMT"
+  }
 ];
 
 const years = [];

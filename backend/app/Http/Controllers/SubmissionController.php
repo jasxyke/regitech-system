@@ -180,7 +180,9 @@ class SubmissionController extends Controller
             $student->save();
         }
 
-        if(!$hasNoEmail){
+        //disabled the email sending functionality because it's blocked.
+
+        if(!$hasNoEmail && env('MAIL_ENABLED')){
             Mail::to($studentUser->email, $studentUser->firstname)
             ->send(new VerifiedDocuments($studentUser, $submittedDocuments, $message, $note));
 

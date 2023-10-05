@@ -113,9 +113,10 @@ class DocumentsHandler{
             $message = "Congratulations! all of your submitted documents has been Verified.";
         }
 
+        //disabled the sending email functionality because it's blocked.
 
-        //if user has email, send an email
-        if($this->user->email !== null){
+        // if user has email, send an email
+        if($this->user->email !== null && env('MAIL_ENABLED')){
             Mail::to($this->user->email, $this->user->firstname)
             ->send(new VerifiedDocuments($this->user, $submittedDocs, $message, $note));
         }

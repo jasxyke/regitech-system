@@ -132,7 +132,7 @@
 .table {
   max-height: 250px;
   min-height: 250px;
-  overflow-x: scroll;
+  overflow-x: auto;
   border-radius: 10px;
   background-color: var(--bg-grey);
 }

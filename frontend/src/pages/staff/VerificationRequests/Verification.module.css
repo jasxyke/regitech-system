@@ -3,7 +3,7 @@
 }
 
 .table {
-  overflow-x: scroll;
+  overflow-x: auto;
   border-radius: 10px;
   min-height: 300px;
 }
