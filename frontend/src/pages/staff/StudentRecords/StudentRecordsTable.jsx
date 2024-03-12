@@ -1,89 +1,50 @@
-import { useEffect, useState } from "react";
-import { Spinner } from "react-bootstrap";
+import { useState } from "react";
 import { PaginationControl } from "react-bootstrap-pagination-control";
-import { FiRefreshCw } from "react-icons/fi";
-import PrimaryButton from "../../../components/ui/PrimaryButton";
-import SecondaryButton from "../../../components/ui/SecondaryButton";
-import useStudents from "../../../hooks/useStudents";
+import LoadingTable from "../../../components/ui/LoadingTable";
 import StaffStyles from "../StaffDashboard/StaffDashboard.module.css";
 import StudentRecords from "./StudentRecords";
-import EmptyTable from "../../../components/EmptyTable";
-import LoadingTable from "../../../components/ui/LoadingTable";
 
-const StudentsRecordTable = () => {
-  const studentsHook = useStudents();
-  const students = studentsHook.students;
-  const handleView = studentsHook.viewStudent;
+const StudentsRecordTable = ({
+  students,
+  loading,
+  handleView,
+  pagination,
+  changePage,
+}) => {
+  // const studentsHook = useStudents();
+  // const students = studentsHook.students;
+  // const handleView = studentsHook.viewStudent;
 
-  const [searchText, setSearchText] = useState("");
+  // const [searchText, setSearchText] = useState("");
   const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    studentsHook.getDefaultStudents();
-  }, []);
+  // useEffect(() => {
+  //   studentsHook.getDefaultStudents();
+  // }, []);
 
-  const handleSelect = (eventKey) => {
-    if (eventKey === "Newest first") {
-      studentsHook.getStudents("/newest-students-first");
-    } else if (eventKey === "Oldest first") {
-      studentsHook.getStudents("/oldest-students-first");
-    } else if (eventKey === "Incomplete") {
-      studentsHook.getStudents("/incomplete-students-first");
-    } else if (eventKey === "Complete") {
-      studentsHook.getStudents("/complete-students-first");
-    } else if (eventKey === "Alphabetically") {
-      studentsHook.getDefaultStudents();
-    }
-  };
+  // const handleSelect = (eventKey) => {
+  //   if (eventKey === "Newest first") {
+  //     studentsHook.getStudents("/newest-students-first");
+  //   } else if (eventKey === "Oldest first") {
+  //     studentsHook.getStudents("/oldest-students-first");
+  //   } else if (eventKey === "Incomplete") {
+  //     studentsHook.getStudents("/incomplete-students-first");
+  //   } else if (eventKey === "Complete") {
+  //     studentsHook.getStudents("/complete-students-first");
+  //   } else if (eventKey === "Alphabetically") {
+  //     studentsHook.getDefaultStudents();
+  //   }
+  // };
 
-  const handleSearch = () => {
-    if (searchText === "") {
-      studentsHook.getDefaultStudents();
-    }
-    studentsHook.searchStudentByName(searchText);
-  };
+  // const handleSearch = () => {
+  //   if (searchText === "") {
+  //     studentsHook.getDefaultStudents();
+  //   }
+  //   studentsHook.searchStudentByName(searchText);
+  // };
 
   return (
-    <div className={"mx-auto " + StaffStyles.staff_table_container}>
-      <div className={"mt-5 " + StaffStyles.tableOptions}>
-        <h4 className="me-auto">
-          <strong className={StaffStyles.table_header}>
-            {" "}
-            Student Records{" "}
-          </strong>
-        </h4>
-        <PrimaryButton
-          text={<FiRefreshCw />}
-          onClick={studentsHook.getDefaultStudents}
-        />
-        {/* <AppDropdown
-          handleSelect={handleSelect}
-          dropdownItems={[
-            "Newest first",
-            "Oldest first",
-            "Incomplete",
-            "Complete",
-            "Alphabetically",
-          ]}
-        /> */}
-
-        <input
-          type="text"
-          value={searchText}
-          onChange={(e) => {
-            setSearchText(e.target.value);
-            if (e.target.value === "") {
-              studentsHook.getDefaultStudents();
-            }
-          }}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              handleSearch();
-            }
-          }}
-        />
-        <SecondaryButton text={"Search"} onClick={handleSearch} />
-      </div>
+    <div>
       <div className={"my-3 table-responsive " + StaffStyles.table}>
         <table className="table table-hover my-0">
           <thead>
@@ -107,7 +68,7 @@ const StudentsRecordTable = () => {
           </thead>
           <tbody className={StaffStyles.table_contents}>
             <LoadingTable
-              loading={studentsHook.loading}
+              loading={loading}
               records={students}
               table={
                 <StudentRecords
@@ -136,10 +97,10 @@ const StudentsRecordTable = () => {
         <PaginationControl
           page={page}
           between={3}
-          total={studentsHook.pagination.total}
-          limit={studentsHook.pagination.per_page}
+          total={pagination === null ? null : pagination.total}
+          limit={pagination === null ? null : pagination.per_page}
           changePage={(page) => {
-            studentsHook.changePage(page);
+            changePage(page);
             setPage(page);
           }}
         />
