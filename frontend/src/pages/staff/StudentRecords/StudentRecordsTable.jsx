@@ -11,37 +11,14 @@ const StudentsRecordTable = ({
   pagination,
   changePage,
 }) => {
-  // const studentsHook = useStudents();
-  // const students = studentsHook.students;
-  // const handleView = studentsHook.viewStudent;
-
-  // const [searchText, setSearchText] = useState("");
   const [page, setPage] = useState(1);
-
-  // useEffect(() => {
-  //   studentsHook.getDefaultStudents();
-  // }, []);
-
-  // const handleSelect = (eventKey) => {
-  //   if (eventKey === "Newest first") {
-  //     studentsHook.getStudents("/newest-students-first");
-  //   } else if (eventKey === "Oldest first") {
-  //     studentsHook.getStudents("/oldest-students-first");
-  //   } else if (eventKey === "Incomplete") {
-  //     studentsHook.getStudents("/incomplete-students-first");
-  //   } else if (eventKey === "Complete") {
-  //     studentsHook.getStudents("/complete-students-first");
-  //   } else if (eventKey === "Alphabetically") {
-  //     studentsHook.getDefaultStudents();
-  //   }
-  // };
-
   // const handleSearch = () => {
   //   if (searchText === "") {
   //     studentsHook.getDefaultStudents();
   //   }
   //   studentsHook.searchStudentByName(searchText);
   // };
+  console.log(students);
 
   return (
     <div>

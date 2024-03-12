@@ -12,16 +12,52 @@ import StudentsRecordTable from "./StudentRecordsTable";
 
 const StudentRecordsNavigator = () => {
   const studentsHook = useStudents();
-  const students = studentsHook.students;
+  // const students = studentsHook.students;
   const handleView = studentsHook.viewStudent;
 
   const [selectedYear, setSelectedYear] = useState(0);
   const [selectedCourse, setSelectedCourse] = useState("");
 
-  const [displayedList, setDisplayedList] = useState(null);
-
   const [searchText, setSearchText] = useState("");
   const [index, setIndex] = useState(0);
+
+  const yearItems = years.map((year) => {
+    return (
+      <NavigationItem
+        key={year}
+        text={year}
+        onClick={() => {
+          navigateForward(year);
+        }}
+      />
+    );
+  });
+  const yearList = <NavigationTable items={yearItems} heading={"Years"} />;
+
+  const courseItems = courses.map((course) => {
+    return (
+      <NavigationItem
+        key={course.id}
+        text={course.name}
+        onClick={() => {
+          navigateForward(course.id);
+        }}
+      />
+    );
+  });
+  const courseList = (
+    <NavigationTable items={courseItems} heading={"Courses"} />
+  );
+
+  const studentsList = (
+    <StudentsRecordTable
+      students={studentsHook.students}
+      loading={studentsHook.loading}
+      handleView={handleView}
+      pagination={studentsHook.pagination}
+      changePage={studentsHook.changePage}
+    />
+  );
 
   const handleSearch = () => {
     if (searchText === "") {
@@ -65,46 +101,10 @@ const StudentRecordsNavigator = () => {
 
   useEffect(() => {
     if (index === 0) {
-      const yearItems = years.map((year) => {
-        return (
-          <NavigationItem
-            key={year}
-            text={year}
-            onClick={() => {
-              navigateForward(year);
-            }}
-          />
-        );
-      });
-      setDisplayedList(<NavigationTable items={yearItems} heading={"Years"} />);
     } else if (index === 1) {
-      const courseItems = courses.map((course) => {
-        return (
-          <NavigationItem
-            key={course.id}
-            text={course.name}
-            onClick={() => {
-              navigateForward(course.id);
-            }}
-          />
-        );
-      });
-      setDisplayedList(
-        <NavigationTable items={courseItems} heading={"Courses"} />
-      );
     } else if (index === 2) {
-      setDisplayedList(
-        <StudentsRecordTable
-          students={students}
-          loading={studentsHook.loading}
-          handleView={handleView}
-          pagination={studentsHook.pagination}
-          changePage={studentsHook.changePage}
-        />
-      );
       getSelectedStudents();
     } else {
-      setDisplayedList(<p className="h1">ERROR TAENA MO</p>);
     }
   }, [index]);
 
@@ -136,7 +136,15 @@ const StudentRecordsNavigator = () => {
         />
         <SecondaryButton text={"Search"} onClick={handleSearch} />
       </div>
-      <div>{displayedList}</div>
+      <div>
+        {index === 0
+          ? yearList
+          : index === 1
+          ? courseList
+          : index === 2
+          ? studentsList
+          : null}
+      </div>
       <BackButton
         text={"Go back"}
         handleClick={navigateBack}

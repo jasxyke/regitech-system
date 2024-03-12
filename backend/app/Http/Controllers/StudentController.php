@@ -66,15 +66,15 @@ class StudentController extends Controller
     }
 
     public function getStudentBySelected(string $year, string $courseId){
-        return User::with('student', 'student.course', 'student.status')
+        return User::with('student', 'student.course', 'student.student_status')
                     ->whereRelation('student', 'year_admitted', '=',$year)
-                    // ->whereRelation('student.course', 'id', '=', $courseId)
+                    ->whereRelation('student.course', 'id', '=', $courseId)
                     ->orderBy('lastname', 'asc')
                     ->paginate(20);
     }
 
     public function newestStudentsFirst(){
-        $students = User::with('student','student.course','student.status')
+        $students = User::with('student','student.course','student.student_status')
                         ->where('role_id', '=', '4')
                         ->orderBy('student.year_admitted')
                         ->orderBy('lastname', 'asc')
