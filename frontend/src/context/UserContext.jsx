@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import axiosClient from "../utils/axios";
 import { useNavigate } from "react-router-dom";
-import Cookies from "universal-cookie";
+// import Cookies from "universal-cookie";
 
 const UserContext = React.createContext(null);
-const cookies = new Cookies({ path: "/", expires: 0 });
+// const cookies = new Cookies({ path: "/", expires: 0 });
 
 export function useUser() {
   return useContext(UserContext);
@@ -16,11 +16,14 @@ export function UserProvider({ children }) {
 
   const saveUser = (user) => {
     setUser(user);
-    cookies.set("user", JSON.stringify(user));
+    // cookies.set("user", JSON.stringify(user));
+    localStorage.setItem("user", JSON.stringify(user));
   };
 
   useEffect(() => {
-    const userCookies = cookies.get("user");
+    // const userCookies = cookies.get("user");
+    let userCookies = localStorage.getItem("user");
+    userCookies = JSON.parse(userCookies);
     if (userCookies) {
       console.log("has user saved in cookies");
       console.log(userCookies);

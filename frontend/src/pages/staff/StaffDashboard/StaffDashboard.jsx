@@ -13,10 +13,11 @@ const StaffDashboard = () => {
   if (user === null) {
     return <LoadingPage />;
   }
+
   return (
     <div className="mt-5">
       <GreetingsHeader name={user?.firstname || "unknown"} />
-      <MainNavbButtons userRole={user.role.name} />
+      <MainNavbButtons userRole={user?.role.name} />
       <VerificationRequestTable />
       <div className="mb-5"></div>
       {/* <div className={css.dl_title}>

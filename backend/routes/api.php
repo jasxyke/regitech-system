@@ -47,6 +47,7 @@ Route::group(['middleware'=>['auth:sanctum','verified']], function(){
    
     Route::post('/logout', [AuthController::class, 'logout']);
 
+    //student documents
     Route::get('/submitted-documents/{id}', [DocumentController::class, 'getSubmittedDocuments']);
     Route::get('/unverified-documents/{id}', [DocumentController::class, 'getUnverifiedDocuments']);
     Route::post('/verify-documents/{id}/{updated_by_id}', [VerifiedDocumentsController::class, 'verify_documents']);
@@ -77,6 +78,9 @@ Route::group(['middleware'=>['auth:sanctum','verified']], function(){
     Route::get('/incomplete-students-first', [StudentController::class, 'incompleteStudentsFirst']);
     Route::get('/complete-students-first', [StudentController::class, 'completeStudentsFirst']);
     Route::get('/students-alphabetical', [StudentController::class, 'alphabeticalStudents']);
+
+    //student route
+    Route::get('/students/{year}/{courseId}', [StudentController::class, 'getStudentBySelected']);
 
     Route::post('/export-masterlist', [StudentDocumentController::class, 'exportStudentDocuments']);
     
