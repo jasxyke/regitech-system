@@ -61,7 +61,7 @@ const StudentRecordsNavigator = () => {
 
   const handleSearch = () => {
     if (searchText === "") {
-      getSelectedStudents();
+      refresh();
     } else {
       setIndex(2);
       studentsHook.searchStudentByName(searchText);
@@ -99,11 +99,17 @@ const StudentRecordsNavigator = () => {
     setIndex(index - 1);
   };
 
+  const refresh = () => {
+    setIndex(0);
+    setSelectedYear(0);
+    setSelectedCourse("");
+  };
+
   useEffect(() => {
     if (index === 0) {
     } else if (index === 1) {
     } else if (index === 2) {
-      getSelectedStudents();
+      if (searchText === "") getSelectedStudents();
     } else {
     }
   }, [index]);
@@ -117,7 +123,7 @@ const StudentRecordsNavigator = () => {
             Student Records{" "}
           </strong>
         </h4>
-        <PrimaryButton text={<FiRefreshCw />} onClick={studentsHook} />
+        <PrimaryButton text={<FiRefreshCw />} onClick={refresh} />
 
         <input
           type="text"
@@ -125,7 +131,7 @@ const StudentRecordsNavigator = () => {
           onChange={(e) => {
             setSearchText(e.target.value);
             if (e.target.value === "") {
-              getSelectedStudents();
+              refresh();
             }
           }}
           onKeyDown={(e) => {
