@@ -70,18 +70,20 @@ const StudentsRecordTable = ({
           }
         `}
       </style>
-      {students !== null && (
-        <PaginationControl
-          page={page}
-          between={3}
-          total={pagination === null ? null : pagination.total}
-          limit={pagination === null ? null : pagination.per_page}
-          changePage={(page) => {
-            changePage(page);
-            setPage(page);
-          }}
-        />
-      )}
+      <div className="d-flex justify-content-center">
+        {students !== null && (
+          <PaginationControl
+            page={page}
+            between={3}
+            total={pagination === null ? null : pagination.total}
+            limit={pagination === null ? null : pagination.per_page}
+            changePage={(page) => {
+              changePage(page);
+              setPage(page);
+            }}
+          />
+        )}
+      </div>
     </div>
   );
 };

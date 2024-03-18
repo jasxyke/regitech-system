@@ -19,6 +19,7 @@ const StudentRecordsNavigator = () => {
   const [selectedCourse, setSelectedCourse] = useState("");
 
   const [searchText, setSearchText] = useState("");
+  const [backButtonText, setBackButtonText] = useState("");
   const [index, setIndex] = useState(0);
 
   const yearItems = years.map((year) => {
@@ -75,8 +76,10 @@ const StudentRecordsNavigator = () => {
   const navigateForward = (selected) => {
     if (index === 0) {
       setSelectedYear(selected);
+      setBackButtonText("Years");
     } else if (index === 1) {
       setSelectedCourse(selected);
+      setBackButtonText("Courses");
     } else if (index === 2) {
       getSelectedStudents();
     } else {
@@ -91,8 +94,10 @@ const StudentRecordsNavigator = () => {
   const navigateBack = () => {
     if (index === 2) {
       setSelectedCourse("");
+      setBackButtonText("Years");
     } else if (index === 1) {
       setSelectedYear(0);
+      setBackButtonText("");
     } else {
       console.log("MERONG MALI!!!");
     }
@@ -117,7 +122,7 @@ const StudentRecordsNavigator = () => {
   return (
     <div className={"mx-auto " + StaffStyles.staff_table_container}>
       <div className={"mt-5 " + StaffStyles.tableOptions}>
-        <h4 className="me-auto">
+        <h4 className={"me-auto " + StaffStyles.labelOption}>
           <strong className={StaffStyles.table_header}>
             {" "}
             Student Records{" "}
@@ -152,7 +157,7 @@ const StudentRecordsNavigator = () => {
           : null}
       </div>
       <BackButton
-        text={"Go back"}
+        text={backButtonText}
         handleClick={navigateBack}
         disabled={index === 0}
       />
