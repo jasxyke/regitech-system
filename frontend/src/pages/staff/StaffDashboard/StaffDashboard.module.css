@@ -7,8 +7,8 @@
 }
 
 .table {
-  max-height: 315px;
-  min-height: 315px;
+  max-height: 310px;
+  min-height: 310px;
   overflow-x: scroll;
   border-radius: 10px;
   background-color: var(--bg-grey);
