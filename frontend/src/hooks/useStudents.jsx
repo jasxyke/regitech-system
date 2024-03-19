@@ -42,6 +42,23 @@ const useStudents = () => {
       });
   };
 
+  const getStudentBySelected = async (year, courseId) => {
+    setLoading(true);
+    axiosClient
+      .get("/students/" + year + "/" + courseId)
+      .then((res) => {
+        console.log("selected students: ");
+        console.log(res);
+        setStudents(res.data.data);
+        setPagination(res.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
   const getDefaultStudents = () => {
     setLoading(true);
     axiosClient
@@ -112,6 +129,7 @@ const useStudents = () => {
     getDefaultStudents,
     getStudent,
     student,
+    getStudentBySelected,
   };
 };
 

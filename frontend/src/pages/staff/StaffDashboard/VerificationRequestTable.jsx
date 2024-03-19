@@ -44,7 +44,7 @@ const VerificationRequestTable = () => {
   return (
     <div className={"mx-auto " + StaffStyles.staff_table_container}>
       <div className={"mt-5 " + StaffStyles.tableOptions}>
-        <div className="me-auto">
+        <div className={"me-auto " + StaffStyles.labelOption}>
           <SectionHeader text={"Verification requests"} block={false} />
         </div>
         <PrimaryButton
@@ -121,18 +121,20 @@ const VerificationRequestTable = () => {
           }
         `}
       </style>
-      {requests !== null && (
-        <PaginationControl
-          page={page}
-          between={3}
-          total={requestsHook.pagination.total}
-          limit={requestsHook.pagination.per_page}
-          changePage={(page) => {
-            requestsHook.changePage(page);
-            setPage(page);
-          }}
-        />
-      )}
+      <div className="d-flex justify-content-center">
+        {requests !== null && (
+          <PaginationControl
+            page={page}
+            between={3}
+            total={requestsHook.pagination.total}
+            limit={requestsHook.pagination.per_page}
+            changePage={(page) => {
+              requestsHook.changePage(page);
+              setPage(page);
+            }}
+          />
+        )}
+      </div>
     </div>
   );
 };

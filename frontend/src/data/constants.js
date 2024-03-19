@@ -6,8 +6,6 @@ const documentStatuses = [
   { id: 5, name: "Missing" },
 ];
 
-console.log("OYYYYYYYY");
-
 const documentTypes = [
   { id: 1, name: "SAR Form" },
   { id: 2, name: "Form 138 Grade 10" },
